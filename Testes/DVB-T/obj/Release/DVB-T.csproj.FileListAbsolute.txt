@@ -1,0 +1,12 @@
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Release\DVB-T.exe.config
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Release\DVB-T.exe
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Release\DVB-T.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Release\DirectShowLib-2005.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Release\DirectShowLib-2005.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\obj\Release\DVB-T.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\obj\Release\DVB_T.Form1.resources
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\obj\Release\DVB_T.Properties.Resources.resources
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\obj\Release\DVB_T.Toolkit.DigitalTVScreen.resources
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\obj\Release\DVB-T.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\obj\Release\DVB-T.exe
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\obj\Release\DVB-T.pdb

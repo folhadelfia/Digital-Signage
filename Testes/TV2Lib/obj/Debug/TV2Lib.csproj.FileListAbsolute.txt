@@ -1,0 +1,11 @@
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\bin\Debug\TV2Lib.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\bin\Debug\TV2Lib.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\bin\Debug\MediaFoundation.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Debug\TV2Lib.DigitalTVScreen.resources
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Debug\TV2Lib.VideoControl.resources
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Debug\TV2Lib.Properties.Resources.resources
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Debug\TV2Lib.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Debug\TV2Lib.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Debug\TV2Lib.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Debug\TV2Lib.csprojResolveAssemblyReference.cache

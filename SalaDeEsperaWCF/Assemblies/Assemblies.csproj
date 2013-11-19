@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A9EA65E7-F4EA-43DD-87C5-101195E583DB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Assemblies</RootNamespace>
+    <AssemblyName>Assemblies</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DigitalTV">
+      <HintPath>Libraries\DigitalTV.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.21786, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="MediaFoundation">
+      <HintPath>..\..\Testes\TV2Lib\bin\Debug\MediaFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Discovery" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.Serialization" />
+    <Reference Include="TrackBar, Version=1.0.2486.37933, Culture=neutral, PublicKeyToken=503bf28f63ad27b4" />
+    <Reference Include="Transitions, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Transitions.dll</HintPath>
+    </Reference>
+    <Reference Include="TV2Lib">
+      <HintPath>..\..\Testes\TV2Lib\bin\Debug\TV2Lib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClientModel\Connection.cs" />
+    <Compile Include="ClientModel\PlayerPC.cs" />
+    <Compile Include="ClientModel\WCFConnection.cs" />
+    <Compile Include="ClientModel\WCFPlayerPC.cs" />
+    <Compile Include="Components\ComponentTargetSite.cs" />
+    <Compile Include="Options\BackgroundOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options\BackgroundOptions.Designer.cs">
+      <DependentUpon>BackgroundOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options\IOptionsWindow.cs" />
+    <Compile Include="Options\OptionsGeneral\FormOptionsBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options\OptionsGeneral\FormOptionsBuilder.Designer.cs">
+      <DependentUpon>FormOptionsBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options\OptionsGeneral\IOptionsView.cs" />
+    <Compile Include="Options\OptionsGeneral\OptionsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Options\OptionsGeneral\Views\FooterOptionsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Options\OptionsGeneral\Views\FooterOptionsView.Designer.cs">
+      <DependentUpon>FooterOptionsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerComponents\DateTime.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Testes\IPlayerComponent.cs" />
+    <Compile Include="Toolkit\EnumUtilities.cs" />
+    <Compile Include="WCF\ClientProxies\PlayerProxy.cs" />
+    <Compile Include="Components\ComposerComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\ComposerComponent.Designer.cs">
+      <DependentUpon>ComposerComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\DateTimeComposer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\MarkeeComposer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\ImageComposer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\PriceListComposer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\SlideShowComposer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\TVComposer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\VideoComposer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\WaitListComposer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\WeatherComposer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Configurations\MarkeeConfiguration.cs" />
+    <Compile Include="Configurations\ItemConfiguration.cs" />
+    <Compile Include="Configurations\PlayerWindowInformation.cs" />
+    <Compile Include="Configurations\ScreenInformation.cs" />
+    <Compile Include="Configurations\TVConfiguration.cs" />
+    <Compile Include="WCF\DataContracts\Components\Markee\WCFMarkeeConfiguration.cs" />
+    <Compile Include="WCF\DataContracts\Components\TV\TunerDevice.cs" />
+    <Compile Include="WCF\DataContracts\Components\TV\WCFChannel.cs" />
+    <Compile Include="WCF\DataContracts\Components\TV\WCFTVConfiguration.cs" />
+    <Compile Include="WCF\DataContracts\Components\WCFItemConfiguration.cs" />
+    <Compile Include="WCF\DataContracts\Drawing\WCFDrawing.cs" />
+    <Compile Include="WCF\DataContracts\Main Window\WCFPlayerWindowInformation.cs" />
+    <Compile Include="WCF\DataContracts\Main Window\WCFScreenInformation.cs" />
+    <Compile Include="WCF\DataContracts\NetToWCFConverter.cs" />
+    <Compile Include="Factories\ComponentCreators.cs" />
+    <Compile Include="Factories\IComponentCreator.cs" />
+    <Compile Include="Options\MarkeeOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options\MarkeeOptions.Designer.cs">
+      <DependentUpon>MarkeeOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options\TVOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options\TVOptions.Designer.cs">
+      <DependentUpon>TVOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerComponents\Markee.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Toolkit\Direction.cs" />
+    <Compile Include="Toolkit\Networking.cs" />
+    <Compile Include="Toolkit\UnsafeNativeMethods.cs" />
+    <Compile Include="WCF\PlayerServiceContracts\IPlayer.cs" />
+    <Compile Include="WCF\PlayerServiceImplementation\PlayerService.cs" />
+    <Compile Include="XMLSerialization\Components\Markee\XMLMarkeeConfiguration.cs" />
+    <Compile Include="XMLSerialization\Components\TV\XMLChannel.cs" />
+    <Compile Include="XMLSerialization\Components\TV\XMLTVConfiguration.cs" />
+    <Compile Include="XMLSerialization\Components\XMLItemConfiguration.cs" />
+    <Compile Include="XMLSerialization\Drawing\XMLDrawing.cs" />
+    <Compile Include="XMLSerialization\NetToXMLConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Components\ComposerComponent.resx">
+      <DependentUpon>ComposerComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options\BackgroundOptions.resx">
+      <DependentUpon>BackgroundOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options\MarkeeOptions.resx">
+      <DependentUpon>MarkeeOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options\OptionsGeneral\FormOptionsBuilder.resx">
+      <DependentUpon>FormOptionsBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options\OptionsGeneral\Views\FooterOptionsView.resx">
+      <DependentUpon>FooterOptionsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options\TVOptions.resx">
+      <DependentUpon>TVOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libraries\DigitalTV.dll" />
+    <Content Include="Libraries\DirectShowLib-2005.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\MediaFoundation.dll" />
+    <Content Include="Libraries\TrackBar.dll" />
+    <Content Include="Libraries\Transitions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\TV2Lib.dll" />
+    <Content Include="Options\Images\alpha.png" />
+    <Content Include="Options\Images\MarkeeBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

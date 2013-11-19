@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<ArrayOfChannelDVBT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ChannelDVBT>
+    <Name>RTP 1</Name>
+    <ChannelNumber>1</ChannelNumber>
+    <Logo />
+    <AudioRendererDevice />
+    <VideoRendererDevice />
+    <VideoZoomMode>FromInside</VideoZoomMode>
+    <VideoKeepAspectRatio>true</VideoKeepAspectRatio>
+    <VideoOffset>
+      <X>0.5</X>
+      <Y>0.5</Y>
+    </VideoOffset>
+    <VideoZoom>1</VideoZoom>
+    <VideoAspectRatioFactor>1</VideoAspectRatioFactor>
+    <ReferenceClock>AudioRenderer</ReferenceClock>
+    <AudioDecoderType>AAC</AudioDecoderType>
+    <AudioDecoderDevice />
+    <VideoDecoderType>H264</VideoDecoderType>
+    <MPEG2DecoderDevice />
+    <H264DecoderDevice>@device:sw:{083863F1-70DE-11D0-BD40-00A0C911CE86}\{04FE9017-F873-410E-871E-AB91661A4EF7}</H264DecoderDevice>
+    <TunerDevice>@device:pnp:\\?\usb#vid_07ca&amp;pid_a835#3047455008100#{71985f48-1ca1-11d3-9cc8-00c04f7971e0}\{9b365890-165f-11d0-a195-0020afd156e4}</TunerDevice>
+    <CaptureDevice />
+    <Frequency>754000</Frequency>
+    <Modulation>ModNotSet</Modulation>
+    <SymbolRate>-1</SymbolRate>
+    <InnerFEC>MethodNotDefined</InnerFEC>
+    <InnerFECRate>RateNotDefined</InnerFECRate>
+    <OuterFEC>MethodNotDefined</OuterFEC>
+    <OuterFECRate>RateNotDefined</OuterFECRate>
+    <ONID>8904</ONID>
+    <TSID>1101</TSID>
+    <SID>1101</SID>
+    <PmtPid>272</PmtPid>
+    <VideoPid>256</VideoPid>
+    <PcrPid>256</PcrPid>
+    <AudioPid>258</AudioPid>
+    <AudioPids>
+      <int>257</int>
+      <int>258</int>
+    </AudioPids>
+    <TeletextPid>32</TeletextPid>
+    <EcmPid>-1</EcmPid>
+    <EcmPids />
+    <Bandwidth>8</Bandwidth>
+    <HAlpha>HAlphaNotSet</HAlpha>
+    <Guard>GuardNotSet</Guard>
+    <Mode>ModeNotSet</Mode>
+    <LPInnerFEC>MethodNotDefined</LPInnerFEC>
+    <LPInnerFECRate>RateNotDefined</LPInnerFECRate>
+    <OtherFrequencyInUse>false</OtherFrequencyInUse>
+  </ChannelDVBT>
+  <ChannelDVBT>
+    <Name>RTP 2</Name>
+    <ChannelNumber>2</ChannelNumber>
+    <Logo />
+    <AudioRendererDevice />
+    <VideoRendererDevice />
+    <VideoZoomMode>FromInside</VideoZoomMode>
+    <VideoKeepAspectRatio>true</VideoKeepAspectRatio>
+    <VideoOffset>
+      <X>0.5</X>
+      <Y>0.5</Y>
+    </VideoOffset>
+    <VideoZoom>1</VideoZoom>
+    <VideoAspectRatioFactor>1</VideoAspectRatioFactor>
+    <ReferenceClock>AudioRenderer</ReferenceClock>
+    <AudioDecoderType>AAC</AudioDecoderType>
+    <AudioDecoderDevice />
+    <VideoDecoderType>H264</VideoDecoderType>
+    <MPEG2DecoderDevice />
+    <H264DecoderDevice>@device:sw:{083863F1-70DE-11D0-BD40-00A0C911CE86}\{04FE9017-F873-410E-871E-AB91661A4EF7}</H264DecoderDevice>
+    <TunerDevice>@device:pnp:\\?\usb#vid_07ca&amp;pid_a835#3047455008100#{71985f48-1ca1-11d3-9cc8-00c04f7971e0}\{9b365890-165f-11d0-a195-0020afd156e4}</TunerDevice>
+    <CaptureDevice />
+    <Frequency>754000</Frequency>
+    <Modulation>ModNotSet</Modulation>
+    <SymbolRate>-1</SymbolRate>
+    <InnerFEC>MethodNotDefined</InnerFEC>
+    <InnerFECRate>RateNotDefined</InnerFECRate>
+    <OuterFEC>MethodNotDefined</OuterFEC>
+    <OuterFECRate>RateNotDefined</OuterFECRate>
+    <ONID>8904</ONID>
+    <TSID>1101</TSID>
+    <SID>1102</SID>
+    <PmtPid>528</PmtPid>
+    <VideoPid>512</VideoPid>
+    <PcrPid>512</PcrPid>
+    <AudioPid>513</AudioPid>
+    <AudioPids>
+      <int>513</int>
+    </AudioPids>
+    <TeletextPid>33</TeletextPid>
+    <EcmPid>-1</EcmPid>
+    <EcmPids />
+    <Bandwidth>8</Bandwidth>
+    <HAlpha>HAlphaNotSet</HAlpha>
+    <Guard>GuardNotSet</Guard>
+    <Mode>ModeNotSet</Mode>
+    <LPInnerFEC>MethodNotDefined</LPInnerFEC>
+    <LPInnerFECRate>RateNotDefined</LPInnerFECRate>
+    <OtherFrequencyInUse>false</OtherFrequencyInUse>
+  </ChannelDVBT>
+  <ChannelDVBT>
+    <Name>SIC</Name>
+    <ChannelNumber>3</ChannelNumber>
+    <Logo />
+    <AudioRendererDevice />
+    <VideoRendererDevice />
+    <VideoZoomMode>FromInside</VideoZoomMode>
+    <VideoKeepAspectRatio>true</VideoKeepAspectRatio>
+    <VideoOffset>
+      <X>0.5</X>
+      <Y>0.5</Y>
+    </VideoOffset>
+    <VideoZoom>1</VideoZoom>
+    <VideoAspectRatioFactor>1</VideoAspectRatioFactor>
+    <ReferenceClock>AudioRenderer</ReferenceClock>
+    <AudioDecoderType>AAC</AudioDecoderType>
+    <AudioDecoderDevice />
+    <VideoDecoderType>H264</VideoDecoderType>
+    <MPEG2DecoderDevice />
+    <H264DecoderDevice>@device:sw:{0 83863F1-70DE-11D09017-F873-410E-871E-AB91661A4EF7}</H264DecoderDevice>
+    <TunerDevice>@device:pnp:\\?\usb#vid_07ca&amp;pid_a835#1ca1-11d3-9cc8-00c04f7971e0}\{9b365890-165f-11d0-a195-0020afd156e4}</TunerDevice>
+    <CaptureDevice />
+    <Frequency>754000</Frequency>
+    <Modulation>ModNotSet</Modulation>
+    <SymbolRate>-1</SymbolRate>
+    <InnerFEC>MethodNotDefined</InnerFEC>
+    <InnerFECRate>RateNotDefined</InnerFECRate>
+    <OuterFEC>MethodNotDefined</OuterFEC>
+    <OuterFECRate>RateNotDefined</OuterFECRate>
+    <ONID>8904</ONID>
+    <TSID>1101</TSID>
+    <SID>1103</SID>
+    <PmtPid>784</PmtPid>
+    <VideoPid>768</VideoPid>
+    <PcrPid>768</PcrPid>
+    <AudioPid>769</AudioPid>
+    <AudioPids>
+      <int>769</int>
+    </AudioPids>
+    <TeletextPid>34</TeletextPid>
+    <EcmPid>-1</EcmPid>
+    <EcmPids />
+    <Bandwidth>8</Bandwidth>
+    <HAlpha>HAlphaNotSet</HAlpha>
+    <Guard>GuardNotSet</Guard>
+    <Mode>ModeNotSet</Mode>
+    <LPInnerFEC>MethodNotDefined</LPInnerFEC>
+    <LPInnerFECRate>RateNotDefined</LPInnerFECRate>
+    <OtherFrequencyInUse>false</OtherFrequencyInUse>
+  </ChannelDVBT>
+  <ChannelDVBT>
+    <Name>TVI</Name>
+    <ChannelNumber>4</ChannelNumber>
+    <Logo />
+    <AudioRendererDevice />
+    <VideoRendererDevice />
+    <VideoZoomMode>FromInside</VideoZoomMode>
+    <VideoKeepAspectRatio>true</VideoKeepAspectRatio>
+    <VideoOffset>
+      <X>0.5</X>
+      <Y>0.5</Y>
+    </VideoOffset>
+    <VideoZoom>1</VideoZoom>
+    <VideoAspectRatioFactor>1</VideoAspectRatioFactor>
+    <ReferenceClock>AudioRenderer</ReferenceClock>
+    <AudioDecoderType>AAC</AudioDecoderType>
+    <AudioDecoderDevice />
+    <VideoDecoderType>H264</VideoDecoderType>
+    <MPEG2DecoderDevice />
+    <H264DecoderDevice>@device:sw:{083863F1-70DE-11D0-BD40-00A0C911CE86}\{04FE9017-F873-410E-871E-AB91661A4EF7}</H264DecoderDevice>
+    <TunerDevice>@device:pnp:\\?\usb#vid_07ca&amp;pid_a835#3047455008100#{71985f48-1ca1-11d3-9cc8-00c04f7971e0}\{9b365890-165f-11d0-a195-0020afd156e4}</TunerDevice>
+    <CaptureDevice />
+    <Frequency>754000</Frequency>
+    <Modulation>ModNotSet</Modulation>
+    <SymbolRate>-1</SymbolRate>
+    <InnerFEC>MethodNotDefined</InnerFEC>
+    <InnerFECRate>RateNotDefined</InnerFECRate>
+    <OuterFEC>MethodNotDefined</OuterFEC>
+    <OuterFECRate>RateNotDefined</OuterFECRate>
+    <ONID>8904</ONID>
+    <TSID>1101</TSID>
+    <SID>1104</SID>
+    <PmtPid>1040</PmtPid>
+    <VideoPid>1024</VideoPid>
+    <PcrPid>1024</PcrPid>
+    <AudioPid>1025</AudioPid>
+    <AudioPids>
+      <int>1025</int>
+    </AudioPids>
+    <TeletextPid>35</TeletextPid>
+    <EcmPid>-1</EcmPid>
+    <EcmPids />
+    <Bandwidth>8</Bandwidth>
+    <HAlpha>HAlphaNotSet</HAlpha>
+    <Guard>GuardNotSet</Guard>
+    <Mode>ModeNotSet</Mode>
+    <LPInnerFEC>MethodNotDefined</LPInnerFEC>
+    <LPInnerFECRate>RateNotDefined</LPInnerFECRate>
+    <OtherFrequencyInUse>false</OtherFrequencyInUse>
+  </ChannelDVBT>
+  <ChannelDVBT>
+    <Name>ARTV</Name>
+    <ChannelNumber>5</ChannelNumber>
+    <Logo />
+    <AudioRendererDevice />
+    <VideoRendererDevice />
+    <VideoZoomMode>FromInside</VideoZoomMode>
+    <VideoKeepAspectRatio>true</VideoKeepAspectRatio>
+    <VideoOffset>
+      <X>0.5</X>
+      <Y>0.5</Y>
+    </VideoOffset>
+    <VideoZoom>1</VideoZoom>
+    <VideoAspectRatioFactor>1</VideoAspectRatioFactor>
+    <ReferenceClock>AudioRenderer</ReferenceClock>
+    <AudioDecoderType>AAC</AudioDecoderType>
+    <AudioDecoderDevice />
+    <VideoDecoderType>H264</VideoDecoderType>
+    <MPEG2DecoderDevice />
+    <H264DecoderDevice>@device:sw:{083863F1-70DE-11D0-BD40-00A0C911CE86}\{04FE9017-F873-410E-871E-AB91661A4EF7}</H264DecoderDevice>
+    <TunerDevice>@device:pnp:\\?\usb#vid_07ca&amp;pid_a835#3047455008100#{71985f48-1ca1-11d3-9cc8-00c04f7971e0}\{9b365890-165f-11d0-a195-0020afd156e4}</TunerDevice>
+    <CaptureDevice />
+    <Frequency>754000</Frequency>
+    <Modulation>ModNotSet</Modulation>
+    <SymbolRate>-1</SymbolRate>
+    <InnerFEC>MethodNotDefined</InnerFEC>
+    <InnerFECRate>RateNotDefined</InnerFECRate>
+    <OuterFEC>MethodNotDefined</OuterFEC>
+    <OuterFECRate>RateNotDefined</OuterFECRate>
+    <ONID>8904</ONID>
+    <TSID>1101</TSID>
+    <SID>1107</SID>
+    <PmtPid>1296</PmtPid>
+    <VideoPid>1280</VideoPid>
+    <PcrPid>1280</PcrPid>
+    <AudioPid>1281</AudioPid>
+    <AudioPids>
+      <int>1281</int>
+    </AudioPids>
+    <TeletextPid>-1</TeletextPid>
+    <EcmPid>-1</EcmPid>
+    <EcmPids />
+    <Bandwidth>8</Bandwidth>
+    <HAlpha>HAlphaNotSet</HAlpha>
+    <Guard>GuardNotSet</Guard>
+    <Mode>ModeNotSet</Mode>
+    <LPInnerFEC>MethodNotDefined</LPInnerFEC>
+    <LPInnerFECRate>RateNotDefined</LPInnerFECRate>
+    <OtherFrequencyInUse>false</OtherFrequencyInUse>
+  </ChannelDVBT>
+  <ChannelDVBT>
+    <Name>HD</Name>
+    <ChannelNumber>8</ChannelNumber>
+    <Logo />
+    <AudioRendererDevice />
+    <VideoRendererDevice />
+    <VideoZoomMode>FromInside</VideoZoomMode>
+    <VideoKeepAspectRatio>true</VideoKeepAspectRatio>
+    <VideoOffset>
+      <X>0.5</X>
+      <Y>0.5</Y>
+    </VideoOffset>
+    <VideoZoom>1</VideoZoom>
+    <VideoAspectRatioFactor>1</VideoAspectRatioFactor>
+    <ReferenceClock>AudioRenderer</ReferenceClock>
+    <AudioDecoderType>MPEG2</AudioDecoderType>
+    <AudioDecoderDevice />
+    <VideoDecoderType>H264</VideoDecoderType>
+    <MPEG2DecoderDevice />
+    <H264DecoderDevice>@device:sw:{083863F1-70DE-11D0-BD40-00A0C911CE86}\{04FE9017-F873-410E-871E-AB91661A4EF7}</H264DecoderDevice>
+    <TunerDevice>@device:pnp:\\?\usb#vid_07ca&amp;pid_a835#3047455008100#{71985f48-1ca1-11d3-9cc8-00c04f7971e0}\{9b365890-165f-11d0-a195-0020afd156e4}</TunerDevice>
+    <CaptureDevice />
+    <Frequency>754000</Frequency>
+    <Modulation>ModNotSet</Modulation>
+    <SymbolRate>-1</SymbolRate>
+    <InnerFEC>MethodNotDefined</InnerFEC>
+    <InnerFECRate>RateNotDefined</InnerFECRate>
+    <OuterFEC>MethodNotDefined</OuterFEC>
+    <OuterFECRate>RateNotDefined</OuterFECRate>
+    <ONID>8904</ONID>
+    <TSID>1101</TSID>
+    <SID>1111</SID>
+    <PmtPid>3856</PmtPid>
+    <VideoPid>3840</VideoPid>
+    <PcrPid>3840</PcrPid>
+    <AudioPid>-1</AudioPid>
+    <AudioPids />
+    <TeletextPid>-1</TeletextPid>
+    <EcmPid>-1</EcmPid>
+    <EcmPids />
+    <Bandwidth>8</Bandwidth>
+    <HAlpha>HAlphaNotSet</HAlpha>
+    <Guard>GuardNotSet</Guard>
+    <Mode>ModeNotSet</Mode>
+    <LPInnerFEC>MethodNotDefined</LPInnerFEC>
+    <LPInnerFECRate>RateNotDefined</LPInnerFECRate>
+    <OtherFrequencyInUse>false</OtherFrequencyInUse>
+  </ChannelDVBT>
+</ArrayOfChannelDVBT>

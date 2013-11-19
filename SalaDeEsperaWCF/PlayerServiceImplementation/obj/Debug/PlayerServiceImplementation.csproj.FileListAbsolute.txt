@@ -1,0 +1,14 @@
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\PlayerServiceImplementation.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\PlayerServiceImplementation.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\Assemblies.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\DataContracts.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\PlayerServiceContracts.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\Transitions.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\Assemblies.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\DataContracts.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\PlayerServiceContracts.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\obj\Debug\PlayerServiceImplementation.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\obj\Debug\PlayerServiceImplementation.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\obj\Debug\PlayerServiceImplementation.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\PlayerServiceImplementation\bin\Debug\DigitalTV.dll

@@ -1,0 +1,10 @@
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\bin\ServerService.dll
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\bin\ServerService.pdb
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\obj\Debug\ServerService.dll
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\obj\Debug\ServerService.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\obj\Debug\ServerService.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\bin\Assemblies.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\bin\DigitalTV.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\bin\Transitions.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\bin\DirectShowLib-2005.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ServerService\bin\Assemblies.pdb

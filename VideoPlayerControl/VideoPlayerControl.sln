@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoPlayer", "VideoPlayer\VideoPlayer.csproj", "{0E596F52-4F16-4DA8-A5F3-75B850142378}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTubeVideoPlayer", "TestTubeVideoPlayer\TestTubeVideoPlayer.csproj", "{FCCCEAB6-2EE9-4C8F-B2A1-9C019DED18D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoPlayerDShowLib", "VideoPlayerDShowLib\VideoPlayerDShowLib.csproj", "{F7F56164-F708-4B77-A164-C6930FDEA425}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTubeVideoPlayerDShow", "TestTubeVideoPlayerDShow\TestTubeVideoPlayerDShow.csproj", "{81EE4144-DFA6-48F8-BF2E-626F96EAFA0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Deploy On Working Folder|Any CPU = Deploy On Working Folder|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E596F52-4F16-4DA8-A5F3-75B850142378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E596F52-4F16-4DA8-A5F3-75B850142378}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E596F52-4F16-4DA8-A5F3-75B850142378}.Deploy On Working Folder|Any CPU.ActiveCfg = Deploy On Working Folder|Any CPU
+		{0E596F52-4F16-4DA8-A5F3-75B850142378}.Deploy On Working Folder|Any CPU.Build.0 = Deploy On Working Folder|Any CPU
+		{0E596F52-4F16-4DA8-A5F3-75B850142378}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E596F52-4F16-4DA8-A5F3-75B850142378}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCCCEAB6-2EE9-4C8F-B2A1-9C019DED18D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCCCEAB6-2EE9-4C8F-B2A1-9C019DED18D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCCCEAB6-2EE9-4C8F-B2A1-9C019DED18D8}.Deploy On Working Folder|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCCCEAB6-2EE9-4C8F-B2A1-9C019DED18D8}.Deploy On Working Folder|Any CPU.Build.0 = Debug|Any CPU
+		{FCCCEAB6-2EE9-4C8F-B2A1-9C019DED18D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCCCEAB6-2EE9-4C8F-B2A1-9C019DED18D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F56164-F708-4B77-A164-C6930FDEA425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7F56164-F708-4B77-A164-C6930FDEA425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7F56164-F708-4B77-A164-C6930FDEA425}.Deploy On Working Folder|Any CPU.ActiveCfg = Deploy On Working Folder|Any CPU
+		{F7F56164-F708-4B77-A164-C6930FDEA425}.Deploy On Working Folder|Any CPU.Build.0 = Deploy On Working Folder|Any CPU
+		{F7F56164-F708-4B77-A164-C6930FDEA425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7F56164-F708-4B77-A164-C6930FDEA425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81EE4144-DFA6-48F8-BF2E-626F96EAFA0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81EE4144-DFA6-48F8-BF2E-626F96EAFA0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81EE4144-DFA6-48F8-BF2E-626F96EAFA0D}.Deploy On Working Folder|Any CPU.ActiveCfg = Debug|Any CPU
+		{81EE4144-DFA6-48F8-BF2E-626F96EAFA0D}.Deploy On Working Folder|Any CPU.Build.0 = Debug|Any CPU
+		{81EE4144-DFA6-48F8-BF2E-626F96EAFA0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81EE4144-DFA6-48F8-BF2E-626F96EAFA0D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<ArrayOfXMLItemConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <XMLItemConfiguration xsi:type="XMLMarkeeConfiguration">
+    <Location>
+      <X>0</X>
+      <Y>411</Y>
+    </Location>
+    <Size>
+      <Height>61</Height>
+      <Width>625</Width>
+    </Size>
+    <Resolution>
+      <Height>477</Height>
+      <Width>629</Width>
+    </Resolution>
+    <FinalResolution>
+      <Height>900</Height>
+      <Width>1440</Width>
+    </FinalResolution>
+    <TextList>
+      <string>Holla mundo</string>
+      <string>HAI</string>
+    </TextList>
+    <Direction>None</Direction>
+    <Speed>3</Speed>
+    <Font>
+      <GdiVerticalFont>false</GdiVerticalFont>
+      <Name>Segoe UI Symbol</Name>
+      <Size>27.75</Size>
+      <Style>Regular</Style>
+      <Unit>Point</Unit>
+      <GdiCharSet>0</GdiCharSet>
+    </Font>
+    <FooterBackColor>
+      <A>255</A>
+      <R>0</R>
+      <G>0</G>
+      <B>128</B>
+    </FooterBackColor>
+    <FooterTextColor>
+      <A>255</A>
+      <R>128</R>
+      <G>128</G>
+      <B>128</B>
+    </FooterTextColor>
+    <TransparentBackground>false</TransparentBackground>
+  </XMLItemConfiguration>
+  <XMLItemConfiguration xsi:type="XMLTVConfiguration">
+    <Location>
+      <X>2</X>
+      <Y>2</Y>
+    </Location>
+    <Size>
+      <Height>403</Height>
+      <Width>620</Width>
+    </Size>
+    <Resolution>
+      <Height>477</Height>
+      <Width>629</Width>
+    </Resolution>
+    <FinalResolution>
+      <Height>900</Height>
+      <Width>1440</Width>
+    </FinalResolution>
+    <Frequency>0</Frequency>
+  </XMLItemConfiguration>
+</ArrayOfXMLItemConfiguration>

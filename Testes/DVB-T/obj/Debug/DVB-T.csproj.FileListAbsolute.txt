@@ -1,0 +1,52 @@
+C:\Users\Cláudio\documents\visual studio 2012\Projects\Testes\DVB-T\bin\Debug\DVB-T.exe.config
+C:\Users\Cláudio\documents\visual studio 2012\Projects\Testes\DVB-T\bin\Debug\DVB-T.exe
+C:\Users\Cláudio\documents\visual studio 2012\Projects\Testes\DVB-T\bin\Debug\DVB-T.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\Testes\DVB-T\obj\Debug\DVB_T.Form1.resources
+C:\Users\Cláudio\documents\visual studio 2012\Projects\Testes\DVB-T\obj\Debug\DVB_T.Properties.Resources.resources
+C:\Users\Cláudio\documents\visual studio 2012\Projects\Testes\DVB-T\obj\Debug\DVB-T.csproj.GenerateResource.Cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\Testes\DVB-T\obj\Debug\DVB-T.exe
+C:\Users\Cláudio\documents\visual studio 2012\Projects\Testes\DVB-T\obj\Debug\DVB-T.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\bin\Debug\DVB-T.exe.config
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\obj\Debug\DVB-T.exe
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\obj\Debug\DVB-T.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\bin\Debug\DVB-T.exe
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\bin\Debug\DVB-T.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\obj\Debug\DVB_T.Form1.resources
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\obj\Debug\DVB_T.Properties.Resources.resources
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Cláudio\Documents\Visual Studio 2010\Projects\Testes\DVB-T\obj\Debug\DVB_T.Toolkit.DigitalTVScreen.resources
+C:\Users\Cláudio\Dropbox\Programação\Work\Projectos\Testes\DVB-T\bin\Debug\DVB-T.exe.config
+C:\Users\Cláudio\Dropbox\Programação\Work\Projectos\Testes\DVB-T\obj\Debug\DVB-T.exe
+C:\Users\Cláudio\Dropbox\Programação\Work\Projectos\Testes\DVB-T\obj\Debug\DVB-T.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Debug\DirectShowLib-2005.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\obj\Debug\DVB-T.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Debug\DigitalTV.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Debug\DigitalTV.pdb
+C:\Users\Cláudio\Desktop\Testes\DVB-T\bin\Debug\DVB-T.exe.config
+C:\Users\Cláudio\Desktop\Testes\DVB-T\obj\Debug\DVB-T.exe
+C:\Users\Cláudio\Desktop\Testes\DVB-T\obj\Debug\DVB-T.pdb
+C:\Users\Cláudio\Desktop\Testes\DVB-T\bin\Debug\DVB-T.exe
+C:\Users\Cláudio\Desktop\Testes\DVB-T\bin\Debug\DVB-T.pdb
+C:\Users\Cláudio\Desktop\Testes\DVB-T\bin\Debug\DigitalTV.dll
+C:\Users\Cláudio\Desktop\Testes\DVB-T\bin\Debug\DigitalTV.pdb
+C:\Users\Cláudio\Desktop\Testes\DVB-T\bin\Debug\DirectShowLib-2005.pdb
+C:\Users\Cláudio\Desktop\Testes\DVB-T\obj\Debug\DVB-T.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Testes\DVB-T\obj\Debug\DVB_T.Form1.resources
+C:\Users\Cláudio\Desktop\Testes\DVB-T\obj\Debug\DVB_T.Properties.Resources.resources
+C:\Users\Cláudio\Desktop\Testes\DVB-T\obj\Debug\DVB-T.csproj.GenerateResource.Cache
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\bin\Debug\DVB-T.exe.config
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\obj\Debug\DVB-T.exe
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\obj\Debug\DVB-T.pdb
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\bin\Debug\DigitalTV.dll
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\bin\Debug\DirectShowLib-2005.dll
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\bin\Debug\DigitalTV.pdb
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\bin\Debug\DirectShowLib-2005.pdb
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\obj\Debug\DVB-T.csprojResolveAssemblyReference.cache
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\obj\Debug\DVB_T.Form1.resources
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\obj\Debug\DVB_T.Properties.Resources.resources
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\obj\Debug\DVB-T.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Debug\MediaFoundation.dll

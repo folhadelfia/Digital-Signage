@@ -1,0 +1,12 @@
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Debug\TV-2.exe
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Debug\TV-2.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Debug\TV2Lib.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Debug\MediaFoundation.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Debug\TV2Lib.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV-2.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV_2.Properties.Resources.resources
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV-2.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV-2.exe
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV-2.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV_2.FormPrincipal.resources

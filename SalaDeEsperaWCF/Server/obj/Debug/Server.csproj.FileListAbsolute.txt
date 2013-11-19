@@ -1,0 +1,28 @@
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\Server.exe.config
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\Server.exe
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\Server.pdb
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\obj\Debug\Server.Properties.Resources.resources
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\obj\Debug\Server.csproj.GenerateResource.Cache
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\obj\Debug\Server.exe
+c:\users\cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\obj\Debug\Server.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\obj\Debug\Server.View.FormJanelaFinal.resources
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\Assemblies.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\Transitions.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\Assemblies.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\obj\Debug\Server.View.ListeningForm.resources
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Visual Studio 2012 VM\Projects\SalaDeEsperaWCF\Server\bin\Debug\Server.exe.config
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Visual Studio 2012 VM\Projects\SalaDeEsperaWCF\Server\obj\Debug\Server.exe
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Visual Studio 2012 VM\Projects\SalaDeEsperaWCF\Server\obj\Debug\Server.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\Libraries\DirectShowLib-2005.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\Libraries\Transitions.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\TrackBar.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\Options\Images\MarkeeBackground.png
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\MediaFoundation.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\TV2Lib.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\VideoPlayer.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\VideoPlayerDShowLib.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\TV2Lib.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\VideoPlayer.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Server\bin\Debug\VideoPlayerDShowLib.pdb

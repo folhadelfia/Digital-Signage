@@ -1,0 +1,6 @@
+C:\Users\Cláudio\Working Directory\VideoPlayer.dll
+C:\Users\Cláudio\Working Directory\VideoPlayer.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Deploy On Working Folder\VideoPlayer.VideoControl.resources
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Deploy On Working Folder\VideoPlayer.csproj.GenerateResource.Cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Deploy On Working Folder\VideoPlayer.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Deploy On Working Folder\VideoPlayer.pdb

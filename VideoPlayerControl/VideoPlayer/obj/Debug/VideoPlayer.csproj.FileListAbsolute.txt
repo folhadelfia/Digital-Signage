@@ -1,0 +1,8 @@
+c:\users\cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\bin\Debug\VideoPlayer.dll
+c:\users\cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\bin\Debug\VideoPlayer.pdb
+c:\users\cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\bin\Debug\DirectShowLib-2005.dll
+c:\users\cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.csprojResolveAssemblyReference.cache
+c:\users\cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.dll
+c:\users\cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.pdb
+C:\Users\Cláudio\Documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.VideoControl.resources

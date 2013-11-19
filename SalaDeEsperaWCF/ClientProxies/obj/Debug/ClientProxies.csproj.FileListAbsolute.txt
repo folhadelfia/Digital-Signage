@@ -1,0 +1,14 @@
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\ClientProxies.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\ClientProxies.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\DataContracts.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\PlayerServiceContracts.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\Assemblies.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\Transitions.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\DataContracts.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\PlayerServiceContracts.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\Assemblies.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\obj\Debug\ClientProxies.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\obj\Debug\ClientProxies.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\obj\Debug\ClientProxies.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\ClientProxies\bin\Debug\DigitalTV.dll

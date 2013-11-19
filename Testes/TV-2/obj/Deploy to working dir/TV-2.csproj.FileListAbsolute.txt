@@ -1,0 +1,12 @@
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Deploy to working dir\DirectShowLib-2005.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Deploy to working dir\TV-2.exe
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Deploy to working dir\TV-2.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Deploy to working dir\TV2Lib.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Deploy to working dir\MediaFoundation.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\bin\Deploy to working dir\TV2Lib.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Deploy to working dir\TV-2.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Deploy to working dir\TV_2.Form1.resources
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Deploy to working dir\TV_2.Properties.Resources.resources
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Deploy to working dir\TV-2.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Deploy to working dir\TV-2.exe
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Deploy to working dir\TV-2.pdb

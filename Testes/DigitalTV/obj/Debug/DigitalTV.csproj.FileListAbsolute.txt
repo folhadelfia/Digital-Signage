@@ -1,0 +1,27 @@
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\obj\Debug\DigitalTV.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\bin\Debug\DigitalTV.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\bin\Debug\DigitalTV.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\bin\Debug\DirectShowLib-2005.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\obj\Debug\DigitalTV.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\obj\Debug\DigitalTV.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\obj\Debug\DigitalTV.DigitalTVScreen.resources
+C:\Users\Cláudio\Desktop\Testes\DigitalTV\bin\Debug\DigitalTV.dll
+C:\Users\Cláudio\Desktop\Testes\DigitalTV\bin\Debug\DigitalTV.pdb
+C:\Users\Cláudio\Desktop\Testes\DigitalTV\bin\Debug\DirectShowLib-2005.pdb
+C:\Users\Cláudio\Desktop\Testes\DigitalTV\obj\Debug\DigitalTV.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Testes\DigitalTV\obj\Debug\DigitalTV.DigitalTVScreen.resources
+C:\Users\Cláudio\Desktop\Testes\DigitalTV\obj\Debug\DigitalTV.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Desktop\Testes\DigitalTV\obj\Debug\DigitalTV.dll
+C:\Users\Cláudio\Desktop\Testes\DigitalTV\obj\Debug\DigitalTV.pdb
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DigitalTV\obj\Debug\DigitalTV.csprojResolveAssemblyReference.cache
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DigitalTV\obj\Debug\DigitalTV.DigitalTVScreen.resources
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DigitalTV\obj\Debug\DigitalTV.csproj.GenerateResource.Cache
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DigitalTV\obj\Debug\DigitalTV.dll
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DigitalTV\bin\Debug\DigitalTV.dll
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DigitalTV\bin\Debug\DigitalTV.pdb
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DigitalTV\bin\Debug\DirectShowLib-2005.dll
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DigitalTV\bin\Debug\DirectShowLib-2005.pdb
+\\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DigitalTV\obj\Debug\DigitalTV.pdb
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\bin\Debug\MediaFoundation.dll
+C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DigitalTV\obj\Debug\DigitalTV.csprojResolveAssemblyReference.cache

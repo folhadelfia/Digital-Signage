@@ -1,0 +1,11 @@
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\bin\Debug\TestTubeVideoPlayerDShow.exe
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\bin\Debug\TestTubeVideoPlayerDShow.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\bin\Debug\VideoPlayerDShowLib.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\bin\Debug\VideoPlayerDShowLib.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\obj\Debug\TestTubeVideoPlayerDShow.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\obj\Debug\TestTubeVideoPlayerDShow.Properties.Resources.resources
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\obj\Debug\TestTubeVideoPlayerDShow.csproj.GenerateResource.Cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\obj\Debug\TestTubeVideoPlayerDShow.exe
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\obj\Debug\TestTubeVideoPlayerDShow.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\TestTubeVideoPlayerDShow\obj\Debug\TestTubeVideoPlayerDShow.FormTestTubeVideoPlayerDShow.resources
