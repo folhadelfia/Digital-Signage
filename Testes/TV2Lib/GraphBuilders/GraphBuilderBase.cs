@@ -215,7 +215,10 @@ namespace TV2Lib
 		{
 			IMediaControl mediaControl = this.graphBuilder as IMediaControl;
 			FilterState pfs;
-			mediaControl.GetState(0, out pfs);
+
+            if (mediaControl == null) return FilterState.Stopped;
+
+            mediaControl.GetState(0, out pfs);
 			return pfs;
 		}
 
@@ -229,8 +232,13 @@ namespace TV2Lib
 
 			if (pfs != FilterState.Running)
 			{
-				hr = mediaControl.Run();
-				ThrowExceptionForHR("Running the graph: ", hr);
+                Thread t = new Thread(() =>
+                {
+                    hr = mediaControl.Run();
+                    ThrowExceptionForHR("Running the graph: ", hr);
+                });
+
+                t.Start();
 
 				IsPossibleGraphRun = false;
 				IsPossibleGraphPause = true;
@@ -244,11 +252,18 @@ namespace TV2Lib
 		{
 			IMediaControl mediaControl = this.graphBuilder as IMediaControl;
 			FilterState pfs;
+
 			mediaControl.GetState(0, out pfs);
+
 			if (pfs == FilterState.Running)
 			{
-				int hr = mediaControl.Pause();
-				ThrowExceptionForHR("Pausing the graph: ", hr);
+                Thread t = new Thread(() =>
+                {
+				    int hr = mediaControl.Pause();
+                    ThrowExceptionForHR("Pausing the graph: ", hr);
+                });
+
+                t.Start();
 
 				IsPossibleGraphRun = true;
 				IsPossibleGraphPause = false;
@@ -260,11 +275,18 @@ namespace TV2Lib
 		{
 			IMediaControl mediaControl = this.graphBuilder as IMediaControl;
 			FilterState pfs;
+
 			mediaControl.GetState(0, out pfs);
+
 			if (pfs == FilterState.Running || pfs == FilterState.Paused)
-			{
-				int hr = mediaControl.Stop();
-				ThrowExceptionForHR("Stopping the graph: ", hr);
+            {
+                Thread t = new Thread(() =>
+                {
+				    int hr = mediaControl.Stop();
+				    ThrowExceptionForHR("Stopping the graph: ", hr);
+                });
+
+                t.Start();
 
 				IsPossibleGraphRun = true;
 				IsPossibleGraphPause = false;
@@ -593,7 +615,6 @@ namespace TV2Lib
 		{
 			return ConfigureVMR9InWindowlessMode(1);
 		}
-
 		protected virtual int ConfigureVMR9InWindowlessMode(int numberOfStream)
         {
             int hr = 0;
