@@ -50,3 +50,17 @@ C:\Users\Cláudio\Desktop\Testes\DVB-T\obj\Debug\DVB-T.csproj.GenerateResource.C
 \\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\obj\Debug\DVB_T.Properties.Resources.resources
 \\IOMEGA\Geral\PROGRAMACAO\Cláudio\Backups dos projectos\Testes\DVB-T\obj\Debug\DVB-T.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\DVB-T\bin\Debug\MediaFoundation.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\bin\Debug\DVB-T.exe.config
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\bin\Debug\DVB-T.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\bin\Debug\DVB-T.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\bin\Debug\DigitalTV.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\bin\Debug\MediaFoundation.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\bin\Debug\DigitalTV.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\bin\Debug\DirectShowLib-2005.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\obj\Debug\DVB-T.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\obj\Debug\DVB_T.Form1.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\obj\Debug\DVB_T.Properties.Resources.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\obj\Debug\DVB-T.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\obj\Debug\DVB-T.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\DVB-T\obj\Debug\DVB-T.pdb
