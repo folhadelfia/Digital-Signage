@@ -10,3 +10,5 @@ C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV
 C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV-2.exe
 C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV-2.pdb
 C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV-2\obj\Debug\TV_2.FormPrincipal.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Debug\TV-2.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Debug\TV-2.pdb
