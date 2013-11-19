@@ -75,10 +75,10 @@ namespace TV2Lib
 					mpeg2DecoderDevices = new Dictionary<string, DsDevice>();
 
 					DsDevice[] devices = DeviceEnumerator.GetMPEG2Devices();
-					foreach (DsDevice d in devices)
-						if (d.Name != null)
+                    foreach (DsDevice d in devices)
+                        if (d.Name != null)
                             mpeg2DecoderDevices.Add(d.DevicePath, d);
-				}
+                }
 				return mpeg2DecoderDevices;
 			}
 		}
@@ -2303,7 +2303,6 @@ namespace TV2Lib
 						try
 						{
 							videoDecoderIn = DsFindPin.ByDirection(this.videoH264DecoderFilter, PinDirection.Input, 0);
-
 
                             //AMMediaType mediaH264 = new AMMediaType();
                             //mediaH264.majorType = MediaType.Video;
