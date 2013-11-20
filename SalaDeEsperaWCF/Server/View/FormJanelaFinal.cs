@@ -384,6 +384,10 @@ namespace Server.View
 
                     tvScreen.Channels.Frequency = temp.Frequency;
                     tvScreen.Channels.ForceRebuildOnChannelTune = true;
+                    tvScreen.VideoZoomMode = VideoSizeMode.FromInside;
+                    tvScreen.VideoZoomValue = 0;
+                    tvScreen.VideoKeepAspectRatio = true;
+                    tvScreen.VideoAspectRatio = 1;
 
                     DirectShowLib.DsDevice dev;
                     if(DigitalTVScreen.DeviceStuff.TunerDevices.TryGetValue(temp.TunerDevicePath, out dev))
