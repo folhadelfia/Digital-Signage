@@ -37,7 +37,6 @@
             this.pictureBoxSIC = new System.Windows.Forms.PictureBox();
             this.pictureBoxRTP2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxRTP1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVolDown)).BeginInit();
@@ -103,6 +102,7 @@
             this.pictureBoxOnOff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxOnOff.TabIndex = 4;
             this.pictureBoxOnOff.TabStop = false;
+            this.pictureBoxOnOff.Click += new System.EventHandler(this.pictureBoxOnOff_Click);
             // 
             // pictureBoxTVI
             // 
@@ -148,23 +148,12 @@
             this.pictureBoxRTP1.TabStop = false;
             this.pictureBoxRTP1.Click += new System.EventHandler(this.pictureBoxRTP1_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(37, 127);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(232, 480);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBoxMinimize);
             this.Controls.Add(this.pictureBoxClose);
             this.Controls.Add(this.pictureBoxVolDown);
@@ -201,7 +190,6 @@
         private System.Windows.Forms.PictureBox pictureBoxVolDown;
         private System.Windows.Forms.PictureBox pictureBoxClose;
         private System.Windows.Forms.PictureBox pictureBoxMinimize;
-        private System.Windows.Forms.Button button1;
     }
 }
 

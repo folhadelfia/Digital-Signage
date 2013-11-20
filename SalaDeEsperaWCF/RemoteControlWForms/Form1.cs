@@ -118,7 +118,7 @@ namespace RemoteControlWForms
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void pictureBoxOnOff_Click(object sender, EventArgs e)
         {
             Client.ServiceList serviceList = new Client.ServiceList();
 

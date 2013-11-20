@@ -10,6 +10,7 @@ using Assemblies.Toolkit;
 using Assemblies.ClientProxies;
 using Assemblies.DataContracts;
 using Assemblies.PlayerServiceContracts;
+using System.Threading;
 
 namespace Assemblies.ClientModel
 {
@@ -150,6 +151,15 @@ namespace Assemblies.ClientModel
         {
             try
             {
+                //Se o utilizador não escolher nenhum tuner, escolhe automaticamente o primeiro
+                foreach (var item in configurations.Components.OfType<TVConfiguration>())
+                {
+                    if (string.IsNullOrWhiteSpace(item.TunerDevicePath))
+                    {
+                        if (player.GetTunerDevices().Count() > 0) item.TunerDevicePath = player.GetTunerDevices()[0].DevicePath;
+                    }
+                }
+
                 player.OpenPlayer(NetWCFConverter.ToWCF(configurations));
             }
             catch

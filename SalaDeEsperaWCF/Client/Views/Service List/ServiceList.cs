@@ -16,6 +16,7 @@ using Assemblies.ClientModel;
 using Assemblies.ClientProxies;
 using Assemblies.DataContracts;
 using Assemblies.PlayerServiceContracts;
+using System.Threading;
 
 namespace Client
 {
@@ -61,33 +62,52 @@ namespace Client
 #endif
             }
         }
-        private void buttonSearchServices_Click(object sender, EventArgs e)
+        private void buttonSearchServices_Click(object sender, EventArgs e) //Com thread
         {
-            if(!(NetworkingToolkit.ValidateIPAddress(ip) && NetworkingToolkit.ValidatePort(port)))
-            {
-                configurarToolStripMenuItem.PerformClick();
-            }
-
-            listViewPCs.Items.Clear();
-
-            connection.ServerIP = ip;
-            connection.ServerPort = port;
-            try
-            {
-                foreach (var pc in connection.GetPlayers())
+            Thread t = new Thread(new ThreadStart(() =>
                 {
-                    ListViewItem temp = new ListViewItem(pc.IP.ToString());
-                    temp.SubItems.Add(pc.Name);
-                    temp.SubItems.Add((pc.Displays as List<WCFScreenInformation>).Count.ToString());
 
-                    temp.Tag = pc;
+                    if (!(NetworkingToolkit.ValidateIPAddress(ip) && NetworkingToolkit.ValidatePort(port)))
+                    {
+                        configurarToolStripMenuItem.PerformClick();
+                    }
 
-                    listViewPCs.Items.Add(temp);
-                }
-            }
-            catch
-            {
-            }
+                    if (this.InvokeRequired) this.BeginInvoke(new MethodInvoker(() =>
+                    {
+                        listViewPCs.Items.Clear();
+                    }));
+                    else
+                        listViewPCs.Items.Clear();
+
+                    connection.ServerIP = ip;
+                    connection.ServerPort = port;
+
+                    var pcs = connection.GetPlayers();
+
+                    try
+                    {
+                        foreach (var pc in pcs)
+                        {
+                            ListViewItem temp = new ListViewItem(pc.IP.ToString());
+                            temp.SubItems.Add(pc.Name);
+                            temp.SubItems.Add((pc.Displays as List<WCFScreenInformation>).Count.ToString());
+
+                            temp.Tag = pc;
+
+                            if (this.InvokeRequired) this.BeginInvoke(new MethodInvoker(() =>
+                            {
+                                listViewPCs.Items.Add(temp);
+                            }));
+                            else
+                                listViewPCs.Items.Add(temp);
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }));
+
+            t.Start();
         }
 
         private void listViewPCs_ItemEntered(IEnumerable<WCFScreenInformation> info)

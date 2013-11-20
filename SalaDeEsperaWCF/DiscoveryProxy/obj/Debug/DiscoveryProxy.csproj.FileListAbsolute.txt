@@ -20,3 +20,19 @@ C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Discover
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\Options\Images\MarkeeBackground.png
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\TV2Lib.dll
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\MediaFoundation.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\Libraries\DirectShowLib-2005.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\Libraries\Transitions.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\Options\Images\MarkeeBackground.png
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\DiscoveryProxy.exe.config
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\DiscoveryProxy.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\DiscoveryProxy.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\Assemblies.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\TV2Lib.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\TrackBar.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\Transitions.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\MediaFoundation.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\Assemblies.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\obj\Debug\DiscoveryProxy.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\obj\Debug\DiscoveryProxy.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\obj\Debug\DiscoveryProxy.pdb
