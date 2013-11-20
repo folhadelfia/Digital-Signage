@@ -241,6 +241,8 @@ namespace TV2Lib
                 IsPossibleGraphRun = false;
                 IsPossibleGraphPause = true;
                 IsPossibleGraphStop = true;
+
+                t.Start();
 			}
 
             return hr;
@@ -261,11 +263,11 @@ namespace TV2Lib
                     ThrowExceptionForHR("Pausing the graph: ", hr);
                 });
 
-                t.Start();
-
 				IsPossibleGraphRun = true;
 				IsPossibleGraphPause = false;
 				IsPossibleGraphStop = true;
+
+                t.Start();
 			}
 		}
 
@@ -284,11 +286,11 @@ namespace TV2Lib
 				    ThrowExceptionForHR("Stopping the graph: ", hr);
                 });
 
-                t.Start();
-
 				IsPossibleGraphRun = true;
 				IsPossibleGraphPause = false;
 				IsPossibleGraphStop = false;
+
+                t.Start();
 			}
 		}
 
