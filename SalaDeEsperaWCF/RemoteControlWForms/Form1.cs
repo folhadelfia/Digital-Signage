@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using Assemblies.ClientModel;
 using Transitions;
@@ -137,26 +138,46 @@ namespace RemoteControlWForms
 
         private void pictureBoxRTP1_Click(object sender, EventArgs e)
         {
-            if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                connection.SetCurrentTVChannel(channels.Single(x=>x.ChannelNumber == 1));
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 1));
+            }));
+
+            t.Start();
         }
 
         private void pictureBoxRTP2_Click(object sender, EventArgs e)
         {
-            if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 2));
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 2));
+            }));
+
+            t.Start();
         }
 
         private void pictureBoxSIC_Click(object sender, EventArgs e)
         {
-            if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 3));
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 3));
+            }));
+
+            t.Start();
         }
 
         private void pictureBoxTVI_Click(object sender, EventArgs e)
         {
-            if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 4));
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 4));
+            }));
+
+            t.Start();
         }
     }
 }

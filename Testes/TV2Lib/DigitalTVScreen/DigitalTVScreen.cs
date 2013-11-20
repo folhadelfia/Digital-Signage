@@ -354,8 +354,6 @@ namespace TV2Lib
                               (owner.Devices.MPEG2Decoder != null && owner.Devices.MPEG2Decoder.DevicePath != CurrentChannel.MPEG2DecoderDevice) ||
                               channelDVBT.NeedToRebuildTheGraph(CurrentChannel);
 
-                //Só descomentar a linha de cima quando compuser o audio
-
                 return (owner.GraphicBuilder = this.TuneChannel(channel, needRebuild)) != null;
             }
             private GraphBuilderBDA TuneChannel(Channel channel, bool needRebuild)

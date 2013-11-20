@@ -10,7 +10,7 @@
  
  */
 
-#define EXPOSE_METADATA
+#undef EXPOSE_METADATA
 
 using System;
 using System.Collections.Generic;

@@ -22,3 +22,4 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Debug\TV-2.csprojR
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Debug\TV_2.FormPrincipal.resources
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Debug\TV_2.Properties.Resources.resources
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Debug\TV-2.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\bin\Debug\TV2Lib.xml
