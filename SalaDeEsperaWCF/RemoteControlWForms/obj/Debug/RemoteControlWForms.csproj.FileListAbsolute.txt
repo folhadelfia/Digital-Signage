@@ -19,3 +19,5 @@ C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\RemoteCo
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\RemoteControlWForms\bin\Debug\Client.exe
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\RemoteControlWForms\bin\Debug\Client.pdb
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\RemoteControlWForms\bin\Debug\TV2Lib.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\obj\Debug\RemoteControlWForms.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\obj\Debug\RemoteControlWForms.pdb

@@ -24,3 +24,6 @@ C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Client\b
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Client\bin\Debug\TV2Lib.dll
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Client\bin\Debug\MediaFoundation.dll
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Client\bin\Debug\TV2Lib.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\Client.exe.config
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.pdb

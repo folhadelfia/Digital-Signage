@@ -1,10 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVB-T", "DVB-T\DVB-T.csproj", "{9706C544-411E-4ADB-BF55-81DB2D9C911C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalTV", "DigitalTV\DigitalTV.csproj", "{53A62310-3693-459D-B923-39996836ACBA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV-2", "TV-2\TV-2.csproj", "{A7DE261E-34D7-4B32-B36F-34C9BEFB85F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV2Lib", "TV2Lib\TV2Lib.csproj", "{6402E765-5743-471C-807C-864270421C08}"
@@ -16,18 +12,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9706C544-411E-4ADB-BF55-81DB2D9C911C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9706C544-411E-4ADB-BF55-81DB2D9C911C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9706C544-411E-4ADB-BF55-81DB2D9C911C}.Deploy to working dir|Any CPU.ActiveCfg = Deploy to working dir|Any CPU
-		{9706C544-411E-4ADB-BF55-81DB2D9C911C}.Deploy to working dir|Any CPU.Build.0 = Deploy to working dir|Any CPU
-		{9706C544-411E-4ADB-BF55-81DB2D9C911C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9706C544-411E-4ADB-BF55-81DB2D9C911C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53A62310-3693-459D-B923-39996836ACBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53A62310-3693-459D-B923-39996836ACBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53A62310-3693-459D-B923-39996836ACBA}.Deploy to working dir|Any CPU.ActiveCfg = Deploy to working dir|Any CPU
-		{53A62310-3693-459D-B923-39996836ACBA}.Deploy to working dir|Any CPU.Build.0 = Deploy to working dir|Any CPU
-		{53A62310-3693-459D-B923-39996836ACBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53A62310-3693-459D-B923-39996836ACBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A7DE261E-34D7-4B32-B36F-34C9BEFB85F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7DE261E-34D7-4B32-B36F-34C9BEFB85F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7DE261E-34D7-4B32-B36F-34C9BEFB85F3}.Deploy to working dir|Any CPU.ActiveCfg = Deploy to working dir|Any CPU

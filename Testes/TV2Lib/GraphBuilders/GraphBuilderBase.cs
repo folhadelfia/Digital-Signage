@@ -238,11 +238,9 @@ namespace TV2Lib
                     ThrowExceptionForHR("Running the graph: ", hr);
                 });
 
-                t.Start();
-
-				IsPossibleGraphRun = false;
-				IsPossibleGraphPause = true;
-				IsPossibleGraphStop = true;
+                IsPossibleGraphRun = false;
+                IsPossibleGraphPause = true;
+                IsPossibleGraphStop = true;
 			}
 
             return hr;

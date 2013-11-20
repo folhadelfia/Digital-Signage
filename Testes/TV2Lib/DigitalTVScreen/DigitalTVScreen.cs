@@ -12,6 +12,7 @@ using DirectShowLib.BDA;
 using System.Collections;
 using TV2Lib.PSI;
 using System.Xml.Serialization;
+using System.Threading;
 
 //Olá
 //Mundo
@@ -558,8 +559,8 @@ namespace TV2Lib
                 owner.OnNewLogMessage("Scanning channels");
                 DigitalTVState oldState = owner.State;
                 bool res = owner.ScanProbeFrequency(this.CurrentChannel);
-
                 if (oldState == DigitalTVState.Stopped) owner.Stop();
+                owner.OnNewLogMessage("Channel scan complete");
 
                 return res;
             }
@@ -794,7 +795,7 @@ namespace TV2Lib
 
                     #endregion
 
-                    hr = GraphicBuilder.Start(tuner, this.Channels.CurrentChannel.VideoDecoderType, this.Channels.CurrentChannel.AudioDecoderType); //mudar para retornar int
+                    hr = GraphicBuilder.Start(tuner, this.Channels.CurrentChannel.VideoDecoderType, this.Channels.CurrentChannel.AudioDecoderType);
                     DsError.ThrowExceptionForHR(hr);
 
                     OnNewLogMessage("TV component started");
@@ -1083,167 +1084,6 @@ namespace TV2Lib
             r = this.GraphicBuilder.GetSignalStatistics(out locked, out present, out strength, out quality);
 
             return r;
-        }
-        private bool ScanProbeFrequency(ChannelTV currentChannelTV, bool rebuildGraph)
-        {
-            bool locked = false, present = false;
-            int strength, quality;
-
-            (this as VideoControl).BackColor = Color.Transparent;
-            try
-            {
-                this.Channels.TuneChannel(currentChannelTV);
-            }
-            catch (Exception ex)
-            {
-                (this as VideoControl).BackColor = this.Settings.VideoBackgroundColor;
-            }
-
-            if (currentChannelTV is ChannelDVB)
-            {
-                if (this.GraphicBuilder is IBDA)
-                {
-                    IBDA graphBuilderBDA = this.GraphicBuilder as IBDA;
-                    System.Threading.Thread.Sleep(500);
-
-                    int sucatadaScanTimeout = 0;
-                    do
-                    {
-                        (graphBuilderBDA as ITV).GetSignalStatistics(out locked, out present, out strength, out quality);
-                        sucatadaScanTimeout++;
-                        if (!(locked && present)) System.Threading.Thread.Sleep(100);
-                    }
-                    while (!(locked && present) && sucatadaScanTimeout < 10);
-
-                    if (locked && present)
-                    {
-                        IMpeg2Data mpeg2Data = graphBuilderBDA.SectionsAndTables as IMpeg2Data;
-
-                        short originalNetworkId = -1;
-                        Hashtable serviceNameByServiceId = new Hashtable();
-
-                        Hashtable serviceTypeByServiceID = new Hashtable();
-                        PSISection[] psiSdts = PSISection.GetPSITable((int)PIDS.SDT, (int)TABLE_IDS.SDT_ACTUAL, mpeg2Data);
-                        for (int i = 0; i < psiSdts.Length; i++)
-                        {
-                            PSISection psiSdt = psiSdts[i];
-                            if (psiSdt != null && psiSdt is PSISDT)
-                            {
-
-                                PSISDT sdt = (PSISDT)psiSdt;
-
-                                originalNetworkId = (short)sdt.OriginalNetworkId;
-                                foreach (PSISDT.Data service in sdt.Services)
-                                {
-                                    serviceNameByServiceId[service.ServiceId] = service.GetServiceName();
-                                    serviceTypeByServiceID[service.ServiceId] = service.GetServiceType();
-                                }
-                            }
-                        }
-
-                        Hashtable logicalChannelNumberByServiceId = new Hashtable();
-                        PSISection[] psiNits = PSISection.GetPSITable((int)PIDS.NIT, (int)TABLE_IDS.NIT_ACTUAL, mpeg2Data);
-                        for (int i = 0; i < psiNits.Length; i++)
-                        {
-                            PSISection psinit = psiNits[i];
-                            if (psinit != null && psinit is PSINIT)
-                            {
-                                PSINIT nit = (PSINIT)psinit;
-
-                                foreach (PSINIT.Data data in nit.Streams)
-                                {
-                                    foreach (PSIDescriptor psiDescriptorData in data.Descriptors)
-                                    {
-                                        if (psiDescriptorData.DescriptorTag == DESCRIPTOR_TAGS.DESCR_LOGICAL_CHANNEL)
-                                        {
-                                            PSIDescriptorLogicalChannel psiDescriptorLogicalChannel = (PSIDescriptorLogicalChannel)psiDescriptorData;
-                                            foreach (PSIDescriptorLogicalChannel.ChannelNumber f in psiDescriptorLogicalChannel.LogicalChannelNumbers)
-                                            {
-                                                logicalChannelNumberByServiceId[f.ServiceID] = f.LogicalChannelNumber; //números dos canais
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        PSISection[] psis = PSISection.GetPSITable((int)PIDS.PAT, (int)TABLE_IDS.PAT, mpeg2Data);
-                        for (int i = 0; i < psis.Length; i++)
-                        {
-                            PSISection psi = psis[i];
-                            if (psi != null && psi is PSIPAT)
-                            {
-                                PSIPAT pat = (PSIPAT)psi;
-
-                                ChannelDVB newTemplateChannelDVB = (this.GraphicBuilder as ITV).CurrentChannel.MakeCopy() as ChannelDVB;
-                                newTemplateChannelDVB.ONID = originalNetworkId;
-                                newTemplateChannelDVB.TSID = pat.TransportStreamId;
-
-                                foreach (PSIPAT.Data program in pat.ProgramIds)
-                                {
-                                    if (!program.IsNetworkPID)
-                                    {
-                                        SERVICE_TYPES st;
-                                        try
-                                        {
-                                            st = (SERVICE_TYPES)serviceTypeByServiceID[program.ProgramNumber];
-                                        }
-                                        catch
-                                        {
-                                            st = SERVICE_TYPES.ADVANCE_CODEC_SD_DIGITAL_SERVICE; //Fail safe to get the programs with bad reception
-                                        }
-
-                                        if (st == SERVICE_TYPES.DIGITAL_TELEVISION_SERVICE ||                       // TV SD MPEG2
-                                            st == SERVICE_TYPES.ADVANCE_CODEC_HD_DIGITAL_SERVICE ||                 // TV HD H264
-                                            st == SERVICE_TYPES.ADVANCE_CODEC_SD_DIGITAL_SERVICE ||                 // TV SD H264
-                                            st == SERVICE_TYPES.MPEG2_HD_DIGITAL_TELEVISION_SERVICE ||              // TV HD MPEG2
-                                            st == SERVICE_TYPES.DIGITAL_RADIO_SOUND_SERVICE ||                      // Radio MP2
-                                            st == SERVICE_TYPES.ADVANCED_CODEC_DIGITAL_RADIO_SOUND_SERVICE ||        // Radio AC3/E-AC3/AAC
-                                            st == SERVICE_TYPES.MOSAIC_SERVICE ||                                   // Mosaic MPEG2                                
-                                            st == SERVICE_TYPES.ADVANCED_CODEC_MOSAIC_SERVICE)                      // Mosaic H264
-                                        {
-                                            ChannelDVB newChannelDVB = newTemplateChannelDVB.MakeCopy() as ChannelDVB;
-                                            newChannelDVB.SID = program.ProgramNumber;
-                                            newChannelDVB.Name = (string)serviceNameByServiceId[program.ProgramNumber];
-                                            //Hervé Stalin: ajout du LCN 
-                                            newChannelDVB.ChannelNumber = Convert.ToInt16(logicalChannelNumberByServiceId[program.ProgramNumber]);
-
-                                            if (newChannelDVB.Name == null)
-                                                newChannelDVB.Name = Properties.Resources.NoName;
-
-                                            UpdateDVBChannelPids(mpeg2Data, program.Pid, newChannelDVB);
-
-                                            //if (currentChannelTV is ChannelDVBT)
-                                            //{
-                                            //    newChannelDVB.Frequency = (currentChannelTV as ChannelDVBT).Frequency;
-                                            //}
-                                            //RECOLHER OS CANAIS AQUI
-                                            this.OnNewLogMessage(string.Format("Channel {0} found.", newChannelDVB.Name));
-
-                                            if (!this.Channels.ChannelList.Contains<ChannelDVBT>(newChannelDVB as ChannelDVBT))
-                                            {
-                                                this.Channels.ChannelList.Add(newChannelDVB as ChannelDVBT);
-                                                this.OnNewLogMessage(string.Format("Channel {0} added. Total: {1} channel{2}", newChannelDVB.Name, this.Channels.ChannelList.Count, this.Channels.ChannelList.Count == 1 ? "" : "s"));
-
-                                                OnChannelListChanged();
-                                            }
-                                            else
-                                            {
-                                                this.OnNewLogMessage(string.Format("Channel {0} already on the list, skipping.", newChannelDVB.Name));
-                                            }
-                                        }
-                                    }
-                                }
-
-                                Application.DoEvents();
-                            }
-                        }
-                    }
-
-                }
-            }
-
-            return locked && present;
         }
         private bool ScanProbeFrequency(ChannelTV currentChannelTV)
         {
