@@ -293,10 +293,12 @@ namespace Server.View
         {
             try
             {
+                this.StartPosition = FormStartPosition.Manual;
+
                 this.shapeSetByPlayerWndInfo = new Rectangle(information.Display.Bounds.Location.X, information.Display.Bounds.Location.Y, information.Display.Bounds.Size.Width, information.Display.Bounds.Size.Height);
 
-                this.Location = new Point(information.Display.Bounds.Location.X, information.Display.Bounds.Location.Y);
-                this.Size = new Size(information.Display.Bounds.Size.Width, information.Display.Bounds.Size.Height);
+                this.Location = information.Display.Bounds.Location;
+                this.Size = information.Display.Bounds.Size;
 
                 this.BackgroundImage = information.Background;
                 this.BackgroundImageLayout = information.BackgroundImageLayout;

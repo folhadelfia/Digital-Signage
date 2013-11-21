@@ -38,9 +38,9 @@ namespace Assemblies.ClientModel
 
         #region Janela do Player
         public abstract void OpenPlayerWindow(PlayerWindowInformation configurations);
-        public abstract void ClosePlayerWindow();
+        public abstract void ClosePlayerWindow(string displayDeviceID);
         public abstract ScreenInformation[] GetDisplayInformation();
-        public abstract bool PlayerWindowIsOpen();
+        public abstract bool PlayerWindowIsOpen(string displayDeviceID);
         #endregion
 
         #region TV

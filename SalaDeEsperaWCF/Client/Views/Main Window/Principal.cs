@@ -376,7 +376,9 @@ namespace Client
 
         private void buttonPlayer_Click(object sender, EventArgs e)
         {
-            if (connection != null && !connection.PlayerWindowIsOpen())
+            ScreenInformation display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary) : selectedScreen;
+
+            if (connection != null && !connection.PlayerWindowIsOpen(display.DeviceID))
             {
                 #region PlayerWindowInformation
                 PlayerWindowInformation info = new PlayerWindowInformation();
@@ -391,7 +393,7 @@ namespace Client
                     }
 
                     info.Components = configs;
-                    info.Display = Connection.GetDisplayInformation().Single(x => x.Primary);
+                    info.Display = display;
                     info.Background = panelBuilder.BackgroundImage;
                     info.BackgroundImageLayout = panelBuilder.BackgroundImageLayout;
                     /*
@@ -437,19 +439,6 @@ namespace Client
                     Connection = new WCFConnection(lista.PC);
 
                     Connection.Open();
-
-                    groupBoxPC.Text = string.Format("Ligado a: {0}", lista.PC.Name);
-
-                    listViewDisplays.Items.Clear();
-
-                    foreach (var display in lista.PC.Displays)
-                    {
-                        var item = new ListViewItem(display.DeviceID) { Tag = display, ToolTipText = string.Format("Nome: {0}{1}Resolução: {2}{1}Primário: {3}", display.DeviceID, Environment.NewLine, display.Bounds.Size.ToString(), (display.Primary ? "Sim" : "Não")) };
-
-                        listViewDisplays.Items.Add(item);
-
-                        if (display.Primary) this.finalResolution = NetWCFConverter.ToNET(display.Bounds.Size);
-                    }
                 }
             }
             catch
@@ -459,27 +448,15 @@ namespace Client
 
         private void buttonFechar_Click(object sender, EventArgs e)
         {
-            if (Connection != null && Connection.State == Assemblies.ClientModel.ConnectionState.Open) Connection.ClosePlayerWindow();
+            string display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary).DeviceID : selectedScreen.DeviceID;
+
+
+            if (Connection != null && Connection.State == Assemblies.ClientModel.ConnectionState.Open) Connection.ClosePlayerWindow(display);
             UpdatePlayerStatus();
         }
 
         private void buttonPause_click(object sender, EventArgs e)
         {
-        }
-
-        private void treeViewRede_AfterCheck(object sender, TreeViewEventArgs e)
-        {
-            if (e.Action != TreeViewAction.Unknown)
-            {
-                if (e.Node.Nodes.Count > 0)
-                    foreach (TreeNode node in e.Node.Nodes)
-                        node.Checked = e.Node.Checked;
-
-                if (e.Node.Parent != null)
-                {
-                    e.Node.Parent.Checked = e.Node.Parent.Nodes.Cast<TreeNode>().Where(x => !x.Checked).Count() == 0;
-                }
-            }
         }
 
         private void propriedadesBackgroundToolStripMenuItem_Click(object sender, EventArgs e)
@@ -516,13 +493,21 @@ namespace Client
         {
             if (connection != null)
             {
-                SetStatusLine("Geral", "Estado", connection == null ? "Desligado" : connection.PlayerWindowIsOpen() ? "Ligado" : "Desligado");
                 SetStatusLine("Geral", "Nome do dispositivo", NetworkingToolkit.resolveIP(connection.ServerIP));
                 SetStatusLine("Geral", "Endereço IP", connection.ServerIP);
                 SetStatusLine("Geral", "Monitores", connection.GetDisplayInformation().Length + "");
+
+                foreach (var item in connection.GetDisplayInformation().OrderBy(x=>!x.Primary).ThenBy(x=>x.Bounds.Left))
+                {
+                    SetStatusLine(item.DeviceID, "Resolução", string.Format("{0}x{1}", item.Bounds.Width.ToString(), item.Bounds.Height.ToString()));
+                    SetStatusLine(item.DeviceID, "Primário", item.Primary ? "Sim" : "Não");
+                    SetStatusLine(item.DeviceID, "Estado", connection.PlayerWindowIsOpen(item.DeviceID) ? "Ligado" : "Desligado");
+                }
                 UpdatePlayerStatusHelper();
             }
         }
+
+        //ATENÇÃO: 
 
         /// <summary>
         /// Faz o update ao status sem fazer nenhum tipo de verificação no player. Apenas usa o dicionário. Para ser usado nas funções de status
@@ -618,6 +603,23 @@ namespace Client
 
         #region Network Tree
 
+        ScreenInformation selectedScreen;
+
+        private void treeViewRede_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (e.Action != TreeViewAction.Unknown)
+            {
+                if (e.Node.Nodes.Count > 0)
+                    foreach (TreeNode node in e.Node.Nodes)
+                        node.Checked = e.Node.Checked;
+
+                if (e.Node.Parent != null)
+                {
+                    e.Node.Parent.Checked = e.Node.Parent.Nodes.Cast<TreeNode>().Where(x => !x.Checked).Count() == 0;
+                }
+            }
+        }
+
         private void buttonScan_Click(object sender, EventArgs e)
         {
             try
@@ -644,14 +646,16 @@ namespace Client
 
                         foreach (var display in pc.Displays)
                         {
-                            nodePC.Nodes.Add(new TreeNode
+                            TreeNode t = new TreeNode()
                                             {
                                                 Text = display.DeviceID,
                                                 ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
                                                 Tag = display,
                                                 ImageKey = "Monitor",
                                                 SelectedImageKey = "Monitor"
-                                            });
+                                            };
+
+                            nodePC.Nodes.Add(t);
                         }
 
                         treeViewRede.Nodes.Add(nodePC);
@@ -663,6 +667,30 @@ namespace Client
             }
         }
 
+        private void ligarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChoosePlayerFromTreeView();
+        }
+
+        private void treeViewRede_DoubleClick(object sender, EventArgs e)
+        {
+            ChoosePlayerFromTreeView();
+        }
+
+        private void ChoosePlayerFromTreeView()
+        {
+            if (treeViewRede.SelectedNode.Tag is WCFScreenInformation)
+            {
+                Connection = new WCFConnection(treeViewRede.SelectedNode.Parent.Tag as WCFPlayerPC);
+                Connection.Open();
+
+                selectedScreen = NetWCFConverter.ToNET(treeViewRede.SelectedNode.Tag as WCFScreenInformation);
+
+                UpdatePlayerStatus();
+
+                groupBoxPC.Text = string.Format("Ligado a: {0}", (treeViewRede.SelectedNode.Parent.Tag as WCFPlayerPC).Name);
+            }
+        }
         #endregion
 
         private void listViewPlayerStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -839,28 +867,5 @@ namespace Client
         }
 
         #endregion
-
     }
 }
-
-
-    /*
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-     * SUBSTITUIR OS CASTS PARA CRIAR IENUMERABLES POR "OFTYPE"
-    */

@@ -166,17 +166,17 @@ namespace Assemblies.ClientModel
             {
             }
         }
-        public override void ClosePlayerWindow()
+        public override void ClosePlayerWindow(string displayDeviceID)
         {
-            player.ClosePlayer(player.GetPrimaryDisplay().DeviceID);
+            player.ClosePlayer(displayDeviceID);
         } //ALTERAR PARA RECEBER O DEVICEID DO MONITOR
         public override ScreenInformation[] GetDisplayInformation()
         {
             return NetWCFConverter.ToNET(player.GetDisplayInformation());
         }
-        public override bool PlayerWindowIsOpen()
+        public override bool PlayerWindowIsOpen(string displayDeviceID)
         {
-            return player.PlayerWindowIsOpen(player.GetPrimaryDisplay().DeviceID);
+            return player.PlayerWindowIsOpen(displayDeviceID);
         }
         #endregion
 
@@ -208,7 +208,7 @@ namespace Assemblies.ClientModel
         }
         #endregion
 
-        #region Footer
+        #region Markee
         public override IEnumerable<string> GetFooterText()
         {
             throw new NotImplementedException();

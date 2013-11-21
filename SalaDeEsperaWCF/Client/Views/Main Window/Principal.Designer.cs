@@ -66,6 +66,8 @@
             this.listViewPlayerStatus = new System.Windows.Forms.ListView();
             this.columnTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripTreeViewRede = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ligarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxComponents.SuspendLayout();
             this.contextMenuStripBackground.SuspendLayout();
             this.contextMenuStripComponents.SuspendLayout();
@@ -74,6 +76,7 @@
             this.groupBoxRede.SuspendLayout();
             this.groupBoxBuilder.SuspendLayout();
             this.groupBoxStatus.SuspendLayout();
+            this.contextMenuStripTreeViewRede.SuspendLayout();
             this.SuspendLayout();
             // 
             // listViewComponents
@@ -321,7 +324,7 @@
             this.treeViewRede.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeViewRede.CheckBoxes = true;
+            this.treeViewRede.ContextMenuStrip = this.contextMenuStripTreeViewRede;
             this.treeViewRede.FullRowSelect = true;
             this.treeViewRede.ImageIndex = 0;
             this.treeViewRede.ImageList = this.imageListComponents;
@@ -333,6 +336,7 @@
             this.treeViewRede.Size = new System.Drawing.Size(229, 171);
             this.treeViewRede.TabIndex = 8;
             this.treeViewRede.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewRede_AfterCheck);
+            this.treeViewRede.DoubleClick += new System.EventHandler(this.treeViewRede_DoubleClick);
             // 
             // groupBoxRede
             // 
@@ -371,10 +375,12 @@
             // 
             // groupBoxStatus
             // 
+            this.groupBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBoxStatus.Controls.Add(this.listViewPlayerStatus);
-            this.groupBoxStatus.Location = new System.Drawing.Point(15, 255);
+            this.groupBoxStatus.Location = new System.Drawing.Point(12, 255);
             this.groupBoxStatus.Name = "groupBoxStatus";
-            this.groupBoxStatus.Size = new System.Drawing.Size(226, 265);
+            this.groupBoxStatus.Size = new System.Drawing.Size(229, 265);
             this.groupBoxStatus.TabIndex = 11;
             this.groupBoxStatus.TabStop = false;
             this.groupBoxStatus.Text = "Status";
@@ -396,7 +402,7 @@
             this.listViewPlayerStatus.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewPlayerStatus.Location = new System.Drawing.Point(3, 16);
             this.listViewPlayerStatus.Name = "listViewPlayerStatus";
-            this.listViewPlayerStatus.Size = new System.Drawing.Size(220, 246);
+            this.listViewPlayerStatus.Size = new System.Drawing.Size(223, 246);
             this.listViewPlayerStatus.TabIndex = 0;
             this.listViewPlayerStatus.UseCompatibleStateImageBehavior = false;
             this.listViewPlayerStatus.View = System.Windows.Forms.View.Details;
@@ -411,6 +417,20 @@
             // 
             this.columnValue.Text = "";
             this.columnValue.Width = 120;
+            // 
+            // contextMenuStripTreeViewRede
+            // 
+            this.contextMenuStripTreeViewRede.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ligarToolStripMenuItem});
+            this.contextMenuStripTreeViewRede.Name = "contextMenuStripTreeViewRede";
+            this.contextMenuStripTreeViewRede.Size = new System.Drawing.Size(101, 26);
+            // 
+            // ligarToolStripMenuItem
+            // 
+            this.ligarToolStripMenuItem.Name = "ligarToolStripMenuItem";
+            this.ligarToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.ligarToolStripMenuItem.Text = "Ligar";
+            this.ligarToolStripMenuItem.Click += new System.EventHandler(this.ligarToolStripMenuItem_Click);
             // 
             // Principal
             // 
@@ -438,6 +458,7 @@
             this.groupBoxRede.ResumeLayout(false);
             this.groupBoxBuilder.ResumeLayout(false);
             this.groupBoxStatus.ResumeLayout(false);
+            this.contextMenuStripTreeViewRede.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -479,6 +500,8 @@
         private System.Windows.Forms.ToolStripMenuItem guardarComoToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripTreeViewRede;
+        private System.Windows.Forms.ToolStripMenuItem ligarToolStripMenuItem;
     }
 }
 
