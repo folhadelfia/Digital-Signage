@@ -62,7 +62,7 @@ namespace ServiceDiscoveryProxy
                     if (findRequestContext.Criteria.IsMatch(endpointDiscoveryMetadata))
                     {
                         if (PrintDiscoveryMetadata != null)
-                            PrintDiscoveryMetadata(endpointDiscoveryMetadata, "Assigned", this.onlineServices.Count);
+                            PrintDiscoveryMetadata(endpointDiscoveryMetadata, "Matched", this.onlineServices.Count);
 
                         findRequestContext.AddMatchingEndpoint(endpointDiscoveryMetadata);
                     }
@@ -84,7 +84,7 @@ namespace ServiceDiscoveryProxy
                     if (criteria.Address == endpointDiscoveryMetadata.Address)
                     {
                         if (PrintDiscoveryMetadata != null)
-                            PrintDiscoveryMetadata(endpointDiscoveryMetadata, "Assigned", this.onlineServices.Count);
+                            PrintDiscoveryMetadata(endpointDiscoveryMetadata, "Matched", this.onlineServices.Count);
 
                         return endpointDiscoveryMetadata;
                     }

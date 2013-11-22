@@ -17,7 +17,20 @@ namespace Server
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ListeningForm());
+
+            var form = new ListeningForm();
+            try
+            {
+                Application.Run(form);
+            }
+            catch
+            {
+                MessageBox.Show("Ocorreu um erro inesperado. O programa irá fechar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (!form.TryCloseService()) form.ForceCloseService();
+            }
         }
     }
 }

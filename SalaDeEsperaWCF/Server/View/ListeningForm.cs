@@ -33,6 +33,7 @@ namespace Server.View
     public partial class ListeningForm : Form
     {
         private ServiceHost serviceHost;
+
         private Dictionary<string, FormJanelaFinal> playerWindows = new Dictionary<string, FormJanelaFinal>();
 
         public ListeningForm()
@@ -154,10 +155,42 @@ namespace Server.View
             throw new NotImplementedException();
         }
 
+        #region Close
         private void ListeningForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (serviceHost != null && serviceHost.State != CommunicationState.Closed && serviceHost.State != CommunicationState.Closing)
+            if (!this.TryCloseService()) this.ForceCloseService();
+        }
+        private void ListeningForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!this.TryCloseService()) this.ForceCloseService();
+        }
+
+        /// <summary>
+        /// Tries to close the service smoothly
+        /// </summary>
+        /// <returns></returns>
+        public bool TryCloseService()
+        {
+            if (serviceHost != null && serviceHost.State != CommunicationState.Closed)
+            {
                 try
+                {
+                    serviceHost.Close();
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return serviceHost == null || serviceHost.State == CommunicationState.Closed;
+        }
+        /// <summary>
+        /// Tries to close the service. If it fails, aborts it
+        /// </summary>
+        public void ForceCloseService()
+        {
+            if (serviceHost != null) try
                 {
                     serviceHost.Close();
                 }
@@ -166,11 +199,7 @@ namespace Server.View
                     serviceHost.Abort();
                 }
         }
-        private void ListeningForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (serviceHost != null && serviceHost.State != CommunicationState.Closed)
-                serviceHost.Abort();
-        }
+        #endregion
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
@@ -408,8 +437,5 @@ namespace Server.View
         {
             Log(string.Format("EXCEPTION: {1}{0}MESSAGE: {2}{0}INNER EXCEPTION: {3}{0}INNER EXCEPTION MESSAGE: {4}", Environment.NewLine, ex.GetType().ToString(), ex.Message, ex.InnerException == null ? "null" : ex.InnerException.GetType().ToString(), ex.InnerException == null ? "null" : ex.InnerException.Message));
         }
-
-
-
     }
 }

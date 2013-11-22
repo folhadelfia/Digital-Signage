@@ -96,13 +96,21 @@ namespace Assemblies.ClientModel
 
                 WCFPlayerPC pc;
 
+                float totalPcs = findResponse.Endpoints.Count;
+                float currentPc = 1;
+
                 foreach (var endpoint in findResponse.Endpoints)
                 {
+                    int progress = Convert.ToInt32(Math.Round((currentPc / totalPcs) * 100f, 0, MidpointRounding.AwayFromZero));
+                    currentPc++;
+
                     try
                     {
+
                         NetTcpBinding bindingPC = new NetTcpBinding();
                         binding.Security.Mode = SecurityMode.None;
                         binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+                        binding.CloseTimeout = new TimeSpan(0, 0, 2);
 
                         PlayerProxy client = new PlayerProxy(binding, endpoint.Address);
 
@@ -115,9 +123,12 @@ namespace Assemblies.ClientModel
                         pc = new WCFPlayerPC() { Displays = displays, Endpoint = endpoint.Address };
 
                         pcs.Add(pc);
+
+                        OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
                     }
                     catch (EndpointNotFoundException)
                     {
+                        OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
                         continue;
                     }
                 }
@@ -129,6 +140,87 @@ namespace Assemblies.ClientModel
 
             return pcs.Cast<PlayerPC>();
         } //Feito
+        public override void GetPlayersAsync(NewPlayerFoundDelegate callback)
+        {
+            Uri probeEndpointAddress = new Uri(CompleteServerAddress);
+
+            NetTcpBinding binding = new NetTcpBinding();
+            binding.Security.Mode = SecurityMode.None;
+            binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+
+            DiscoveryEndpoint discoveryEndpoint = new DiscoveryEndpoint(binding, new EndpointAddress(probeEndpointAddress));
+
+            DiscoveryClient discoveryClient = new DiscoveryClient(discoveryEndpoint);
+
+            try
+            {
+                FindResponse findResponse = discoveryClient.Find(new FindCriteria(typeof(IPlayer)));
+
+                WCFPlayerPC pc;
+
+                float totalPcs = findResponse.Endpoints.Count;
+                float currentPc = 1;
+
+                List<Thread> threads = new List<Thread>();
+
+                foreach (var endpoint in findResponse.Endpoints)
+                {
+                    Thread t = new Thread(new ThreadStart(() =>
+                    {
+                        int progress = Convert.ToInt32(Math.Round((currentPc / totalPcs) * 100f, 0, MidpointRounding.AwayFromZero));
+                        currentPc++;
+
+                        try
+                        {
+
+                            NetTcpBinding bindingPC = new NetTcpBinding();
+                            binding.Security.Mode = SecurityMode.None;
+                            binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+                            binding.CloseTimeout = new TimeSpan(0, 0, 2);
+
+                            PlayerProxy client = new PlayerProxy(binding, endpoint.Address);
+
+                            client.Open();
+
+                            List<WCFScreenInformation> displays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
+
+                            client.Close();
+
+                            pc = new WCFPlayerPC() { Displays = displays, Endpoint = endpoint.Address };
+
+                            callback(pc);
+
+                            OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
+                        }
+                        catch (EndpointNotFoundException)
+                        {
+                            OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
+                        }
+                    }));
+
+                    threads.Add(t);
+                }
+
+                foreach (var t in threads)
+                {
+                    t.Start();
+                }
+            }
+            catch
+            {
+                return;
+            }
+
+        }
+        public override event GetPlayersEventHandler GetPlayersProgressChanged;
+        private void OnGetPlayersProgressChanged(int progress, int count)
+        {
+            if (this.GetPlayersProgressChanged != null) this.GetPlayersProgressChanged(this, new GetPlayersEventArgs()
+             {
+                 PlayerCount = count,
+                 Progress = progress
+             });
+        }
 
         public override void Dispose()
         {

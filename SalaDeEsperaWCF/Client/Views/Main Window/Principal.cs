@@ -29,6 +29,7 @@ using System.Xml.Serialization;
 using Assemblies.XMLSerialization.Components;
 using Assemblies.XMLSerialization;
 using System.IO;
+using System.Threading;
 
 namespace Client
 {
@@ -622,6 +623,16 @@ namespace Client
 
         private void buttonScan_Click(object sender, EventArgs e)
         {
+            //Thread t = new Thread(new ThreadStart(ScanPlayers));
+
+            //t.Start();
+
+            this.ScanPlayersAsync();
+            
+        }
+        private void ScanPlayers()
+        {
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(()=> { ScanPlayers(); }));
             try
             {
                 using (Assemblies.ClientModel.Connection discoveryServerConnection = new WCFConnection()
@@ -632,38 +643,110 @@ namespace Client
                 {
                     treeViewRede.Nodes.Clear();
                     discoveryServerConnection.Open();
+                    discoveryServerConnection.GetPlayersProgressChanged += discoveryServerConnection_GetPlayersProgressChanged;
+
+                    progressBarScanPlayers.Value = 0;
 
                     foreach (var pc in discoveryServerConnection.GetPlayers())
                     {
                         TreeNode nodePC = new TreeNode
-                                            {
-                                                Text = pc.Name,
-                                                ToolTipText = string.Format("IP: {0}", pc.IP),
-                                                Tag = pc,
-                                                ImageKey = "Computer",
-                                                SelectedImageKey = "Computer"
-                                            };
+                        {
+                            Text = pc.Name,
+                            ToolTipText = string.Format("IP: {0}", pc.IP),
+                            Tag = pc,
+                            ImageKey = "Computer",
+                            SelectedImageKey = "Computer"
+                        };
 
                         foreach (var display in pc.Displays)
                         {
                             TreeNode t = new TreeNode()
-                                            {
-                                                Text = display.DeviceID,
-                                                ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
-                                                Tag = display,
-                                                ImageKey = "Monitor",
-                                                SelectedImageKey = "Monitor"
-                                            };
+                            {
+                                Text = display.DeviceID,
+                                ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
+                                Tag = display,
+                                ImageKey = "Monitor",
+                                SelectedImageKey = "Monitor"
+                            };
 
                             nodePC.Nodes.Add(t);
                         }
 
                         treeViewRede.Nodes.Add(nodePC);
                     }
+                    discoveryServerConnection.GetPlayersProgressChanged -= discoveryServerConnection_GetPlayersProgressChanged;
                 }
             }
             catch
             {
+            }
+        }
+        private void ScanPlayersAsync()
+        {
+            try
+            {
+                using (Assemblies.ClientModel.Connection discoveryServerConnection = new WCFConnection()
+                {
+                    ServerIP = "10.0.0.165",
+                    ServerPort = "8001"
+                })
+                {
+                    treeViewRede.Nodes.Clear();
+                    discoveryServerConnection.Open();
+                    discoveryServerConnection.GetPlayersProgressChanged += discoveryServerConnection_GetPlayersProgressChanged;
+
+                    progressBarScanPlayers.Value = 0;
+
+                    discoveryServerConnection.GetPlayersAsync(ScanPlayersCallback);
+
+                    discoveryServerConnection.GetPlayersProgressChanged -= discoveryServerConnection_GetPlayersProgressChanged;
+                }
+            }
+            catch
+            {
+            }
+        }
+        private void ScanPlayersCallback(PlayerPC pc)
+        {
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { this.ScanPlayersCallback(pc); }));
+            else
+            {
+                TreeNode nodePC = new TreeNode
+                {
+                    Text = pc.Name,
+                    ToolTipText = string.Format("IP: {0}", pc.IP),
+                    Tag = pc,
+                    ImageKey = "Computer",
+                    SelectedImageKey = "Computer"
+                };
+
+                foreach (var display in pc.Displays)
+                {
+                    TreeNode t = new TreeNode()
+                    {
+                        Text = display.DeviceID,
+                        ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
+                        Tag = display,
+                        ImageKey = "Monitor",
+                        SelectedImageKey = "Monitor"
+                    };
+
+                    nodePC.Nodes.Add(t);
+                }
+
+                treeViewRede.Nodes.Add(nodePC);
+            }
+        }
+
+        void discoveryServerConnection_GetPlayersProgressChanged(object sender, GetPlayersEventArgs e)
+        {
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { this.discoveryServerConnection_GetPlayersProgressChanged(sender, e); }));
+            else
+            {
+                progressBarScanPlayers.Value = e.Progress;
+
+                labelScanProgressPercent.Visible = e.Progress < 100;
+                labelScanProgressPercent.Text = string.Format("{0}%", e.Progress);
             }
         }
 
@@ -681,6 +764,11 @@ namespace Client
         {
             if (treeViewRede.SelectedNode.Tag is WCFScreenInformation)
             {
+                if (connection != null && connection.State != Assemblies.ClientModel.ConnectionState.Closed)
+                {
+                    connection.Dispose();
+                }
+
                 Connection = new WCFConnection(treeViewRede.SelectedNode.Parent.Tag as WCFPlayerPC);
                 Connection.Open();
 
@@ -691,6 +779,12 @@ namespace Client
                 groupBoxPC.Text = string.Format("Ligado a: {0}", (treeViewRede.SelectedNode.Parent.Tag as WCFPlayerPC).Name);
             }
         }
+
+
+
+
+
+
         #endregion
 
         private void listViewPlayerStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -867,5 +961,14 @@ namespace Client
         }
 
         #endregion
+
+        private void Principal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (connection != null && connection.State != Assemblies.ClientModel.ConnectionState.Closed)
+            {
+                connection.Dispose();
+                connection = null;
+            }
+        }
     }
 }

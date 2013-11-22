@@ -35,6 +35,8 @@ namespace Assemblies.ClientModel
         public abstract void Open();
         public abstract void Close();
         public abstract IEnumerable<PlayerPC> GetPlayers();
+        public abstract void GetPlayersAsync(NewPlayerFoundDelegate callback);
+        public abstract event GetPlayersEventHandler GetPlayersProgressChanged;
 
         #region Janela do Player
         public abstract void OpenPlayerWindow(PlayerWindowInformation configurations);
@@ -79,4 +81,17 @@ namespace Assemblies.ClientModel
         Failed,
         Created
     }
+
+    #region Eventos
+
+    public class GetPlayersEventArgs : EventArgs
+    {
+        public int Progress { get; set; }
+        public int PlayerCount { get; set; }
+    }
+
+    public delegate void GetPlayersEventHandler(object sender, GetPlayersEventArgs e);
+    public delegate void NewPlayerFoundDelegate(PlayerPC pc);
+
+    #endregion
 }
