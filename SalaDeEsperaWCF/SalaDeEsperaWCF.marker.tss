@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<ArrayOfTabHighlightState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TabHighlightState>
+    <extensions>
+      <string>Server\View\ListeningForm.cs</string>
+      <string>Server\View\ListeningForm.cs</string>
+    </extensions>
+    <highlightIndex>1</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>Client\Views\Main Window\Principal.cs</string>
+      <string>Client\Views\Main Window\Principal.cs</string>
+    </extensions>
+    <highlightIndex>2</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>Server\Program.cs</string>
+    </extensions>
+    <highlightIndex>1</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>Assemblies\ClientModel\WCFConnection.cs</string>
+    </extensions>
+    <highlightIndex>3</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>c:\Users\Cláudio\Documents\Visual Studio 2012\Projects\SalaDeEsperaWCF\Assemblies\Options\TVOptions.cs</string>
+    </extensions>
+    <highlightIndex>3</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>RemoteControlWForms\Form1.cs</string>
+    </extensions>
+    <highlightIndex>4</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>Assemblies\WCF\ClientProxies\PlayerProxy.cs</string>
+    </extensions>
+    <highlightIndex>3</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>Assemblies\ClientModel\Connection.cs</string>
+    </extensions>
+    <highlightIndex>3</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>DiscoveryProxy\DiscoveryProxy.cs</string>
+    </extensions>
+    <highlightIndex>5</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>Client\Views\Service List\ServiceList.cs</string>
+      <string>Client\Views\Service List\ServiceList.cs</string>
+    </extensions>
+    <highlightIndex>2</highlightIndex>
+  </TabHighlightState>
+</ArrayOfTabHighlightState>
