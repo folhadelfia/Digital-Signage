@@ -2,30 +2,16 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\Program.cs</string>
+      <string>History - Server.csproj</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\WCFConnection.cs</string>
     </ArrayOfString>
     <ArrayOfString>
+      <string>C:\Users\Cláudio\AppData\Local\Temp\SalaDeEsperaWCF - Copy.sln</string>
+    </ArrayOfString>
+    <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>c:\Users\Cláudio\Documents\Visual Studio 2012\Projects\SalaDeEsperaWCF\Assemblies\Options\TVOptions.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\Form1.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\ClientProxies\PlayerProxy.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\Connection.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

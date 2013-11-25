@@ -497,6 +497,8 @@ namespace Client
         {
             if (connection != null)
             {
+                if (connection.State != Assemblies.ClientModel.ConnectionState.Open) connection.Open();
+
                 SetStatusLine("Geral", "Nome do dispositivo", NetworkingToolkit.resolveIP(connection.ServerIP));
                 SetStatusLine("Geral", "Endereço IP", connection.ServerIP);
                 SetStatusLine("Geral", "Monitores", connection.GetDisplayInformation().Length + "");

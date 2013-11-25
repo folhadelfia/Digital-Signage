@@ -64,6 +64,7 @@ namespace Assemblies.ClientModel
             }
             catch
             {
+
             }
         }//Feito
         public override void Close()

@@ -69,10 +69,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assemblies\Libraries\Transitions.dll</HintPath>
     </Reference>
-    <Reference Include="TV2Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Testes\TV2Lib\bin\Debug\TV2Lib.dll</HintPath>
-    </Reference>
     <Reference Include="VideoPlayer">
       <HintPath>..\..\VideoPlayerControl\VideoPlayer\bin\Debug\VideoPlayer.dll</HintPath>
     </Reference>
@@ -124,6 +120,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Testes\TV2Lib\TV2Lib.csproj">
+      <Project>{6402e765-5743-471c-807c-864270421c08}</Project>
+      <Name>TV2Lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Assemblies\Assemblies.csproj">
       <Project>{a9ea65e7-f4ea-43dd-87c5-101195e583db}</Project>
       <Name>Assemblies</Name>
