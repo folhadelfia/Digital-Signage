@@ -1,0 +1,10 @@
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\bin\Release x86\TV2Lib.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\bin\Release x86\TV2Lib.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\bin\Release x86\DirectShowLib-2005.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\bin\Release x86\MediaFoundation.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2Lib.DigitalTVScreen.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2Lib.VideoControl.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2Lib.Properties.Resources.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2Lib.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2Lib.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2Lib.pdb
