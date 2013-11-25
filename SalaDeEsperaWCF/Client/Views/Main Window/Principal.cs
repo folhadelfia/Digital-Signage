@@ -630,6 +630,10 @@ namespace Client
             this.ScanPlayersAsync();
             
         }
+        /// <summary>
+        /// Procura no discovery server por players
+        /// </summary>
+        [Obsolete("ScanPlayers é sucatada, usar o ScanPlayersAsync")]
         private void ScanPlayers()
         {
             if (this.InvokeRequired) this.Invoke((MethodInvoker)(()=> { ScanPlayers(); }));
@@ -643,7 +647,6 @@ namespace Client
                 {
                     treeViewRede.Nodes.Clear();
                     discoveryServerConnection.Open();
-                    discoveryServerConnection.GetPlayersProgressChanged += discoveryServerConnection_GetPlayersProgressChanged;
 
                     progressBarScanPlayers.Value = 0;
 
@@ -674,7 +677,6 @@ namespace Client
 
                         treeViewRede.Nodes.Add(nodePC);
                     }
-                    discoveryServerConnection.GetPlayersProgressChanged -= discoveryServerConnection_GetPlayersProgressChanged;
                 }
             }
             catch
@@ -693,13 +695,10 @@ namespace Client
                 {
                     treeViewRede.Nodes.Clear();
                     discoveryServerConnection.Open();
-                    discoveryServerConnection.GetPlayersProgressChanged += discoveryServerConnection_GetPlayersProgressChanged;
 
                     progressBarScanPlayers.Value = 0;
 
                     discoveryServerConnection.GetPlayersAsync(ScanPlayersCallback);
-
-                    discoveryServerConnection.GetPlayersProgressChanged -= discoveryServerConnection_GetPlayersProgressChanged;
                 }
             }
             catch
@@ -735,18 +734,6 @@ namespace Client
                 }
 
                 treeViewRede.Nodes.Add(nodePC);
-            }
-        }
-
-        void discoveryServerConnection_GetPlayersProgressChanged(object sender, GetPlayersEventArgs e)
-        {
-            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { this.discoveryServerConnection_GetPlayersProgressChanged(sender, e); }));
-            else
-            {
-                progressBarScanPlayers.Value = e.Progress;
-
-                labelScanProgressPercent.Visible = e.Progress < 100;
-                labelScanProgressPercent.Text = string.Format("{0}%", e.Progress);
             }
         }
 

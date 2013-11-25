@@ -18,6 +18,8 @@ using Assemblies.DataContracts;
 using Assemblies.Options;
 using TV2Lib;
 
+using DirectShowLib;
+
 namespace Server.View
 {
     public partial class FormJanelaFinal : Form
@@ -378,18 +380,20 @@ namespace Server.View
                     */
                     #endregion
 
-                    DigitalTVScreen tvScreen = new DigitalTVScreen()
-                    {
-                        Location = temp.FinalLocation,
-                        Size = temp.FinalSize
-                    };
+                    DigitalTVScreen tvScreen = this.CreateTVInstance(temp);
 
-                    tvScreen.Channels.Frequency = temp.Frequency;
-                    tvScreen.Channels.ForceRebuildOnChannelTune = true;
-                    tvScreen.VideoZoomMode = VideoSizeMode.FromInside;
-                    tvScreen.VideoZoomValue = 0;
-                    tvScreen.VideoKeepAspectRatio = true;
-                    tvScreen.VideoAspectRatio = 1;
+                    //DigitalTVScreen tvScreen = new DigitalTVScreen()
+                    //{
+                    //    Location = temp.FinalLocation,
+                    //    Size = temp.FinalSize
+                    //};
+
+                    //tvScreen.Channels.Frequency = temp.Frequency;
+                    //tvScreen.Channels.ForceRebuildOnChannelTune = true;
+                    //tvScreen.VideoZoomMode = VideoSizeMode.FromInside;
+                    //tvScreen.VideoZoomValue = 0;
+                    //tvScreen.VideoKeepAspectRatio = true;
+                    //tvScreen.VideoAspectRatio = 1;
 
                     DirectShowLib.DsDevice dev;
                     if(DigitalTVScreen.DeviceStuff.TunerDevices.TryGetValue(temp.TunerDevicePath, out dev))
@@ -401,6 +405,7 @@ namespace Server.View
 
                     try
                     {
+                        throw new Exception();
                         tvScreen.Channels.LoadFromXML();
                     }
                     catch (Exception)
@@ -435,6 +440,43 @@ namespace Server.View
 #endif
             }
         }
+
+        private DigitalTVScreen CreateTVInstance(TVConfiguration config)
+        {
+            TV2Lib.Settings settings = new Settings()
+            {
+                Balance = 0,
+                SnapshotsFolder = "Snapshots",
+                StartVideoMode = VideoMode.Normal,
+                TimeShiftingActivated = false,
+                TimeShiftingBufferLengthMax = 180,
+                TimeShiftingBufferLengthMin = 180,
+                UseVideo169Mode = false,
+                UseWPF = false,
+                VideoBackgroundColor = System.Drawing.Color.Black,
+                VideoBackgroundColorString = "Black",
+                VideosFolder = "Recorder",
+                Volume = 0
+            };
+
+            return new DigitalTVScreen()
+            {
+                BorderStyle = BorderStyle.None,
+                CurrentGraphBuilder = null,
+                Location = config.FinalLocation,
+                MinimumSize = config.FinalSize,
+                Settings = settings,
+                Size = config.FinalSize,
+                TabIndex = 0,
+                UseBlackBands = true,
+                VideoAspectRatio = 1D,
+                VideoKeepAspectRatio = true,
+                VideoOffset = new PointF(0f,0f),
+                VideoZoomMode = 0D
+            };
+        
+        }
+
         public Channel GetChannel()
         {
             DigitalTVScreen temp = null;

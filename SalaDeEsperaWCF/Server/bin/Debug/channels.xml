@@ -22,7 +22,7 @@
     <H264DecoderDevice />
     <TunerDevice />
     <CaptureDevice />
-    <Frequency>0</Frequency>
+    <Frequency>754000</Frequency>
     <Modulation>ModNotSet</Modulation>
     <SymbolRate>-1</SymbolRate>
     <InnerFEC>MethodNotDefined</InnerFEC>
@@ -73,7 +73,7 @@
     <H264DecoderDevice />
     <TunerDevice />
     <CaptureDevice />
-    <Frequency>0</Frequency>
+    <Frequency>754000</Frequency>
     <Modulation>ModNotSet</Modulation>
     <SymbolRate>-1</SymbolRate>
     <InnerFEC>MethodNotDefined</InnerFEC>
@@ -123,7 +123,7 @@
     <H264DecoderDevice />
     <TunerDevice />
     <CaptureDevice />
-    <Frequency>0</Frequency>
+    <Frequency>754000</Frequency>
     <Modulation>ModNotSet</Modulation>
     <SymbolRate>-1</SymbolRate>
     <InnerFEC>MethodNotDefined</InnerFEC>
@@ -173,7 +173,7 @@
     <H264DecoderDevice />
     <TunerDevice />
     <CaptureDevice />
-    <Frequency>0</Frequency>
+    <Frequency>754000</Frequency>
     <Modulation>ModNotSet</Modulation>
     <SymbolRate>-1</SymbolRate>
     <InnerFEC>MethodNotDefined</InnerFEC>
@@ -223,7 +223,7 @@
     <H264DecoderDevice />
     <TunerDevice />
     <CaptureDevice />
-    <Frequency>0</Frequency>
+    <Frequency>754000</Frequency>
     <Modulation>ModNotSet</Modulation>
     <SymbolRate>-1</SymbolRate>
     <InnerFEC>MethodNotDefined</InnerFEC>
@@ -273,7 +273,7 @@
     <H264DecoderDevice />
     <TunerDevice />
     <CaptureDevice />
-    <Frequency>0</Frequency>
+    <Frequency>754000</Frequency>
     <Modulation>ModNotSet</Modulation>
     <SymbolRate>-1</SymbolRate>
     <InnerFEC>MethodNotDefined</InnerFEC>

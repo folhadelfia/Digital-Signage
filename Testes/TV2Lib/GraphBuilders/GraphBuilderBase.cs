@@ -231,18 +231,20 @@ namespace TV2Lib
             int hr = 0;
 
 			if (pfs != FilterState.Running)
-			{
-                Thread t = new Thread(() =>
-                {
-                    hr = mediaControl.Run();
-                    ThrowExceptionForHR("Running the graph: ", hr);
-                });
+            {
+                hr = mediaControl.Run();
+                ThrowExceptionForHR("Running the graph: ", hr);
+                //Thread t = new Thread(() =>
+                //{
+                //    hr = mediaControl.Run();
+                //    ThrowExceptionForHR("Running the graph: ", hr);
+                //});
 
                 IsPossibleGraphRun = false;
                 IsPossibleGraphPause = true;
                 IsPossibleGraphStop = true;
 
-                t.Start();
+                //t.Start();
 			}
 
             return hr;
@@ -256,18 +258,21 @@ namespace TV2Lib
 			mediaControl.GetState(0, out pfs);
 
 			if (pfs == FilterState.Running)
-			{
-                Thread t = new Thread(() =>
-                {
-				    int hr = mediaControl.Pause();
-                    ThrowExceptionForHR("Pausing the graph: ", hr);
-                });
+            {
+                int hr = mediaControl.Pause();
+                ThrowExceptionForHR("Pausing the graph: ", hr);
+
+                //Thread t = new Thread(() =>
+                //{
+                //    int hr = mediaControl.Pause();
+                //    ThrowExceptionForHR("Pausing the graph: ", hr);
+                //});
 
 				IsPossibleGraphRun = true;
 				IsPossibleGraphPause = false;
 				IsPossibleGraphStop = true;
 
-                t.Start();
+                //t.Start();
 			}
 		}
 
@@ -280,17 +285,21 @@ namespace TV2Lib
 
 			if (pfs == FilterState.Running || pfs == FilterState.Paused)
             {
-                Thread t = new Thread(() =>
-                {
-				    int hr = mediaControl.Stop();
-				    ThrowExceptionForHR("Stopping the graph: ", hr);
-                });
+
+                int hr = mediaControl.Stop();
+                ThrowExceptionForHR("Stopping the graph: ", hr);
+
+                //Thread t = new Thread(() =>
+                //{
+                //    int hr = mediaControl.Stop();
+                //    ThrowExceptionForHR("Stopping the graph: ", hr);
+                //});
 
 				IsPossibleGraphRun = true;
 				IsPossibleGraphPause = false;
 				IsPossibleGraphStop = false;
 
-                t.Start();
+                //t.Start();
 			}
 		}
 
