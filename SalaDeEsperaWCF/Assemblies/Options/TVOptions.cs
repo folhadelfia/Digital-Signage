@@ -69,6 +69,8 @@ namespace Assemblies.Options
             if (connection.State != ClientModel.ConnectionState.Open)
                 connection.Open();
             ChannelList = connection.GetTVChannels().ToList();
+
+            connection.Close();
         }
 
         private void listBoxAllChannels_MouseDown(object sender, MouseEventArgs e)
@@ -97,6 +99,8 @@ namespace Assemblies.Options
 
             foreach (var item in connection.GetTunerDevices())
                 comboBoxTunerDevices.Items.Add(item);
+
+            connection.Close();
         }
 
         private void comboBoxTunerDevices_SelectedIndexChanged(object sender, EventArgs e)

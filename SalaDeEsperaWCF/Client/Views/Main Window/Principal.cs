@@ -377,9 +377,12 @@ namespace Client
 
         private void buttonPlayer_Click(object sender, EventArgs e)
         {
+            if (connection != null && connection.State != Assemblies.ClientModel.ConnectionState.Open)
+                connection.Open();
+
             ScreenInformation display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary) : selectedScreen;
 
-            if (connection != null && !connection.PlayerWindowIsOpen(display.DeviceID))
+            if (!connection.PlayerWindowIsOpen(display.DeviceID))
             {
                 #region PlayerWindowInformation
                 PlayerWindowInformation info = new PlayerWindowInformation();

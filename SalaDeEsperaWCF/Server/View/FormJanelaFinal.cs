@@ -405,7 +405,6 @@ namespace Server.View
 
                     try
                     {
-                        throw new Exception();
                         tvScreen.Channels.LoadFromXML();
                     }
                     catch (Exception)
