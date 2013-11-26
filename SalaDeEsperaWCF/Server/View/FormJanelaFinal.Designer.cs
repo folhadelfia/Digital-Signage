@@ -151,7 +151,7 @@
             this.contextMSTV.Name = "contextMSTV";
             this.contextMSTV.ShowCheckMargin = true;
             this.contextMSTV.ShowImageMargin = false;
-            this.contextMSTV.Size = new System.Drawing.Size(178, 142);
+            this.contextMSTV.Size = new System.Drawing.Size(178, 120);
             this.contextMSTV.Opening += new System.ComponentModel.CancelEventHandler(this.contextMS_Opening);
             // 
             // reposicionarJanelaTVTSMItem
@@ -203,7 +203,7 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormJanelaFinal";
-            this.Text = "Lista de Espera";
+            this.Text = "Player";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormJanelaFinal_FormClosing);
             this.Load += new System.EventHandler(this.FormJanelaFinal_Load);
             this.contextMSFormJanelaPrincipal.ResumeLayout(false);

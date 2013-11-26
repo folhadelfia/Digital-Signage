@@ -22,11 +22,15 @@ namespace Assemblies.DataContracts
         [DataMember]
         public bool Primary { get; set; }
 
-        public WCFScreenInformation(WCFRectangle bounds, string name, bool isPrimary)
+        [DataMember]
+        public string Name { get; set; }
+
+        public WCFScreenInformation(WCFRectangle bounds, string devID, bool isPrimary, string name)
         {
             this.Bounds = bounds;
-            this.DeviceID = name;
+            this.DeviceID = devID;
             this.Primary = isPrimary;
+            this.Name = name;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -54,21 +55,52 @@ namespace Assemblies.PlayerServiceImplementation
             if (ClosePlayerWindow != null) ClosePlayerWindow(displayName);
         }
 
-        public WCFScreenInformation[] GetDisplayInformation() //Não está a dar. Verificar os callbacks (sucatada)
+
+        #region Displays
+
+
+
+        public WCFScreenInformation[] GetDisplayInformation()
         {
             List<WCFScreenInformation> res = new List<WCFScreenInformation>();
 
             foreach (var display in Screen.AllScreens)
             {
-                res.Add(NetWCFConverter.ToWCF(display));
+                res.Add(NetWCFConverter.ToWCF(display, this.GetName(display.DeviceName)));
             }
 
             return res.ToArray();
         }
         public WCFScreenInformation GetPrimaryDisplay()
         {
-            return NetWCFConverter.ToWCF(Screen.PrimaryScreen);
+            return NetWCFConverter.ToWCF(Screen.PrimaryScreen, this.GetName(Screen.PrimaryScreen.DeviceName));
         }
+
+        private string GetName(string devID)
+        {
+            DISPLAY_DEVICE d = new DISPLAY_DEVICE();
+            d.cb = Marshal.SizeOf(d);
+            try
+            {
+                if(EnumDisplayDevices(devID, 0, ref d, 0) && d.StateFlags.HasFlag(DisplayDeviceStateFlags.AttachedToDesktop))
+                {
+                    return d.DeviceString;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(String.Format("{0}", ex.ToString()));
+            }
+
+            return devID;
+        }
+
+
+        [DllImport("user32.dll")]
+        static extern bool EnumDisplayDevices(string lpDevice, uint iDevNum, ref DISPLAY_DEVICE lpDisplayDevice, uint dwFlags);
+
+        #endregion
+
 
         // Adicionar um método estático na classe do player de tv para devolver os canais
         public WCFChannel[] GetChannels()
@@ -162,6 +194,47 @@ namespace Assemblies.PlayerServiceImplementation
             if (SetTunerDevice != null) SetTunerDevice(displayName, tuner);
         }
     }
+
+    #region Monitores
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    public struct DISPLAY_DEVICE
+    {
+        [MarshalAs(UnmanagedType.U4)]
+        public int cb;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+        public string DeviceName;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+        public string DeviceString;
+        [MarshalAs(UnmanagedType.U4)]
+        public DisplayDeviceStateFlags StateFlags;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+        public string DeviceID;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+        public string DeviceKey;
+    }
+
+    [Flags()]
+    public enum DisplayDeviceStateFlags : int
+    {
+        /// <summary>The device is part of the desktop.</summary>
+        AttachedToDesktop = 0x1,
+        MultiDriver = 0x2,
+        /// <summary>The device is part of the desktop.</summary>
+        PrimaryDevice = 0x4,
+        /// <summary>Represents a pseudo device used to mirror application drawing for remoting or other purposes.</summary>
+        MirroringDriver = 0x8,
+        /// <summary>The device is VGA compatible.</summary>
+        VGACompatible = 0x10,
+        /// <summary>The device is removable; it cannot be the primary display.</summary>
+        Removable = 0x20,
+        /// <summary>The device has more display modes than its output devices support.</summary>
+        ModesPruned = 0x8000000,
+        Remote = 0x4000000,
+        Disconnect = 0x2000000
+    }
+
+    #endregion
 
     public delegate void PlayerWindowEventHandler(WCFPlayerWindowInformation config);
     public delegate void PlayerWindowEventHandler2(WCFPlayerWindowInformation2 config);

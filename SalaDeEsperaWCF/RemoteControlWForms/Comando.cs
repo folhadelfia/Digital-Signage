@@ -13,7 +13,7 @@ using TV2Lib;
 
 namespace RemoteControlWForms
 {
-    public partial class Form1 : Form
+    public partial class Comando : Form
     {
         Connection connection;
         List<ChannelDVBT> channels = new List<ChannelDVBT>();
@@ -93,7 +93,7 @@ namespace RemoteControlWForms
 
         #endregion
 
-        public Form1()
+        public Comando()
         {
             InitializeComponent();
 

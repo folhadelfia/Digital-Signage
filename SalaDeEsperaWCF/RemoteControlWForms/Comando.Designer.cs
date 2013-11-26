@@ -1,6 +1,6 @@
 ﻿namespace RemoteControlWForms
 {
-    partial class Form1
+    partial class Comando
     {
         /// <summary>
         /// Required designer variable.
@@ -148,7 +148,7 @@
             this.pictureBoxRTP1.TabStop = false;
             this.pictureBoxRTP1.Click += new System.EventHandler(this.pictureBoxRTP1_Click);
             // 
-            // Form1
+            // Comando
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -164,8 +164,8 @@
             this.Controls.Add(this.pictureBoxRTP2);
             this.Controls.Add(this.pictureBoxRTP1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Comando";
+            this.Text = "Comando";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVolDown)).EndInit();

@@ -266,18 +266,18 @@ namespace Assemblies.DataContracts
         #endregion
 
         #region Screens e Windows
-        public static WCFScreenInformation ToWCF(Screen screen)
+        public static WCFScreenInformation ToWCF(Screen screen, string name)
         {
-            return new WCFScreenInformation(new WCFRectangle(screen.Bounds.X, screen.Bounds.Y, screen.Bounds.Width, screen.Bounds.Height), screen.DeviceName, screen.Primary);
+            return new WCFScreenInformation(new WCFRectangle(screen.Bounds.X, screen.Bounds.Y, screen.Bounds.Width, screen.Bounds.Height), screen.DeviceName, screen.Primary, name);
         }
         public static WCFScreenInformation ToWCF(ScreenInformation screen)
         {
-            return new WCFScreenInformation(ToWCF(screen.Bounds), screen.DeviceID, screen.Primary);
+            return new WCFScreenInformation(ToWCF(screen.Bounds), screen.DeviceID, screen.Primary, screen.Name);
         }
 
         public static ScreenInformation ToNET(WCFScreenInformation screen)
         {
-            return new ScreenInformation(ToNET(screen.Bounds), screen.DeviceID, screen.Primary);
+            return new ScreenInformation(ToNET(screen.Bounds), screen.DeviceID, screen.Primary, screen.Name);
         }
         public static ScreenInformation[] ToNET(WCFScreenInformation[] screens)
         {

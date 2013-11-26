@@ -375,63 +375,6 @@ namespace Client
             }
         }
 
-        private void buttonPlayer_Click(object sender, EventArgs e)
-        {
-            if (connection != null && connection.State != Assemblies.ClientModel.ConnectionState.Open)
-                connection.Open();
-
-            ScreenInformation display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary) : selectedScreen;
-
-            if (!connection.PlayerWindowIsOpen(display.DeviceID))
-            {
-                #region PlayerWindowInformation
-                PlayerWindowInformation info = new PlayerWindowInformation();
-
-                List<ItemConfiguration> configs = new List<ItemConfiguration>();
-                try
-                {
-
-                    foreach (var composerComponent in panelBuilder.Controls.OfType<ComposerComponent>())
-                    {
-                        configs.Add(composerComponent.Configuration);
-                    }
-
-                    info.Components = configs;
-                    info.Display = display;
-                    info.Background = panelBuilder.BackgroundImage;
-                    info.BackgroundImageLayout = panelBuilder.BackgroundImageLayout;
-                    /*
-                     * 1 - Transformar o info.Display num IEnumerable de displays
-                     * 2 - Fazer com que sejam abertas várias janelas nos displays inseridos
-                     */
-
-                    Connection.Open();
-                    Connection.OpenPlayerWindow(info);
-                }
-                catch
-                {
-                }
-                #endregion
-
-                #region PlayerWindowInformation2
-                //PlayerWindowInformation2 info = new PlayerWindowInformation2();
-
-                //List<ItemConfiguration> configs = new List<ItemConfiguration>();
-
-                //Connection.Open();
-
-                //foreach (var composerComponent in panelBuilder.Controls.Cast<ComposerComponent>())
-                //{
-                //    configs.Add(composerComponent.Configuration);
-                //}
-
-                //info.Configuration
-                #endregion
-
-                UpdatePlayerStatus();
-            }
-        }
-
         private void computadoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -457,10 +400,6 @@ namespace Client
 
             if (Connection != null && Connection.State == Assemblies.ClientModel.ConnectionState.Open) Connection.ClosePlayerWindow(display);
             UpdatePlayerStatus();
-        }
-
-        private void buttonPause_click(object sender, EventArgs e)
-        {
         }
 
         private void propriedadesBackgroundToolStripMenuItem_Click(object sender, EventArgs e)
@@ -505,10 +444,18 @@ namespace Client
 
                 foreach (var item in connection.GetDisplayInformation().OrderBy(x=>!x.Primary).ThenBy(x=>x.Bounds.Left))
                 {
-                    SetStatusLine(item.DeviceID, "Resolução", string.Format("{0}x{1}", item.Bounds.Width.ToString(), item.Bounds.Height.ToString()));
-                    SetStatusLine(item.DeviceID, "Primário", item.Primary ? "Sim" : "Não");
-                    SetStatusLine(item.DeviceID, "Estado", connection.PlayerWindowIsOpen(item.DeviceID) ? "Ligado" : "Desligado");
+                    string tempDisplayName = string.Format("{0} (X: {1}, Y: {2})", item.Name, item.Bounds.X, item.Bounds.Y);
+
+                    SetStatusLine(tempDisplayName, "Resolução", string.Format("{0}x{1}", item.Bounds.Width.ToString(), item.Bounds.Height.ToString()));
+                    SetStatusLine(tempDisplayName, "Primário", item.Primary ? "Sim" : "Não");
+                    SetStatusLine(tempDisplayName, "Estado", connection.PlayerWindowIsOpen(item.DeviceID) ? "Ligado" : "Desligado");
                 }
+
+                foreach (var item in connection.GetTunerDevices().OrderBy(x=>x.Name))
+                {
+                    SetStatusLine("Sintonizadores TV", item.Name, "");
+                }
+                //Se existirem sintonizadores, mostrar também uma lista com codecs e reprodutores de audio e video
                 UpdatePlayerStatusHelper();
             }
         }
@@ -560,7 +507,9 @@ namespace Client
                 newItem = new ListViewItem()
                 {
                     Group = listViewPlayerStatus.Groups.OfType<ListViewGroup>().Single(x => x.Header == group),
-                    Text = title
+                    Text = title,
+                    ToolTipText = string.Format("{0}{1}", title, !string.IsNullOrWhiteSpace(values[0]) ? " - " + values[0] : ""),
+                    
                 };
 
                 newItem.SubItems.Add(new ListViewItem.ListViewSubItem()
@@ -653,8 +602,6 @@ namespace Client
                     treeViewRede.Nodes.Clear();
                     discoveryServerConnection.Open();
 
-                    progressBarScanPlayers.Value = 0;
-
                     foreach (var pc in discoveryServerConnection.GetPlayers())
                     {
                         TreeNode nodePC = new TreeNode
@@ -670,7 +617,7 @@ namespace Client
                         {
                             TreeNode t = new TreeNode()
                             {
-                                Text = display.DeviceID,
+                                Text = display.Name,
                                 ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
                                 Tag = display,
                                 ImageKey = "Monitor",
@@ -700,8 +647,6 @@ namespace Client
                 {
                     treeViewRede.Nodes.Clear();
                     discoveryServerConnection.Open();
-
-                    progressBarScanPlayers.Value = 0;
 
                     discoveryServerConnection.GetPlayersAsync(ScanPlayersCallback);
                 }
@@ -754,7 +699,7 @@ namespace Client
 
         private void ChoosePlayerFromTreeView()
         {
-            if (treeViewRede.SelectedNode.Tag is WCFScreenInformation)
+            if (treeViewRede.SelectedNode != null && treeViewRede.SelectedNode.Tag is WCFScreenInformation)
             {
                 if (connection != null && connection.State != Assemblies.ClientModel.ConnectionState.Closed)
                 {
@@ -769,6 +714,7 @@ namespace Client
                 UpdatePlayerStatus();
 
                 groupBoxPC.Text = string.Format("Ligado a: {0}", (treeViewRede.SelectedNode.Parent.Tag as WCFPlayerPC).Name);
+            
             }
         }
 
@@ -781,8 +727,8 @@ namespace Client
 
         private void listViewPlayerStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (ListViewItem item in (sender as ListView).SelectedItems)
-                item.Selected = false;
+            //foreach (ListViewItem item in (sender as ListView).SelectedItems)
+            //    item.Selected = false;
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -960,6 +906,73 @@ namespace Client
             {
                 connection.Dispose();
                 connection = null;
+            }
+        }
+
+        private void abrirPlayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirPlayer();
+        }
+
+        private void buttonPlayer_Click(object sender, EventArgs e)
+        {
+            AbrirPlayer();
+        }
+
+        private void AbrirPlayer()
+        {
+            if (connection != null && connection.State != Assemblies.ClientModel.ConnectionState.Open)
+                connection.Open();
+
+            ScreenInformation display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary) : selectedScreen;
+
+            if (!connection.PlayerWindowIsOpen(display.DeviceID))
+            {
+                #region PlayerWindowInformation
+                PlayerWindowInformation info = new PlayerWindowInformation();
+
+                List<ItemConfiguration> configs = new List<ItemConfiguration>();
+                try
+                {
+
+                    foreach (var composerComponent in panelBuilder.Controls.OfType<ComposerComponent>())
+                    {
+                        configs.Add(composerComponent.Configuration);
+                    }
+
+                    info.Components = configs;
+                    info.Display = display;
+                    info.Background = panelBuilder.BackgroundImage;
+                    info.BackgroundImageLayout = panelBuilder.BackgroundImageLayout;
+                    /*
+                     * 1 - Transformar o info.Display num IEnumerable de displays
+                     * 2 - Fazer com que sejam abertas várias janelas nos displays inseridos
+                     */
+
+                    Connection.Open();
+                    Connection.OpenPlayerWindow(info);
+                }
+                catch
+                {
+                }
+                #endregion
+
+                #region PlayerWindowInformation2
+                //PlayerWindowInformation2 info = new PlayerWindowInformation2();
+
+                //List<ItemConfiguration> configs = new List<ItemConfiguration>();
+
+                //Connection.Open();
+
+                //foreach (var composerComponent in panelBuilder.Controls.Cast<ComposerComponent>())
+                //{
+                //    configs.Add(composerComponent.Configuration);
+                //}
+
+                //info.Configuration
+                #endregion
+
+                UpdatePlayerStatus();
             }
         }
     }

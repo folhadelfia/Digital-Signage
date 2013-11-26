@@ -2,16 +2,26 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>History - Server.csproj</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\WCFConnection.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\AppData\Local\Temp\SalaDeEsperaWCF - Copy.sln</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\Comando.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\Comando.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\FormJanelaFinal.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\FormJanelaFinal.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Configurations\ScreenInformation.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\PlayerServiceImplementation\PlayerService.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
