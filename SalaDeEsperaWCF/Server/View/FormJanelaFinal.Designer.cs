@@ -47,6 +47,11 @@
             this.propriedadesTVTSMItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.sairTVTSMItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.minimizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.minimizarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.minimizarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMSFormJanelaPrincipal.SuspendLayout();
             this.contextMSFooter.SuspendLayout();
             this.contextMSTV.SuspendLayout();
@@ -56,39 +61,40 @@
             // 
             this.contextMSFormJanelaPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reposicionarJanelaBackgroundTSMItem,
+            this.minimizarToolStripMenuItem,
             this.sempreNoTopoBackgroundTSMItem,
             this.toolStripSeparator2,
             this.sairBackgroundTSMItem});
             this.contextMSFormJanelaPrincipal.Name = "contextMSFormJanelaPrincipal";
             this.contextMSFormJanelaPrincipal.ShowCheckMargin = true;
             this.contextMSFormJanelaPrincipal.ShowImageMargin = false;
-            this.contextMSFormJanelaPrincipal.Size = new System.Drawing.Size(178, 76);
+            this.contextMSFormJanelaPrincipal.Size = new System.Drawing.Size(163, 98);
             this.contextMSFormJanelaPrincipal.Opening += new System.ComponentModel.CancelEventHandler(this.contextMS_Opening);
             // 
             // reposicionarJanelaBackgroundTSMItem
             // 
             this.reposicionarJanelaBackgroundTSMItem.Name = "reposicionarJanelaBackgroundTSMItem";
-            this.reposicionarJanelaBackgroundTSMItem.Size = new System.Drawing.Size(177, 22);
-            this.reposicionarJanelaBackgroundTSMItem.Text = "Reposicionar Janela";
+            this.reposicionarJanelaBackgroundTSMItem.Size = new System.Drawing.Size(162, 22);
+            this.reposicionarJanelaBackgroundTSMItem.Text = "Reposicionar";
             this.reposicionarJanelaBackgroundTSMItem.Click += new System.EventHandler(this.reposicionarJanelaToolStripMenuItem_Click);
             // 
             // sempreNoTopoBackgroundTSMItem
             // 
             this.sempreNoTopoBackgroundTSMItem.Checked = this.TopMost;
             this.sempreNoTopoBackgroundTSMItem.Name = "sempreNoTopoBackgroundTSMItem";
-            this.sempreNoTopoBackgroundTSMItem.Size = new System.Drawing.Size(177, 22);
+            this.sempreNoTopoBackgroundTSMItem.Size = new System.Drawing.Size(162, 22);
             this.sempreNoTopoBackgroundTSMItem.Text = "Sempre no Topo";
             this.sempreNoTopoBackgroundTSMItem.Click += new System.EventHandler(this.sempreNoTopoToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(174, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(159, 6);
             // 
             // sairBackgroundTSMItem
             // 
             this.sairBackgroundTSMItem.Name = "sairBackgroundTSMItem";
-            this.sairBackgroundTSMItem.Size = new System.Drawing.Size(177, 22);
+            this.sairBackgroundTSMItem.Size = new System.Drawing.Size(162, 22);
             this.sairBackgroundTSMItem.Text = "Sair";
             this.sairBackgroundTSMItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
@@ -96,46 +102,48 @@
             // 
             this.contextMSFooter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reposicionarJanelaFooterTSMItem,
+            this.minimizarToolStripMenuItem1,
             this.sempreNoTopoFooterTSMItem,
+            this.toolStripSeparator5,
             this.propriedadesFooterTSMItem,
             this.toolStripSeparator1,
             this.sairFooterTSMItem});
             this.contextMSFooter.Name = "contextMSFooter";
             this.contextMSFooter.ShowCheckMargin = true;
             this.contextMSFooter.ShowImageMargin = false;
-            this.contextMSFooter.Size = new System.Drawing.Size(178, 98);
+            this.contextMSFooter.Size = new System.Drawing.Size(163, 126);
             this.contextMSFooter.Opening += new System.ComponentModel.CancelEventHandler(this.contextMS_Opening);
             // 
             // reposicionarJanelaFooterTSMItem
             // 
             this.reposicionarJanelaFooterTSMItem.Name = "reposicionarJanelaFooterTSMItem";
-            this.reposicionarJanelaFooterTSMItem.Size = new System.Drawing.Size(177, 22);
-            this.reposicionarJanelaFooterTSMItem.Text = "Reposicionar Janela";
+            this.reposicionarJanelaFooterTSMItem.Size = new System.Drawing.Size(162, 22);
+            this.reposicionarJanelaFooterTSMItem.Text = "Reposicionar";
             this.reposicionarJanelaFooterTSMItem.Click += new System.EventHandler(this.reposicionarJanelaToolStripMenuItem_Click);
             // 
             // sempreNoTopoFooterTSMItem
             // 
             this.sempreNoTopoFooterTSMItem.Name = "sempreNoTopoFooterTSMItem";
-            this.sempreNoTopoFooterTSMItem.Size = new System.Drawing.Size(177, 22);
+            this.sempreNoTopoFooterTSMItem.Size = new System.Drawing.Size(162, 22);
             this.sempreNoTopoFooterTSMItem.Text = "Sempre no Topo";
             this.sempreNoTopoFooterTSMItem.Click += new System.EventHandler(this.sempreNoTopoToolStripMenuItem_Click);
             // 
             // propriedadesFooterTSMItem
             // 
             this.propriedadesFooterTSMItem.Name = "propriedadesFooterTSMItem";
-            this.propriedadesFooterTSMItem.Size = new System.Drawing.Size(177, 22);
+            this.propriedadesFooterTSMItem.Size = new System.Drawing.Size(162, 22);
             this.propriedadesFooterTSMItem.Text = "Propriedades";
             this.propriedadesFooterTSMItem.Click += new System.EventHandler(this.propriedadesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(174, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
             // 
             // sairFooterTSMItem
             // 
             this.sairFooterTSMItem.Name = "sairFooterTSMItem";
-            this.sairFooterTSMItem.Size = new System.Drawing.Size(177, 22);
+            this.sairFooterTSMItem.Size = new System.Drawing.Size(162, 22);
             this.sairFooterTSMItem.Text = "Sair";
             this.sairFooterTSMItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
@@ -143,7 +151,9 @@
             // 
             this.contextMSTV.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reposicionarJanelaTVTSMItem,
+            this.minimizarToolStripMenuItem2,
             this.sempreNoTopoTVTSMItem,
+            this.toolStripSeparator4,
             this.canalTVTSMItem,
             this.propriedadesTVTSMItem,
             this.toolStripSeparator3,
@@ -151,7 +161,7 @@
             this.contextMSTV.Name = "contextMSTV";
             this.contextMSTV.ShowCheckMargin = true;
             this.contextMSTV.ShowImageMargin = false;
-            this.contextMSTV.Size = new System.Drawing.Size(178, 120);
+            this.contextMSTV.Size = new System.Drawing.Size(178, 170);
             this.contextMSTV.Opening += new System.ComponentModel.CancelEventHandler(this.contextMS_Opening);
             // 
             // reposicionarJanelaTVTSMItem
@@ -191,6 +201,37 @@
             this.sairTVTSMItem.Size = new System.Drawing.Size(177, 22);
             this.sairTVTSMItem.Text = "Sair";
             this.sairTVTSMItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            // 
+            // minimizarToolStripMenuItem
+            // 
+            this.minimizarToolStripMenuItem.Name = "minimizarToolStripMenuItem";
+            this.minimizarToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.minimizarToolStripMenuItem.Text = "Minimizar";
+            this.minimizarToolStripMenuItem.Click += new System.EventHandler(this.minimizarToolStripMenuItem_Click);
+            // 
+            // minimizarToolStripMenuItem1
+            // 
+            this.minimizarToolStripMenuItem1.Name = "minimizarToolStripMenuItem1";
+            this.minimizarToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.minimizarToolStripMenuItem1.Text = "Minimizar";
+            this.minimizarToolStripMenuItem1.Click += new System.EventHandler(this.minimizarToolStripMenuItem_Click);
+            // 
+            // minimizarToolStripMenuItem2
+            // 
+            this.minimizarToolStripMenuItem2.Name = "minimizarToolStripMenuItem2";
+            this.minimizarToolStripMenuItem2.Size = new System.Drawing.Size(177, 22);
+            this.minimizarToolStripMenuItem2.Text = "Minimizar";
+            this.minimizarToolStripMenuItem2.Click += new System.EventHandler(this.minimizarToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(174, 6);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(159, 6);
             // 
             // FormJanelaFinal
             // 
@@ -233,5 +274,10 @@
         private System.Windows.Forms.ToolStripMenuItem sempreNoTopoBackgroundTSMItem;
         private System.Windows.Forms.ToolStripMenuItem sempreNoTopoFooterTSMItem;
         private System.Windows.Forms.ToolStripMenuItem sempreNoTopoTVTSMItem;
+        private System.Windows.Forms.ToolStripMenuItem minimizarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem minimizarToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem minimizarToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }

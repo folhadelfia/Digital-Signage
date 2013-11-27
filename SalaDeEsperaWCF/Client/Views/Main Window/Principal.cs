@@ -438,6 +438,8 @@ namespace Client
             {
                 if (connection.State != Assemblies.ClientModel.ConnectionState.Open) connection.Open();
 
+                statusLines.Clear();
+
                 SetStatusLine("Geral", "Nome do dispositivo", NetworkingToolkit.resolveIP(connection.ServerIP));
                 SetStatusLine("Geral", "Endereço IP", connection.ServerIP);
                 SetStatusLine("Geral", "Monitores", connection.GetDisplayInformation().Length + "");
@@ -671,9 +673,11 @@ namespace Client
 
                 foreach (var display in pc.Displays)
                 {
+                    string tempDispName = string.Format("{0} (X: {1}, Y: {2})", display.Name, display.Bounds.X, display.Bounds.Y);
+
                     TreeNode t = new TreeNode()
                     {
-                        Text = display.DeviceID,
+                        Text = tempDispName,
                         ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
                         Tag = display,
                         ImageKey = "Monitor",

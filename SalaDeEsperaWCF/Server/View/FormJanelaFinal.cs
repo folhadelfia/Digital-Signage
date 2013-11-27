@@ -519,5 +519,10 @@ namespace Server.View
         }
 
         #endregion
+
+        private void minimizarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }
