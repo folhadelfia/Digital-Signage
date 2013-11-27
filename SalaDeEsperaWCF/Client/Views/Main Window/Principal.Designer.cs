@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Geral", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("TV", System.Windows.Forms.HorizontalAlignment.Left);
             this.listViewComponents = new System.Windows.Forms.ListView();
             this.imageListComponents = new System.Windows.Forms.ImageList(this.components);
             this.groupBoxComponents = new System.Windows.Forms.GroupBox();
@@ -55,7 +53,6 @@
             this.groupBoxPC = new System.Windows.Forms.GroupBox();
             this.buttonFechar = new System.Windows.Forms.Button();
             this.buttonPlayer = new System.Windows.Forms.Button();
-            this.listViewDisplays = new System.Windows.Forms.ListView();
             this.treeViewRede = new System.Windows.Forms.TreeView();
             this.contextMenuStripTreeViewRede = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ligarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,9 +77,9 @@
             // listViewComponents
             // 
             this.listViewComponents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewComponents.Location = new System.Drawing.Point(3, 16);
+            this.listViewComponents.Location = new System.Drawing.Point(3, 18);
             this.listViewComponents.Name = "listViewComponents";
-            this.listViewComponents.Size = new System.Drawing.Size(205, 346);
+            this.listViewComponents.Size = new System.Drawing.Size(205, 344);
             this.listViewComponents.SmallImageList = this.imageListComponents;
             this.listViewComponents.TabIndex = 0;
             this.listViewComponents.UseCompatibleStateImageBehavior = false;
@@ -112,6 +109,7 @@
             this.groupBoxComponents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBoxComponents.Controls.Add(this.listViewComponents);
+            this.groupBoxComponents.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxComponents.Location = new System.Drawing.Point(286, 158);
             this.groupBoxComponents.Name = "groupBoxComponents";
             this.groupBoxComponents.Size = new System.Drawing.Size(211, 365);
@@ -127,9 +125,9 @@
             this.panelBuilder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelBuilder.ContextMenuStrip = this.contextMenuStripBackground;
             this.panelBuilder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBuilder.Location = new System.Drawing.Point(3, 16);
+            this.panelBuilder.Location = new System.Drawing.Point(3, 18);
             this.panelBuilder.Name = "panelBuilder";
-            this.panelBuilder.Size = new System.Drawing.Size(629, 477);
+            this.panelBuilder.Size = new System.Drawing.Size(629, 475);
             this.panelBuilder.TabIndex = 2;
             this.panelBuilder.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelConfigurador_DragDrop);
             this.panelBuilder.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelConfigurador_DragEnter);
@@ -252,7 +250,7 @@
             // abrirPlayerToolStripMenuItem
             // 
             this.abrirPlayerToolStripMenuItem.Name = "abrirPlayerToolStripMenuItem";
-            this.abrirPlayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abrirPlayerToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.abrirPlayerToolStripMenuItem.Text = "Abrir Player";
             this.abrirPlayerToolStripMenuItem.Click += new System.EventHandler(this.abrirPlayerToolStripMenuItem_Click);
             // 
@@ -260,7 +258,7 @@
             // 
             this.groupBoxPC.Controls.Add(this.buttonFechar);
             this.groupBoxPC.Controls.Add(this.buttonPlayer);
-            this.groupBoxPC.Controls.Add(this.listViewDisplays);
+            this.groupBoxPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxPC.Location = new System.Drawing.Point(289, 27);
             this.groupBoxPC.Name = "groupBoxPC";
             this.groupBoxPC.Size = new System.Drawing.Size(208, 125);
@@ -290,17 +288,6 @@
             this.buttonPlayer.UseVisualStyleBackColor = true;
             this.buttonPlayer.Click += new System.EventHandler(this.buttonPlayer_Click);
             // 
-            // listViewDisplays
-            // 
-            this.listViewDisplays.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listViewDisplays.Location = new System.Drawing.Point(3, 16);
-            this.listViewDisplays.Name = "listViewDisplays";
-            this.listViewDisplays.ShowItemToolTips = true;
-            this.listViewDisplays.Size = new System.Drawing.Size(202, 77);
-            this.listViewDisplays.TabIndex = 0;
-            this.listViewDisplays.UseCompatibleStateImageBehavior = false;
-            this.listViewDisplays.SelectedIndexChanged += new System.EventHandler(this.listViewDisplays_SelectedIndexChanged);
-            // 
             // treeViewRede
             // 
             this.treeViewRede.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -324,19 +311,20 @@
             this.contextMenuStripTreeViewRede.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ligarToolStripMenuItem});
             this.contextMenuStripTreeViewRede.Name = "contextMenuStripTreeViewRede";
-            this.contextMenuStripTreeViewRede.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStripTreeViewRede.Size = new System.Drawing.Size(123, 26);
             // 
             // ligarToolStripMenuItem
             // 
             this.ligarToolStripMenuItem.Name = "ligarToolStripMenuItem";
-            this.ligarToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.ligarToolStripMenuItem.Text = "Ligar";
+            this.ligarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ligarToolStripMenuItem.Text = "Conectar";
             this.ligarToolStripMenuItem.Click += new System.EventHandler(this.ligarToolStripMenuItem_Click);
             // 
             // groupBoxRede
             // 
             this.groupBoxRede.Controls.Add(this.buttonPause);
             this.groupBoxRede.Controls.Add(this.treeViewRede);
+            this.groupBoxRede.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxRede.Location = new System.Drawing.Point(12, 27);
             this.groupBoxRede.Name = "groupBoxRede";
             this.groupBoxRede.Size = new System.Drawing.Size(268, 180);
@@ -351,16 +339,15 @@
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(75, 23);
             this.buttonPause.TabIndex = 9;
-            this.buttonPause.Text = "Scan";
+            this.buttonPause.Text = "Procurar";
             this.buttonPause.UseVisualStyleBackColor = true;
             this.buttonPause.Click += new System.EventHandler(this.buttonScan_Click);
             // 
             // groupBoxBuilder
             // 
-            this.groupBoxBuilder.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxBuilder.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBoxBuilder.Controls.Add(this.panelBuilder);
+            this.groupBoxBuilder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxBuilder.Location = new System.Drawing.Point(503, 27);
             this.groupBoxBuilder.Name = "groupBoxBuilder";
             this.groupBoxBuilder.Size = new System.Drawing.Size(635, 496);
@@ -373,9 +360,10 @@
             this.groupBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBoxStatus.Controls.Add(this.listViewPlayerStatus);
+            this.groupBoxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxStatus.Location = new System.Drawing.Point(12, 213);
             this.groupBoxStatus.Name = "groupBoxStatus";
-            this.groupBoxStatus.Size = new System.Drawing.Size(268, 307);
+            this.groupBoxStatus.Size = new System.Drawing.Size(268, 310);
             this.groupBoxStatus.TabIndex = 11;
             this.groupBoxStatus.TabStop = false;
             this.groupBoxStatus.Text = "Status";
@@ -387,19 +375,12 @@
             this.columnValue});
             this.listViewPlayerStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewPlayerStatus.FullRowSelect = true;
-            listViewGroup1.Header = "Geral";
-            listViewGroup1.Name = "LVGroupGeneral";
-            listViewGroup2.Header = "TV";
-            listViewGroup2.Name = "LVGroupTV";
-            this.listViewPlayerStatus.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2});
             this.listViewPlayerStatus.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewPlayerStatus.Location = new System.Drawing.Point(3, 16);
+            this.listViewPlayerStatus.Location = new System.Drawing.Point(3, 18);
             this.listViewPlayerStatus.MultiSelect = false;
             this.listViewPlayerStatus.Name = "listViewPlayerStatus";
             this.listViewPlayerStatus.ShowItemToolTips = true;
-            this.listViewPlayerStatus.Size = new System.Drawing.Size(262, 288);
+            this.listViewPlayerStatus.Size = new System.Drawing.Size(262, 289);
             this.listViewPlayerStatus.TabIndex = 0;
             this.listViewPlayerStatus.UseCompatibleStateImageBehavior = false;
             this.listViewPlayerStatus.View = System.Windows.Forms.View.Details;
@@ -461,7 +442,6 @@
         private System.Windows.Forms.ToolStripMenuItem ferramentasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirPlayerToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBoxPC;
-        private System.Windows.Forms.ListView listViewDisplays;
         private System.Windows.Forms.TreeView treeViewRede;
         private System.Windows.Forms.GroupBox groupBoxRede;
         private System.Windows.Forms.Button buttonPause;

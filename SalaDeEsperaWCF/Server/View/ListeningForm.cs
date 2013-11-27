@@ -394,21 +394,31 @@ namespace Server.View
                     {
                         switch (serviceHost.State)
                         {
-                            case CommunicationState.Closed: labelEstado.ForeColor = Color.Red;
+                            case CommunicationState.Closed:
+                                labelEstado.Text = "Fechado";
+                                labelEstado.ForeColor = Color.Red;
                                 break;
-                            case CommunicationState.Closing: labelEstado.ForeColor = Color.Goldenrod;
+                            case CommunicationState.Closing:
+                                labelEstado.Text = "A fechar";
+                                labelEstado.ForeColor = Color.Goldenrod;
                                 break;
-                            case CommunicationState.Opening: labelEstado.ForeColor = Color.Goldenrod;
+                            case CommunicationState.Opening:
+                                labelEstado.Text = "A abrir";
+                                labelEstado.ForeColor = Color.Goldenrod;
                                 break;
-                            case CommunicationState.Opened: labelEstado.ForeColor = Color.ForestGreen;
+                            case CommunicationState.Opened:
+                                labelEstado.Text = "Aberto";
+                                labelEstado.ForeColor = Color.ForestGreen;
                                 break;
-                            case CommunicationState.Faulted: labelEstado.ForeColor = Color.Red;
+                            case CommunicationState.Faulted:
+                                labelEstado.Text = "Falha";
+                                labelEstado.ForeColor = Color.Red;
                                 break;
-                            case CommunicationState.Created: labelEstado.ForeColor = Color.Blue;
+                            case CommunicationState.Created:
+                                labelEstado.Text = "Pronto";
+                                labelEstado.ForeColor = Color.Blue;
                                 break;
                         }
-
-                        labelEstado.Text = serviceHost.State.ToString();
                     }
                     catch (Exception ex)
                     {

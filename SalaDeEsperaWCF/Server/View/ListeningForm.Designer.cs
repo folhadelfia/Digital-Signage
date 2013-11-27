@@ -199,9 +199,9 @@
             this.labelEstado.ForeColor = System.Drawing.Color.Blue;
             this.labelEstado.Location = new System.Drawing.Point(51, 30);
             this.labelEstado.Name = "labelEstado";
-            this.labelEstado.Size = new System.Drawing.Size(74, 25);
+            this.labelEstado.Size = new System.Drawing.Size(75, 25);
             this.labelEstado.TabIndex = 8;
-            this.labelEstado.Text = "Ready";
+            this.labelEstado.Text = "Pronto";
             // 
             // groupBoxEstado
             // 
