@@ -29,6 +29,7 @@ namespace Assemblies.PlayerServiceImplementation
         static public event SendWindowIsOpenBackEventHandler SendWindowIsOpen;
 
         static public event SendDevicesBackEventHandler SendTunerDevices;
+        static public event SendDevicesBackEventHandler SendTunerDevicesInUse;
         static public event SendDeviceBackEventHandler SendTunerDevice;
         static public event PlayerWindowSetTunerDeviceEventHandler SetTunerDevice;
 
@@ -177,7 +178,6 @@ namespace Assemblies.PlayerServiceImplementation
             return devs;
         }
 
-
         public TunerDevice GetTunerDevice(string displayName)
         {
             if (SendTunerDevice == null) return null;
@@ -192,6 +192,17 @@ namespace Assemblies.PlayerServiceImplementation
         public void DefineTunerDevice(string displayName, TunerDevice tuner)
         {
             if (SetTunerDevice != null) SetTunerDevice(displayName, tuner);
+        }
+
+        public TunerDevice[] GetTunerDevicesInUse()
+        {
+            if (SendTunerDevicesInUse == null) return null;
+
+            TunerDevice[] devs;
+
+            SendTunerDevicesInUse(out devs);
+
+            return devs;
         }
     }
 

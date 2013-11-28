@@ -35,37 +35,30 @@ namespace Client
 {
     public partial class Principal : Form
     {
-        private event EventHandler ConnectionChanged;
+        #region Connection stuff
 
-        private WCFConnection connection;
-        private WCFConnection Connection 
-        {
-            get { return connection; }
-            set
-            {
-                connection = value;
-                if (ConnectionChanged != null)
-                    ConnectionChanged(this, new EventArgs());
-            }
-        }
 
-        Dictionary<PlayerPC, Dictionary<ScreenInformation, List<ComposerComponent>>> allPlayersConfiguration = new Dictionary<PlayerPC, Dictionary<ScreenInformation, List<ComposerComponent>>>();
+
+        #endregion
+
+        //Dictionary<PlayerPC, Dictionary<ScreenInformation, List<ComposerComponent>>> allPlayersConfiguration = new Dictionary<PlayerPC, Dictionary<ScreenInformation, List<ComposerComponent>>>(); //Ainda não está a ser usado
 
         private List<string> logs = new List<string>();
 
         private Size finalResolution = Screen.PrimaryScreen.Bounds.Size;
+
+        private bool cancelTreeViewContextMenu = false;
 
         public Principal()
         {
             InitializeComponent();
 
             this.ConnectionChanged += Principal_ConnectionChanged;
-        }
-
-        void Principal_ConnectionChanged(object sender, EventArgs e)
-        {
-            foreach (var component in panelBuilder.Controls.Cast<ComposerComponent>().Where(x => x is TVComposer).ToList())
-                (component as TVComposer).SetOptionsWindowConnection(Connection);
+            treeViewRede.NodeMouseClick += (sender, args) => treeViewRede.SelectedNode = args.Node; //Selecciona o nó com o botao direito
+            treeViewRede.MouseDown += (sender, args) =>
+                {
+                    cancelTreeViewContextMenu = args.Button == System.Windows.Forms.MouseButtons.Right && treeViewRede.GetNodeAt(args.Location) == null;
+                }; //Só deixa abrir o menu d contexto em cima de um nó
         }
 
         private void Principal_Load(object sender, EventArgs e)
@@ -307,7 +300,27 @@ namespace Client
 
         ////////////////////
 
-        #region Serviço
+        #region Conexões
+
+        private event EventHandler ConnectionChanged;
+
+        private WCFConnection connection;
+        private WCFConnection Connection
+        {
+            get { return connection; }
+            set
+            {
+                connection = value;
+                if (ConnectionChanged != null)
+                    ConnectionChanged(this, new EventArgs());
+            }
+        }
+
+        void Principal_ConnectionChanged(object sender, EventArgs e)
+        {
+            foreach (var component in panelBuilder.Controls.Cast<ComposerComponent>().Where(x => x is TVComposer).ToList())
+                (component as TVComposer).SetOptionsWindowConnection(Connection);
+        }
 
         #endregion
 
@@ -346,6 +359,8 @@ namespace Client
 
         #endregion
 
+        ////////////////////
+
         #region Logs
 
         private void Log(string text)
@@ -355,75 +370,16 @@ namespace Client
 
         #endregion
 
-        List<ScreenInformation> selectedDisplays = new List<ScreenInformation>();
-
-        private void listViewDisplays_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var temp = sender as ListView;
-
-            foreach (var item in temp.SelectedItems)
-            {
-                try
-                {
-                    temp.SelectedItems.Clear();
-                    selectedDisplays.Add(temp.Tag as ScreenInformation);
-                }
-                catch
-                {
-                    continue;
-                }
-            }
-        }
-
-        private void computadoresToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ServiceList lista = new ServiceList();
-
-                if (lista.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    Connection = new WCFConnection(lista.PC);
-
-                    Connection.Open();
-                }
-            }
-            catch
-            {
-            }
-        }
-
-        private void buttonFechar_Click(object sender, EventArgs e)
-        {
-            string display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary).DeviceID : selectedScreen.DeviceID;
-
-
-            if (Connection != null && Connection.State == Assemblies.ClientModel.ConnectionState.Open) Connection.ClosePlayerWindow(display);
-            UpdatePlayerStatus();
-        }
-
-        private void propriedadesBackgroundToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //FormOptionsBuilder options = new FormOptionsBuilder(panelBuilder.Controls.Cast<ComposerComponent>().ToList());
-
-            //options.ShowDialog();
-
-            var backgroundOptWnd = new Assemblies.Options.BackgroundOptions();
-
-            if (backgroundOptWnd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                panelBuilder.BackgroundImage = Image.FromFile(backgroundOptWnd.SelectedPath);
-                panelBuilder.BackgroundImageLayout = backgroundOptWnd.BackgroundImageLayout;
-            }
-        }
+        ////////////////////
 
         #region Status
+
         //statusLines[Group][Title][Values(...)]
         private Dictionary<string, Dictionary<string, List<string>>> statusLines = new Dictionary<string, Dictionary<string, List<string>>>();
 
         private void SetStatusLine(string group, string title, List<string> values)
         {
-            if(!statusLines.Keys.Contains(group)) statusLines.Add(group, new Dictionary<string, List<string>>());
+            if (!statusLines.Keys.Contains(group)) statusLines.Add(group, new Dictionary<string, List<string>>());
 
             if (!statusLines[group].Keys.Contains(title)) statusLines[group].Add(title, values);
             else statusLines[group][title] = values;
@@ -444,7 +400,7 @@ namespace Client
                 SetStatusLine("Geral", "Endereço IP", connection.ServerIP);
                 SetStatusLine("Geral", "Monitores", connection.GetDisplayInformation().Length + "");
 
-                foreach (var item in connection.GetDisplayInformation().OrderBy(x=>!x.Primary).ThenBy(x=>x.Bounds.Left))
+                foreach (var item in connection.GetDisplayInformation().OrderBy(x => !x.Primary).ThenBy(x => x.Bounds.Left))
                 {
                     string tempDisplayName = string.Format("{0} (X: {1}, Y: {2})", item.Name, item.Bounds.X, item.Bounds.Y);
 
@@ -453,7 +409,7 @@ namespace Client
                     SetStatusLine(tempDisplayName, "Estado", connection.PlayerWindowIsOpen(item.DeviceID) ? "Ligado" : "Desligado");
                 }
 
-                foreach (var item in connection.GetTunerDevices().OrderBy(x=>x.Name))
+                foreach (var item in connection.GetTunerDevices().OrderBy(x => x.Name))
                 {
                     SetStatusLine("Sintonizadores TV", item.Name, "");
                 }
@@ -511,7 +467,7 @@ namespace Client
                     Group = listViewPlayerStatus.Groups.OfType<ListViewGroup>().Single(x => x.Header == group),
                     Text = title,
                     ToolTipText = string.Format("{0}{1}", title, !string.IsNullOrWhiteSpace(values[0]) ? " - " + values[0] : ""),
-                    
+
                 };
 
                 newItem.SubItems.Add(new ListViewItem.ListViewSubItem()
@@ -558,6 +514,8 @@ namespace Client
         }
         #endregion
 
+        ////////////////////
+
         #region Network Tree
 
         ScreenInformation selectedScreen;
@@ -584,7 +542,7 @@ namespace Client
             //t.Start();
 
             this.ScanPlayersAsync();
-            
+
         }
         /// <summary>
         /// Procura no discovery server por players
@@ -592,7 +550,7 @@ namespace Client
         [Obsolete("ScanPlayers é sucatada, usar o ScanPlayersAsync")]
         private void ScanPlayers()
         {
-            if (this.InvokeRequired) this.Invoke((MethodInvoker)(()=> { ScanPlayers(); }));
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { ScanPlayers(); }));
             try
             {
                 using (Assemblies.ClientModel.Connection discoveryServerConnection = new WCFConnection()
@@ -717,8 +675,17 @@ namespace Client
 
                 UpdatePlayerStatus();
 
-                groupBoxPC.Text = string.Format("Ligado a: {0}", (treeViewRede.SelectedNode.Parent.Tag as WCFPlayerPC).Name);
-            
+                foreach (var parentNode in treeViewRede.Nodes.OfType<TreeNode>())
+                {
+                    foreach (var node in parentNode.Nodes.OfType<TreeNode>())
+                    {
+                        node.BackColor = SystemColors.Window;
+                    }
+                }
+
+                treeViewRede.SelectedNode.BackColor = Color.FromArgb(100, 137, 255, 161);
+                treeViewRede.SelectedNode = null;
+
             }
         }
 
@@ -729,21 +696,7 @@ namespace Client
 
         #endregion
 
-        private void listViewPlayerStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //foreach (ListViewItem item in (sender as ListView).SelectedItems)
-            //    item.Selected = false;
-        }
-
-        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.Connection != null && this.Connection.State == Assemblies.ClientModel.ConnectionState.Open)
-                this.Connection.Close();
-
-            this.Close();
-        }
-
-
+        ////////////////////
 
         #region Saves
 
@@ -790,7 +743,7 @@ namespace Client
 
                     List<XMLItemConfiguration> temp = new List<XMLItemConfiguration>();
 
-                    foreach (var item in panelBuilder.Controls.OfType<ComposerComponent>().Select(x => x.Configuration).OrderBy(x=>x.GetType().ToString()).ToList())
+                    foreach (var item in panelBuilder.Controls.OfType<ComposerComponent>().Select(x => x.Configuration).OrderBy(x => x.GetType().ToString()).ToList())
                         temp.Add(NetToXMLConverter.ToXML(item));
 
                     serializer.Serialize(writer, temp);
@@ -810,7 +763,7 @@ namespace Client
             {
                 if (string.IsNullOrWhiteSpace(path)) return null;
 
-                using(System.IO.FileStream reader = new System.IO.FileStream(path, FileMode.Open))
+                using (System.IO.FileStream reader = new System.IO.FileStream(path, FileMode.Open))
                 {
                     XmlSerializer deserializer = new XmlSerializer(typeof(List<XMLItemConfiguration>));
 
@@ -889,7 +842,7 @@ namespace Client
                 panelBuilder.Controls.Clear();
                 IComponentCreator creator;
 
-                foreach(var item in LoadProject(ofd.FileName))
+                foreach (var item in LoadProject(ofd.FileName))
                 {
                     if (item is MarkeeConfiguration) creator = new MarkeeCreator();
                     else if (item is TVConfiguration) creator = new TVCreator();
@@ -903,6 +856,86 @@ namespace Client
         }
 
         #endregion
+
+        ////////////////////
+
+        List<ScreenInformation> selectedDisplays = new List<ScreenInformation>();
+
+        private void listViewDisplays_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var temp = sender as ListView;
+
+            foreach (var item in temp.SelectedItems)
+            {
+                try
+                {
+                    temp.SelectedItems.Clear();
+                    selectedDisplays.Add(temp.Tag as ScreenInformation);
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+        }
+
+        private void computadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ServiceList lista = new ServiceList();
+
+                if (lista.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Connection = new WCFConnection(lista.PC);
+
+                    Connection.Open();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private void buttonFechar_Click(object sender, EventArgs e)
+        {
+            string display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary).DeviceID : selectedScreen.DeviceID;
+
+
+            if (Connection != null && Connection.State == Assemblies.ClientModel.ConnectionState.Open) Connection.ClosePlayerWindow(display);
+            UpdatePlayerStatus();
+        }
+
+        private void propriedadesBackgroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //FormOptionsBuilder options = new FormOptionsBuilder(panelBuilder.Controls.Cast<ComposerComponent>().ToList());
+
+            //options.ShowDialog();
+
+            var backgroundOptWnd = new Assemblies.Options.BackgroundOptions();
+
+            if (backgroundOptWnd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                panelBuilder.BackgroundImage = Image.FromFile(backgroundOptWnd.SelectedPath);
+                panelBuilder.BackgroundImageLayout = backgroundOptWnd.BackgroundImageLayout;
+            }
+        }
+
+        private void listViewPlayerStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //foreach (ListViewItem item in (sender as ListView).SelectedItems)
+            //    item.Selected = false;
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.Connection != null && this.Connection.State == Assemblies.ClientModel.ConnectionState.Open)
+                this.Connection.Close();
+
+            this.Close();
+        }
+
+
 
         private void Principal_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -938,10 +971,28 @@ namespace Client
                 List<ItemConfiguration> configs = new List<ItemConfiguration>();
                 try
                 {
-
                     foreach (var composerComponent in panelBuilder.Controls.OfType<ComposerComponent>())
                     {
                         configs.Add(composerComponent.Configuration);
+                    }
+
+                    var devices = connection.GetTunerDevices();
+
+                    foreach (var tvConfig in configs.OfType<TVConfiguration>())
+                    {
+                        if (string.IsNullOrWhiteSpace(tvConfig.TunerDevicePath) && devices.Count() > 0)
+                        {
+                            ChooseTVTuner temp = new ChooseTVTuner(devices);
+
+                            if (temp.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                            {
+                                tvConfig.TunerDevicePath = temp.Tuner.DevicePath;
+                            }
+                        }
+                        else if (devices.Count() == 0 && MessageBox.Show(string.Format("Não existe nenhum sintonizador disponível. Não será possível apresentar televisão.{0}{0}Deseja continuar?", Environment.NewLine), "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
+                        {
+                            throw new ApplicationException("No tuner device selected", new ArgumentNullException());
+                        }
                     }
 
                     info.Components = configs;
@@ -958,6 +1009,8 @@ namespace Client
                 }
                 catch
                 {
+
+                    if (connection.State != Assemblies.ClientModel.ConnectionState.Closed) connection.Close();
                 }
                 #endregion
 
@@ -978,6 +1031,13 @@ namespace Client
 
                 UpdatePlayerStatus();
             }
+
+            if (connection.State != Assemblies.ClientModel.ConnectionState.Closed) connection.Close();
+        }
+
+        private void contextMenuStripTreeViewRede_Opening(object sender, CancelEventArgs e)
+        {
+            e.Cancel = this.cancelTreeViewContextMenu || !(treeViewRede.SelectedNode.Tag is WCFScreenInformation);
         }
     }
 }

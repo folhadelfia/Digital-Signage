@@ -46,7 +46,10 @@ namespace TV2Lib
 		private static Dictionary<string, DsDevice> bdaTunerDevices;
 		protected DsDevice tunerDevice;
 		private static Dictionary<string, DsDevice> bdaCaptureDevices;
-		protected DsDevice captureDevice;
+        protected DsDevice captureDevice;
+        private static Dictionary<string, DsDevice> bdaTunerDevicesInUse;
+
+
 
 		protected EPG epg;
 
@@ -54,15 +57,14 @@ namespace TV2Lib
 		{
 			get
 			{
-				if (audioDecoderDevices == null)
-				{
-					audioDecoderDevices = new Dictionary<string, DsDevice>();
+				if (audioDecoderDevices == null) audioDecoderDevices = new Dictionary<string, DsDevice>();
 
-					DsDevice[] devices = DeviceEnumerator.GetDevicesWithThisInPin(MediaType.Audio, MediaSubType.Mpeg2Audio);
-					foreach (DsDevice d in devices)
-						if (d.Name != null)
-                            audioDecoderDevices.Add(d.DevicePath, d);
-				}
+                audioDecoderDevices.Clear();
+
+				DsDevice[] devices = DeviceEnumerator.GetDevicesWithThisInPin(MediaType.Audio, MediaSubType.Mpeg2Audio);
+				foreach (DsDevice d in devices)
+					if (d.Name != null)
+                        audioDecoderDevices.Add(d.DevicePath, d);
 				return audioDecoderDevices;
 			}
 		}
@@ -70,15 +72,15 @@ namespace TV2Lib
 		{
 			get
 			{
-				if (mpeg2DecoderDevices == null)
-				{
-					mpeg2DecoderDevices = new Dictionary<string, DsDevice>();
+				if (mpeg2DecoderDevices == null) mpeg2DecoderDevices = new Dictionary<string, DsDevice>();
 
-					DsDevice[] devices = DeviceEnumerator.GetMPEG2Devices();
-                    foreach (DsDevice d in devices)
-                        if (d.Name != null)
-                            mpeg2DecoderDevices.Add(d.DevicePath, d);
-                }
+                mpeg2DecoderDevices.Clear();
+
+				DsDevice[] devices = DeviceEnumerator.GetMPEG2Devices();
+                foreach (DsDevice d in devices)
+                    if (d.Name != null)
+                        mpeg2DecoderDevices.Add(d.DevicePath, d);
+            
 				return mpeg2DecoderDevices;
 			}
 		}
@@ -86,14 +88,14 @@ namespace TV2Lib
 		{
 			get
 			{
-				if (h264DecoderDevices == null)
-				{
-					h264DecoderDevices = new Dictionary<string, DsDevice>();
+				if (h264DecoderDevices == null) h264DecoderDevices = new Dictionary<string, DsDevice>();
 
-					DsDevice[] devices = DeviceEnumerator.GetH264Devices();
-					foreach (DsDevice d in devices)
-                        h264DecoderDevices.Add(d.DevicePath, d);
-				}
+                h264DecoderDevices.Clear();
+
+				DsDevice[] devices = DeviceEnumerator.GetH264Devices();
+				foreach (DsDevice d in devices)
+                    h264DecoderDevices.Add(d.DevicePath, d);
+
 				return h264DecoderDevices;
 			}
 		}
@@ -101,16 +103,17 @@ namespace TV2Lib
 		{
 			get
 			{
-				if(bdaTunerDevices == null)
-				{
-					bdaTunerDevices = new Dictionary<string, DsDevice>();
+				if(bdaTunerDevices == null) bdaTunerDevices = new Dictionary<string, DsDevice>();
 
-					// Then enumerate BDA Receiver Components category to found a filter connecting 
-					// to the tuner and the MPEG2 Demux
-					DsDevice[] devices = DsDevice.GetDevicesOfCat(FilterCategory.BDASourceFiltersCategory);
-					foreach (DsDevice d in devices)
-						bdaTunerDevices.Add(d.DevicePath, d);
-				}
+				// Then enumerate BDA Receiver Components category to find a filter connecting 
+				// to the tuner and the MPEG2 Demux
+
+                bdaTunerDevices.Clear();
+
+				DsDevice[] devices = DsDevice.GetDevicesOfCat(FilterCategory.BDASourceFiltersCategory);
+				foreach (DsDevice d in devices)
+					bdaTunerDevices.Add(d.DevicePath, d);
+
 				return bdaTunerDevices;
 			}
 		}
@@ -118,18 +121,29 @@ namespace TV2Lib
 		{
 			get
 			{
-				if (bdaCaptureDevices == null)
-				{
-					bdaCaptureDevices = new Dictionary<string, DsDevice>();
+				if (bdaCaptureDevices == null) bdaCaptureDevices = new Dictionary<string, DsDevice>();
 
-					// Enumerate BDA Source filters category and found one that can connect to the network provider
-					DsDevice[] devices = DsDevice.GetDevicesOfCat(FilterCategory.BDAReceiverComponentsCategory);
-					foreach (DsDevice d in devices)
-                        bdaCaptureDevices.Add(d.DevicePath, d);
-				}
+                bdaCaptureDevices.Clear();
+
+				// Enumerate BDA Source filters category and found one that can connect to the network provider
+				DsDevice[] devices = DsDevice.GetDevicesOfCat(FilterCategory.BDAReceiverComponentsCategory);
+				foreach (DsDevice d in devices)
+                    bdaCaptureDevices.Add(d.DevicePath, d);
+
 				return bdaCaptureDevices;
 			}
 		}
+        public static Dictionary<string, DsDevice> TunerDevicesInUse
+        {
+            get
+            {
+                if (bdaTunerDevicesInUse == null) bdaTunerDevicesInUse = new Dictionary<string, DsDevice>();
+
+                bdaTunerDevicesInUse.Clear();
+
+                return bdaTunerDevicesInUse;
+            }
+        }
 
 		public ChannelDVB.Clock ReferenceClock { get { return this.referenceClock; } set { this.referenceClock = value; } }
 

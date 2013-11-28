@@ -87,5 +87,11 @@ namespace Assemblies.ClientProxies
         {
             Channel.DefineTunerDevice(displayName, tuner);
         }
+
+
+        public DataContracts.TunerDevice[] GetTunerDevicesInUse()
+        {
+            return Channel.GetTunerDevicesInUse();
+        }
     }
 }

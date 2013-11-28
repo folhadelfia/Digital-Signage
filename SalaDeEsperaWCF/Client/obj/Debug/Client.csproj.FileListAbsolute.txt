@@ -48,3 +48,6 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\C
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.ConfigureForm.resources
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.ServiceList.resources
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\Server.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\Server.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.ChooseTVTuner.resources

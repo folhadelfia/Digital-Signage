@@ -105,6 +105,7 @@ namespace Server.View
             private set { if (value != "") displayName = value; else throw new NoNullAllowedException("The display name cannot be null. Ever.", null); }
         }
         Dictionary<string, FormJanelaFinal> listaSucatada;
+
         string idDaSucatada;
 
 
@@ -311,7 +312,7 @@ namespace Server.View
                 foreach (ItemConfiguration config in information.Components)
                     this.AddItemFromConfiguration(config);
 
-                this.TopMost = true;
+                this.TopMost = false;
                 this.PreventSleep();
 
                 this.Show();
@@ -367,7 +368,7 @@ namespace Server.View
                 else if (config is TVConfiguration)
                 {
                     var temp = config as TVConfiguration;
-
+                    if (string.IsNullOrWhiteSpace(temp.TunerDevicePath)) return;
                     #region using DigitalTVScreen
                     /*
                     DigitalTVScreen tvDisplay = new DigitalTVScreen() { Location = temp.FinalLocation, Size = temp.FinalSize };
@@ -420,6 +421,9 @@ namespace Server.View
                         (contextMSTV.Items["canalTVTSMItem"] as ToolStripMenuItem).DropDownItems.Add(ch.Name, null, (object sender, EventArgs e) => { tvScreen.Channels.TuneChannel(ch); });
                     }
 
+                    if (DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Where(x => x.Name.Contains("ffdshow")).Count() == 1)
+                        tvScreen.Devices.H264Decoder = DigitalTVScreen.DeviceStuff.H264DecoderDevices[DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Single(x => x.Name.Contains("ffdshow")).DevicePath];
+
                     if (tvScreen.Channels.ChannelList.Count > 0) tvScreen.Channels.TuneChannel(tvScreen.Channels.ChannelList[0]);
 
                     //tvScreen.Start();
@@ -460,7 +464,8 @@ namespace Server.View
                 Volume = 0
             };
 
-            return new DigitalTVScreen()
+
+            var res = new DigitalTVScreen()
             {
                 BorderStyle = BorderStyle.None,
                 CurrentGraphBuilder = null,
@@ -475,6 +480,9 @@ namespace Server.View
                 VideoOffset = new PointF(0f,0f),
                 VideoZoomMode = 0D
             };
+
+            if(DigitalTVScreen.DeviceStuff.TunerDevices.ContainsKey(config.TunerDevicePath)) res.Devices.TunerDevice = DigitalTVScreen.DeviceStuff.TunerDevices[config.TunerDevicePath];
+            return res;
         
         }
 

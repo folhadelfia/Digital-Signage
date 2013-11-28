@@ -1,0 +1,13 @@
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\bin\Release x86\TV-2.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\bin\Release x86\TV-2.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\bin\Release x86\DirectShowLib-2005.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\bin\Release x86\TV2Lib.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\bin\Release x86\MediaFoundation.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\bin\Release x86\TV2Lib.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\bin\Release x86\TV2Lib.xml
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Release x86\TV-2.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Release x86\TV_2.FormPrincipal.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Release x86\TV_2.Properties.Resources.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Release x86\TV-2.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Release x86\TV-2.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\obj\Release x86\TV-2.pdb

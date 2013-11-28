@@ -34,6 +34,9 @@ namespace Assemblies.ClientModel
             set { displays = value; }
         }
 
+        public TunerDevice[] Devices
+        { get; set; }
+
         protected PlayerPC()
         {
         }

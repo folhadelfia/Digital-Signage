@@ -51,6 +51,7 @@ namespace Assemblies.ClientModel
         public abstract void SetCurrentTVChannel(Channel channel);
         public abstract TunerDevice GetTunerDevice();
         public abstract IEnumerable<TunerDevice> GetTunerDevices();
+        public abstract IEnumerable<TunerDevice> GetTunerDevicesInUse();
         public abstract void SetTunerDevice(TunerDevice dev);
         #endregion
 

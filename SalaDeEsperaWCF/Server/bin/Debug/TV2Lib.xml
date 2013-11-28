@@ -341,5 +341,10 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
+        <member name="P:TV2Lib.Properties.Resources.NoName">
+            <summary>
+              Looks up a localized string similar to UNDEFINED.
+            </summary>
+        </member>
     </members>
 </doc>

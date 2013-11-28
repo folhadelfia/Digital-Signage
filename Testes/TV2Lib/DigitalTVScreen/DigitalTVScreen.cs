@@ -65,7 +65,7 @@ namespace TV2Lib
                 get { try { return owner.GraphicBuilder.H264DecoderDevice; } catch (NullReferenceException) { return null; } }
                 set
                 {
-                    owner.GraphicBuilder.H264DecoderDevice = value != null && GraphBuilderBDA.H264DecoderDevices.Values.Contains(value) ? value : null;
+                    owner.GraphicBuilder.H264DecoderDevice = value != null && GraphBuilderBDA.H264DecoderDevices.Keys.Contains(value.DevicePath) ? value : null;
                     if (value != null)
                     {
                         if (owner.Channels.CurrentChannel != null) owner.Channels.CurrentChannel.H264DecoderDevice = value.DevicePath;
@@ -83,7 +83,7 @@ namespace TV2Lib
                 get { try { return owner.GraphicBuilder.Mpeg2DecoderDevice; } catch (NullReferenceException) { return null; } }
                 set
                 {
-                    owner.GraphicBuilder.Mpeg2DecoderDevice = value != null && GraphBuilderBDA.MPEG2DecoderDevices.Values.Contains(value) ? value : null;
+                    owner.GraphicBuilder.Mpeg2DecoderDevice = value != null && GraphBuilderBDA.MPEG2DecoderDevices.Keys.Contains(value.DevicePath) ? value : null;
                     if (value != null)
                     {
                         if (owner.Channels.CurrentChannel != null) owner.Channels.CurrentChannel.MPEG2DecoderDevice = value.DevicePath;
@@ -101,7 +101,7 @@ namespace TV2Lib
                 get { try { return owner.GraphicBuilder.AudioDecoderDevice; } catch (NullReferenceException) { return null; } }
                 set
                 {
-                    owner.GraphicBuilder.AudioDecoderDevice = value != null && GraphBuilderBDA.AudioDecoderDevices.Values.Contains(value) ? value : null;
+                    owner.GraphicBuilder.AudioDecoderDevice = value != null && GraphBuilderBDA.AudioDecoderDevices.Keys.Contains(value.DevicePath) ? value : null;
 
                     if (value != null)
                     {
@@ -125,7 +125,7 @@ namespace TV2Lib
                 }
                 set
                 {
-                    owner.GraphicBuilder.TunerDevice = (value != null && TunerDevices.Values.Contains(value)) ? value : null;
+                    owner.GraphicBuilder.TunerDevice = (value != null && TunerDevices.Keys.Contains(value.DevicePath)) ? value : null;
 
                     //if (value != null)
                     //{
@@ -148,7 +148,7 @@ namespace TV2Lib
                 }
                 set
                 {
-                    owner.GraphicBuilder.TunerDevice = (value != null && TunerDevices.Values.Contains(value)) ? value : null;
+                    owner.GraphicBuilder.TunerDevice = (value != null && TunerDevices.Keys.Contains(value.DevicePath)) ? value : null;
 
                     if (value != null)
                     {
@@ -168,7 +168,7 @@ namespace TV2Lib
                 get { try { return owner.GraphicBuilder.AudioDecoderDevice; } catch (NullReferenceException) { return null; } }
                 set
                 {
-                    owner.GraphicBuilder.AudioDecoderDevice = value != null && GraphBuilderBDA.AudioRendererDevices.Values.Contains(value) ? value : null;
+                    owner.GraphicBuilder.AudioDecoderDevice = value != null && GraphBuilderBDA.AudioRendererDevices.Keys.Contains(value.DevicePath) ? value : null;
                     if (value != null)
                     {
                         if (owner.Channels.CurrentChannel != null) owner.Channels.CurrentChannel.AudioRendererDevice = value.DevicePath;
@@ -208,6 +208,10 @@ namespace TV2Lib
             public static Dictionary<string, DsDevice> CaptureDevices
             {
                 get { return GraphBuilderBDA.CaptureDevices; }
+            }
+            public static Dictionary<string, DsDevice> TunerDevicesInUse
+            {
+                get { return GraphBuilderBDA.TunerDevicesInUse; }
             }
         }
         private DeviceStuff devices;
@@ -354,7 +358,9 @@ namespace TV2Lib
                               (owner.Devices.MPEG2Decoder != null && owner.Devices.MPEG2Decoder.DevicePath != CurrentChannel.MPEG2DecoderDevice) ||
                               channelDVBT.NeedToRebuildTheGraph(CurrentChannel);
 
-                return (owner.GraphicBuilder = this.TuneChannel(channel, needRebuild)) != null;
+                bool res = (owner.GraphicBuilder = this.TuneChannel(channel, needRebuild)) != null;
+
+                return res;
             }
             private GraphBuilderBDA TuneChannel(Channel channel, bool needRebuild)
             {
@@ -416,7 +422,6 @@ namespace TV2Lib
                         //newGraph.GraphEnded += new EventHandler(newGraph_GraphEnded);
                         //newGraph.PossibleChanged += new EventHandler<GraphBuilderBase.PossibleEventArgs>(newGraph_PossibleChanged);
                         newGraph.Settings = oldSettings;
-                        currentGraphTV = newGraph;
 
                         newGraph.ReferenceClock = channelDVB.ReferenceClock;
 
@@ -532,6 +537,8 @@ namespace TV2Lib
                         owner.SetGraphBuilderEvents();
 
                         newGraph.BuildGraph(tuner, (channel as ChannelDVBT).VideoDecoderType, (channel as ChannelDVBT).AudioDecoderType);
+
+                        currentGraphTV = newGraph;
                     }
 
                     #endregion
@@ -544,7 +551,13 @@ namespace TV2Lib
                     currentGraphTV.VideoZoom = channelDVB.VideoZoom;
                     currentGraphTV.VideoAspectRatioFactor = channelDVB.VideoAspectRatioFactor;
 
-                    currentGraphTV.RunGraph();
+                    if (currentGraphTV.RunGraph() == 1)
+                    {
+                        if (!DigitalTVScreen.DeviceStuff.TunerDevicesInUse.ContainsKey(currentGraphTV.TunerDevice.DevicePath))
+                        {
+                            DigitalTVScreen.DeviceStuff.TunerDevicesInUse.Add(currentGraphTV.TunerDevice.DevicePath, currentGraphTV.TunerDevice);
+                        }
+                    }
                     //currentGraph.VideoResizer();
                     currentGraphTV.CurrentChannel = channel;
                 }
@@ -766,6 +779,7 @@ namespace TV2Lib
             InitializeGraphBuilder();
         }
 
+        [Obsolete("Use Channels.TuneChannel(Channel ch) instead")]
         public int Start()
         {
             if (this.State != DigitalTVState.Running)
@@ -1093,7 +1107,7 @@ namespace TV2Lib
             {
                 this.Channels.TuneChannel(currentChannelTV);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 (this as VideoControl).BackColor = this.Settings.VideoBackgroundColor;
             }

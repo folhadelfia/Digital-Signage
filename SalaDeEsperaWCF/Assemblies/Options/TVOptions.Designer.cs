@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBoxTune = new System.Windows.Forms.GroupBox();
+            this.labelKhz = new System.Windows.Forms.Label();
             this.comboBoxTunerDevices = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonScanFrequencies = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.listBoxAllChannels = new System.Windows.Forms.ListBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.labelKhz = new System.Windows.Forms.Label();
             this.groupBoxTune.SuspendLayout();
             this.groupBoxCanais.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +58,15 @@
             this.groupBoxTune.TabIndex = 0;
             this.groupBoxTune.TabStop = false;
             this.groupBoxTune.Text = "Tune";
+            // 
+            // labelKhz
+            // 
+            this.labelKhz.AutoSize = true;
+            this.labelKhz.Location = new System.Drawing.Point(187, 22);
+            this.labelKhz.Name = "labelKhz";
+            this.labelKhz.Size = new System.Drawing.Size(24, 13);
+            this.labelKhz.TabIndex = 9;
+            this.labelKhz.Text = "khz";
             // 
             // comboBoxTunerDevices
             // 
@@ -154,15 +163,6 @@
             this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            // 
-            // labelKhz
-            // 
-            this.labelKhz.AutoSize = true;
-            this.labelKhz.Location = new System.Drawing.Point(187, 22);
-            this.labelKhz.Name = "labelKhz";
-            this.labelKhz.Size = new System.Drawing.Size(24, 13);
-            this.labelKhz.TabIndex = 9;
-            this.labelKhz.Text = "khz";
             // 
             // TVOptions
             // 

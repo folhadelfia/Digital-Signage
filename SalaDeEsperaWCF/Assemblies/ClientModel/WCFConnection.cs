@@ -197,6 +197,10 @@ namespace Assemblies.ClientModel
                         {
                             OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
                         }
+                        catch (TimeoutException)
+                        {
+                            OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
+                        }
                     }));
 
                     threads.Add(t);
@@ -232,7 +236,14 @@ namespace Assemblies.ClientModel
             catch
             {
                 if (player.State != CommunicationState.Closed)
-                    player.Abort();
+
+                    try
+                    {
+                        player.Abort();
+                    }
+                    catch
+                    {
+                    }
             }
         }
 
@@ -262,7 +273,7 @@ namespace Assemblies.ClientModel
         public override void ClosePlayerWindow(string displayDeviceID)
         {
             player.ClosePlayer(displayDeviceID);
-        } //ALTERAR PARA RECEBER O DEVICEID DO MONITOR
+        }
         public override ScreenInformation[] GetDisplayInformation()
         {
             return NetWCFConverter.ToNET(player.GetDisplayInformation());
@@ -294,6 +305,10 @@ namespace Assemblies.ClientModel
         public override IEnumerable<TunerDevice> GetTunerDevices()
         {
             return player.GetTunerDevices().ToList();
+        }
+        public override IEnumerable<TunerDevice> GetTunerDevicesInUse()
+        {
+            return player.GetTunerDevicesInUse().ToList();
         }
         public override void SetTunerDevice(TunerDevice dev)
         {

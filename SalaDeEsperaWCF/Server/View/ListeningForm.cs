@@ -52,12 +52,13 @@ namespace Server.View
 
             PlayerService.SendTunerDevice += PlayerService_SendTunerDevice;
             PlayerService.SendTunerDevices += PlayerService_SendTunerDevices;
+            PlayerService.SendTunerDevicesInUse += PlayerService_SendTunerDevicesInUse;
             PlayerService.SetTunerDevice += PlayerService_SetTunerDevice;
-
 
 
             textBoxLocalIP.Text = NetworkingToolkit.LocalIPAddress;
         }
+
 
         void PlayerService_SetTunerDevice(string displayName, TunerDevice dev)
         {
@@ -74,6 +75,10 @@ namespace Server.View
         void PlayerService_SendTunerDevices(out TunerDevice[] devs)
         {
             devs = DigitalTVScreen.DeviceStuff.TunerDevices.Values.Select(x => new TunerDevice() { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
+        }
+        void PlayerService_SendTunerDevicesInUse(out TunerDevice[] devs)
+        {
+            devs = DigitalTVScreen.DeviceStuff.TunerDevicesInUse.Values.Select(x => new TunerDevice { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
         }
 
         void PlayerService_SendTunerDevice(string displayName, out TunerDevice dev)

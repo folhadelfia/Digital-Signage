@@ -97,7 +97,10 @@ namespace Assemblies.Options
 
             comboBoxTunerDevices.Items.Clear();
 
-            foreach (var item in connection.GetTunerDevices())
+            IEnumerable<DataContracts.TunerDevice> allDevices = connection.GetTunerDevices();
+            IEnumerable<DataContracts.TunerDevice> usedDevices = connection.GetTunerDevicesInUse();
+
+            foreach (var item in connection.GetTunerDevices().Where(x=>!usedDevices.Contains(x)))
                 comboBoxTunerDevices.Items.Add(item);
 
             connection.Close();

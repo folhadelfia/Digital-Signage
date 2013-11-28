@@ -119,5 +119,16 @@ namespace Assemblies.PlayerServiceContracts
 
         #endregion
 
+        #region 27 nov 2013 - Saber que tuners estão em uso
+
+
+        /// <summary>
+        /// Enumera os tuners em uso do player
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        TunerDevice[] GetTunerDevicesInUse();
+
+        #endregion
     }
 }
