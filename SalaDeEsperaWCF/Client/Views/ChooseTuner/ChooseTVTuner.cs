@@ -14,11 +14,11 @@ namespace Client
     public partial class ChooseTVTuner : Form
     {
 
-        public TunerDevice Tuner
+        public GeneralDevice Tuner
         {
             get
             {
-                return comboBoxTuners.SelectedItem as TunerDevice;
+                return comboBoxTuners.SelectedItem as GeneralDevice;
             }
         }
         private ChooseTVTuner()
@@ -26,7 +26,7 @@ namespace Client
             InitializeComponent();
         }
 
-        public ChooseTVTuner(IEnumerable<TunerDevice> devices)
+        public ChooseTVTuner(IEnumerable<GeneralDevice> devices)
             : this()
         {
             comboBoxTuners.DisplayMember = "Name";

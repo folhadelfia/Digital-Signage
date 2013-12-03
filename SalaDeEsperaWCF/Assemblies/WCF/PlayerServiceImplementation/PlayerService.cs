@@ -30,8 +30,25 @@ namespace Assemblies.PlayerServiceImplementation
 
         static public event SendDevicesBackEventHandler SendTunerDevices;
         static public event SendDevicesBackEventHandler SendTunerDevicesInUse;
-        static public event SendDeviceBackEventHandler SendTunerDevice;
-        static public event PlayerWindowSetTunerDeviceEventHandler SetTunerDevice;
+        static public event PlayerWindowSendDeviceBackEventHandler SendTunerDevice;
+        static public event PlayerWindowSetDeviceEventHandler SetTunerDevice;
+
+        static public event PlayerWindowSendDeviceBackEventHandler SendAudioDecoder;
+        static public event PlayerWindowSendDeviceBackEventHandler SendAudioRenderer;
+        static public event PlayerWindowSendDeviceBackEventHandler SendH264Decoder;
+        static public event PlayerWindowSendDeviceBackEventHandler SendMPEG2Decoder;
+
+        static public event SendDevicesBackEventHandler SendAudioDecoders;
+        static public event SendDevicesBackEventHandler SendAudioRenderers;
+        static public event SendDevicesBackEventHandler SendH264Decoders;
+        static public event SendDevicesBackEventHandler SendMPEG2Decoders;
+
+        static public event PlayerWindowSetDeviceEventHandler SetAudioDecoder;
+        static public event PlayerWindowSetDeviceEventHandler SetAudioRenderer;
+        static public event PlayerWindowSetDeviceEventHandler SetH264Decoder;
+        static public event PlayerWindowSetDeviceEventHandler SetMPEG2Decoder;
+        //Adicionar os sets
+
 
         #endregion
 
@@ -104,33 +121,6 @@ namespace Assemblies.PlayerServiceImplementation
 
 
         // Adicionar um método estático na classe do player de tv para devolver os canais
-        public WCFChannel[] GetChannels()
-        {
-            try
-            {
-                var temp = new TV2Lib.DigitalTVScreen();
-
-                temp.Channels.CurrentChannel.Frequency = 754000;
-
-                try
-                {
-                    temp.Channels.LoadFromXML();
-                }
-                catch (Exception)
-                {
-                    temp.Channels.RefreshChannels(); //Só funciona em Portugal. Compor o ecra de opçoes no composer
-                    temp.Channels.SaveToXML();
-                }
-
-                var channels = temp.Channels.ChannelList;
-
-                return NetWCFConverter.ToWCF(channels.ToArray());
-            }
-            catch
-            {
-                return new WCFChannel[0];
-            }
-        }
 
 
         public void SetChannel(string displayName, WCFChannel channel)
@@ -167,40 +157,380 @@ namespace Assemblies.PlayerServiceImplementation
         #endregion
 
 
-        public TunerDevice[] GetTunerDevices()
+        public GeneralDevice[] GetTunerDevices()
         {
             if (SendTunerDevices == null) return null;
 
-            TunerDevice[] devs;
+            GeneralDevice[] devs;
 
             SendTunerDevices(out devs);
 
             return devs;
         }
 
-        public TunerDevice GetTunerDevice(string displayName)
+        public GeneralDevice GetTunerDevice(string displayName)
         {
             if (SendTunerDevice == null) return null;
 
-            TunerDevice dev;
+            GeneralDevice dev;
 
             SendTunerDevice(displayName, out dev);
 
             return dev;
         }
 
-        public void DefineTunerDevice(string displayName, TunerDevice tuner)
+        public void DefineTunerDevice(string displayName, GeneralDevice tuner)
         {
             if (SetTunerDevice != null) SetTunerDevice(displayName, tuner);
         }
 
-        public TunerDevice[] GetTunerDevicesInUse()
+        public GeneralDevice[] GetTunerDevicesInUse()
         {
             if (SendTunerDevicesInUse == null) return null;
 
-            TunerDevice[] devs;
+            GeneralDevice[] devs;
 
             SendTunerDevicesInUse(out devs);
+
+            return devs;
+        }
+
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na frequência padrão (754000 khz).
+        /// </summary>
+        /// <returns></returns>
+        public WCFChannel[] GetChannels()
+        {
+            return this.GetChannels(false);
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na frequência padrão (754000 khz). Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        public WCFChannel[] GetChannels(bool forceRescan)
+        {
+            return this.GetChannels(TV2Lib.DigitalTVScreen.ChannelStuff.DEFAULT_FREQUENCY, forceRescan);
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na <paramref name="frequency"/> dada.
+        /// </summary>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <returns></returns>
+        public WCFChannel[] GetChannels(int frequency)
+        {
+            return this.GetChannels(frequency, false);
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na <paramref name="frequency"/> dada. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        public WCFChannel[] GetChannels(int frequency, bool forceRescan)
+        {
+            try
+            {
+                return this.GetChannels(TV2Lib.DigitalTVScreen.DeviceStuff.TunerDevices.ElementAt(0).Key, frequency, forceRescan);
+            }
+            catch(ArgumentOutOfRangeException)
+            {
+                return null;
+            }
+            catch
+            {
+                return new WCFChannel[0];
+            }
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz.
+        /// </summary>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <returns></returns>
+        public WCFChannel[] GetChannels(int minFrequency, int maxFrequency, int step)
+        {
+            return this.GetChannels(minFrequency, maxFrequency, step, false);
+        } // Done
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        public WCFChannel[] GetChannels(int minFrequency, int maxFrequency, int step, bool forceRescan)
+        {
+
+            try
+            {
+                return this.GetChannels(TV2Lib.DigitalTVScreen.DeviceStuff.TunerDevices.ElementAt(0).Key, minFrequency, maxFrequency, step, forceRescan);
+            }
+            catch(ArgumentOutOfRangeException)
+            {
+                return null;
+            }
+            catch
+            {
+                return new WCFChannel[0];
+            }
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na frequência padrão (754000 khz).
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public WCFChannel[] GetChannels(string device)
+        {
+            return this.GetChannels(device, TV2Lib.DigitalTVScreen.ChannelStuff.DEFAULT_FREQUENCY, false);
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na frequência padrão (754000 khz). Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public WCFChannel[] GetChannels(string device, bool forceRescan)
+        {
+            return this.GetChannels(device, TV2Lib.DigitalTVScreen.ChannelStuff.DEFAULT_FREQUENCY, forceRescan);
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na <paramref name="frequency"/> dada.
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public WCFChannel[] GetChannels(string device, int frequency)
+        {
+            return this.GetChannels(device, frequency, false);
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na <paramref name="frequency"/> dada. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public WCFChannel[] GetChannels(string device, int frequency, bool forceRescan)
+        {
+            try
+            {
+                var temp = new TV2Lib.DigitalTVScreen();
+
+                temp.Channels.CurrentChannel.Frequency = frequency;
+
+                try
+                {
+                    temp.Devices.TunerDevice = TV2Lib.DigitalTVScreen.DeviceStuff.TunerDevices[device];
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException("Error retrieving the tuner device", ex);
+                }
+
+                if (forceRescan)
+                {
+                    temp.Channels.RefreshChannels(); 
+                    temp.Channels.SaveToXML();
+                }
+                else
+                {
+                    try
+                    {
+                        temp.Channels.LoadFromXML();
+                    }
+                    catch (Exception)
+                    {
+                        temp.Channels.RefreshChannels(); 
+                        temp.Channels.SaveToXML();
+                    }
+                }
+
+                var channels = temp.Channels.ChannelList;
+
+                return NetWCFConverter.ToWCF(channels.ToArray());
+            }
+            catch
+            {
+                return new WCFChannel[0];
+            }
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, no player com o DeviceID <paramref name="device"/>, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz.
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public WCFChannel[] GetChannels(string device, int minFrequency, int maxFrequency, int step)
+        {
+            return this.GetChannels(device, minFrequency, maxFrequency, step, false);
+        }// Done
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, no player com o DeviceID <paramref name="device"/>, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public WCFChannel[] GetChannels(string device, int minFrequency, int maxFrequency, int step, bool forceRescan)
+        {
+            try
+            {
+                var temp = new TV2Lib.DigitalTVScreen();
+
+                try
+                {
+                    temp.Devices.TunerDevice = TV2Lib.DigitalTVScreen.DeviceStuff.TunerDevices[device];
+                }
+                catch(Exception ex)
+                {
+                    throw new ApplicationException("Error retrieving the tuner device", ex);
+                }
+
+                if (forceRescan)
+                {
+                    temp.Channels.ScanFrequencies(minFrequency, maxFrequency, step);
+                    temp.Channels.SaveToXML();
+                }
+                else
+                {
+                    try
+                    {
+                        temp.Channels.LoadFromXML();
+                    }
+                    catch
+                    {
+                        temp.Channels.ScanFrequencies(minFrequency, maxFrequency, step); 
+                        temp.Channels.SaveToXML();
+                    }
+                }
+
+                var channels = temp.Channels.ChannelList;
+
+                return NetWCFConverter.ToWCF(channels.ToArray());
+            }
+            catch
+            {
+                return new WCFChannel[0];
+            }
+        }// Done
+
+
+        public GeneralDevice GetAudioDecoder(string displayName)
+        {
+            if (SendAudioDecoder == null) return null;
+
+            GeneralDevice dev;
+
+            SendAudioDecoder(displayName, out dev);
+
+            return dev;
+        }
+        public void DefineAudioDecoder(string displayName, GeneralDevice dev)
+        {
+            if (SetAudioDecoder != null) SetAudioDecoder(displayName, dev);
+        }
+
+        public GeneralDevice[] GetAudioDecoders()
+        {
+            if (SendAudioDecoders == null) return null;
+
+            GeneralDevice[] devs;
+
+            SendAudioDecoders(out devs);
+
+            return devs;
+        }
+
+
+        public GeneralDevice GetAudioRenderer(string displayName)
+        {
+            if (SendAudioRenderer == null) return null;
+
+            GeneralDevice dev;
+
+            SendAudioRenderer(displayName, out dev);
+
+            return dev;
+        }
+        public void DefineAudioRenderer(string displayName, GeneralDevice dev)
+        {
+            if (SetAudioRenderer != null) SetAudioRenderer(displayName, dev);
+        }
+
+        public GeneralDevice[] GetAudioRenderers()
+        {
+            if (SendAudioRenderers == null) return null;
+
+            GeneralDevice[] devs;
+
+            SendAudioRenderers(out devs);
+
+            return devs;
+        }
+
+
+        public GeneralDevice GetH264Decoder(string displayName)
+        {
+            if (SendH264Decoder == null) return null;
+
+            GeneralDevice dev;
+
+            SendH264Decoder(displayName, out dev);
+
+            return dev;
+        }
+        public void DefineH264Decoder(string displayName, GeneralDevice dev)
+        {
+            if (SetH264Decoder != null) SetH264Decoder(displayName, dev);
+        }
+
+        public GeneralDevice[] GetH264Decoders()
+        {
+            if (SendH264Decoders == null) return null;
+
+            GeneralDevice[] devs;
+
+            SendH264Decoders(out devs);
+
+            return devs;
+        }
+
+
+        public GeneralDevice GetMPEG2Decoder(string displayName)
+        {
+            if (SendMPEG2Decoder == null) return null;
+
+            GeneralDevice dev;
+
+            SendMPEG2Decoder(displayName, out dev);
+
+            return dev;
+        }
+        public void DefineMPEG2Decoder(string displayName, GeneralDevice dev)
+        {
+            if (SetMPEG2Decoder != null) SetMPEG2Decoder(displayName, dev);
+        }
+
+        public GeneralDevice[] GetMPEG2Decoders()
+        {
+            if (SendMPEG2Decoders == null) return null;
+
+            GeneralDevice[] devs;
+
+            SendMPEG2Decoders(out devs);
 
             return devs;
         }
@@ -255,8 +585,8 @@ namespace Assemblies.PlayerServiceImplementation
     public delegate void SendChannelBackEventHandler(string displayName, out WCFChannel ch);
     public delegate void SendWindowIsOpenBackEventHandler(string displayName, out bool IsOpen);
 
-    public delegate void SendDevicesBackEventHandler(out TunerDevice[] devs);
-    public delegate void SendDeviceBackEventHandler(string displayName, out TunerDevice dev);
-    public delegate void PlayerWindowSetTunerDeviceEventHandler(string displayName, TunerDevice dev);
+    public delegate void SendDevicesBackEventHandler(out GeneralDevice[] devs);
+    public delegate void PlayerWindowSendDeviceBackEventHandler(string displayName, out GeneralDevice dev);
+    public delegate void PlayerWindowSetDeviceEventHandler(string displayName, GeneralDevice dev);
 
 }

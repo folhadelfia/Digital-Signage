@@ -40,10 +40,12 @@ namespace Server.View
         {
             InitializeComponent();
 
+            #region Eventos do serviço
+
             PlayerService.OpenPlayerWindow += PlayerService_OpenPlayerWindow;
             PlayerService.OpenPlayerWindow2 += PlayerService_OpenPlayerWindow2;
-            PlayerService.ClosePlayerWindow += PlayerService_ClosePlayerWindow;
             PlayerService.EditPlayerWindow += PlayerService_EditPlayerWindow;
+            PlayerService.ClosePlayerWindow += PlayerService_ClosePlayerWindow;
 
             PlayerService.SendTunedChannel += PlayerService_SendTunedChannel;
             PlayerService.TuneToChannel += PlayerService_TuneToChannel;
@@ -56,72 +58,27 @@ namespace Server.View
             PlayerService.SetTunerDevice += PlayerService_SetTunerDevice;
 
 
+            PlayerService.SendAudioDecoder += PlayerService_SendAudioDecoder;
+            PlayerService.SendAudioRenderer += PlayerService_SendAudioRenderer;
+            PlayerService.SendH264Decoder += PlayerService_SendH264Decoder;
+            PlayerService.SendMPEG2Decoder += PlayerService_SendMPEG2Decoder;
+
+            PlayerService.SetAudioDecoder += PlayerService_SetAudioDecoder;
+            PlayerService.SetAudioRenderer += PlayerService_SetAudioRenderer;
+            PlayerService.SetH264Decoder += PlayerService_SetH264Decoder;
+            PlayerService.SetMPEG2Decoder += PlayerService_SetMPEG2Decoder;
+
+            PlayerService.SendAudioDecoders += PlayerService_SendAudioDecoders;
+            PlayerService.SendAudioRenderers += PlayerService_SendAudioRenderers;
+            PlayerService.SendH264Decoders += PlayerService_SendH264Decoders;
+            PlayerService.SendMPEG2Decoders += PlayerService_SendMPEG2Decoders;
+
+            #endregion
+
             textBoxLocalIP.Text = NetworkingToolkit.LocalIPAddress;
         }
 
-
-        void PlayerService_SetTunerDevice(string displayName, TunerDevice dev)
-        {
-            FormJanelaFinal window = playerWindows[displayName];
-
-            if (window.Controls.OfType<DigitalTVScreen>().Count() == 1)
-            {
-                DigitalTVScreen temp = window.Controls.OfType<DigitalTVScreen>().ToList()[0];
-
-                temp.Devices.TunerDevice = DigitalTVScreen.DeviceStuff.TunerDevices.Values.Single(x=>x.DevicePath == dev.DevicePath);
-            }
-        }
-
-        void PlayerService_SendTunerDevices(out TunerDevice[] devs)
-        {
-            devs = DigitalTVScreen.DeviceStuff.TunerDevices.Values.Select(x => new TunerDevice() { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
-        }
-        void PlayerService_SendTunerDevicesInUse(out TunerDevice[] devs)
-        {
-            devs = DigitalTVScreen.DeviceStuff.TunerDevicesInUse.Values.Select(x => new TunerDevice { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
-        }
-
-        void PlayerService_SendTunerDevice(string displayName, out TunerDevice dev)
-        {
-            FormJanelaFinal window = playerWindows[displayName];
-
-            dev = window.GetTunerDevice();
-        }
-
-        void PlayerService_SendWindowIsOpen(string displayName, out bool isOpen)
-        {
-            isOpen = playerWindows.Keys.Contains(displayName);
-        }
-
-        void PlayerService_SendTunedChannel(string displayName, out WCFChannel ch)
-        {
-            if (playerWindows.Keys.Contains(displayName)) ch = NetWCFConverter.ToWCF(playerWindows[displayName].GetChannel());
-            else ch = null;
-        }
-
-        void PlayerService_TuneToChannel(string deviceName, WCFChannel ch)
-        {
-            FormJanelaFinal window = playerWindows[deviceName];
-
-            window.SetChannel(NetWCFConverter.ToNET(ch));
-        }
-
-        void PlayerService_EditPlayerWindow(WCFPlayerWindowInformation config)
-        {
-            Player_EditPlayerWindow(NetWCFConverter.ToNET(config));
-        }
-
-        void PlayerService_ClosePlayerWindow(string deviceName)
-        {
-            try
-            {
-                playerWindows[deviceName].Close();
-                playerWindows.Remove(deviceName);
-            }
-            catch
-            {
-            }
-        }
+        #region Eventos do serviço
 
         void PlayerService_OpenPlayerWindow(WCFPlayerWindowInformation config)
         {
@@ -137,8 +94,6 @@ namespace Server.View
 
             playerWindows.Add(config.Display.DeviceID, newWindow);
         }
-
-
         void PlayerService_OpenPlayerWindow2(WCFPlayerWindowInformation2 config)
         {
             Player_OpenPlayerWindow2(NetWCFConverter.ToNET(config));
@@ -148,17 +103,121 @@ namespace Server.View
             foreach (var key in config.Configuration.Keys)
             {
                 Player_OpenPlayerWindow(new PlayerWindowInformation
-                                            {
-                                                Components = config.Configuration[key],
-                                                Display = key
-                                            });
+                {
+                    Components = config.Configuration[key],
+                    Display = key
+                });
             }
         }
-
+        void PlayerService_EditPlayerWindow(WCFPlayerWindowInformation config)
+        {
+            Player_EditPlayerWindow(NetWCFConverter.ToNET(config));
+        }
         void Player_EditPlayerWindow(PlayerWindowInformation config)
         {
             throw new NotImplementedException();
+        } //NOT IMPLEMENTED
+        void PlayerService_ClosePlayerWindow(string displayName)
+        {
+            try
+            {
+                playerWindows[displayName].Close();
+                playerWindows.Remove(displayName);
+            }
+            catch
+            {
+            }
         }
+
+        void PlayerService_SendTunedChannel(string displayName, out WCFChannel ch)
+        {
+            if (playerWindows.ContainsKey(displayName)) ch = NetWCFConverter.ToWCF(playerWindows[displayName].GetChannel());
+            else ch = null;
+        }
+        void PlayerService_TuneToChannel(string displayName, WCFChannel ch)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].SetChannel(NetWCFConverter.ToNET(ch));
+        }
+
+        void PlayerService_SendWindowIsOpen(string displayName, out bool isOpen)
+        {
+            isOpen = playerWindows.Keys.Contains(displayName);
+        }
+
+        void PlayerService_SendTunerDevice(string displayName, out Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) dev = playerWindows[displayName].GetTunerDevice();
+            else dev = null;
+        }
+        void PlayerService_SendTunerDevices(out Assemblies.DataContracts.GeneralDevice[] devs)
+        {
+            devs = DigitalTVScreen.DeviceStuff.TunerDevices.Values.Select(x => new GeneralDevice() { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
+        }
+        void PlayerService_SendTunerDevicesInUse(out Assemblies.DataContracts.GeneralDevice[] devs)
+        {
+            devs = DigitalTVScreen.DeviceStuff.TunerDevicesInUse.Values.Select(x => new GeneralDevice { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
+        }
+        void PlayerService_SetTunerDevice(string displayName, Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].SetTunerDevice(dev);
+        }
+
+        void PlayerService_SendAudioDecoder(string displayName, out Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) dev = playerWindows[displayName].GetAudioDecoder();
+            else dev = null;
+        }
+        void PlayerService_SendAudioRenderer(string displayName, out Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) dev = playerWindows[displayName].GetAudioRenderer();
+            else dev = null;
+        }
+        void PlayerService_SendH264Decoder(string displayName, out Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) dev = playerWindows[displayName].GetH264Decoder();
+            else dev = null;
+        }
+        void PlayerService_SendMPEG2Decoder(string displayName, out Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) dev = playerWindows[displayName].GetMPEG2Decoder();
+            else dev = null;
+        }
+
+        void PlayerService_SetAudioDecoder(string displayName, Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].SetAudioDecoder(dev);
+        }
+        void PlayerService_SetAudioRenderer(string displayName, Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].SetAudioRenderer(dev);
+        }
+        void PlayerService_SetH264Decoder(string displayName, Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].SetH264Decoder(dev);
+        }
+        void PlayerService_SetMPEG2Decoder(string displayName, Assemblies.DataContracts.GeneralDevice dev)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].SetMPEG2Decoder(dev);
+        }
+
+        void PlayerService_SendAudioDecoders(out GeneralDevice[] devs)
+        {
+            devs = DigitalTVScreen.DeviceStuff.AudioDecoderDevices.Values.Select(x => new GeneralDevice() { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
+        }
+        void PlayerService_SendAudioRenderers(out GeneralDevice[] devs)
+        {
+            devs = DigitalTVScreen.DeviceStuff.AudioRendererDevices.Values.Select(x => new GeneralDevice() { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
+        }
+        void PlayerService_SendH264Decoders(out GeneralDevice[] devs)
+        {
+            devs = DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Select(x => new GeneralDevice() { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
+        }
+        void PlayerService_SendMPEG2Decoders(out GeneralDevice[] devs)
+        {
+            devs = DigitalTVScreen.DeviceStuff.MPEG2DecoderDevices.Values.Select(x => new GeneralDevice() { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
+        }
+
+        #endregion
 
         #region Close
         private void ListeningForm_FormClosing(object sender, FormClosingEventArgs e)

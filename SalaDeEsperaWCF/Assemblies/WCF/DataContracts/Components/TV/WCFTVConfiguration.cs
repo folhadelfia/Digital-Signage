@@ -15,5 +15,15 @@ namespace Assemblies.DataContracts
 
         [DataMember]
         public string TunerDevicePath { get; set; }
+
+
+        [DataMember]
+        public string AudioDecoder { get; set; }
+        [DataMember]
+        public string AudioRenderer { get; set; }
+        [DataMember]
+        public string H264Decoder { get; set; }
+        [DataMember]
+        public string MPEG2Decoder { get; set; }
     }
 }

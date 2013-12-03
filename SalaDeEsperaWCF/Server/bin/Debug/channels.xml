@@ -35,7 +35,7 @@
     <PmtPid>272</PmtPid>
     <VideoPid>256</VideoPid>
     <PcrPid>256</PcrPid>
-    <AudioPid>258</AudioPid>
+    <AudioPid>257</AudioPid>
     <AudioPids>
       <int>257</int>
       <int>258</int>

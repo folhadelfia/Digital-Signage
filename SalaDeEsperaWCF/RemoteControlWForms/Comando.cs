@@ -136,12 +136,15 @@ namespace RemoteControlWForms
             }
         }
 
+        //Escolher o monitor que quer controlar antes de fazer a ligação, e guardar o id numa var. Sempre que quiser mudar d canal,
+        //dá o valor dessa var
+
         private void pictureBoxRTP1_Click(object sender, EventArgs e)
         {
             Thread t = new Thread(new ThreadStart(() =>
             {
-                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 1));
+                //if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                //    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 1));
             }));
 
             t.Start();
@@ -151,8 +154,8 @@ namespace RemoteControlWForms
         {
             Thread t = new Thread(new ThreadStart(() =>
             {
-                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 2));
+                //if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                //    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 2));
             }));
 
             t.Start();
@@ -162,8 +165,8 @@ namespace RemoteControlWForms
         {
             Thread t = new Thread(new ThreadStart(() =>
             {
-                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 3));
+                //if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                //    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 3));
             }));
 
             t.Start();
@@ -173,8 +176,8 @@ namespace RemoteControlWForms
         {
             Thread t = new Thread(new ThreadStart(() =>
             {
-                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 4));
+                //if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                //    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 4));
             }));
 
             t.Start();

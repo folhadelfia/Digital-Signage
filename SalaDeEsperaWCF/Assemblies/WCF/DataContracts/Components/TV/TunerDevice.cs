@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Assemblies.DataContracts
 {
     [DataContract]
-    public class TunerDevice
+    public class GeneralDevice
     {
         [DataMember]
         public string Name { get; set; }
@@ -19,7 +19,7 @@ namespace Assemblies.DataContracts
 
         public override bool Equals(object obj)
         {
-            return obj is TunerDevice && (obj as TunerDevice).DevicePath == this.DevicePath;
+            return obj is GeneralDevice && (obj as GeneralDevice).DevicePath == this.DevicePath;
         }
 
         public override int GetHashCode()

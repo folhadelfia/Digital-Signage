@@ -57,7 +57,7 @@ namespace Assemblies.ClientModel
 
             try
             {
-                NetTcpBinding binding = new NetTcpBinding(SecurityMode.None) { ReceiveTimeout = new TimeSpan(0, 5, 0) };
+                NetTcpBinding binding = new NetTcpBinding(SecurityMode.None) { ReceiveTimeout = new TimeSpan(0, 5, 0), SendTimeout = new TimeSpan(0, 5, 0) };
                 WCFPlayerPC wcfComputer = pc as WCFPlayerPC;
                 player = new PlayerProxy(binding, wcfComputer.Endpoint);
                 player.Open();
@@ -285,34 +285,222 @@ namespace Assemblies.ClientModel
         #endregion
 
         #region TV
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na frequência padrão (754000 khz).
+        /// </summary>
+        /// <returns></returns>
         public override IEnumerable<TV2Lib.Channel> GetTVChannels()
         {
             var channels = player.GetChannels();
             return NetWCFConverter.ToNET(channels);
         }
-        public override TV2Lib.Channel GetCurrentTVChannel()
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na frequência padrão (754000 khz). Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(bool forceRescan)
         {
-            return NetWCFConverter.ToNET(player.GetCurrentTVChannel(player.GetPrimaryDisplay().DeviceID));
+            var channels = player.GetChannels(forceRescan);
+            return NetWCFConverter.ToNET(channels);
         }
-        public override void SetCurrentTVChannel(TV2Lib.Channel channel)
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na <paramref name="frequency"/> dada.
+        /// </summary>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <returns></returns>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(int frequency)
         {
-            player.SetChannel(player.GetPrimaryDisplay().DeviceID, NetWCFConverter.ToWCF(channel));
+            var channels = player.GetChannels(frequency);
+            return NetWCFConverter.ToNET(channels);
         }
-        public override TunerDevice GetTunerDevice()
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na <paramref name="frequency"/> dada. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(int frequency, bool forceRescan)
         {
-            return player.GetTunerDevice(player.GetPrimaryDisplay().DeviceID);
+            var channels = player.GetChannels(frequency, forceRescan);
+            return NetWCFConverter.ToNET(channels);
         }
-        public override IEnumerable<TunerDevice> GetTunerDevices()
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz.
+        /// </summary>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <returns></returns>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(int minFrequency, int maxFrequency, int step)
+        {
+            var channels = player.GetChannels(minFrequency, maxFrequency, step);
+            return NetWCFConverter.ToNET(channels);
+        }
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(int minFrequency, int maxFrequency, int step, bool forceRescan)
+        {
+            var channels = player.GetChannels(minFrequency, maxFrequency, step, forceRescan);
+            return NetWCFConverter.ToNET(channels);
+        }
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na frequência padrão (754000 khz).
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(string device)
+        {
+            var channels = player.GetChannels(device);
+            return NetWCFConverter.ToNET(channels);
+        }
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na frequência padrão (754000 khz). Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(string device, bool forceRescan)
+        {
+            var channels = player.GetChannels(device, forceRescan);
+            return NetWCFConverter.ToNET(channels);
+        }
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na <paramref name="frequency"/> dada.
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(string device, int frequency)
+        {
+            var channels = player.GetChannels(device, frequency);
+            return NetWCFConverter.ToNET(channels);
+        }
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na <paramref name="frequency"/> dada. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(string device, int frequency, bool forceRescan)
+        {
+            var channels = player.GetChannels(device, frequency, forceRescan);
+            return NetWCFConverter.ToNET(channels);
+        }
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, no player com o DeviceID <paramref name="device"/>, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz.
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(string device, int minFrequency, int maxFrequency, int step)
+        {
+            var channels = player.GetChannels(device, minFrequency, maxFrequency, step);
+            return NetWCFConverter.ToNET(channels);
+        }
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, no player com o DeviceID <paramref name="device"/>, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        public override IEnumerable<TV2Lib.Channel> GetTVChannels(string device, int minFrequency, int maxFrequency, int step, bool forceRescan)
+        {
+            var channels = player.GetChannels(device, minFrequency, maxFrequency, step, forceRescan);
+            return NetWCFConverter.ToNET(channels);
+        }
+
+        public override TV2Lib.Channel GetCurrentTVChannel(string displayName)
+        {
+            return NetWCFConverter.ToNET(player.GetCurrentTVChannel(displayName));
+        }
+        public override void SetCurrentTVChannel(string displayName, TV2Lib.Channel channel)
+        {
+            player.SetChannel(displayName, NetWCFConverter.ToWCF(channel));
+        }
+        public override GeneralDevice GetTunerDevice(string displayName)
+        {
+            return player.GetTunerDevice(displayName);
+        }
+        public override IEnumerable<GeneralDevice> GetTunerDevices()
         {
             return player.GetTunerDevices().ToList();
         }
-        public override IEnumerable<TunerDevice> GetTunerDevicesInUse()
+        public override IEnumerable<GeneralDevice> GetTunerDevicesInUse()
         {
             return player.GetTunerDevicesInUse().ToList();
         }
-        public override void SetTunerDevice(TunerDevice dev)
+        public override void SetTunerDevice(string displayName, GeneralDevice dev)
         {
-            player.DefineTunerDevice(player.GetPrimaryDisplay().DeviceID, dev);
+            player.DefineTunerDevice(displayName, dev);
+        }
+
+        public override GeneralDevice GetAudioDecoder(string displayName)
+        {
+            return player.GetAudioDecoder(displayName);
+        }
+        public override IEnumerable<GeneralDevice> GetAudioDecoders()
+        {
+            return player.GetAudioDecoders();
+        }
+        public override GeneralDevice GetAudioRenderer(string displayName)
+        {
+            return player.GetAudioRenderer(displayName);
+        }
+        public override IEnumerable<GeneralDevice> GetAudioRenderers()
+        {
+            return player.GetAudioRenderers();
+        }
+
+        public override GeneralDevice GetH264Decoder(string displayName)
+        {
+            return player.GetH264Decoder(displayName);
+        }
+        public override IEnumerable<GeneralDevice> GetH264Decoders()
+        {
+            return player.GetH264Decoders();
+        }
+        public override GeneralDevice GetMPEG2Decoder(string displayName)
+        {
+            return player.GetMPEG2Decoder(displayName);
+        }
+        public override IEnumerable<GeneralDevice> GetMPEG2Decoders()
+        {
+            return player.GetMPEG2Decoders();
+        }
+        public override void SetAudioDecoder(string displayName, GeneralDevice dev)
+        {
+            player.DefineAudioDecoder(displayName, dev);
+        }
+        public override void SetAudioRenderer(string displayName, GeneralDevice dev)
+        {
+            player.DefineAudioRenderer(displayName, dev);
+        }
+        public override void SetH264Codec(string displayName, GeneralDevice dev)
+        {
+            player.DefineH264Decoder(displayName, dev);
+        }
+        public override void SetMPEG2Codec(string displayName, GeneralDevice dev)
+        {
+            player.DefineMPEG2Decoder(displayName, dev);
         }
         #endregion
 

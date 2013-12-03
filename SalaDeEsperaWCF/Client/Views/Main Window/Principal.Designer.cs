@@ -304,13 +304,13 @@
             this.contextMenuStripTreeViewRede.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ligarToolStripMenuItem});
             this.contextMenuStripTreeViewRede.Name = "contextMenuStripTreeViewRede";
-            this.contextMenuStripTreeViewRede.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStripTreeViewRede.Size = new System.Drawing.Size(123, 26);
             this.contextMenuStripTreeViewRede.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripTreeViewRede_Opening);
             // 
             // ligarToolStripMenuItem
             // 
             this.ligarToolStripMenuItem.Name = "ligarToolStripMenuItem";
-            this.ligarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ligarToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.ligarToolStripMenuItem.Text = "Conectar";
             this.ligarToolStripMenuItem.Click += new System.EventHandler(this.ligarToolStripMenuItem_Click);
             // 
@@ -385,12 +385,12 @@
             // columnTitle
             // 
             this.columnTitle.Text = "";
-            this.columnTitle.Width = 120;
+            this.columnTitle.Width = 25;
             // 
             // columnValue
             // 
             this.columnValue.Text = "";
-            this.columnValue.Width = 120;
+            this.columnValue.Width = 221;
             // 
             // splitContainer1
             // 

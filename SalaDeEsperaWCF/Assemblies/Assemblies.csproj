@@ -54,9 +54,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DigitalTV">
-      <HintPath>Libraries\DigitalTV.dll</HintPath>
-    </Reference>
     <Reference Include="DirectShowLib-2005, Version=2.1.0.21786, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\DirectShowLib-2005.dll</HintPath>
@@ -78,9 +75,6 @@
     <Reference Include="Transitions, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\Transitions.dll</HintPath>
-    </Reference>
-    <Reference Include="TV2Lib">
-      <HintPath>..\..\Testes\TV2Lib\bin\Debug\TV2Lib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -240,7 +234,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Testes\TV2Lib\TV2Lib.csproj">
+      <Project>{6402e765-5743-471c-807c-864270421c08}</Project>
+      <Name>TV2Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

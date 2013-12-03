@@ -165,10 +165,10 @@ namespace TV2Lib
 
             public DsDevice AudioRenderer
             {
-                get { try { return owner.GraphicBuilder.AudioDecoderDevice; } catch (NullReferenceException) { return null; } }
+                get { try { return owner.GraphicBuilder.AudioRendererDevice; } catch (NullReferenceException) { return null; } }
                 set
                 {
-                    owner.GraphicBuilder.AudioDecoderDevice = value != null && GraphBuilderBDA.AudioRendererDevices.Keys.Contains(value.DevicePath) ? value : null;
+                    owner.GraphicBuilder.AudioRendererDevice = value != null && GraphBuilderBDA.AudioRendererDevices.Keys.Contains(value.DevicePath) ? value : null;
                     if (value != null)
                     {
                         if (owner.Channels.CurrentChannel != null) owner.Channels.CurrentChannel.AudioRendererDevice = value.DevicePath;
@@ -310,9 +310,10 @@ namespace TV2Lib
 
             public bool ForceRebuildOnChannelTune { get; set; }
 
-            public int MIN_FREQUENCY { get { return 470000; } }
-            public int MAX_FREQUENCY { get { return 855000; } }
-            public int DEFAULT_STEP { get { return 2000; } }
+            public static int MIN_FREQUENCY { get { return 470000; } }
+            public static int MAX_FREQUENCY { get { return 855000; } }
+            public static int DEFAULT_STEP { get { return 1000; } }
+            public static int DEFAULT_FREQUENCY { get { return 754000; } }
 
 
             public int Count { get { return this.ChannelList.Count; } }
@@ -578,7 +579,7 @@ namespace TV2Lib
 
             public int ScanFrequencies()
             {
-                return ScanFrequencies(this.MIN_FREQUENCY, this.MAX_FREQUENCY, DEFAULT_STEP);
+                return ScanFrequencies(ChannelStuff.MIN_FREQUENCY, ChannelStuff.MAX_FREQUENCY, ChannelStuff.DEFAULT_STEP);
             }
             public int ScanFrequencies(int minFreq, int maxFreq, int step)
             {

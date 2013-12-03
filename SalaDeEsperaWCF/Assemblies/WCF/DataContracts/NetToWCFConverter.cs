@@ -151,6 +151,10 @@ namespace Assemblies.DataContracts
                 {
                     Frequency = tvConfig.Frequency,
                     TunerDevicePath = tvConfig.TunerDevicePath,
+                    AudioDecoder = tvConfig.AudioDecoder,
+                    AudioRenderer = tvConfig.AudioRenderer,
+                    H264Decoder = tvConfig.H264Decoder,
+                    MPEG2Decoder = tvConfig.MPEG2Decoder,
                     FinalResolution = ToWCF(tvConfig.FinalResolution),
                     Location = ToWCF(tvConfig.Location),
                     Resolution = ToWCF(tvConfig.Resolution),
@@ -196,7 +200,12 @@ namespace Assemblies.DataContracts
                     FinalResolution = ToNET(tvConfig.FinalResolution),
                     Location = ToNET(tvConfig.Location),
                     Resolution = ToNET(tvConfig.Resolution),
-                    Size = ToNET(tvConfig.Size)
+                    Size = ToNET(tvConfig.Size),
+
+                    AudioDecoder = tvConfig.AudioDecoder,
+                    AudioRenderer = tvConfig.AudioRenderer,
+                    H264Decoder = tvConfig.H264Decoder,
+                    MPEG2Decoder = tvConfig.MPEG2Decoder
                 };
             }
             else return null;

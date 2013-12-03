@@ -454,6 +454,11 @@ namespace Client
                 foreach (var item in old)
                     listViewPlayerStatus.Items.Add(item as ListViewItem);
             }
+
+            foreach (ColumnHeader column in listViewPlayerStatus.Columns)
+            {
+                column.Width = -1;
+            }
         }
 
         private ListViewItem AddStatusLineHelper(string group, string title, List<string> values)
@@ -466,7 +471,7 @@ namespace Client
                 {
                     Group = listViewPlayerStatus.Groups.OfType<ListViewGroup>().Single(x => x.Header == group),
                     Text = title,
-                    ToolTipText = string.Format("{0}{1}", title, !string.IsNullOrWhiteSpace(values[0]) ? " - " + values[0] : ""),
+                    ToolTipText = string.Format("{0}{1}", title, !string.IsNullOrWhiteSpace(values[0]) ? " - " + values[0] : "")
 
                 };
 
@@ -899,11 +904,15 @@ namespace Client
 
         private void buttonFechar_Click(object sender, EventArgs e)
         {
+            if (Connection.State != Assemblies.ClientModel.ConnectionState.Open) Connection.Open();
+
             string display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary).DeviceID : selectedScreen.DeviceID;
 
 
             if (Connection != null && Connection.State == Assemblies.ClientModel.ConnectionState.Open) Connection.ClosePlayerWindow(display);
             UpdatePlayerStatus();
+
+            Connection.Close();
         }
 
         private void propriedadesBackgroundToolStripMenuItem_Click(object sender, EventArgs e)

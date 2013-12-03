@@ -57,10 +57,10 @@ namespace Assemblies.PlayerServiceContracts
         WCFScreenInformation GetPrimaryDisplay();
 
         /// <summary>
-        /// Enumera os canais disponíveis no player
+        /// Enumera os canais disponíveis no player, na frequência padrão (754000 khz).
         /// </summary>
         /// <returns></returns>
-        [OperationContract]
+        [OperationContract(Name="GetChannels")]
         WCFChannel[] GetChannels();
 
         #region 14 ago 2013 - Mudar de canal pelo Client, saber que canal está a mostrar, saber se o player está aberto
@@ -101,21 +101,21 @@ namespace Assemblies.PlayerServiceContracts
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        TunerDevice[] GetTunerDevices();
+        GeneralDevice[] GetTunerDevices();
 
         /// <summary>
         /// Retorna o tuner a ser utilizado
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        TunerDevice GetTunerDevice(string displayName);
+        GeneralDevice GetTunerDevice(string displayName);
 
         /// <summary>
         /// Selecciona o tuner a ser utilizado
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        void DefineTunerDevice(string displayName, TunerDevice tuner);
+        void DefineTunerDevice(string displayName, GeneralDevice tuner);
 
         #endregion
 
@@ -127,7 +127,152 @@ namespace Assemblies.PlayerServiceContracts
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        TunerDevice[] GetTunerDevicesInUse();
+        GeneralDevice[] GetTunerDevicesInUse();
+
+        #endregion
+
+        #region 29 nov 2013 - GetChannels com parâmetros
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na frequência padrão (754000 khz). Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        [OperationContract(Name = "GetChannelsForce")]
+        WCFChannel[] GetChannels(bool forceRescan);
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na <paramref name="frequency"/> dada.
+        /// </summary>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <returns></returns>
+        [OperationContract(Name = "GetChannelsFrequency")]
+        WCFChannel[] GetChannels(int frequency);
+        /// <summary>
+        /// Enumera os canais disponíveis no player, na <paramref name="frequency"/> dada. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        [OperationContract(Name = "GetChannelsFrequencyForce")]
+        WCFChannel[] GetChannels(int frequency, bool forceRescan);
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz.
+        /// </summary>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <returns></returns>
+        [OperationContract(Name = "GetChannelsScan")]
+        WCFChannel[] GetChannels(int minFrequency, int maxFrequency, int step);
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        [OperationContract(Name = "GetChannelsScanForce")]
+        WCFChannel[] GetChannels(int minFrequency, int maxFrequency, int step, bool forceRescan);
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na frequência padrão (754000 khz).
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        [OperationContract(Name = "GetChannelsDevice")]
+        WCFChannel[] GetChannels(string device);
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na frequência padrão (754000 khz). Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        [OperationContract(Name = "GetChannelsDeviceForce")]
+        WCFChannel[] GetChannels(string device, bool forceRescan);
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na <paramref name="frequency"/> dada.
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        [OperationContract(Name = "GetChanneslDeviceFrequency")]
+        WCFChannel[] GetChannels(string device, int frequency);
+        /// <summary>
+        /// Enumera os canais disponíveis no player com o DeviceID <paramref name="device"/>, na <paramref name="frequency"/> dada. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="frequency">Frequência, em khz, a ser utilizada para o scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        [OperationContract(Name = "GetChannelsDeviceFrequencyForce")]
+        WCFChannel[] GetChannels(string device, int frequency, bool forceRescan);
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, no player com o DeviceID <paramref name="device"/>, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz.
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        [OperationContract(Name = "GetChannelsDeviceScan")]
+        WCFChannel[] GetChannels(string device, int minFrequency, int maxFrequency, int step);
+        /// <summary>
+        /// Enumera os canais disponíveis entre duas frequências, no player com o DeviceID <paramref name="device"/>, fazendo o scan de <paramref name="step"/> em <paramref name="step"/> khz. Se <paramref name="forceRescan"/>, faz o scan em vez de utilizar o ficheiro XML (se disponível)
+        /// </summary>
+        /// <param name="device">Identificador do dispositivo.</param>
+        /// <param name="minFrequency">Frequência, em khz, onde começa o scan</param>
+        /// <param name="maxFrequency">Frequência, em khz, onde acaba o scan</param>
+        /// <param name="step">Incremento, em khz, de scan para scan</param>
+        /// <param name="forceRescan">Se true, o player faz o scan obrigatoriamente</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">Lançada se o <paramref name="device"/> não corresponder a nenhum dispositivo.</exception>
+        [OperationContract(Name = "GetChannelsDeviceScanForce")]
+        WCFChannel[] GetChannels(string device, int minFrequency, int maxFrequency, int step, bool forceRescan);
+
+        #endregion
+
+        #region 2 dez 2013 - Gets e sets dos codecs
+
+        [OperationContract]
+        GeneralDevice GetAudioDecoder(string displayName);
+
+        [OperationContract]
+        GeneralDevice[] GetAudioDecoders();
+
+        [OperationContract]
+        GeneralDevice GetAudioRenderer(string displayName);
+
+        [OperationContract]
+        GeneralDevice[] GetAudioRenderers();
+
+        [OperationContract]
+        GeneralDevice GetH264Decoder(string displayName);
+
+        [OperationContract]
+        GeneralDevice[] GetH264Decoders();
+
+        [OperationContract]
+        GeneralDevice GetMPEG2Decoder(string displayName);
+
+        [OperationContract]
+        GeneralDevice[] GetMPEG2Decoders();
+
+
+        [OperationContract]
+        void DefineAudioDecoder(string displayName, GeneralDevice dev);
+
+        [OperationContract]
+        void DefineAudioRenderer(string displayName, GeneralDevice dev);
+
+        [OperationContract]
+        void DefineH264Decoder(string displayName, GeneralDevice dev);
+
+        [OperationContract]
+        void DefineMPEG2Decoder(string displayName, GeneralDevice dev);
 
         #endregion
     }

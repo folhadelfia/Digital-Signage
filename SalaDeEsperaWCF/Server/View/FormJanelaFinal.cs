@@ -272,6 +272,185 @@ namespace Server.View
 
 
         #endregion
+
+        #region TV
+
+        private DigitalTVScreen CreateTVInstance(TVConfiguration config)
+        {
+            TV2Lib.Settings settings = new Settings()
+            {
+                Balance = 0,
+                SnapshotsFolder = "Snapshots",
+                StartVideoMode = VideoMode.Normal,
+                TimeShiftingActivated = false,
+                TimeShiftingBufferLengthMax = 180,
+                TimeShiftingBufferLengthMin = 180,
+                UseVideo169Mode = false,
+                UseWPF = false,
+                VideoBackgroundColor = System.Drawing.Color.Black,
+                VideoBackgroundColorString = "Black",
+                VideosFolder = "Recorder",
+                Volume = 0
+            };
+
+
+            var res = new DigitalTVScreen()
+            {
+                BorderStyle = BorderStyle.None,
+                CurrentGraphBuilder = null,
+                Location = config.FinalLocation,
+                MinimumSize = config.FinalSize,
+                Settings = settings,
+                Size = config.FinalSize,
+                TabIndex = 0,
+                UseBlackBands = true,
+                VideoAspectRatio = 1D,
+                VideoKeepAspectRatio = true,
+                VideoOffset = new PointF(0f, 0f),
+                VideoZoomMode = 0D
+            };
+
+            if (DigitalTVScreen.DeviceStuff.TunerDevices.ContainsKey(config.TunerDevicePath)) res.Devices.TunerDevice = DigitalTVScreen.DeviceStuff.TunerDevices[config.TunerDevicePath];
+            if (DigitalTVScreen.DeviceStuff.AudioDecoderDevices.ContainsKey(config.AudioDecoder)) res.Devices.AudioDecoder = DigitalTVScreen.DeviceStuff.AudioDecoderDevices[config.AudioDecoder];
+            if (DigitalTVScreen.DeviceStuff.AudioRendererDevices.ContainsKey(config.AudioRenderer)) res.Devices.AudioRenderer = DigitalTVScreen.DeviceStuff.AudioRendererDevices[config.AudioRenderer];
+            if (DigitalTVScreen.DeviceStuff.H264DecoderDevices.ContainsKey(config.H264Decoder)) res.Devices.H264Decoder = DigitalTVScreen.DeviceStuff.H264DecoderDevices[config.H264Decoder];
+            if (DigitalTVScreen.DeviceStuff.MPEG2DecoderDevices.ContainsKey(config.MPEG2Decoder)) res.Devices.MPEG2Decoder = DigitalTVScreen.DeviceStuff.MPEG2DecoderDevices[config.MPEG2Decoder];
+
+            return res;
+
+        }
+
+
+        #region Channels
+
+        public Channel  GetChannel()
+        {
+            DigitalTVScreen temp = null;
+
+            foreach (var control in this.Controls)
+                if (control is DigitalTVScreen)
+                {
+                    temp = control as DigitalTVScreen;
+                }
+            return temp.Channels.CurrentChannel;
+        }
+
+        public void     SetChannel(Channel ch)
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return;
+
+            temp.Channels.TuneChannel(ch);
+        }
+
+        #endregion
+
+        #region Tuner
+
+        public GeneralDevice    GetTunerDevice()
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return null;
+
+            return new GeneralDevice() { Name = temp.Devices.TunerDevice.Name, DevicePath = temp.Devices.TunerDevice.DevicePath };
+        }
+        public void             SetTunerDevice(GeneralDevice dev)
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return;
+
+            temp.Devices.TunerDevice = DigitalTVScreen.DeviceStuff.TunerDevices[dev.DevicePath];
+        }
+
+        #endregion
+
+        #region Codecs
+
+        public GeneralDevice GetAudioDecoder()
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return null;
+
+            return new GeneralDevice() { Name = temp.Devices.AudioDecoder.Name, DevicePath = temp.Devices.AudioDecoder.DevicePath };
+        }
+        public void SetAudioDecoder(GeneralDevice dev)
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return;
+
+            temp.Devices.AudioDecoder = DigitalTVScreen.DeviceStuff.AudioDecoderDevices[dev.DevicePath];
+        }
+
+        public GeneralDevice GetAudioRenderer()
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return null;
+
+            return new GeneralDevice() { Name = temp.Devices.AudioRenderer.Name, DevicePath = temp.Devices.AudioRenderer.DevicePath };
+        }
+        public void SetAudioRenderer(GeneralDevice dev)
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return;
+
+            temp.Devices.AudioRenderer = DigitalTVScreen.DeviceStuff.AudioRendererDevices[dev.DevicePath];
+        }
+
+        public GeneralDevice GetH264Decoder()
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return null;
+
+            return new GeneralDevice() { Name = temp.Devices.H264Decoder.Name, DevicePath = temp.Devices.H264Decoder.DevicePath };
+        }
+        public void SetH264Decoder(GeneralDevice dev)
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return;
+
+            temp.Devices.H264Decoder = DigitalTVScreen.DeviceStuff.H264DecoderDevices[dev.DevicePath];
+        }
+
+        public GeneralDevice GetMPEG2Decoder()
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return null;
+
+            return new GeneralDevice() { Name = temp.Devices.MPEG2Decoder.Name, DevicePath = temp.Devices.MPEG2Decoder.DevicePath };
+        }
+        public void SetMPEG2Decoder(GeneralDevice dev)
+        {
+            DigitalTVScreen temp = null;
+
+            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
+            else return;
+
+            temp.Devices.MPEG2Decoder = DigitalTVScreen.DeviceStuff.MPEG2DecoderDevices[dev.DevicePath];
+        }
+
+        #endregion
+
+        #endregion
         #endregion
 
 
@@ -446,87 +625,10 @@ namespace Server.View
             }
         }
 
-        private DigitalTVScreen CreateTVInstance(TVConfiguration config)
-        {
-            TV2Lib.Settings settings = new Settings()
-            {
-                Balance = 0,
-                SnapshotsFolder = "Snapshots",
-                StartVideoMode = VideoMode.Normal,
-                TimeShiftingActivated = false,
-                TimeShiftingBufferLengthMax = 180,
-                TimeShiftingBufferLengthMin = 180,
-                UseVideo169Mode = false,
-                UseWPF = false,
-                VideoBackgroundColor = System.Drawing.Color.Black,
-                VideoBackgroundColorString = "Black",
-                VideosFolder = "Recorder",
-                Volume = 0
-            };
 
 
-            var res = new DigitalTVScreen()
-            {
-                BorderStyle = BorderStyle.None,
-                CurrentGraphBuilder = null,
-                Location = config.FinalLocation,
-                MinimumSize = config.FinalSize,
-                Settings = settings,
-                Size = config.FinalSize,
-                TabIndex = 0,
-                UseBlackBands = true,
-                VideoAspectRatio = 1D,
-                VideoKeepAspectRatio = true,
-                VideoOffset = new PointF(0f,0f),
-                VideoZoomMode = 0D
-            };
-
-            if(DigitalTVScreen.DeviceStuff.TunerDevices.ContainsKey(config.TunerDevicePath)) res.Devices.TunerDevice = DigitalTVScreen.DeviceStuff.TunerDevices[config.TunerDevicePath];
-            return res;
-        
-        }
-
-        public Channel GetChannel()
-        {
-            DigitalTVScreen temp = null;
-
-            foreach (var control in this.Controls)
-                if (control is DigitalTVScreen)
-                {
-                    temp = control as DigitalTVScreen;
-                }
-            return temp.Channels.CurrentChannel;
-        }
-
-        public void SetChannel(Channel ch)
-        {
-            DigitalTVScreen temp = null;
-
-            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
-            else return;
-
-            temp.Channels.TuneChannel(ch);
-        }
-
-        public TunerDevice GetTunerDevice()
-        {
-            DigitalTVScreen temp = null;
-
-            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
-            else return null;
-
-            return new TunerDevice() { Name = temp.Devices.TunerDevice.Name, DevicePath = temp.Devices.TunerDevice.DevicePath };
-        }
-
-        public void SetTunerDevice(TunerDevice dev)
-        {
-            DigitalTVScreen temp = null;
-
-            if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
-            else return;
-
-            temp.Devices.TunerDevice = DigitalTVScreen.DeviceStuff.TunerDevices.Single(x=>x.Value.DevicePath == dev.DevicePath).Value;
-        }
+        //Implementar os returns de um dispositivo na janela, e de todos no listeningform.
+        //Implementar os sets dos dispositivos
 
         #endregion
 

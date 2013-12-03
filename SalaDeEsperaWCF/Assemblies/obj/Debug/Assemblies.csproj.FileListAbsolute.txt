@@ -25,7 +25,6 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Deb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Options\Images\MarkeeBackground.png
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Assemblies.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Assemblies.pdb
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\DigitalTV.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\DirectShowLib-2005.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\MediaFoundation.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TrackBar.dll
@@ -42,3 +41,5 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Deb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TV2Lib.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TV2Lib.xml

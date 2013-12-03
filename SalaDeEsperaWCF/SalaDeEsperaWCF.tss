@@ -2,30 +2,24 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\DigitalTVScreen\DigitalTVScreen.cs</string>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\DigitalTVScreen\DigitalTVScreen.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\PlayerServiceImplementation\PlayerService.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\PlayerServiceContracts\IPlayer.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\ClientProxies\PlayerProxy.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
+    </ArrayOfString>
+  </ArrayOfArrayOfString>
+  <ArrayOfArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Configurations\TVConfiguration.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Options\TVOptions.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\Connection.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\WCFConnection.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\FormJanelaFinal.cs</string>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\FormJanelaFinal.Designer.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Options\TVOptions.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\ChooseTuner\ChooseTVTuner.cs</string>
@@ -35,20 +29,41 @@
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\WCFPlayerPC.cs</string>
     </ArrayOfString>
     <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\WCFConnection.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\FormJanelaFinal.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\FormJanelaFinal.Designer.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\DataContracts\Components\TV\WCFTVConfiguration.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\DataContracts\NetToWCFConverter.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\PlayerPC.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GraphBuilders\DVBStuffs\EPG.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\PlayerServiceImplementation\PlayerService.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\Comando.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\ClientProxies\PlayerProxy.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GraphBuilders\GraphBuilderBDA.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\Connection.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Components\TVComposer.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
