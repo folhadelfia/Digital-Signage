@@ -311,7 +311,7 @@ namespace Server.View
             };
 
             if (DigitalTVScreen.DeviceStuff.TunerDevices.ContainsKey(config.TunerDevicePath)) res.Devices.TunerDevice = DigitalTVScreen.DeviceStuff.TunerDevices[config.TunerDevicePath];
-            if (DigitalTVScreen.DeviceStuff.AudioDecoderDevices.ContainsKey(config.AudioDecoder)) res.Devices.AudioDecoder = DigitalTVScreen.DeviceStuff.AudioDecoderDevices[config.AudioDecoder];
+            //if (DigitalTVScreen.DeviceStuff.AudioDecoderDevices.ContainsKey(config.AudioDecoder)) res.Devices.AudioDecoder = DigitalTVScreen.DeviceStuff.AudioDecoderDevices[config.AudioDecoder];
             if (DigitalTVScreen.DeviceStuff.AudioRendererDevices.ContainsKey(config.AudioRenderer)) res.Devices.AudioRenderer = DigitalTVScreen.DeviceStuff.AudioRendererDevices[config.AudioRenderer];
             if (DigitalTVScreen.DeviceStuff.H264DecoderDevices.ContainsKey(config.H264Decoder)) res.Devices.H264Decoder = DigitalTVScreen.DeviceStuff.H264DecoderDevices[config.H264Decoder];
             if (DigitalTVScreen.DeviceStuff.MPEG2DecoderDevices.ContainsKey(config.MPEG2Decoder)) res.Devices.MPEG2Decoder = DigitalTVScreen.DeviceStuff.MPEG2DecoderDevices[config.MPEG2Decoder];

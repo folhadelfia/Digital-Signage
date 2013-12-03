@@ -65,9 +65,7 @@
             this.comboBoxH264Decoder = new System.Windows.Forms.ComboBox();
             this.groupBoxAudio = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.comboBoxAudioRenderer = new System.Windows.Forms.ComboBox();
-            this.comboBoxAudioDecoder = new System.Windows.Forms.ComboBox();
             this.groupBoxScan.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageDVBT.SuspendLayout();
@@ -313,7 +311,6 @@
             this.buttonOk.TabIndex = 4;
             this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // buttonCancel
             // 
@@ -408,7 +405,7 @@
             this.groupBoxVideo.Controls.Add(this.comboBoxMPEG2Codec);
             this.groupBoxVideo.Controls.Add(this.label11);
             this.groupBoxVideo.Controls.Add(this.comboBoxH264Decoder);
-            this.groupBoxVideo.Location = new System.Drawing.Point(6, 95);
+            this.groupBoxVideo.Location = new System.Drawing.Point(6, 65);
             this.groupBoxVideo.Name = "groupBoxVideo";
             this.groupBoxVideo.Size = new System.Drawing.Size(307, 83);
             this.groupBoxVideo.TabIndex = 1;
@@ -445,26 +442,24 @@
             this.label11.TabIndex = 4;
             this.label11.Text = "Descodificador H264";
             // 
-            // comboBoxH264Codec
+            // comboBoxH264Decoder
             // 
             this.comboBoxH264Decoder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxH264Decoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxH264Decoder.FormattingEnabled = true;
             this.comboBoxH264Decoder.Location = new System.Drawing.Point(134, 20);
-            this.comboBoxH264Decoder.Name = "comboBoxH264Codec";
+            this.comboBoxH264Decoder.Name = "comboBoxH264Decoder";
             this.comboBoxH264Decoder.Size = new System.Drawing.Size(167, 21);
             this.comboBoxH264Decoder.TabIndex = 2;
             // 
             // groupBoxAudio
             // 
             this.groupBoxAudio.Controls.Add(this.label10);
-            this.groupBoxAudio.Controls.Add(this.label9);
             this.groupBoxAudio.Controls.Add(this.comboBoxAudioRenderer);
-            this.groupBoxAudio.Controls.Add(this.comboBoxAudioDecoder);
             this.groupBoxAudio.Location = new System.Drawing.Point(6, 6);
             this.groupBoxAudio.Name = "groupBoxAudio";
-            this.groupBoxAudio.Size = new System.Drawing.Size(307, 83);
+            this.groupBoxAudio.Size = new System.Drawing.Size(307, 53);
             this.groupBoxAudio.TabIndex = 0;
             this.groupBoxAudio.TabStop = false;
             this.groupBoxAudio.Text = "Audio";
@@ -472,21 +467,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(10, 50);
+            this.label10.Location = new System.Drawing.Point(10, 22);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
             this.label10.TabIndex = 3;
             this.label10.Text = "Reprodutor";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 23);
-            this.label9.Margin = new System.Windows.Forms.Padding(7, 7, 3, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(78, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Descodificador";
             // 
             // comboBoxAudioRenderer
             // 
@@ -494,21 +479,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxAudioRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAudioRenderer.FormattingEnabled = true;
-            this.comboBoxAudioRenderer.Location = new System.Drawing.Point(94, 47);
+            this.comboBoxAudioRenderer.Location = new System.Drawing.Point(94, 19);
             this.comboBoxAudioRenderer.Name = "comboBoxAudioRenderer";
             this.comboBoxAudioRenderer.Size = new System.Drawing.Size(207, 21);
             this.comboBoxAudioRenderer.TabIndex = 1;
-            // 
-            // comboBoxAudioCodec
-            // 
-            this.comboBoxAudioDecoder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxAudioDecoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAudioDecoder.FormattingEnabled = true;
-            this.comboBoxAudioDecoder.Location = new System.Drawing.Point(94, 20);
-            this.comboBoxAudioDecoder.Name = "comboBoxAudioCodec";
-            this.comboBoxAudioDecoder.Size = new System.Drawing.Size(207, 21);
-            this.comboBoxAudioDecoder.TabIndex = 0;
             // 
             // TVOptions
             // 
@@ -571,9 +545,7 @@
         private System.Windows.Forms.ComboBox comboBoxH264Decoder;
         private System.Windows.Forms.GroupBox groupBoxAudio;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBoxAudioRenderer;
-        private System.Windows.Forms.ComboBox comboBoxAudioDecoder;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.CheckBox checkBoxForceScan;

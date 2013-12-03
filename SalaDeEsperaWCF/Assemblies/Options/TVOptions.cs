@@ -381,14 +381,14 @@ namespace Assemblies.Options
 
             #region Codecs
 
-            comboBoxAudioDecoder.DisplayMember = "Name";
+            //comboBoxAudioDecoder.DisplayMember = "Name";
             comboBoxAudioRenderer.DisplayMember = "Name";
             comboBoxH264Decoder.DisplayMember = "Name";
             comboBoxMPEG2Codec.DisplayMember = "Name";
 
-            comboBoxAudioDecoder.Items.Clear();
-            foreach (var item in connection.GetAudioDecoders())
-                comboBoxAudioDecoder.Items.Add(item);
+            //comboBoxAudioDecoder.Items.Clear();
+            //foreach (var item in connection.GetAudioDecoders())
+            //    comboBoxAudioDecoder.Items.Add(item);
 
             comboBoxAudioRenderer.Items.Clear();
             foreach (var item in connection.GetAudioRenderers())
@@ -402,12 +402,12 @@ namespace Assemblies.Options
             foreach (var item in connection.GetMPEG2Decoders())
                 comboBoxMPEG2Codec.Items.Add(item);
 
-            comboBoxAudioDecoder.DropDown += comboBox_DropDown_AdjustWidth;
+            //comboBoxAudioDecoder.DropDown += comboBox_DropDown_AdjustWidth;
             comboBoxAudioRenderer.DropDown += comboBox_DropDown_AdjustWidth;
             comboBoxH264Decoder.DropDown += comboBox_DropDown_AdjustWidth;
             comboBoxMPEG2Codec.DropDown += comboBox_DropDown_AdjustWidth;
 
-            if (comboBoxAudioDecoder.Items.Count > 0) comboBoxAudioDecoder.SelectedIndex = 0;
+            //if (comboBoxAudioDecoder.Items.Count > 0) comboBoxAudioDecoder.SelectedIndex = 0;
             if (comboBoxAudioRenderer.Items.Count > 0) comboBoxAudioRenderer.SelectedIndex = 0;
             if (comboBoxH264Decoder.Items.Count > 0) comboBoxH264Decoder.SelectedIndex = 0;
             if (comboBoxMPEG2Codec.Items.Count > 0) comboBoxMPEG2Codec.SelectedIndex = 0;
@@ -459,7 +459,7 @@ namespace Assemblies.Options
             tempConfig.Frequency = this.frequency;
             tempConfig.TunerDevicePath = this.device;
 
-            tempConfig.AudioDecoder = (comboBoxAudioDecoder.SelectedItem as DataContracts.GeneralDevice).DevicePath;
+            //tempConfig.AudioDecoder = (comboBoxAudioDecoder.SelectedItem as DataContracts.GeneralDevice).DevicePath;
             tempConfig.AudioRenderer = (comboBoxAudioRenderer.SelectedItem as DataContracts.GeneralDevice).DevicePath;
             tempConfig.H264Decoder = (comboBoxH264Decoder.SelectedItem as DataContracts.GeneralDevice).DevicePath;
             tempConfig.MPEG2Decoder = (comboBoxMPEG2Codec.SelectedItem as DataContracts.GeneralDevice).DevicePath;
@@ -533,11 +533,6 @@ namespace Assemblies.Options
             {
                 textBoxFreq.Text = DigitalTVScreen.ChannelStuff.DEFAULT_FREQUENCY.ToString();
             }
-        }
-
-        private void buttonOk_Click(object sender, EventArgs e)
-        {
-
         }
     }
 
