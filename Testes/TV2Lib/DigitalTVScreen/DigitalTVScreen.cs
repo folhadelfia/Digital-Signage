@@ -1086,9 +1086,9 @@ namespace TV2Lib
             hashtableEcmPids.Keys.CopyTo(channelDVB.EcmPids, 0);
             if (channelDVB.EcmPids.Length > 0)
                 channelDVB.EcmPid = channelDVB.EcmPids[0];
-        }
 
-        //Criar método para fazer o scan às frequências
+            if (channelDVB.AudioPids.Count() > 0) channelDVB.AudioPid = channelDVB.AudioPids.Min();
+        }
 
         public bool GetSignalStatistics(out bool locked, out bool present, out int strength, out int quality)
         {
