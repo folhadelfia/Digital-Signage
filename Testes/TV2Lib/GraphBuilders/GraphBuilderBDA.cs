@@ -2294,29 +2294,29 @@ namespace TV2Lib
 			hr = this.mpeg2Demux.FindPin("H264", out pinOut);
 			if (pinOut != null)
 			{
-				try
-				{
-					if (this.videoH264DecoderFilter == null) //se não for dado um decoder, usa o intelliconnect
-					{
-						IPin pinInFromFilterOut = DsFindPin.ByDirection(this.videoRenderer, PinDirection.Input, 0);
-						if (pinInFromFilterOut != null)
-						{
-							try
-							{
-								hr = this.graphBuilder.Connect(pinOut, pinInFromFilterOut);
-							}
-							finally
-							{
-								Marshal.ReleaseComObject(pinInFromFilterOut);
-							}
-						}
-					}
-					else
-					{
-						IPin videoDecoderIn = null;
-						try
-						{
-							videoDecoderIn = DsFindPin.ByDirection(this.videoH264DecoderFilter, PinDirection.Input, 0);
+                try
+                {
+                    if (this.videoH264DecoderFilter == null) //se não for dado um decoder, usa o intelliconnect
+                    {
+                        IPin pinInFromFilterOut = DsFindPin.ByDirection(this.videoRenderer, PinDirection.Input, 0);
+                        if (pinInFromFilterOut != null)
+                        {
+                            try
+                            {
+                                hr = this.graphBuilder.Connect(pinOut, pinInFromFilterOut);
+                            }
+                            finally
+                            {
+                                Marshal.ReleaseComObject(pinInFromFilterOut);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        IPin videoDecoderIn = null;
+                        try
+                        {
+                            videoDecoderIn = DsFindPin.ByDirection(this.videoH264DecoderFilter, PinDirection.Input, 0);
 
                             //AMMediaType mediaH264 = new AMMediaType();
                             //mediaH264.majorType = MediaType.Video;
@@ -2344,27 +2344,42 @@ namespace TV2Lib
                             //Marshal.FreeHGlobal(mediaH264.formatPtr);
 
                             //if (hr != 0)
-    							FilterGraphTools.ConnectFilters(this.graphBuilder, pinOut, videoDecoderIn, false);
-						}
-						finally
-						{
-							if (videoDecoderIn != null) Marshal.ReleaseComObject(videoDecoderIn);
-						}
+                            FilterGraphTools.ConnectFilters(this.graphBuilder, pinOut, videoDecoderIn, false);
+                        }
+                        finally
+                        {
+                            if (videoDecoderIn != null) Marshal.ReleaseComObject(videoDecoderIn);
+                        }
 
-						IPin videoDecoderOut = null, videoVMRIn = null;
-						try
-						{
-							videoDecoderOut = DsFindPin.ByDirection(this.videoH264DecoderFilter, PinDirection.Output, 0);
-							videoVMRIn = DsFindPin.ByDirection(this.videoRenderer, PinDirection.Input, 0);
-							FilterGraphTools.ConnectFilters(this.graphBuilder, videoDecoderOut, videoVMRIn, false);
-						}
-						finally
-						{
-							if (videoDecoderOut != null) Marshal.ReleaseComObject(videoDecoderOut);
-							if (videoVMRIn != null) Marshal.ReleaseComObject(videoVMRIn);
-						}
-					}
-				}
+                        IPin videoDecoderOut = null, videoVMRIn = null;
+                        try
+                        {
+                            videoDecoderOut = DsFindPin.ByDirection(this.videoH264DecoderFilter, PinDirection.Output, 0);
+                            videoVMRIn = DsFindPin.ByDirection(this.videoRenderer, PinDirection.Input, 0);
+                            FilterGraphTools.ConnectFilters(this.graphBuilder, videoDecoderOut, videoVMRIn, false);
+                        }
+                        finally
+                        {
+                            if (videoDecoderOut != null) Marshal.ReleaseComObject(videoDecoderOut);
+                            if (videoVMRIn != null) Marshal.ReleaseComObject(videoVMRIn);
+                        }
+                    }
+                }
+                catch //Se falhar, tenta com o intelconnect
+                {
+                    IPin pinInFromFilterOut = DsFindPin.ByDirection(this.videoRenderer, PinDirection.Input, 0);
+                    if (pinInFromFilterOut != null)
+                    {
+                        try
+                        {
+                            hr = this.graphBuilder.Connect(pinOut, pinInFromFilterOut);
+                        }
+                        finally
+                        {
+                            Marshal.ReleaseComObject(pinInFromFilterOut);
+                        }
+                    }
+                }
 				finally
 				{
 					Marshal.ReleaseComObject(pinOut);

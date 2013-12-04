@@ -95,9 +95,9 @@
             this.groupBoxScan.Controls.Add(this.labelFreqKhz);
             this.groupBoxScan.Controls.Add(this.labelFreqDesc);
             this.groupBoxScan.Controls.Add(this.textBoxFreq);
-            this.groupBoxScan.Location = new System.Drawing.Point(10, 34);
+            this.groupBoxScan.Location = new System.Drawing.Point(10, 37);
             this.groupBoxScan.Name = "groupBoxScan";
-            this.groupBoxScan.Size = new System.Drawing.Size(257, 210);
+            this.groupBoxScan.Size = new System.Drawing.Size(275, 210);
             this.groupBoxScan.TabIndex = 0;
             this.groupBoxScan.TabStop = false;
             this.groupBoxScan.Text = "Procura";
@@ -106,7 +106,7 @@
             // buttonDefault
             // 
             this.buttonDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDefault.Location = new System.Drawing.Point(197, 181);
+            this.buttonDefault.Location = new System.Drawing.Point(215, 181);
             this.buttonDefault.Name = "buttonDefault";
             this.buttonDefault.Size = new System.Drawing.Size(54, 23);
             this.buttonDefault.TabIndex = 23;
@@ -119,7 +119,7 @@
             this.labelHelpForceScan.AutoSize = true;
             this.labelHelpForceScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelHelpForceScan.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.labelHelpForceScan.Location = new System.Drawing.Point(100, 186);
+            this.labelHelpForceScan.Location = new System.Drawing.Point(103, 186);
             this.labelHelpForceScan.Name = "labelHelpForceScan";
             this.labelHelpForceScan.Size = new System.Drawing.Size(13, 13);
             this.labelHelpForceScan.TabIndex = 22;
@@ -128,7 +128,7 @@
             // checkBoxForceScan
             // 
             this.checkBoxForceScan.AutoSize = true;
-            this.checkBoxForceScan.Location = new System.Drawing.Point(3, 185);
+            this.checkBoxForceScan.Location = new System.Drawing.Point(6, 185);
             this.checkBoxForceScan.Name = "checkBoxForceScan";
             this.checkBoxForceScan.Size = new System.Drawing.Size(104, 17);
             this.checkBoxForceScan.TabIndex = 21;
@@ -138,7 +138,7 @@
             // labelSensKhz
             // 
             this.labelSensKhz.AutoSize = true;
-            this.labelSensKhz.Location = new System.Drawing.Point(227, 98);
+            this.labelSensKhz.Location = new System.Drawing.Point(245, 98);
             this.labelSensKhz.Name = "labelSensKhz";
             this.labelSensKhz.Size = new System.Drawing.Size(24, 13);
             this.labelSensKhz.TabIndex = 20;
@@ -147,7 +147,7 @@
             // buttonScanFrequencies
             // 
             this.buttonScanFrequencies.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonScanFrequencies.Location = new System.Drawing.Point(116, 181);
+            this.buttonScanFrequencies.Location = new System.Drawing.Point(134, 181);
             this.buttonScanFrequencies.Name = "buttonScanFrequencies";
             this.buttonScanFrequencies.Size = new System.Drawing.Size(75, 23);
             this.buttonScanFrequencies.TabIndex = 6;
@@ -170,13 +170,13 @@
             this.textBoxSens.Location = new System.Drawing.Point(113, 95);
             this.textBoxSens.MaxLength = 6;
             this.textBoxSens.Name = "textBoxSens";
-            this.textBoxSens.Size = new System.Drawing.Size(108, 20);
+            this.textBoxSens.Size = new System.Drawing.Size(126, 20);
             this.textBoxSens.TabIndex = 18;
             // 
             // labelMaxFreqKhz
             // 
             this.labelMaxFreqKhz.AutoSize = true;
-            this.labelMaxFreqKhz.Location = new System.Drawing.Point(227, 72);
+            this.labelMaxFreqKhz.Location = new System.Drawing.Point(245, 72);
             this.labelMaxFreqKhz.Name = "labelMaxFreqKhz";
             this.labelMaxFreqKhz.Size = new System.Drawing.Size(24, 13);
             this.labelMaxFreqKhz.TabIndex = 17;
@@ -197,13 +197,13 @@
             this.textBoxMaxFreq.Location = new System.Drawing.Point(113, 69);
             this.textBoxMaxFreq.MaxLength = 6;
             this.textBoxMaxFreq.Name = "textBoxMaxFreq";
-            this.textBoxMaxFreq.Size = new System.Drawing.Size(108, 20);
+            this.textBoxMaxFreq.Size = new System.Drawing.Size(126, 20);
             this.textBoxMaxFreq.TabIndex = 15;
             // 
             // labelMinFreqKhz
             // 
             this.labelMinFreqKhz.AutoSize = true;
-            this.labelMinFreqKhz.Location = new System.Drawing.Point(227, 46);
+            this.labelMinFreqKhz.Location = new System.Drawing.Point(245, 46);
             this.labelMinFreqKhz.Name = "labelMinFreqKhz";
             this.labelMinFreqKhz.Size = new System.Drawing.Size(24, 13);
             this.labelMinFreqKhz.TabIndex = 14;
@@ -224,7 +224,7 @@
             this.textBoxMinFreq.Location = new System.Drawing.Point(113, 43);
             this.textBoxMinFreq.MaxLength = 6;
             this.textBoxMinFreq.Name = "textBoxMinFreq";
-            this.textBoxMinFreq.Size = new System.Drawing.Size(108, 20);
+            this.textBoxMinFreq.Size = new System.Drawing.Size(126, 20);
             this.textBoxMinFreq.TabIndex = 12;
             // 
             // radioButtonManual
@@ -255,7 +255,7 @@
             // 
             this.labelFreqKhz.AutoSize = true;
             this.labelFreqKhz.Enabled = false;
-            this.labelFreqKhz.Location = new System.Drawing.Point(227, 150);
+            this.labelFreqKhz.Location = new System.Drawing.Point(245, 150);
             this.labelFreqKhz.Name = "labelFreqKhz";
             this.labelFreqKhz.Size = new System.Drawing.Size(24, 13);
             this.labelFreqKhz.TabIndex = 9;
@@ -278,7 +278,7 @@
             this.textBoxFreq.Location = new System.Drawing.Point(113, 147);
             this.textBoxFreq.MaxLength = 6;
             this.textBoxFreq.Name = "textBoxFreq";
-            this.textBoxFreq.Size = new System.Drawing.Size(108, 20);
+            this.textBoxFreq.Size = new System.Drawing.Size(126, 20);
             this.textBoxFreq.TabIndex = 0;
             this.textBoxFreq.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -305,7 +305,7 @@
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOk.Location = new System.Drawing.Point(405, 297);
+            this.buttonOk.Location = new System.Drawing.Point(423, 297);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 4;
@@ -316,7 +316,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(486, 297);
+            this.buttonCancel.Location = new System.Drawing.Point(504, 297);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -333,7 +333,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(549, 279);
+            this.tabControl1.Size = new System.Drawing.Size(567, 279);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPageDVBT
@@ -345,7 +345,7 @@
             this.tabPageDVBT.Location = new System.Drawing.Point(4, 22);
             this.tabPageDVBT.Name = "tabPageDVBT";
             this.tabPageDVBT.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDVBT.Size = new System.Drawing.Size(541, 253);
+            this.tabPageDVBT.Size = new System.Drawing.Size(559, 253);
             this.tabPageDVBT.TabIndex = 0;
             this.tabPageDVBT.Text = "Rede TV";
             this.tabPageDVBT.UseVisualStyleBackColor = true;
@@ -353,7 +353,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.listViewChannels);
-            this.groupBox1.Location = new System.Drawing.Point(273, 34);
+            this.groupBox1.Location = new System.Drawing.Point(291, 37);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(262, 210);
             this.groupBox1.TabIndex = 9;
@@ -394,7 +394,7 @@
             this.tabPageCodecs.Location = new System.Drawing.Point(4, 22);
             this.tabPageCodecs.Name = "tabPageCodecs";
             this.tabPageCodecs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCodecs.Size = new System.Drawing.Size(541, 253);
+            this.tabPageCodecs.Size = new System.Drawing.Size(559, 253);
             this.tabPageCodecs.TabIndex = 1;
             this.tabPageCodecs.Text = "Codecs";
             this.tabPageCodecs.UseVisualStyleBackColor = true;
@@ -489,7 +489,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(570, 331);
+            this.ClientSize = new System.Drawing.Size(588, 331);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonCancel);
