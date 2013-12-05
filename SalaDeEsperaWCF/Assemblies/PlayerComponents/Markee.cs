@@ -101,6 +101,10 @@ namespace Assemblies.PlayerComponents
             (base.Configuration as MarkeeConfiguration).Text = new List<string>();
             (base.Configuration as MarkeeConfiguration).BackColor = this.BackColor;
 
+            ToolTip tt = new ToolTip();
+
+            tt.SetToolTip(this, this.ToString());
+
 
             if(targetSite != ComponentTargetSite.OptionsMenu)
                 base.optionsForm = new MarkeeOptions()
@@ -316,6 +320,11 @@ namespace Assemblies.PlayerComponents
                 MessageBox.Show("OpenOptionsWindow Rodapé" + Environment.NewLine + ex.Message);
 #endif
             }
+        }
+
+        public override string ToString()
+        {
+            return "Rodapé";
         }
     }
 }

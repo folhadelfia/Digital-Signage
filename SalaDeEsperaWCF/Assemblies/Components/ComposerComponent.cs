@@ -20,7 +20,7 @@ namespace Assemblies.Components
             InitializeComponent();
             TargetSite = ComponentTargetSite.Builder;
 
-            base.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            base.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         }
         protected ComposerComponent(ComponentTargetSite targetSite)
         {

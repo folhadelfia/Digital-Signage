@@ -30,6 +30,7 @@ using Assemblies.XMLSerialization.Components;
 using Assemblies.XMLSerialization;
 using System.IO;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace Client
 {
@@ -459,7 +460,46 @@ namespace Client
             {
                 column.Width = -1;
             }
+
+            SetGroupCollapse(listViewPlayerStatus, GroupState.COLLAPSIBLE);
         }
+
+        #region Fechar os grupos na listview
+        [DllImport("user32.dll")]
+        static extern int SendMessage(IntPtr window, int message, int wParam, IntPtr lParam);
+
+        private void SetGroupCollapse(ListView target, GroupState state)
+        {
+            if (target == null) return;
+            for (int i = 0; i <= target.Groups.Count; i++)
+            {
+
+                LVGROUP group = new LVGROUP();
+                group.cbSize = Marshal.SizeOf(group);
+                group.state = (int)state; // LVGS_COLLAPSIBLE 
+                group.mask = 4; // LVGF_STATE 
+                group.iGroupId = i;
+
+                IntPtr ip = IntPtr.Zero;
+                try
+                {
+                    ip = Marshal.AllocHGlobal(group.cbSize);
+                    Marshal.StructureToPtr(group, ip, true);
+                    SendMessage(target.Handle, 0x1000 + 147, i, ip); // #define LVM_SETGROUPINFO (LVM_FIRST + 147) 
+                }
+
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Trace.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+                }
+                finally
+                {
+                    if (null != ip) Marshal.FreeHGlobal(ip);
+                }
+            }
+
+        }
+        #endregion
 
         private ListViewItem AddStatusLineHelper(string group, string title, List<string> values)
         {
@@ -904,6 +944,7 @@ namespace Client
 
         private void buttonFechar_Click(object sender, EventArgs e)
         {
+            if (connection == null) return;
             if (Connection.State != Assemblies.ClientModel.ConnectionState.Open) Connection.Open();
 
             string display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary).DeviceID : selectedScreen.DeviceID;
@@ -970,6 +1011,8 @@ namespace Client
             if (connection != null && connection.State != Assemblies.ClientModel.ConnectionState.Open)
                 connection.Open();
 
+            if (connection == null || connection.State != Assemblies.ClientModel.ConnectionState.Open) return;
+
             ScreenInformation display = selectedScreen == null ? Connection.GetDisplayInformation().Single(x => x.Primary) : selectedScreen;
 
             if (!connection.PlayerWindowIsOpen(display.DeviceID))
@@ -982,27 +1025,54 @@ namespace Client
                 {
                     foreach (var composerComponent in panelBuilder.Controls.OfType<ComposerComponent>())
                     {
+                        if(composerComponent is TVComposer)
+                        {
+                            TVConfiguration tvConfig = (composerComponent as TVComposer).Configuration as TVConfiguration;
+
+                            var devices = connection.GetTunerDevices();
+                            //var aDecoders = connection.GetAudioDecoders();
+                            var aRenderers = connection.GetAudioRenderers();
+                            var hDecoders = connection.GetH264Decoders();
+                            var mDecoders = connection.GetMPEG2Decoders();
+
+                            if ((string.IsNullOrWhiteSpace(tvConfig.TunerDevicePath) && devices.Count() > 0) ||
+                                //(string.IsNullOrWhiteSpace(tvConfig.AudioDecoder) && aDecoders.Count() > 0) ||
+                                (string.IsNullOrWhiteSpace(tvConfig.AudioRenderer) && aRenderers.Count() > 0) ||
+                                (string.IsNullOrWhiteSpace(tvConfig.H264Decoder) && hDecoders.Count() > 0) ||
+                                (string.IsNullOrWhiteSpace(tvConfig.MPEG2Decoder) && mDecoders.Count() > 0))
+                            {
+                                DialogResult res = MessageBox.Show("Não configurou o componente de TV." + Environment.NewLine +
+                                                   "Deseja fazê-lo agora?" + Environment.NewLine + 
+                                                   Environment.NewLine + 
+                                                   "Sim - Abre a janela de opções" + Environment.NewLine + 
+                                                   "Não - Continua com a abertura do Player (não recomendado" + Environment.NewLine + 
+                                                   "Cancelar - Voltar para o Builder",
+                                                   "Atenção",
+                                                   MessageBoxButtons.YesNoCancel,
+                                                   MessageBoxIcon.Warning);
+                                if (res == System.Windows.Forms.DialogResult.Yes)
+                                {
+                                    composerComponent.OpenOptionsWindow();
+                                    return;
+                                }
+                                else if (res == System.Windows.Forms.DialogResult.No)
+                                {
+                                    continue;
+                                }
+                                else if (res == System.Windows.Forms.DialogResult.Cancel)
+                                {
+                                    return;
+                                }
+                            }
+                            else if (devices.Count() == 0 && MessageBox.Show(string.Format("Não existe nenhum sintonizador disponível. Não será possível apresentar televisão.{0}{0}Deseja continuar?", Environment.NewLine), "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
+                            {
+                                throw new ApplicationException("No tuner device selected", new ArgumentNullException());
+                            }
+                        }
+
                         configs.Add(composerComponent.Configuration);
                     }
 
-                    var devices = connection.GetTunerDevices();
-
-                    foreach (var tvConfig in configs.OfType<TVConfiguration>())
-                    {
-                        if (string.IsNullOrWhiteSpace(tvConfig.TunerDevicePath) && devices.Count() > 0)
-                        {
-                            ChooseTVTuner temp = new ChooseTVTuner(devices);
-
-                            if (temp.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                            {
-                                tvConfig.TunerDevicePath = temp.Tuner.DevicePath;
-                            }
-                        }
-                        else if (devices.Count() == 0 && MessageBox.Show(string.Format("Não existe nenhum sintonizador disponível. Não será possível apresentar televisão.{0}{0}Deseja continuar?", Environment.NewLine), "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
-                        {
-                            throw new ApplicationException("No tuner device selected", new ArgumentNullException());
-                        }
-                    }
 
                     info.Components = configs;
                     info.Display = display;
@@ -1049,4 +1119,32 @@ namespace Client
             e.Cancel = this.cancelTreeViewContextMenu || !(treeViewRede.SelectedNode.Tag is WCFScreenInformation);
         }
     }
+
+    #region Fechar os grupos na listview
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct LVGROUP
+    {
+        public int cbSize;
+        public int mask;
+        [MarshalAs(UnmanagedType.LPTStr)]
+        public string pszHeader;
+        public int cchHeader;
+        [MarshalAs(UnmanagedType.LPTStr)]
+        public string pszFooter;
+        public int cchFooter;
+        public int iGroupId;
+        public int stateMask;
+        public int state;
+        public int uAlign;
+    }
+
+    public enum GroupState
+    {
+        COLLAPSIBLE = 8,
+        COLLAPSED = 1,
+        EXPANDED = 0
+    } 
+
+    #endregion
 }

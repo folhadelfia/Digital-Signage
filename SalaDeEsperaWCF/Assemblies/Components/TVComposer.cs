@@ -25,6 +25,10 @@ namespace Assemblies.Components
             base.Configuration = config;
 
             base.optionsForm = new TVOptions();
+
+            ToolTip tt = new ToolTip();
+
+            tt.SetToolTip(this, this.ToString());
         }
 
         #region Configuração

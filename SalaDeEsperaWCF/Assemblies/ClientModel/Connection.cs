@@ -159,8 +159,8 @@ namespace Assemblies.ClientModel
 
         public abstract void SetAudioDecoder(string displayName, GeneralDevice dev);
         public abstract void SetAudioRenderer(string displayName, GeneralDevice dev);
-        public abstract void SetH264Codec(string displayName, GeneralDevice dev);
-        public abstract void SetMPEG2Codec(string displayName, GeneralDevice dev);
+        public abstract void SetH264Decoder(string displayName, GeneralDevice dev);
+        public abstract void SetMPEG2Decoder(string displayName, GeneralDevice dev);
 
         #endregion
 

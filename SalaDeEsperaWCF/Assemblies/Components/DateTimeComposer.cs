@@ -13,6 +13,10 @@ namespace Assemblies.Components
         public DateTimeComposer()
         {
             base.BackColor = Color.Red;
+
+            ToolTip tt = new ToolTip();
+
+            tt.SetToolTip(this, this.ToString());
         }
 
         #region Formatos, fusos horários, tamanhos e tipos de letra, entre outros

@@ -336,32 +336,54 @@ namespace TV2Lib
 
             //Ver como é que o programa muda os valores, e ver os que devem fazer com quem o graph seja reiniciado
 
+            public delegate void TuneChannelCallbackDelegate(DigitalTVScreen screen, Channel ch, bool result);
+
+            public void TuneChannelAsync(Channel channel, TuneChannelCallbackDelegate callback)
+            {
+                Thread t = new Thread(new ThreadStart((MethodInvoker)(() =>
+                {
+                    bool res = this.TuneChannel(channel);
+
+                    if (callback != null) callback(owner, channel, res);
+                })));
+
+                t.Start();
+            }
+
             public bool TuneChannel(Channel channel)
             {
-                bool needRebuild = false;
-                ChannelDVBT channelDVBT = channel as ChannelDVBT;
+                if (owner.InvokeRequired)
+                {
+                    owner.Invoke((MethodInvoker)(() => { owner.Channels.TuneChannel(channel); }));
+                    return owner.GraphicBuilder != null;
+                }
+                else
+                {
+                    bool needRebuild = false;
+                    ChannelDVBT channelDVBT = channel as ChannelDVBT;
 
-                if (channelDVBT == null) return false;
+                    if (channelDVBT == null) return false;
 
-                //needRebuild = (owner.GraphicBuilder.CurrentChannel as ChannelDVBT).AudioDecoderType != channelDVBT.AudioDecoderType ||
-                //              (owner.GraphicBuilder.CurrentChannel as ChannelDVBT).VideoDecoderType != channelDVBT.VideoDecoderType;
+                    //needRebuild = (owner.GraphicBuilder.CurrentChannel as ChannelDVBT).AudioDecoderType != channelDVBT.AudioDecoderType ||
+                    //              (owner.GraphicBuilder.CurrentChannel as ChannelDVBT).VideoDecoderType != channelDVBT.VideoDecoderType;
 
-                //Como a imagem fica com fps baixo, obriguei o graph a construir-se de novo sempre que há um tune novo
-                //needRebuild = true;
-                needRebuild = this.ForceRebuildOnChannelTune || 
-                              owner.GraphicBuilder == null ||
-                              owner.GraphicBuilder.Demultiplexer == null ||
-                              (owner.Devices.TunerDevice != null && owner.Devices.TunerDevice.DevicePath != CurrentChannel.TunerDevice) ||
-                              (owner.Devices.CaptureDevice != null && owner.Devices.CaptureDevice.DevicePath != CurrentChannel.CaptureDevice) ||
-                              (owner.Devices.AudioDecoder != null && owner.Devices.AudioDecoder.DevicePath != CurrentChannel.AudioDecoderDevice) ||
-                              (owner.Devices.AudioRenderer != null && owner.Devices.AudioRenderer.DevicePath != CurrentChannel.AudioRendererDevice) ||
-                              (owner.Devices.H264Decoder != null && owner.Devices.H264Decoder.DevicePath != CurrentChannel.H264DecoderDevice) ||
-                              (owner.Devices.MPEG2Decoder != null && owner.Devices.MPEG2Decoder.DevicePath != CurrentChannel.MPEG2DecoderDevice) ||
-                              channelDVBT.NeedToRebuildTheGraph(CurrentChannel);
+                    //Como a imagem fica com fps baixo, obriguei o graph a construir-se de novo sempre que há um tune novo
+                    //needRebuild = true;
+                    needRebuild = this.ForceRebuildOnChannelTune ||
+                                  owner.GraphicBuilder == null ||
+                                  owner.GraphicBuilder.Demultiplexer == null ||
+                                  (owner.Devices.TunerDevice != null && owner.Devices.TunerDevice.DevicePath != CurrentChannel.TunerDevice) ||
+                                  (owner.Devices.CaptureDevice != null && owner.Devices.CaptureDevice.DevicePath != CurrentChannel.CaptureDevice) ||
+                                  (owner.Devices.AudioDecoder != null && owner.Devices.AudioDecoder.DevicePath != CurrentChannel.AudioDecoderDevice) ||
+                                  (owner.Devices.AudioRenderer != null && owner.Devices.AudioRenderer.DevicePath != CurrentChannel.AudioRendererDevice) ||
+                                  (owner.Devices.H264Decoder != null && owner.Devices.H264Decoder.DevicePath != CurrentChannel.H264DecoderDevice) ||
+                                  (owner.Devices.MPEG2Decoder != null && owner.Devices.MPEG2Decoder.DevicePath != CurrentChannel.MPEG2DecoderDevice) ||
+                                  channelDVBT.NeedToRebuildTheGraph(CurrentChannel);
 
-                bool res = (owner.GraphicBuilder = this.TuneChannel(channel, needRebuild)) != null;
+                    bool res = (owner.GraphicBuilder = this.TuneChannel(channel, needRebuild)) != null;
 
-                return res;
+                    return res;
+                }
             }
             private GraphBuilderBDA TuneChannel(Channel channel, bool needRebuild)
             {

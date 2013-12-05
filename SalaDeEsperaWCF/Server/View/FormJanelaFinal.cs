@@ -220,7 +220,7 @@ namespace Server.View
             {
                 if (menuSource is DigitalTVScreen && (sender as ToolStripMenuItem).Tag is Channel)
                 {
-                    (menuSource as DigitalTVScreen).Channels.TuneChannel((sender as ToolStripMenuItem).Tag as Channel);
+                    (menuSource as DigitalTVScreen).Channels.TuneChannelAsync((sender as ToolStripMenuItem).Tag as Channel, TuneChannelCallback);
                 }
             }
             catch
@@ -342,14 +342,23 @@ namespace Server.View
             if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
             else return;
 
-            temp.Channels.TuneChannel(ch);
+            temp.Channels.TuneChannelAsync(ch, TuneChannelCallback);
+        }
+
+        private void TuneChannelCallback(DigitalTVScreen screen, Channel ch, bool result)
+        {
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { TuneChannelCallback(screen, ch, result); }));
+            else
+            {
+                
+            }
         }
 
         #endregion
 
         #region Tuner
 
-        public GeneralDevice    GetTunerDevice()
+        public GeneralDevice GetTunerDevice()
         {
             DigitalTVScreen temp = null;
 
@@ -358,7 +367,7 @@ namespace Server.View
 
             return new GeneralDevice() { Name = temp.Devices.TunerDevice.Name, DevicePath = temp.Devices.TunerDevice.DevicePath };
         }
-        public void             SetTunerDevice(GeneralDevice dev)
+        public void SetTunerDevice(GeneralDevice dev)
         {
             DigitalTVScreen temp = null;
 
@@ -597,7 +606,8 @@ namespace Server.View
 
                     foreach (var ch in tvScreen.Channels.ChannelList)
                     {
-                        (contextMSTV.Items["canalTVTSMItem"] as ToolStripMenuItem).DropDownItems.Add(ch.Name, null, (object sender, EventArgs e) => { tvScreen.Channels.TuneChannel(ch); });
+                        (contextMSTV.Items["canalTVTSMItem"] as ToolStripMenuItem).DropDownItems.Add(ch.Name, null, channelToolStripMenuItem_Click);
+                        (contextMSTV.Items["canalTVTSMItem"] as ToolStripMenuItem).DropDownItems[(contextMSTV.Items["canalTVTSMItem"] as ToolStripMenuItem).DropDownItems.Count - 1].Tag = ch;
                     }
 
                     if (DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Where(x => x.Name.Contains("ffdshow")).Count() == 1)

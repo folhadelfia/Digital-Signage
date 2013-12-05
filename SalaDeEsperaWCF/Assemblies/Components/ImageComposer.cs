@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Assemblies.Components
 {
@@ -11,6 +12,10 @@ namespace Assemblies.Components
         public ImageComposer()
         {
             base.BackColor = Color.Blue;
+
+            ToolTip tt = new ToolTip();
+
+            tt.SetToolTip(this, this.ToString());
         }
 
         #region Configuração

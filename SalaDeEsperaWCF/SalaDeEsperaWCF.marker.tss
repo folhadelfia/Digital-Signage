@@ -2,93 +2,6 @@
 <ArrayOfTabHighlightState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TabHighlightState>
     <extensions>
-      <string>Assemblies\ClientModel\Connection.cs</string>
-    </extensions>
-    <highlightIndex>1</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Assemblies\ClientModel\WCFConnection.cs</string>
-    </extensions>
-    <highlightIndex>1</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Assemblies\WCF\PlayerServiceContracts\IPlayer.cs</string>
-    </extensions>
-    <highlightIndex>1</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Assemblies\WCF\ClientProxies\PlayerProxy.cs</string>
-    </extensions>
-    <highlightIndex>1</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Assemblies\WCF\PlayerServiceImplementation\PlayerService.cs</string>
-    </extensions>
-    <highlightIndex>1</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Assemblies\WCF\DataContracts\NetToWCFConverter.cs</string>
-    </extensions>
-    <highlightIndex>1</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>*..\Testes\TV2Lib\TV2Lib.csproj*DigitalTVScreen\DigitalTVScreen.cs</string>
-    </extensions>
-    <highlightIndex>2</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>*..\Testes\TV2Lib\TV2Lib.csproj*GraphBuilders\GraphBuilderBDA.cs</string>
-    </extensions>
-    <highlightIndex>2</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Client\Views\Main Window\Principal.cs</string>
-      <string>Client\Views\Main Window\Principal.cs</string>
-    </extensions>
-    <highlightIndex>3</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Assemblies\Options\TVOptions.cs</string>
-      <string>Assemblies\Options\TVOptions.cs</string>
-    </extensions>
-    <highlightIndex>3</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Assemblies\Configurations\TVConfiguration.cs</string>
-    </extensions>
-    <highlightIndex>3</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Assemblies\WCF\DataContracts\Components\TV\WCFTVConfiguration.cs</string>
-    </extensions>
-    <highlightIndex>3</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>Client\Views\ChooseTuner\ChooseTVTuner.cs</string>
-      <string>Client\Views\ChooseTuner\ChooseTVTuner.cs</string>
-    </extensions>
-    <highlightIndex>3</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>RemoteControlWForms\Comando.cs</string>
-    </extensions>
-    <highlightIndex>4</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
       <string>Server\View\ListeningForm.cs</string>
       <string>Server\View\ListeningForm.cs</string>
     </extensions>
@@ -98,6 +11,7 @@
     <extensions>
       <string>Server\View\FormJanelaFinal.cs</string>
       <string>Server\View\FormJanelaFinal.Designer.cs</string>
+      <string>Server\View\FormJanelaFinal.cs</string>
     </extensions>
     <highlightIndex>5</highlightIndex>
   </TabHighlightState>

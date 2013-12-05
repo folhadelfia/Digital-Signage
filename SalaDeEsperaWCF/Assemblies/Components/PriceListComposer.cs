@@ -13,6 +13,10 @@ namespace Assemblies.Components
         public PriceListComposer()
         {
             base.BackColor = Color.DarkGray;
+
+            ToolTip tt = new ToolTip();
+
+            tt.SetToolTip(this, this.ToString());
         }
 
         public override string ToString()

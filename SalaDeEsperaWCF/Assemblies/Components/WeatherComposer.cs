@@ -13,6 +13,10 @@ namespace Assemblies.Components
         public WeatherComposer()
         {
             base.BackColor = Color.Violet;
+
+            ToolTip tt = new ToolTip();
+
+            tt.SetToolTip(this, this.ToString());
         }
 
         #region Configuração

@@ -13,6 +13,10 @@ namespace Assemblies.Components
         public SlideShowComposer()
         {
             base.BackColor = Color.White;
+
+            ToolTip tt = new ToolTip();
+
+            tt.SetToolTip(this, this.ToString());
         }
 
         #region Configuração

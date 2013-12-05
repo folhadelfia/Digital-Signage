@@ -60,10 +60,10 @@
             this.groupBoxBuilder = new System.Windows.Forms.GroupBox();
             this.groupBoxStatus = new System.Windows.Forms.GroupBox();
             this.listViewPlayerStatus = new System.Windows.Forms.ListView();
-            this.columnTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.listViewStatusColAtribute = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listViewStatusColValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.splitContainerGeral = new System.Windows.Forms.SplitContainer();
+            this.splitContainerRedeStatus = new System.Windows.Forms.SplitContainer();
             this.groupBoxComponents.SuspendLayout();
             this.contextMenuStripBackground.SuspendLayout();
             this.contextMenuStripComponents.SuspendLayout();
@@ -72,14 +72,14 @@
             this.groupBoxRede.SuspendLayout();
             this.groupBoxBuilder.SuspendLayout();
             this.groupBoxStatus.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerGeral)).BeginInit();
+            this.splitContainerGeral.Panel1.SuspendLayout();
+            this.splitContainerGeral.Panel2.SuspendLayout();
+            this.splitContainerGeral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerRedeStatus)).BeginInit();
+            this.splitContainerRedeStatus.Panel1.SuspendLayout();
+            this.splitContainerRedeStatus.Panel2.SuspendLayout();
+            this.splitContainerRedeStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // listViewComponents
@@ -87,7 +87,7 @@
             this.listViewComponents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewComponents.Location = new System.Drawing.Point(3, 18);
             this.listViewComponents.Name = "listViewComponents";
-            this.listViewComponents.Size = new System.Drawing.Size(219, 472);
+            this.listViewComponents.Size = new System.Drawing.Size(152, 471);
             this.listViewComponents.SmallImageList = this.imageListComponents;
             this.listViewComponents.TabIndex = 0;
             this.listViewComponents.UseCompatibleStateImageBehavior = false;
@@ -119,7 +119,7 @@
             this.groupBoxComponents.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxComponents.Location = new System.Drawing.Point(0, 0);
             this.groupBoxComponents.Name = "groupBoxComponents";
-            this.groupBoxComponents.Size = new System.Drawing.Size(225, 493);
+            this.groupBoxComponents.Size = new System.Drawing.Size(158, 492);
             this.groupBoxComponents.TabIndex = 1;
             this.groupBoxComponents.TabStop = false;
             this.groupBoxComponents.Text = "Componentes";
@@ -134,7 +134,7 @@
             this.panelBuilder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBuilder.Location = new System.Drawing.Point(3, 18);
             this.panelBuilder.Name = "panelBuilder";
-            this.panelBuilder.Size = new System.Drawing.Size(629, 475);
+            this.panelBuilder.Size = new System.Drawing.Size(629, 471);
             this.panelBuilder.TabIndex = 2;
             this.panelBuilder.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelConfigurador_DragDrop);
             this.panelBuilder.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelConfigurador_DragEnter);
@@ -264,7 +264,7 @@
             // buttonFechar
             // 
             this.buttonFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonFechar.Location = new System.Drawing.Point(87, 198);
+            this.buttonFechar.Location = new System.Drawing.Point(87, 197);
             this.buttonFechar.Name = "buttonFechar";
             this.buttonFechar.Size = new System.Drawing.Size(75, 23);
             this.buttonFechar.TabIndex = 8;
@@ -275,7 +275,7 @@
             // buttonPlayer
             // 
             this.buttonPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonPlayer.Location = new System.Drawing.Point(6, 198);
+            this.buttonPlayer.Location = new System.Drawing.Point(6, 197);
             this.buttonPlayer.Name = "buttonPlayer";
             this.buttonPlayer.Size = new System.Drawing.Size(75, 23);
             this.buttonPlayer.TabIndex = 7;
@@ -295,7 +295,7 @@
             this.treeViewRede.Name = "treeViewRede";
             this.treeViewRede.SelectedImageIndex = 0;
             this.treeViewRede.ShowNodeToolTips = true;
-            this.treeViewRede.Size = new System.Drawing.Size(250, 174);
+            this.treeViewRede.Size = new System.Drawing.Size(316, 174);
             this.treeViewRede.TabIndex = 8;
             this.treeViewRede.DoubleClick += new System.EventHandler(this.treeViewRede_DoubleClick);
             // 
@@ -324,7 +324,7 @@
             this.groupBoxRede.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxRede.Location = new System.Drawing.Point(0, 0);
             this.groupBoxRede.Name = "groupBoxRede";
-            this.groupBoxRede.Size = new System.Drawing.Size(256, 227);
+            this.groupBoxRede.Size = new System.Drawing.Size(322, 226);
             this.groupBoxRede.TabIndex = 9;
             this.groupBoxRede.TabStop = false;
             this.groupBoxRede.Text = "Rede";
@@ -332,7 +332,7 @@
             // buttonPause
             // 
             this.buttonPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPause.Location = new System.Drawing.Point(175, 198);
+            this.buttonPause.Location = new System.Drawing.Point(241, 197);
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(75, 23);
             this.buttonPause.TabIndex = 9;
@@ -347,7 +347,7 @@
             this.groupBoxBuilder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxBuilder.Location = new System.Drawing.Point(503, 27);
             this.groupBoxBuilder.Name = "groupBoxBuilder";
-            this.groupBoxBuilder.Size = new System.Drawing.Size(635, 496);
+            this.groupBoxBuilder.Size = new System.Drawing.Size(635, 492);
             this.groupBoxBuilder.TabIndex = 10;
             this.groupBoxBuilder.TabStop = false;
             this.groupBoxBuilder.Text = "Builder";
@@ -359,7 +359,7 @@
             this.groupBoxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxStatus.Location = new System.Drawing.Point(0, 0);
             this.groupBoxStatus.Name = "groupBoxStatus";
-            this.groupBoxStatus.Size = new System.Drawing.Size(256, 262);
+            this.groupBoxStatus.Size = new System.Drawing.Size(322, 261);
             this.groupBoxStatus.TabIndex = 11;
             this.groupBoxStatus.TabStop = false;
             this.groupBoxStatus.Text = "Status";
@@ -367,80 +367,83 @@
             // listViewPlayerStatus
             // 
             this.listViewPlayerStatus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnTitle,
-            this.columnValue});
+            this.listViewStatusColAtribute,
+            this.listViewStatusColValue});
             this.listViewPlayerStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewPlayerStatus.FullRowSelect = true;
-            this.listViewPlayerStatus.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewPlayerStatus.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewPlayerStatus.Location = new System.Drawing.Point(3, 18);
             this.listViewPlayerStatus.MultiSelect = false;
             this.listViewPlayerStatus.Name = "listViewPlayerStatus";
             this.listViewPlayerStatus.ShowItemToolTips = true;
-            this.listViewPlayerStatus.Size = new System.Drawing.Size(250, 241);
+            this.listViewPlayerStatus.Size = new System.Drawing.Size(316, 240);
             this.listViewPlayerStatus.TabIndex = 0;
             this.listViewPlayerStatus.UseCompatibleStateImageBehavior = false;
             this.listViewPlayerStatus.View = System.Windows.Forms.View.Details;
             this.listViewPlayerStatus.SelectedIndexChanged += new System.EventHandler(this.listViewPlayerStatus_SelectedIndexChanged);
             // 
-            // columnTitle
+            // listViewStatusColAtribute
             // 
-            this.columnTitle.Text = "";
-            this.columnTitle.Width = 25;
+            this.listViewStatusColAtribute.Text = "Atributo";
+            this.listViewStatusColAtribute.Width = 25;
             // 
-            // columnValue
+            // listViewStatusColValue
             // 
-            this.columnValue.Text = "";
-            this.columnValue.Width = 221;
+            this.listViewStatusColValue.Text = "Valor";
+            this.listViewStatusColValue.Width = 221;
             // 
-            // splitContainer1
+            // splitContainerGeral
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.splitContainerGeral.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.splitContainer1.Location = new System.Drawing.Point(12, 27);
-            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainerGeral.Location = new System.Drawing.Point(12, 27);
+            this.splitContainerGeral.Name = "splitContainerGeral";
             // 
-            // splitContainer1.Panel1
+            // splitContainerGeral.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            this.splitContainerGeral.Panel1.Controls.Add(this.splitContainerRedeStatus);
+            this.splitContainerGeral.Panel1MinSize = 247;
             // 
-            // splitContainer1.Panel2
+            // splitContainerGeral.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBoxComponents);
-            this.splitContainer1.Size = new System.Drawing.Size(485, 493);
-            this.splitContainer1.SplitterDistance = 256;
-            this.splitContainer1.TabIndex = 12;
+            this.splitContainerGeral.Panel2.Controls.Add(this.groupBoxComponents);
+            this.splitContainerGeral.Size = new System.Drawing.Size(485, 492);
+            this.splitContainerGeral.SplitterDistance = 322;
+            this.splitContainerGeral.SplitterWidth = 5;
+            this.splitContainerGeral.TabIndex = 12;
             // 
-            // splitContainer2
+            // splitContainerRedeStatus
             // 
-            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.splitContainerRedeStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerRedeStatus.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerRedeStatus.Name = "splitContainerRedeStatus";
+            this.splitContainerRedeStatus.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer2.Panel1
+            // splitContainerRedeStatus.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.groupBoxRede);
+            this.splitContainerRedeStatus.Panel1.Controls.Add(this.groupBoxRede);
             // 
-            // splitContainer2.Panel2
+            // splitContainerRedeStatus.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.groupBoxStatus);
-            this.splitContainer2.Size = new System.Drawing.Size(256, 493);
-            this.splitContainer2.SplitterDistance = 227;
-            this.splitContainer2.TabIndex = 0;
+            this.splitContainerRedeStatus.Panel2.Controls.Add(this.groupBoxStatus);
+            this.splitContainerRedeStatus.Size = new System.Drawing.Size(322, 492);
+            this.splitContainerRedeStatus.SplitterDistance = 226;
+            this.splitContainerRedeStatus.SplitterWidth = 5;
+            this.splitContainerRedeStatus.TabIndex = 0;
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1150, 535);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(1150, 534);
+            this.Controls.Add(this.splitContainerGeral);
             this.Controls.Add(this.groupBoxBuilder);
             this.Controls.Add(this.menuStripPrincipal);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStripPrincipal;
-            this.MinimumSize = new System.Drawing.Size(600, 480);
+            this.MinimumSize = new System.Drawing.Size(1166, 572);
             this.Name = "Principal";
             this.Text = "Builder";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Principal_FormClosing);
@@ -454,14 +457,14 @@
             this.groupBoxRede.ResumeLayout(false);
             this.groupBoxBuilder.ResumeLayout(false);
             this.groupBoxStatus.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
+            this.splitContainerGeral.Panel1.ResumeLayout(false);
+            this.splitContainerGeral.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerGeral)).EndInit();
+            this.splitContainerGeral.ResumeLayout(false);
+            this.splitContainerRedeStatus.Panel1.ResumeLayout(false);
+            this.splitContainerRedeStatus.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerRedeStatus)).EndInit();
+            this.splitContainerRedeStatus.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -489,8 +492,8 @@
         private System.Windows.Forms.ToolStripMenuItem propriedadesBackgroundToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBoxStatus;
         private System.Windows.Forms.ListView listViewPlayerStatus;
-        private System.Windows.Forms.ColumnHeader columnTitle;
-        private System.Windows.Forms.ColumnHeader columnValue;
+        private System.Windows.Forms.ColumnHeader listViewStatusColAtribute;
+        private System.Windows.Forms.ColumnHeader listViewStatusColValue;
         private System.Windows.Forms.ToolStripMenuItem ficheiroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem novoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
@@ -501,8 +504,8 @@
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripTreeViewRede;
         private System.Windows.Forms.ToolStripMenuItem ligarToolStripMenuItem;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.SplitContainer splitContainerGeral;
+        private System.Windows.Forms.SplitContainer splitContainerRedeStatus;
     }
 }
 

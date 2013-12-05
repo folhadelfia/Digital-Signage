@@ -494,11 +494,11 @@ namespace Assemblies.ClientModel
         {
             player.DefineAudioRenderer(displayName, dev);
         }
-        public override void SetH264Codec(string displayName, GeneralDevice dev)
+        public override void SetH264Decoder(string displayName, GeneralDevice dev)
         {
             player.DefineH264Decoder(displayName, dev);
         }
-        public override void SetMPEG2Codec(string displayName, GeneralDevice dev)
+        public override void SetMPEG2Decoder(string displayName, GeneralDevice dev)
         {
             player.DefineMPEG2Decoder(displayName, dev);
         }
