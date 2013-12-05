@@ -610,8 +610,8 @@ namespace Server.View
                         (contextMSTV.Items["canalTVTSMItem"] as ToolStripMenuItem).DropDownItems[(contextMSTV.Items["canalTVTSMItem"] as ToolStripMenuItem).DropDownItems.Count - 1].Tag = ch;
                     }
 
-                    if (DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Where(x => x.Name.Contains("ffdshow")).Count() == 1)
-                        tvScreen.Devices.H264Decoder = DigitalTVScreen.DeviceStuff.H264DecoderDevices[DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Single(x => x.Name.Contains("ffdshow")).DevicePath];
+                    //if (DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Where(x => x.Name.Contains("ffdshow")).Count() == 1)
+                    //    tvScreen.Devices.H264Decoder = DigitalTVScreen.DeviceStuff.H264DecoderDevices[DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Single(x => x.Name.Contains("ffdshow")).DevicePath];
 
                     if (tvScreen.Channels.ChannelList.Count > 0) tvScreen.Channels.TuneChannel(tvScreen.Channels.ChannelList[0]);
 
