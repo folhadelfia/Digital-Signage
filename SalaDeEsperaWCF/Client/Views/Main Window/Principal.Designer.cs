@@ -285,8 +285,10 @@
             // 
             // treeViewRede
             // 
+            this.treeViewRede.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.treeViewRede.ContextMenuStrip = this.contextMenuStripTreeViewRede;
-            this.treeViewRede.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeViewRede.FullRowSelect = true;
             this.treeViewRede.ImageIndex = 0;
             this.treeViewRede.ImageList = this.imageListComponents;
@@ -385,12 +387,12 @@
             // listViewStatusColAtribute
             // 
             this.listViewStatusColAtribute.Text = "Atributo";
-            this.listViewStatusColAtribute.Width = 25;
+            this.listViewStatusColAtribute.Width = 100;
             // 
             // listViewStatusColValue
             // 
             this.listViewStatusColValue.Text = "Valor";
-            this.listViewStatusColValue.Width = 221;
+            this.listViewStatusColValue.Width = 90;
             // 
             // splitContainerGeral
             // 

@@ -251,9 +251,9 @@ namespace Client
             catch (Exception ex)
             {
 #if DEBUG
-                MessageBox.Show(ex.Message);
-                return null;
+                MessageBox.Show(ex.Message
 #endif
+                return null;
             }
         }
         private ComposerComponent AddComponentToPanel(IComponentCreator creator)
@@ -281,8 +281,8 @@ namespace Client
             {
 #if DEBUG
                 MessageBox.Show(ex.Message);
-                return null;
 #endif
+                return null;
             }
         }
 
@@ -461,7 +461,7 @@ namespace Client
                 column.Width = -1;
             }
 
-            SetGroupCollapse(listViewPlayerStatus, GroupState.COLLAPSIBLE);
+            //SetGroupCollapse(listViewPlayerStatus, GroupState.COLLAPSIBLE);
         }
 
         #region Fechar os grupos na listview

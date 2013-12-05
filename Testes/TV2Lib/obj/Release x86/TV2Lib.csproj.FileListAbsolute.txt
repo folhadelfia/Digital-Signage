@@ -9,4 +9,3 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2L
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2Lib.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2Lib.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\bin\Release x86\TV2Lib.XML
-C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Release x86\TV2Lib.csprojResolveAssemblyReference.cache
