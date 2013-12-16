@@ -3,19 +3,13 @@
   <ArrayOfArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\FormPrincipal.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\DigitalTVScreen\DigitalTVScreen.cs</string>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\DigitalTVScreen\DigitalTVScreen.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GraphBuilders\GraphBuilderBDA.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV-2\FormPrincipal.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>TV2Lib</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\DigitalTVScreen\DigitalTVScreen.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GUI\VideoControl\VideoControl.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

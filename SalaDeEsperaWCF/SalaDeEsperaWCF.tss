@@ -5,6 +5,9 @@
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\DigitalTVScreen\DigitalTVScreen.cs</string>
     </ArrayOfString>
     <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GraphBuilders\GraphBuilderBDA.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Options\TVOptions.cs</string>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Options\TVOptions.cs</string>
     </ArrayOfString>
@@ -25,9 +28,6 @@
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\Connection.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GraphBuilders\GraphBuilderBDA.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\DataContracts\NetToWCFConverter.cs</string>
     </ArrayOfString>
     <ArrayOfString>
@@ -35,9 +35,6 @@
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\DataContracts\Components\TV\WCFTVConfiguration.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\Comando.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\PlayerServiceContracts\IPlayer.cs</string>
@@ -50,6 +47,16 @@
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\Program.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Toolkit\Networking.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\RegistarPosto\AskForPasswordForm.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\RegistarPosto\AskForPasswordForm.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

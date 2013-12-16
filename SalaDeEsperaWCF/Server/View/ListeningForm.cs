@@ -27,6 +27,7 @@ using Transitions;
 using System.Threading;
 using TV2Lib;
 using DirectShowLib;
+using Server.Linq;
 
 namespace Server.View
 {
@@ -75,7 +76,7 @@ namespace Server.View
 
             #endregion
 
-            textBoxLocalIP.Text = NetworkingToolkit.LocalIPAddress;
+            textBoxLocalIP.Text = MyToolkit.Networking.LocalIPAddress.ToString();
         }
 
         #region Eventos do serviço
@@ -279,7 +280,7 @@ namespace Server.View
                         string serverIP = textBoxServerIP.Text, serverPort = textBoxServerPort.Text, localPort = textBoxLocalPort.Text;
                         bool ready = true;
 
-                        if (!NetworkingToolkit.ValidateIPAddress(serverIP))
+                        if (!MyToolkit.Networking.ValidateIPAddress(serverIP))
                         {
                             ready = false;
                             Transition.run(textBoxServerIP, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
@@ -289,7 +290,7 @@ namespace Server.View
                             Transition.run(textBoxServerIP, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
                         }
 
-                        if (!NetworkingToolkit.ValidatePort(serverPort))
+                        if (!MyToolkit.Networking.ValidatePort(serverPort))
                         {
                             ready = false;
                             Transition.run(textBoxServerPort, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
@@ -299,7 +300,7 @@ namespace Server.View
                             Transition.run(textBoxServerPort, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
                         }
 
-                        if (!NetworkingToolkit.ValidatePort(localPort))
+                        if (!MyToolkit.Networking.ValidatePort(localPort))
                         {
                             ready = false;
                             Transition.run(textBoxLocalPort, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
@@ -363,16 +364,16 @@ namespace Server.View
         }
         private void buttonRandomize_Click(object sender, EventArgs e)
         {
-            textBoxLocalPort.Text = NetworkingToolkit.RandomPort().ToString();
+            textBoxLocalPort.Text = MyToolkit.Networking.RandomPort().ToString();
         }
 
         private void StartService(string serverIP, string serverPort, string localPort)
         {
-            if (!(NetworkingToolkit.ValidateIPAddress(serverIP) && NetworkingToolkit.ValidatePort(serverPort) && NetworkingToolkit.ValidatePort(localPort)))
+            if (!(MyToolkit.Networking.ValidateIPAddress(serverIP) && MyToolkit.Networking.ValidatePort(serverPort) && MyToolkit.Networking.ValidatePort(localPort)))
                 throw new ArgumentException() { Source = "ListeningForm.StartService(string serverIP, string serverPort, string localPort)" }; 
 
             ////endereço do player
-            Uri baseAddress = new Uri(String.Format("net.tcp://{0}:{1}/PlayerService/{2}", NetworkingToolkit.LocalIPAddress, localPort, Guid.NewGuid()));
+            Uri baseAddress = new Uri(String.Format("net.tcp://{0}:{1}/PlayerService/{2}", MyToolkit.Networking.LocalIPAddress, localPort, Guid.NewGuid()));
             ////endpoint para onde as mensagens de announcement serão enviadas
             Uri announcementEndpointAddress = new Uri(String.Format("net.tcp://{0}:{1}/Announcement", serverIP, serverPort));
 
@@ -510,6 +511,10 @@ namespace Server.View
         private void Log(Exception ex)
         {
             Log(string.Format("EXCEPTION: {1}{0}MESSAGE: {2}{0}INNER EXCEPTION: {3}{0}INNER EXCEPTION MESSAGE: {4}", Environment.NewLine, ex.GetType().ToString(), ex.Message, ex.InnerException == null ? "null" : ex.InnerException.GetType().ToString(), ex.InnerException == null ? "null" : ex.InnerException.Message));
+        }
+
+        private void ListeningForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }

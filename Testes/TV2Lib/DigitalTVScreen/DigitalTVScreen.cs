@@ -637,6 +637,21 @@ namespace TV2Lib
                 return this.ChannelList.Count;
             }
 
+            public void ScanFrequenciesAsync(ChannelListCallbackDelegate callback)
+            {
+                ScanFrequenciesAsync(ChannelStuff.MIN_FREQUENCY, ChannelStuff.MAX_FREQUENCY, ChannelStuff.DEFAULT_STEP, callback);
+            }
+            public void ScanFrequenciesAsync(int minFreq, int maxFreq, int step, ChannelListCallbackDelegate callback)
+            {
+                Thread t = new Thread(new ThreadStart((MethodInvoker)(() =>
+                    {
+                        ScanFrequencies(minFreq, maxFreq, step);
+                        if (callback != null) callback(this, this.ChannelList);
+                    })));
+
+                t.Start();
+            }
+
             public void SaveToXML()
             {
                 try
@@ -1298,4 +1313,6 @@ namespace TV2Lib
                 (chList as List<Channel>).Add(channel);
         }
     }
+
+    public delegate void ChannelListCallbackDelegate(object sender, IEnumerable<Channel> channels);
 }

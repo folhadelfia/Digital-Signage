@@ -117,12 +117,20 @@ namespace TV2Lib
 
 		private Hashtable subscribersByWindowsMessage = new Hashtable();
 
-		public int SubscribeEvents(IVideoEventHandler videoEventHandler, IMediaEventEx mediaEvent)
-		{
-			mediaEvent.SetNotifyWindow(Handle, currentWindowsMessage, IntPtr.Zero);
-			subscribersByWindowsMessage[currentWindowsMessage] = videoEventHandler;
-			return currentWindowsMessage++;
-		}
+        public int SubscribeEvents(IVideoEventHandler videoEventHandler, IMediaEventEx mediaEvent)
+        {
+            int res = 0;
+
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { res = SubscribeEvents(videoEventHandler, mediaEvent); }));
+            else
+            {
+                mediaEvent.SetNotifyWindow(Handle, currentWindowsMessage, IntPtr.Zero);
+                subscribersByWindowsMessage[currentWindowsMessage] = videoEventHandler;
+                res = currentWindowsMessage++;
+            }
+
+            return res;
+        }
 
 		private GraphBuilderBase currentGraphBuilder = null;
 		public GraphBuilderBase CurrentGraphBuilder { get { return currentGraphBuilder; } set { currentGraphBuilder = value; } }

@@ -1,7 +1,7 @@
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Release\Server.exe.config
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Release\Libraries\DirectShowLib-2005.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Release\Libraries\Transitions.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Release\Options\Images\MarkeeBackground.png
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Release\Server.exe.config
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Release\Server.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Release\Server.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Release\Assemblies.dll

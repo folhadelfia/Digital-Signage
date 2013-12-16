@@ -28,7 +28,7 @@ namespace ServiceDiscoveryProxy
                 port = Console.ReadLine();
                 switch (port.ToLower())
                 {
-                    case "r": port = NetworkingToolkit.RandomPort().ToString();
+                    case "r": port = MyToolkit.Networking.RandomPort().ToString();
                         validOption = true;
                         break;
                     case "": port = "8001";
@@ -46,7 +46,7 @@ namespace ServiceDiscoveryProxy
             }
             while (!validOption);
 
-            Uri probeEndpointAddress = new Uri("net.tcp://" + NetworkingToolkit.LocalIPAddress + ":" + port +"/Probe");
+            Uri probeEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.LocalIPAddress + ":" + port +"/Probe");
             #endregion
             #region Escolher a porta para os announcements
             do
@@ -56,7 +56,7 @@ namespace ServiceDiscoveryProxy
                 port = Console.ReadLine();
                 switch (port.ToLower())
                 {
-                    case "r": port = NetworkingToolkit.RandomPort().ToString();
+                    case "r": port = MyToolkit.Networking.RandomPort().ToString();
                         validOption = true;
                         break;
                     case "": port = "9021";
@@ -74,7 +74,7 @@ namespace ServiceDiscoveryProxy
             }
             while (!validOption);
 
-            Uri announcementEndpointAddress = new Uri("net.tcp://" + NetworkingToolkit.LocalIPAddress + ":" + port + "/Announcement");
+            Uri announcementEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.LocalIPAddress + ":" + port + "/Announcement");
             #endregion
 
             //Host the DiscoveryProxy service

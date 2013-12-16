@@ -52,7 +52,9 @@ namespace TV_2
 
         void digitalTVScreen1_NewLogMessage(string message)
         {
-            textBoxLog.AppendText(message);
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { digitalTVScreen1_NewLogMessage(message); }));
+            else
+                textBoxLog.AppendText(message);
         }
 
         private void FormPrincipal_Load(object sender, EventArgs e)
@@ -229,7 +231,7 @@ namespace TV_2
         {
             if (radioButtonAuto.Checked)
             {
-                digitalTVScreen.Channels.ScanFrequencies();
+                digitalTVScreen.Channels.ScanFrequenciesAsync(null);
             }
             else if (radioButtonCustom.Checked)
             {
@@ -241,7 +243,7 @@ namespace TV_2
                     int.TryParse(textBoxMax.Text, out max);
                     int.TryParse(textBoxStep.Text, out step);
 
-                    digitalTVScreen.Channels.ScanFrequencies(min, max, step);
+                    digitalTVScreen.Channels.ScanFrequenciesAsync(min, max, step, null);
                 }
                 catch
                 {
@@ -265,9 +267,9 @@ namespace TV_2
                    string.IsNullOrWhiteSpace(textBoxMax.Text) &&
                    string.IsNullOrWhiteSpace(textBoxStep.Text))
                 {
-                    textBoxMax.Text = digitalTVScreen.Channels.MAX_FREQUENCY.ToString();
-                    textBoxMin.Text = digitalTVScreen.Channels.MIN_FREQUENCY.ToString();
-                    textBoxStep.Text = digitalTVScreen.Channels.DEFAULT_STEP.ToString();
+                    textBoxMax.Text = DigitalTVScreen.ChannelStuff.MAX_FREQUENCY.ToString();
+                    textBoxMin.Text = DigitalTVScreen.ChannelStuff.MIN_FREQUENCY.ToString();
+                    textBoxStep.Text = DigitalTVScreen.ChannelStuff.DEFAULT_STEP.ToString();
                 }
             }
         }

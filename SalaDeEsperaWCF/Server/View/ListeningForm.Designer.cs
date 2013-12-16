@@ -230,6 +230,7 @@
             this.Text = "Ligação Player";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ListeningForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ListeningForm_FormClosed);
+            this.Load += new System.EventHandler(this.ListeningForm_Load);
             this.groupBoxServer.ResumeLayout(false);
             this.groupBoxServer.PerformLayout();
             this.groupBoxLocal.ResumeLayout(false);

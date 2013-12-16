@@ -67,7 +67,7 @@ namespace Client
             Thread t = new Thread(new ThreadStart(() =>
                 {
 
-                    if (!(NetworkingToolkit.ValidateIPAddress(ip) && NetworkingToolkit.ValidatePort(port)))
+                    if (!(MyToolkit.Networking.ValidateIPAddress(ip) && MyToolkit.Networking.ValidatePort(port)))
                     {
                         configurarToolStripMenuItem.PerformClick();
                     }

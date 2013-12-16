@@ -1,13 +1,7 @@
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\Client.exe.config
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.csprojResolveAssemblyReference.cache
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.Principal.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.Properties.Resources.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.ConfigureForm.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.ServiceList.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\Libraries\DirectShowLib-2005.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\Libraries\Transitions.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\Options\Images\MarkeeBackground.png
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\Client.exe.config
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\Client.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\Client.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\Assemblies.dll
@@ -22,5 +16,11 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\Server.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\TV2Lib.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Release\TV2Lib.xml
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.Principal.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.Properties.Resources.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.ConfigureForm.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.ServiceList.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Release\Client.pdb

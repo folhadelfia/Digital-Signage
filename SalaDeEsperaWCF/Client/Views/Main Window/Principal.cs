@@ -251,7 +251,7 @@ namespace Client
             catch (Exception ex)
             {
 #if DEBUG
-                MessageBox.Show(ex.Message
+                MessageBox.Show(ex.Message);
 #endif
                 return null;
             }
@@ -397,7 +397,7 @@ namespace Client
 
                 statusLines.Clear();
 
-                SetStatusLine("Geral", "Nome do dispositivo", NetworkingToolkit.resolveIP(connection.ServerIP));
+                SetStatusLine("Geral", "Nome do dispositivo", MyToolkit.Networking.resolveIP(connection.ServerIP));
                 SetStatusLine("Geral", "Endereço IP", connection.ServerIP);
                 SetStatusLine("Geral", "Monitores", connection.GetDisplayInformation().Length + "");
 

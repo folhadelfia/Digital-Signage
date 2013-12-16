@@ -248,7 +248,6 @@ namespace Assemblies.ClientModel
         }
 
         //A partir daqui é tudo feito a partir do Player
-        // TODO - Alterar os métodos para receberem o id do display em vez de chamar sempre o principal
 
         #region Janela do Player
         public override void OpenPlayerWindow(PlayerWindowInformation configurations)

@@ -52,7 +52,7 @@ namespace Client
         {
             bool allOk = false;
 
-            if (!NetworkingToolkit.ValidateIPAddress(textBoxIP.Text))
+            if (!MyToolkit.Networking.ValidateIPAddress(textBoxIP.Text))
             {
                 Transition.run(textBoxIP, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(500));
             }
@@ -62,7 +62,7 @@ namespace Client
                 Transition.run(textBoxIP, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(500));
             }
 
-            if (!NetworkingToolkit.ValidatePort(textBoxPort.Text))
+            if (!MyToolkit.Networking.ValidatePort(textBoxPort.Text))
             {
                 allOk = false;
                 Transition.run(textBoxPort, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(500));
