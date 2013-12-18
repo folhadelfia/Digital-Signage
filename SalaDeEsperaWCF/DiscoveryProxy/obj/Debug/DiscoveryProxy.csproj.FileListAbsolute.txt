@@ -37,4 +37,3 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\obj
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\obj\Debug\DiscoveryProxy.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\obj\Debug\DiscoveryProxy.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\TV2Lib.pdb
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug\TV2Lib.xml

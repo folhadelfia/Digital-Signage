@@ -42,5 +42,4 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Deb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TV2Lib.pdb
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TV2Lib.xml
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.RegistarPosto.AskForPasswordForm.resources

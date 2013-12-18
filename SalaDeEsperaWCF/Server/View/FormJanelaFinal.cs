@@ -220,7 +220,7 @@ namespace Server.View
             {
                 if (menuSource is DigitalTVScreen && (sender as ToolStripMenuItem).Tag is Channel)
                 {
-                    (menuSource as DigitalTVScreen).Channels.TuneChannelAsync((sender as ToolStripMenuItem).Tag as Channel, TuneChannelCallback);
+                    this.SetChannel((sender as ToolStripMenuItem).Tag as Channel);
                 }
             }
             catch
@@ -307,7 +307,7 @@ namespace Server.View
                 VideoAspectRatio = 1D,
                 VideoKeepAspectRatio = true,
                 VideoOffset = new PointF(0f, 0f),
-                VideoZoomMode = 0D
+                VideoZoomMode = VideoSizeMode.FromInside
             };
 
             if (DigitalTVScreen.DeviceStuff.TunerDevices.ContainsKey(config.TunerDevicePath)) res.Devices.TunerDevice = DigitalTVScreen.DeviceStuff.TunerDevices[config.TunerDevicePath];
@@ -342,7 +342,9 @@ namespace Server.View
             if (this.Controls.OfType<DigitalTVScreen>().Count() > 0) temp = this.Controls.OfType<DigitalTVScreen>().ToList()[0];
             else return;
 
-            temp.Channels.TuneChannelAsync(ch, TuneChannelCallback);
+            //temp.Channels.TuneChannelAsync(ch, TuneChannelCallback);
+
+            temp.Channels.TuneChannel(ch);
         }
 
         private void TuneChannelCallback(DigitalTVScreen screen, Channel ch, bool result)
@@ -497,8 +499,12 @@ namespace Server.View
 
                 this.DisplayName = information.Display.DeviceID;
 
+                this.SuspendLayout();
+
                 foreach (ItemConfiguration config in information.Components)
                     this.AddItemFromConfiguration(config);
+
+                this.ResumeLayout(true);
 
                 this.TopMost = false;
                 this.PreventSleep();
@@ -572,6 +578,12 @@ namespace Server.View
                     #endregion
 
                     DigitalTVScreen tvScreen = this.CreateTVInstance(temp);
+
+                    LogForm logWindow = new LogForm();
+
+                    tvScreen.NewLogMessage += (s) => { logWindow.Log(s); };
+
+                    logWindow.Show();
 
                     //DigitalTVScreen tvScreen = new DigitalTVScreen()
                     //{

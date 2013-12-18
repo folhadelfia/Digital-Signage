@@ -1017,7 +1017,6 @@ namespace TV2Lib
             //this.hostingControl.Move += new EventHandler(OnResizeMoveHandler); // for WM_MOVE
             SystemEvents.DisplaySettingsChanged += new EventHandler(OnDisplayChangedHandler); // for WM_DISPLAYCHANGE
         }
-
 		protected virtual void RemoveHandlers()
         {
             // Remove Windows Messages handlers
@@ -1028,7 +1027,6 @@ namespace TV2Lib
             this.hostingControl.UseBlackBands = false;
             SystemEvents.DisplaySettingsChanged -= new EventHandler(OnDisplayChangedHandler); // for WM_DISPLAYCHANGE
         }
-
 		protected virtual void Decompose()
         {
 			if (this.graphBuilder != null)
@@ -1140,6 +1138,7 @@ namespace TV2Lib
 		{
 			if (this.videoRenderer != null)
 			{
+                this.OnNewLogMessage("Refreshing video");
 				//Trace.WriteLineIf(trace.TraceInfo, "VideoRefresh()");
 
                 VideoResizer(this.videoZoomMode, this.videoKeepAspectRatio, this.videoOffset, this.videoZoom, this.videoAspectRatioFactor);
@@ -1170,17 +1169,27 @@ namespace TV2Lib
 			}
 		}
 
-		// Idea from Gabest (http://www.gabest.org) and modify by me
 		public virtual void VideoResizer(VideoSizeMode videoZoomMode, bool keepAspectRatio, PointF offset, double zoom, double aspectRatioFactor)
 		{
 			Trace.WriteLineIf(trace.TraceInfo, "VideoResizer(...)");
+            this.OnNewLogMessage("Resizing video");
+            this.OnNewLogMessage(string.Format("Video zoom mode: {0}", videoZoomMode.ToString()));
+            this.OnNewLogMessage(string.Format("Keep aspect ratio: {0}", keepAspectRatio.ToString()));
+            this.OnNewLogMessage(string.Format("Offset: ({0}, {1})", offset.X, offset.Y));
+            this.OnNewLogMessage(string.Format("Zoom: {0}", Math.Round(zoom, 0)));
+            this.OnNewLogMessage(string.Format("Aspect ratio factor: {0}", aspectRatioFactor));
+
 			int hr = 0;
 			
 			Rectangle windowRect = this.hostingControl.ClientRectangle;
+            this.OnNewLogMessage(string.Format("Control size: {0}px width x {1}px height", windowRect.Width, windowRect.Height));
+
 			currentVideoTargetRectangle = windowRect;
 			currentVideoSourceSize = new Size();
 
             FilterState filterState = GetGraphState();
+            this.OnNewLogMessage(string.Format("Graph is {0}", filterState.ToString()));
+
             if (filterState == FilterState.Paused || filterState == FilterState.Running)
             {
                 if (videoZoomMode != VideoSizeMode.StretchToWindow)
@@ -1203,6 +1212,12 @@ namespace TV2Lib
                     }
                     else
     					hr = (this.videoRenderer as IVMRWindowlessControl9).GetNativeVideoSize(out arX, out arY, out arX2, out arY2);
+
+                    this.OnNewLogMessage(string.Format("arX: {0}", arX));
+                    this.OnNewLogMessage(string.Format("arY: {0}", arY));
+                    this.OnNewLogMessage(string.Format("arX2: {0}", arX2));
+                    this.OnNewLogMessage(string.Format("arY2: {0}", arY2));
+
 					if (hr >= 0 && arY > 0)
 					{
 						//DsError.ThrowExceptionForHR(hr);
@@ -1264,6 +1279,7 @@ namespace TV2Lib
 		{
 			if (this.videoRenderer != null)
 			{
+
 				//Trace.WriteLineIf(trace.TraceInfo, "OnResizeMoveHandler()");
 
 				VideoResizer(this.videoZoomMode, this.videoKeepAspectRatio, this.videoOffset, this.videoZoom, this.videoAspectRatioFactor);
@@ -1291,7 +1307,7 @@ namespace TV2Lib
 		void OnPaintHandler(object sender, PaintEventArgs e)
 		{
 			if (this.videoRenderer != null)
-			{
+            {
 				Trace.WriteLineIf(trace.TraceInfo, "OnPaintHandler()");
 
 				try
@@ -1311,7 +1327,7 @@ namespace TV2Lib
                         PaintBlackBands(e.Graphics);
                     }
 				}
-				catch { }
+                catch { }
 			}
 		}
 

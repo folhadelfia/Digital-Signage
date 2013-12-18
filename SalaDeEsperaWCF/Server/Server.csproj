@@ -70,6 +70,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
     <Reference Include="Transitions, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assemblies\Libraries\Transitions.dll</HintPath>
@@ -106,6 +107,15 @@
     <Compile Include="View\ListeningForm.Designer.cs">
       <DependentUpon>ListeningForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\LogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LogForm.Designer.cs">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\LogForm.resx">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Linq\Clinicas.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Clinicas.designer.cs</LastGenOutput>

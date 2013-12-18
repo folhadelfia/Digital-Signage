@@ -359,6 +359,8 @@ namespace Assemblies.DataContracts
 
         public static WCFChannel ToWCF(Channel channel)
         {
+            if (channel == null) return null;
+
             ChannelDVBT ch = channel as ChannelDVBT;
 
             return new WCFChannel
@@ -410,6 +412,8 @@ namespace Assemblies.DataContracts
         }
         public static WCFChannel[] ToWCF(Channel[] channels)
         {
+            if (channels == null) return null;
+
             List<WCFChannel> res = new List<WCFChannel>();
 
             foreach (var ch in channels)
@@ -420,6 +424,8 @@ namespace Assemblies.DataContracts
 
         public static Channel ToNET(WCFChannel channel)
         {
+            if (channel == null) return null;
+
             return new ChannelDVBT
             {
                 AudioDecoderDevice = channel.AudioDecoderDevice,
@@ -469,6 +475,8 @@ namespace Assemblies.DataContracts
         }
         public static Channel[] ToNET(WCFChannel[] channels)
         {
+            if (channels == null) return null;
+
             List<Channel> res = new List<Channel>();
 
             foreach (var ch in channels)

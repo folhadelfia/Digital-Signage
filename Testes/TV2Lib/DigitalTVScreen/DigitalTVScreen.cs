@@ -345,6 +345,8 @@ namespace TV2Lib
                     bool res = this.TuneChannel(channel);
 
                     if (callback != null) callback(owner, channel, res);
+
+
                 })));
 
                 t.Start();
@@ -352,13 +354,15 @@ namespace TV2Lib
 
             public bool TuneChannel(Channel channel)
             {
-                if (owner.InvokeRequired)
+                //if (owner.InvokeRequired)
+                //{
+                //    owner.Invoke((MethodInvoker)(() => { owner.Channels.TuneChannel(channel); }));
+                //    return owner.GraphicBuilder != null;
+                //}
+                //else
                 {
-                    owner.Invoke((MethodInvoker)(() => { owner.Channels.TuneChannel(channel); }));
-                    return owner.GraphicBuilder != null;
-                }
-                else
-                {
+                    
+
                     bool needRebuild = false;
                     ChannelDVBT channelDVBT = channel as ChannelDVBT;
 
@@ -721,21 +725,21 @@ namespace TV2Lib
         public event BDAGraphEventHandler NewLogMessage;
         public event EventHandler Started, Stopped;
 
-        public void OnChannelListChanged()
+        private void OnChannelListChanged()
         {
             if (ChannelListChanged != null) ChannelListChanged(this, new ChannelEventArgs(this.Channels.ChannelList));
         }
-        public void OnNewLogMessage(string message)
+        private void OnNewLogMessage(string message)
         {
             string newMessage = string.Format("[{0}] {1}{2}", DateTime.Now.ToString("HH:mm:ss"), message, Environment.NewLine);
 
             if (NewLogMessage != null) NewLogMessage(newMessage);
         }
-        public void OnStarted(object sender, EventArgs e)
+        private void OnStarted(object sender, EventArgs e)
         {
             if (Started != null) Started(this, new EventArgs());
         }
-        public void OnStopped(object sender, EventArgs e)
+        private void OnStopped(object sender, EventArgs e)
         {
             if (Stopped != null) Stopped(this, new EventArgs());
         }
@@ -746,7 +750,7 @@ namespace TV2Lib
         }
         private void SetGraphBuilderEvents(GraphBuilderBDA builder)
         {
-            builder.NewLogMessage += OnNewLogMessage;
+            (builder as GraphBuilderBase).NewLogMessage += OnNewLogMessage;
         }
 
         #endregion

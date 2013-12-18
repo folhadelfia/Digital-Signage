@@ -17,6 +17,7 @@ namespace RemoteControlWForms
     {
         Connection connection;
         List<ChannelDVBT> channels = new List<ChannelDVBT>();
+        string displayName = "";
 
         #region Mover a janela sem barra de título
 
@@ -122,17 +123,24 @@ namespace RemoteControlWForms
         {
             Client.ServiceList serviceList = new Client.ServiceList();
 
-            if (serviceList.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (serviceList.ShowDialog() == System.Windows.Forms.DialogResult.OK && serviceList.PC != null && serviceList.Screen != null)
             {
                 connection = new WCFConnection(serviceList.PC);
 
                 connection.Open();
 
                 channels.Clear();
-                foreach (var ch in connection.GetTVChannels())
+
+                var chList = connection.GetTVChannels();
+
+                if(chList == null) return;
+
+                foreach (var ch in chList)
                 {
                     channels.Add(ch as ChannelDVBT);
                 }
+
+                displayName = serviceList.Screen;
             }
         }
 
@@ -143,8 +151,8 @@ namespace RemoteControlWForms
         {
             Thread t = new Thread(new ThreadStart(() =>
             {
-                //if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                //    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 1));
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                    connection.SetCurrentTVChannel(displayName, channels.Single(x => x.ChannelNumber == 1));
             }));
 
             t.Start();
@@ -154,8 +162,8 @@ namespace RemoteControlWForms
         {
             Thread t = new Thread(new ThreadStart(() =>
             {
-                //if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                //    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 2));
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                    connection.SetCurrentTVChannel(displayName, channels.Single(x => x.ChannelNumber == 2));
             }));
 
             t.Start();
@@ -165,8 +173,8 @@ namespace RemoteControlWForms
         {
             Thread t = new Thread(new ThreadStart(() =>
             {
-                //if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                //    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 3));
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                    connection.SetCurrentTVChannel(displayName, channels.Single(x => x.ChannelNumber == 3));
             }));
 
             t.Start();
@@ -176,8 +184,8 @@ namespace RemoteControlWForms
         {
             Thread t = new Thread(new ThreadStart(() =>
             {
-                //if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
-                //    connection.SetCurrentTVChannel(channels.Single(x => x.ChannelNumber == 4));
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open && channels.Count > 0)
+                    connection.SetCurrentTVChannel(displayName, channels.Single(x => x.ChannelNumber == 4));
             }));
 
             t.Start();

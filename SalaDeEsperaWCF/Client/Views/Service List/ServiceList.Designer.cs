@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServiceList));
             this.groupBoxPCS = new System.Windows.Forms.GroupBox();
-            this.listViewPCs = new System.Windows.Forms.ListView();
-            this.columnHeaderIP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderHostName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderDisplays = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonOk = new System.Windows.Forms.Button();
             this.menuStripServiceList = new System.Windows.Forms.MenuStrip();
             this.fICHEIROToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonSearchServices = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.treeViewRede = new System.Windows.Forms.TreeView();
+            this.imageListServiceList = new System.Windows.Forms.ImageList(this.components);
             this.groupBoxPCS.SuspendLayout();
             this.menuStripServiceList.SuspendLayout();
             this.SuspendLayout();
@@ -48,47 +48,13 @@
             this.groupBoxPCS.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxPCS.Controls.Add(this.listViewPCs);
+            this.groupBoxPCS.Controls.Add(this.treeViewRede);
             this.groupBoxPCS.Location = new System.Drawing.Point(12, 27);
             this.groupBoxPCS.Name = "groupBoxPCS";
             this.groupBoxPCS.Size = new System.Drawing.Size(339, 188);
             this.groupBoxPCS.TabIndex = 1;
             this.groupBoxPCS.TabStop = false;
             this.groupBoxPCS.Text = "Computadores disponíveis";
-            // 
-            // listViewPCs
-            // 
-            this.listViewPCs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderIP,
-            this.columnHeaderHostName,
-            this.columnHeaderDisplays});
-            this.listViewPCs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewPCs.FullRowSelect = true;
-            this.listViewPCs.Location = new System.Drawing.Point(3, 16);
-            this.listViewPCs.MultiSelect = false;
-            this.listViewPCs.Name = "listViewPCs";
-            this.listViewPCs.Size = new System.Drawing.Size(333, 169);
-            this.listViewPCs.TabIndex = 1;
-            this.listViewPCs.UseCompatibleStateImageBehavior = false;
-            this.listViewPCs.View = System.Windows.Forms.View.Details;
-            this.listViewPCs.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewPCs_ItemSelectionChanged);
-            this.listViewPCs.DoubleClick += new System.EventHandler(this.listViewPCs_DoubleClick);
-            this.listViewPCs.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.listViewPCs_PreviewKeyDown);
-            // 
-            // columnHeaderIP
-            // 
-            this.columnHeaderIP.Text = "IP";
-            this.columnHeaderIP.Width = 100;
-            // 
-            // columnHeaderHostName
-            // 
-            this.columnHeaderHostName.Text = "Nome do computador";
-            this.columnHeaderHostName.Width = 140;
-            // 
-            // columnHeaderDisplays
-            // 
-            this.columnHeaderDisplays.Text = "Monitores";
-            this.columnHeaderDisplays.Width = 80;
             // 
             // buttonOk
             // 
@@ -146,6 +112,25 @@
             this.buttonCancel.Text = "Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // treeViewRede
+            // 
+            this.treeViewRede.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewRede.ImageIndex = 0;
+            this.treeViewRede.ImageList = this.imageListServiceList;
+            this.treeViewRede.Location = new System.Drawing.Point(3, 16);
+            this.treeViewRede.Name = "treeViewRede";
+            this.treeViewRede.SelectedImageIndex = 0;
+            this.treeViewRede.Size = new System.Drawing.Size(333, 169);
+            this.treeViewRede.TabIndex = 0;
+            this.treeViewRede.DoubleClick += new System.EventHandler(this.treeViewRede_DoubleClick);
+            // 
+            // imageListServiceList
+            // 
+            this.imageListServiceList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListServiceList.ImageStream")));
+            this.imageListServiceList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListServiceList.Images.SetKeyName(0, "Monitor");
+            this.imageListServiceList.Images.SetKeyName(1, "Computer");
+            // 
             // ServiceList
             // 
             this.AcceptButton = this.buttonOk;
@@ -178,10 +163,8 @@
         private System.Windows.Forms.ToolStripMenuItem fICHEIROToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem configurarToolStripMenuItem;
         private System.Windows.Forms.Button buttonSearchServices;
-        private System.Windows.Forms.ListView listViewPCs;
-        private System.Windows.Forms.ColumnHeader columnHeaderIP;
-        private System.Windows.Forms.ColumnHeader columnHeaderHostName;
-        private System.Windows.Forms.ColumnHeader columnHeaderDisplays;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.TreeView treeViewRede;
+        private System.Windows.Forms.ImageList imageListServiceList;
     }
 }

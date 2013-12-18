@@ -229,6 +229,8 @@ namespace Assemblies.ClientModel
 
         public override void Dispose()
         {
+            if (player == null) return;
+
             try
             {
                 player.Close();

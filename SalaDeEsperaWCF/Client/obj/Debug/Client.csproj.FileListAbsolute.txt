@@ -41,7 +41,6 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\D
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\MediaFoundation.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\Assemblies.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\TV2Lib.pdb
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\TV2Lib.xml
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.Principal.resources
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.Properties.Resources.resources
