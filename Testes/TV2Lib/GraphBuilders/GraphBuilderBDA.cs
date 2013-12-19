@@ -173,7 +173,6 @@ namespace TV2Lib
 		public GraphBuilderBDA(VideoControl renderingControl)
 			: base(renderingControl)
 		{
-            
 		}
 
         private void AddROTEntry(IFilterGraph graph)
@@ -343,6 +342,7 @@ namespace TV2Lib
 
             return BuildGraph();
         }
+
 		public override int BuildGraph()
 		{
             int hr = 0;

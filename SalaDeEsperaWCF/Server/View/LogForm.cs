@@ -19,7 +19,7 @@ namespace Server.View
 
         public void Log(string l)
         {
-            logBox.AppendText(string.Format("[{0}]: {1}{2}", DateTime.Now.ToString("HH:mm:ss"), l, Environment.NewLine));
+            logBox.AppendText(l + Environment.NewLine);
         }
     }
 }

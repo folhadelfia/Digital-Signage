@@ -563,6 +563,8 @@ namespace TV2Lib
                         newGraph.TuningSpace = tuningSpace as ITuningSpace;
                         owner.SetGraphBuilderEvents();
 
+                        newGraph.useEVR = true;
+
                         newGraph.BuildGraph(tuner, (channel as ChannelDVBT).VideoDecoderType, (channel as ChannelDVBT).AudioDecoderType);
 
                         currentGraphTV = newGraph;

@@ -53,7 +53,7 @@ namespace TV2Lib
 
 		protected VideoControl hostingControl;
         //protected bool useWPF = true;
-        protected bool useEVR = false;
+        public bool useEVR = false;
 		//protected DirectDraw directDraw = new DirectDraw();
 
 		protected static Dictionary<string, DsDevice> audioRendererDevices;
@@ -432,15 +432,15 @@ namespace TV2Lib
                 //}
                 //else
                 {
-                    //try
-                    //{
-                    //    this.videoRenderer = (IBaseFilter)new EnhancedVideoRenderer();
-                    //    hr = graphBuilder.AddFilter(this.videoRenderer, "Enhanced Video Renderer");
-                    //    ThrowExceptionForHR("Adding the EVR: ", hr);
-                    //    useEVR = true;
-                    //}
-                    //catch (Exception) { }
-                    //if (!useEVR)
+                    try
+                    {
+                        this.videoRenderer = (IBaseFilter)new EnhancedVideoRenderer();
+                        hr = graphBuilder.AddFilter(this.videoRenderer, "Enhanced Video Renderer");
+                        ThrowExceptionForHR("Adding the EVR: ", hr);
+                        useEVR = true;
+                    }
+                    catch (Exception) { }
+                    if (!useEVR)
                     {
                         this.videoRenderer = (IBaseFilter)new VideoMixingRenderer9();
                         hr = graphBuilder.AddFilter(this.videoRenderer, "Video Mixing Renderer 9");
