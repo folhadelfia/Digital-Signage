@@ -1,0 +1,17 @@
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\Libraries\DirectShowLib-2005.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\Libraries\Transitions.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\Options\Images\MarkeeBackground.png
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\DiscoveryProxy.exe.config
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\DiscoveryProxy.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\DiscoveryProxy.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\Assemblies.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\TV2Lib.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\TrackBar.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\Transitions.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\DirectShowLib-2005.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\MediaFoundation.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\Assemblies.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\bin\Debug x64\TV2Lib.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\obj\Debug x64\DiscoveryProxy.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\obj\Debug x64\DiscoveryProxy.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\obj\Debug x64\DiscoveryProxy.pdb

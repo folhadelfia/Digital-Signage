@@ -318,7 +318,8 @@ namespace Server.View
                         }
                         if (serviceHost.State == CommunicationState.Opened || serviceHost.State == CommunicationState.Opening)
                         {
-                            this.Log(string.Format("Ligado ao servidor {1}:{2}{0}Endpoint: {3}", Environment.NewLine, serverIP, serverPort, serviceHost.Description.Endpoints[0].Address));
+                            this.Log(string.Format("Ligado ao servidor {0}:{1}", serverIP, serverPort));
+                            this.Log(string.Format("Endpoint: {0}", serviceHost.Description.Endpoints[0].Address));
                             (sender as Button).Text = "Desligar";
                         }
                         else

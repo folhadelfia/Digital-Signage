@@ -20,4 +20,3 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Debug\TV2Lib.csp
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Debug\TV2Lib.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Debug\TV2Lib.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\bin\Debug\TV2Lib.tlb
-C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Debug\TV2Lib.csprojResolveAssemblyReference.cache

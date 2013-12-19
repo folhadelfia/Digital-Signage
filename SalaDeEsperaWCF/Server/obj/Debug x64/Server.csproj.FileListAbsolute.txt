@@ -14,7 +14,6 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Debug x
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Debug x64\TrackBar.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Debug x64\Assemblies.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Debug x64\TV2Lib.pdb
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Debug x64\TV2Lib.xml
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Debug x64\VideoPlayer.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Debug x64\VideoPlayerDShowLib.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug x64\Server.csprojResolveAssemblyReference.cache
@@ -24,3 +23,4 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug x
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug x64\Server.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug x64\Server.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug x64\Server.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug x64\Server.View.LogForm.resources
