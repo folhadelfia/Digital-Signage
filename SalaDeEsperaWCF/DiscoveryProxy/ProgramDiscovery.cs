@@ -17,66 +17,98 @@ namespace ServiceDiscoveryProxy
 
         static void Main(string[] args)
         {
-            string port = "";
             bool validOption = false;
 
-            #region Escolher a porta para os probes
-            do
+            string probePort = "", 
+                   announcementPort = "";
+
+            try
             {
-                Console.WriteLine("Port for probe (where clients will connect to find servers) " + Environment.NewLine + 
-                    "[ENTER: 8001 | r: random | value: 1 - 65535]:");
-                port = Console.ReadLine();
-                switch (port.ToLower())
+                if (args.Contains("-auto"))
                 {
-                    case "r": port = MyToolkit.Networking.RandomPort().ToString();
-                        validOption = true;
-                        break;
-                    case "": port = "8001";
-                        validOption = true;
-                        break;
-                    default:
-                        int i;
-                        if (int.TryParse(port, out i))
-                            validOption = i < 65535;
-                        else validOption = false;
-                        break;
+                    probePort = "8001";
+                    announcementPort = "9021";
+                }
+                else if (args.Length == 4)
+                {
+                    int probePortValue,
+                        announcementPortValue;
+
+                    if (int.TryParse(args[args.ToList().IndexOf("-pp") + 1], out probePortValue))
+                        probePort = probePortValue.ToString();
+                    else throw new Exception();
+
+                    if (int.TryParse(args[args.ToList().IndexOf("-ap") + 1], out announcementPortValue))
+                        announcementPort = announcementPortValue.ToString();
+                    else throw new Exception();
                 }
 
-                Console.WriteLine((validOption ? "Listening for probes on port " : "Invalid option: ") + port + Environment.NewLine);
             }
-            while (!validOption);
-
-            Uri probeEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.LocalIPAddress + ":" + port +"/Probe");
-            #endregion
-            #region Escolher a porta para os announcements
-            do
+            catch (Exception)
             {
-                Console.WriteLine("Port for announcement (where servers will announce themselves) " + Environment.NewLine +
-                    "[ENTER: 9021 | r: random | value: 1 - 65535]:"); 
-                port = Console.ReadLine();
-                switch (port.ToLower())
-                {
-                    case "r": port = MyToolkit.Networking.RandomPort().ToString();
-                        validOption = true;
-                        break;
-                    case "": port = "9021";
-                        validOption = true;
-                        break;
-                    default:
-                        int i;
-                        if (int.TryParse(port, out i))
-                            validOption = i < 65535;
-                        else validOption = false;
-                        break;
-                }
-
-                Console.WriteLine(validOption ? "Listening for announcements on port " + port : "Invalid option");
+                probePort = "";
+                announcementPort = "";
             }
-            while (!validOption);
+            if (string.IsNullOrWhiteSpace(probePort) || string.IsNullOrWhiteSpace(announcementPort))
+            {
+                #region Escolher a porta para os probes
+                do
+                {
+                    Console.WriteLine("Port for probe (where clients will connect to find servers) " + Environment.NewLine +
+                        "[ENTER: 8001 | r: random | value: 1 - 65535]:");
+                    probePort = Console.ReadLine();
+                    switch (probePort.ToLower())
+                    {
+                        case "r": probePort = MyToolkit.Networking.RandomPort().ToString();
+                            validOption = true;
+                            break;
+                        case "": probePort = "8001";
+                            validOption = true;
+                            break;
+                        default:
+                            int i;
+                            if (int.TryParse(probePort, out i))
+                                validOption = i < 65535;
+                            else validOption = false;
+                            break;
+                    }
 
-            Uri announcementEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.LocalIPAddress + ":" + port + "/Announcement");
-            #endregion
+                    Console.WriteLine((validOption ? "Listening for probes on port " : "Invalid option: ") + probePort + Environment.NewLine);
+                }
+                while (!validOption);
+                #endregion
+                #region Escolher a porta para os announcements
+                do
+                {
+                    Console.WriteLine("Port for announcement (where servers will announce themselves) " + Environment.NewLine +
+                        "[ENTER: 9021 | r: random | value: 1 - 65535]:");
+                    announcementPort = Console.ReadLine();
+                    switch (announcementPort.ToLower())
+                    {
+                        case "r": announcementPort = MyToolkit.Networking.RandomPort().ToString();
+                            validOption = true;
+                            break;
+                        case "": announcementPort = "9021";
+                            validOption = true;
+                            break;
+                        default:
+                            int i;
+                            if (int.TryParse(announcementPort, out i))
+                                validOption = i < 65535;
+                            else validOption = false;
+                            break;
+                    }
 
+                    Console.WriteLine(validOption ? "Listening for announcements on port " + announcementPort : "Invalid option");
+                }
+                while (!validOption);
+
+
+                #endregion
+            }
+
+            Uri probeEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.LocalIPAddress + ":" + probePort + "/Probe"),
+                announcementEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.LocalIPAddress + ":" + announcementPort + "/Announcement");
             //Host the DiscoveryProxy service
             ServiceDiscoveryProxy proxyServiceInstance = new ServiceDiscoveryProxy();
             ServiceHost proxyServiceHost = new ServiceHost(proxyServiceInstance);
