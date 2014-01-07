@@ -101,6 +101,12 @@
     <Compile Include="View\FormJanelaFinal.Designer.cs">
       <DependentUpon>FormJanelaFinal.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FormJanelaLigacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormJanelaLigacao.Designer.cs">
+      <DependentUpon>FormJanelaLigacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ListeningForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     <Compile Include="View\LogForm.Designer.cs">
       <DependentUpon>LogForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\FormJanelaLigacao.resx">
+      <DependentUpon>FormJanelaLigacao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\LogForm.resx">
       <DependentUpon>LogForm.cs</DependentUpon>
     </EmbeddedResource>

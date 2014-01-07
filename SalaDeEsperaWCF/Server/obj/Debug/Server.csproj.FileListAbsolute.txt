@@ -52,3 +52,4 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug\S
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug\Server.View.ListeningForm.resources
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug\Server.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug\Server.View.LogForm.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug\Server.View.FormJanelaLigacao.resources

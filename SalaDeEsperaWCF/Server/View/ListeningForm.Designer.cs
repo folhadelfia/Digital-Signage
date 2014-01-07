@@ -44,10 +44,15 @@
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.labelEstado = new System.Windows.Forms.Label();
             this.groupBoxEstado = new System.Windows.Forms.GroupBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.definiçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ligaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxServer.SuspendLayout();
             this.groupBoxLocal.SuspendLayout();
             this.groupBoxLog.SuspendLayout();
             this.groupBoxEstado.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -84,7 +89,7 @@
             this.textBoxServerIP.Name = "textBoxServerIP";
             this.textBoxServerIP.Size = new System.Drawing.Size(119, 20);
             this.textBoxServerIP.TabIndex = 3;
-            this.textBoxServerIP.Text = "10.0.0.165";
+            this.textBoxServerIP.Text = "clicenter-pl.no-ip.org";
             // 
             // textBoxServerPort
             // 
@@ -101,7 +106,7 @@
             this.groupBoxServer.Controls.Add(this.textBoxServerPort);
             this.groupBoxServer.Controls.Add(this.Porta);
             this.groupBoxServer.Controls.Add(this.textBoxServerIP);
-            this.groupBoxServer.Location = new System.Drawing.Point(12, 113);
+            this.groupBoxServer.Location = new System.Drawing.Point(12, 128);
             this.groupBoxServer.Name = "groupBoxServer";
             this.groupBoxServer.Size = new System.Drawing.Size(172, 95);
             this.groupBoxServer.TabIndex = 5;
@@ -115,7 +120,7 @@
             this.groupBoxLocal.Controls.Add(this.textBoxLocalIP);
             this.groupBoxLocal.Controls.Add(this.textBoxLocalPort);
             this.groupBoxLocal.Controls.Add(this.label2);
-            this.groupBoxLocal.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxLocal.Location = new System.Drawing.Point(12, 27);
             this.groupBoxLocal.Name = "groupBoxLocal";
             this.groupBoxLocal.Size = new System.Drawing.Size(172, 95);
             this.groupBoxLocal.TabIndex = 6;
@@ -172,9 +177,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxLog.Controls.Add(this.textBoxLog);
-            this.groupBoxLog.Location = new System.Drawing.Point(190, 12);
+            this.groupBoxLog.Location = new System.Drawing.Point(190, 27);
             this.groupBoxLog.Name = "groupBoxLog";
-            this.groupBoxLog.Size = new System.Drawing.Size(517, 402);
+            this.groupBoxLog.Size = new System.Drawing.Size(517, 387);
             this.groupBoxLog.TabIndex = 7;
             this.groupBoxLog.TabStop = false;
             this.groupBoxLog.Text = "Log";
@@ -189,7 +194,7 @@
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
-            this.textBoxLog.Size = new System.Drawing.Size(505, 376);
+            this.textBoxLog.Size = new System.Drawing.Size(505, 361);
             this.textBoxLog.TabIndex = 0;
             // 
             // labelEstado
@@ -206,12 +211,44 @@
             // groupBoxEstado
             // 
             this.groupBoxEstado.Controls.Add(this.labelEstado);
-            this.groupBoxEstado.Location = new System.Drawing.Point(12, 214);
+            this.groupBoxEstado.Location = new System.Drawing.Point(12, 229);
             this.groupBoxEstado.Name = "groupBoxEstado";
             this.groupBoxEstado.Size = new System.Drawing.Size(172, 80);
             this.groupBoxEstado.TabIndex = 9;
             this.groupBoxEstado.TabStop = false;
             this.groupBoxEstado.Text = "Estado";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.definiçõesToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(719, 24);
+            this.menuStrip1.TabIndex = 10;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // definiçõesToolStripMenuItem
+            // 
+            this.definiçõesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ligaçãoToolStripMenuItem,
+            this.sairToolStripMenuItem});
+            this.definiçõesToolStripMenuItem.Name = "definiçõesToolStripMenuItem";
+            this.definiçõesToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.definiçõesToolStripMenuItem.Text = "Definições";
+            // 
+            // sairToolStripMenuItem
+            // 
+            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sairToolStripMenuItem.Text = "Sair";
+            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            // 
+            // ligaçãoToolStripMenuItem
+            // 
+            this.ligaçãoToolStripMenuItem.Name = "ligaçãoToolStripMenuItem";
+            this.ligaçãoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ligaçãoToolStripMenuItem.Text = "Ligação";
             // 
             // ListeningForm
             // 
@@ -223,14 +260,15 @@
             this.Controls.Add(this.groupBoxLog);
             this.Controls.Add(this.groupBoxLocal);
             this.Controls.Add(this.groupBoxServer);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "ListeningForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Ligação Player";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ListeningForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ListeningForm_FormClosed);
-            this.Load += new System.EventHandler(this.ListeningForm_Load);
             this.groupBoxServer.ResumeLayout(false);
             this.groupBoxServer.PerformLayout();
             this.groupBoxLocal.ResumeLayout(false);
@@ -239,7 +277,10 @@
             this.groupBoxLog.PerformLayout();
             this.groupBoxEstado.ResumeLayout(false);
             this.groupBoxEstado.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -261,5 +302,9 @@
         private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.Label labelEstado;
         private System.Windows.Forms.GroupBox groupBoxEstado;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem definiçõesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ligaçãoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
     }
 }

@@ -579,24 +579,11 @@ namespace Server.View
 
                     DigitalTVScreen tvScreen = this.CreateTVInstance(temp);
 
-                    LogForm logWindow = new LogForm();
+                    //LogForm logWindow = new LogForm();
 
-                    tvScreen.NewLogMessage += (s) => { logWindow.Log(s); };
+                    //tvScreen.NewLogMessage += (s) => { logWindow.Log(s); };
 
-                    logWindow.Show();
-
-                    //DigitalTVScreen tvScreen = new DigitalTVScreen()
-                    //{
-                    //    Location = temp.FinalLocation,
-                    //    Size = temp.FinalSize
-                    //};
-
-                    //tvScreen.Channels.Frequency = temp.Frequency;
-                    //tvScreen.Channels.ForceRebuildOnChannelTune = true;
-                    //tvScreen.VideoZoomMode = VideoSizeMode.FromInside;
-                    //tvScreen.VideoZoomValue = 0;
-                    //tvScreen.VideoKeepAspectRatio = true;
-                    //tvScreen.VideoAspectRatio = 1;
+                    //logWindow.Show();
 
                     DirectShowLib.DsDevice dev;
                     if(DigitalTVScreen.DeviceStuff.TunerDevices.TryGetValue(temp.TunerDevicePath, out dev))
@@ -622,12 +609,7 @@ namespace Server.View
                         (contextMSTV.Items["canalTVTSMItem"] as ToolStripMenuItem).DropDownItems[(contextMSTV.Items["canalTVTSMItem"] as ToolStripMenuItem).DropDownItems.Count - 1].Tag = ch;
                     }
 
-                    //if (DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Where(x => x.Name.Contains("ffdshow")).Count() == 1)
-                    //    tvScreen.Devices.H264Decoder = DigitalTVScreen.DeviceStuff.H264DecoderDevices[DigitalTVScreen.DeviceStuff.H264DecoderDevices.Values.Single(x => x.Name.Contains("ffdshow")).DevicePath];
-
                     if (tvScreen.Channels.ChannelList.Count > 0) tvScreen.Channels.TuneChannel(tvScreen.Channels.ChannelList[0]);
-
-                    //tvScreen.Start();
                 }
                 else if (config is VideoComposer)//MUDAR
                 {
@@ -646,11 +628,6 @@ namespace Server.View
 #endif
             }
         }
-
-
-
-        //Implementar os returns de um dispositivo na janela, e de todos no listeningform.
-        //Implementar os sets dos dispositivos
 
         #endregion
 

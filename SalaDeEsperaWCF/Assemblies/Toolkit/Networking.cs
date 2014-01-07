@@ -38,6 +38,30 @@ namespace Assemblies.Toolkit
                 else throw new ApplicationException("No physical address found", null);
             }
 
+            public static IPAddress PublicIPAddress
+            {
+                get { return GetPublicIPAddress(); }
+            }
+
+            private static IPAddress GetPublicIPAddress()
+            {
+                string url = "http://checkip.dyndns.org";
+                System.Net.WebRequest req = System.Net.WebRequest.Create(url);
+                System.Net.WebResponse resp = req.GetResponse();
+                System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                string response = sr.ReadToEnd().Trim();
+                string[] a = response.Split(':');
+                string a2 = a[1].Substring(1);
+                string[] a3 = a2.Split('<');
+                string a4 = a3[0];
+
+                string[] a5 = a4.Split('.');
+
+                byte[] ipByte = new byte[] { Convert.ToByte(a5[0], 10), Convert.ToByte(a5[1], 10), Convert.ToByte(a5[2], 10), Convert.ToByte(a5[3], 10) };
+
+                return new IPAddress(ipByte);
+            }
+
             public static PhysicalAddress HardwareAddress
             {
                 get { return GetPhysicalAddress(); }
@@ -77,14 +101,21 @@ namespace Assemblies.Toolkit
                 }
             }
 
+            public static bool ValidateAddress(string address)
+            {
+                var ips = Networking.resolveHostname(address);
+
+                if (ips.Length > 0) address = ips.Where(x => Networking.ValidateIPAddress(x.ToString())).FirstOrDefault().ToString();
+
+                return !string.IsNullOrEmpty(address) && Networking.ValidateIPAddress(address);
+            }
+
             public static bool ValidateIPAddress(string address)
             {
                 if (address == "localhost") return true;
                 if (string.IsNullOrWhiteSpace(address)) return false;
 
                 int number = 0;
-
-                int i = 0;
 
                 string[] arrayNumbers = address.Split('.');
 

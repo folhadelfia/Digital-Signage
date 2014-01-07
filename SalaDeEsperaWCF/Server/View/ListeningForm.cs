@@ -230,6 +230,11 @@ namespace Server.View
             if (!this.TryCloseService()) this.ForceCloseService();
         }
 
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         /// <summary>
         /// Tries to close the service smoothly
         /// </summary>
@@ -280,7 +285,14 @@ namespace Server.View
                         string serverIP = textBoxServerIP.Text, serverPort = textBoxServerPort.Text, localPort = textBoxLocalPort.Text;
                         bool ready = true;
 
-                        if (!MyToolkit.Networking.ValidateIPAddress(serverIP))
+                        //var ips = MyToolkit.Networking.resolveHostname(serverIP);
+
+                        //if (ips != null && ips.Length > 0)
+                        //{
+                        //    serverIP = ips[0].ToString();
+                        //}
+
+                        if (!MyToolkit.Networking.ValidateAddress(serverIP))
                         {
                             ready = false;
                             Transition.run(textBoxServerIP, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
@@ -370,8 +382,8 @@ namespace Server.View
 
         private void StartService(string serverIP, string serverPort, string localPort)
         {
-            if (!(MyToolkit.Networking.ValidateIPAddress(serverIP) && MyToolkit.Networking.ValidatePort(serverPort) && MyToolkit.Networking.ValidatePort(localPort)))
-                throw new ArgumentException() { Source = "ListeningForm.StartService(string serverIP, string serverPort, string localPort)" }; 
+            //if (!(MyToolkit.Networking.ValidateIPAddress(serverIP) && MyToolkit.Networking.ValidatePort(serverPort) && MyToolkit.Networking.ValidatePort(localPort)))
+            //    throw new ArgumentException() { Source = "ListeningForm.StartService(string serverIP, string serverPort, string localPort)" }; 
 
             ////endereço do player
             Uri baseAddress = new Uri(String.Format("net.tcp://{0}:{1}/PlayerService/{2}", MyToolkit.Networking.LocalIPAddress, localPort, Guid.NewGuid()));
@@ -436,9 +448,9 @@ namespace Server.View
             {
                 Log(e);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Log(ex);
+                Log(e);
             }
         }
 
@@ -512,10 +524,6 @@ namespace Server.View
         private void Log(Exception ex)
         {
             Log(string.Format("EXCEPTION: {1}{0}MESSAGE: {2}{0}INNER EXCEPTION: {3}{0}INNER EXCEPTION MESSAGE: {4}", Environment.NewLine, ex.GetType().ToString(), ex.Message, ex.InnerException == null ? "null" : ex.InnerException.GetType().ToString(), ex.InnerException == null ? "null" : ex.InnerException.Message));
-        }
-
-        private void ListeningForm_Load(object sender, EventArgs e)
-        {
         }
     }
 }

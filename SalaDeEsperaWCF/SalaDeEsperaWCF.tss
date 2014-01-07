@@ -8,18 +8,11 @@
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GraphBuilders\GraphBuilderBDA.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Options\TVOptions.cs</string>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Options\TVOptions.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\ClientProxies\PlayerProxy.cs</string>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GraphBuilders\GraphBuilderBase.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\Views\Main Window\Principal.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\PlayerServiceImplementation\PlayerService.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\ClientModel\WCFConnection.cs</string>
@@ -37,9 +30,6 @@
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\DataContracts\Components\TV\WCFTVConfiguration.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\PlayerServiceContracts\IPlayer.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\FormJanelaFinal.cs</string>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\FormJanelaFinal.cs</string>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\FormJanelaFinal.Designer.cs</string>
@@ -49,29 +39,22 @@
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\ListeningForm.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\Program.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Toolkit\Networking.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\RegistarPosto\AskForPasswordForm.cs</string>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\RegistarPosto\AskForPasswordForm.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GraphBuilders\Helpers\Common.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GraphBuilders\GraphBuilderBase.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\View\LogForm.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\DigitalTVScreen\Utils.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\GUI\VideoControl\VideoControl.Designer.cs</string>
+      <string>c:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\WCF\ClientProxies\PlayerProxy.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\Options\TVOptions.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\DiscoveryProxy\ProgramDiscovery.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>DiscoveryProxy</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

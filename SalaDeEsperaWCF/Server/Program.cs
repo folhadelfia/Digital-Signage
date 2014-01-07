@@ -9,11 +9,79 @@ using System.Management;
 using System.Net.NetworkInformation;
 using Assemblies.Toolkit;
 using Assemblies.RegistarPosto;
+using System.Data.SqlClient;
+using System.Xml;
+using System.IO;
 
 namespace Server
 {
     static class Program
     {
+        public static SqlConnection LigacaoClinicas
+        {
+            get
+            {
+                string NomeServidor = "";
+                string ficheiro = Application.StartupPath + "\\DadosBDClinicas.xml";
+
+                try
+                {
+                    XmlTextReader lerXml = new XmlTextReader(ficheiro);
+                    while (lerXml.Read())
+                    {
+                        if (lerXml.IsStartElement("NomeServidor"))
+                            NomeServidor = lerXml.ReadElementString("NomeServidor");
+                    }
+
+                    lerXml.Close();
+                }
+                catch (IOException IOex)
+                {
+                    MessageBox.Show(IOex.Message, "Erro na Leitura", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro na Leitura", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+
+                return new SqlConnection("Server=" + NomeServidor + "; Database=GestProgram; User ID=Cliente; Password=cliente; Trusted_Connection=False;");
+            }
+        }
+
+        public static SqlConnection LigacaoRegistarPosto
+        {
+            get
+            {
+                string NomeServidor = "";
+                string ficheiro = Application.StartupPath + "\\DadosBDRegistarPosto.xml";
+
+                try
+                {
+                    XmlTextReader lerXml = new XmlTextReader(ficheiro);
+                    while (lerXml.Read())
+                    {
+                        if (lerXml.IsStartElement("NomeServidor"))
+                            NomeServidor = lerXml.ReadElementString("NomeServidor");
+                    }
+
+                    lerXml.Close();
+                }
+                catch (IOException IOex)
+                {
+                    MessageBox.Show(IOex.Message, "Erro na Leitura", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro na Leitura", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+
+                return new SqlConnection("Server=" + NomeServidor + "; Database=GestMulti; User ID=Cliente; Password=cliente; Trusted_Connection=False;");
+            }
+        }
 
         /// <summary>
         /// The main entry point for the application.
@@ -26,36 +94,42 @@ namespace Server
 
             #region Registar posto
 
-            RegistarPostoDataContext dbRegistarPosto = new RegistarPostoDataContext();
-            ClinicasDataContext dbClinicas = new ClinicasDataContext();
+            try
+            {
+                RegistarPostoDataContext dbRegistarPosto = new RegistarPostoDataContext(LigacaoRegistarPosto);
+                ClinicasDataContext dbClinicas = new ClinicasDataContext(LigacaoClinicas);
 
-            int idClinica = dbClinicas.Clinicas.Single(x => x.Estado == true).idClinica;
+                int idClinica = dbClinicas.Clinicas.Single(x => x.Estado == true).idClinica;
 
-            bool postoRegistado = dbRegistarPosto.WorkStations.Where(x => x.idClinic == idClinica && x.uuid == MyToolkit.Hardware.UUID && x.macAddress == MyToolkit.Networking.HardwareAddress.ToString() && x.isActive == true).Count() > 0;
+                bool postoRegistado = dbRegistarPosto.WorkStations.Where(x => x.idClinic == idClinica && x.uuid == MyToolkit.Hardware.UUID && x.macAddress == MyToolkit.Networking.HardwareAddress.ToString() && x.isActive == true).Count() > 0;
 
             #endregion
 
-            if (!postoRegistado)
-            {
-                AskForPasswordForm passForm = new AskForPasswordForm();
-
-                if (passForm.ShowDialog() == DialogResult.OK)
+                if (!postoRegistado)
                 {
-                    dbRegistarPosto.WorkStations.InsertOnSubmit(new WorkStation()
+                    AskForPasswordForm passForm = new AskForPasswordForm();
+
+                    if (passForm.ShowDialog() == DialogResult.OK)
                     {
-                        date = DateTime.Now,
-                        idClinic = idClinica,
-                        isActive = true,
-                        macAddress = MyToolkit.Networking.HardwareAddress.ToString(),
-                        name = MyToolkit.Networking.Hostname,
-                        uuid = MyToolkit.Hardware.UUID
-                    });
+                        dbRegistarPosto.WorkStations.InsertOnSubmit(new WorkStation()
+                        {
+                            date = DateTime.Now,
+                            idClinic = idClinica,
+                            isActive = true,
+                            macAddress = MyToolkit.Networking.HardwareAddress.ToString(),
+                            name = MyToolkit.Networking.Hostname,
+                            uuid = MyToolkit.Hardware.UUID
+                        });
 
-                    dbRegistarPosto.SubmitChanges();
-
-                        
+                        dbRegistarPosto.SubmitChanges();
+                    }
+                    else return;
                 }
-                else return;
+            }
+            catch
+            {
+                MessageBox.Show("Não foi possível ligar ao servidor." + Environment.NewLine + "O programa irá agora sair.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             var form = new ListeningForm();

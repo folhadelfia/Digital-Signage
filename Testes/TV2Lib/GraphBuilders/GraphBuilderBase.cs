@@ -658,6 +658,8 @@ namespace TV2Lib
                             hr = evrFilterConfig.SetNumberOfStreams(numberOfStream);
                         }
 
+                        
+
                         // Keep the aspect-ratio OK
                         hr = evrVideoDisplayControl.SetAspectRatioMode(MFVideoAspectRatioMode.None); // VMR9AspectRatioMode.None);
                         ThrowExceptionForHR("Setting the EVR AspectRatioMode: ", hr);
