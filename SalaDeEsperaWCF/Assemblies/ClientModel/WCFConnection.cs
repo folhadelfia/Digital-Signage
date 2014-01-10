@@ -175,11 +175,11 @@ namespace Assemblies.ClientModel
                         {
 
                             NetTcpBinding bindingPC = new NetTcpBinding();
-                            binding.Security.Mode = SecurityMode.None;
-                            binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
-                            binding.CloseTimeout = new TimeSpan(0, 0, 2);
+                            bindingPC.Security.Mode = SecurityMode.None;
+                            bindingPC.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+                            bindingPC.CloseTimeout = new TimeSpan(0, 0, 2);
 
-                            PlayerProxy client = new PlayerProxy(binding, endpoint.Address);
+                            PlayerProxy client = new PlayerProxy(bindingPC, endpoint.Address);
 
                             client.Open();
 

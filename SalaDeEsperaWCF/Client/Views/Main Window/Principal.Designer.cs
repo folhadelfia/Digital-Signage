@@ -111,6 +111,7 @@
             this.imageListComponents.Images.SetKeyName(8, "Weather");
             this.imageListComponents.Images.SetKeyName(9, "Computer");
             this.imageListComponents.Images.SetKeyName(10, "Monitor");
+            this.imageListComponents.Images.SetKeyName(11, "Clinic");
             // 
             // groupBoxComponents
             // 

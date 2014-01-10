@@ -65,6 +65,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
@@ -116,6 +117,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RegistarPosto\AskForPasswordForm.cs">
       <SubType>Form</SubType>
@@ -207,6 +213,7 @@
     <EmbeddedResource Include="Components\ComposerComponent.resx">
       <DependentUpon>ComposerComponent.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <EmbeddedResource Include="Options\BackgroundOptions.resx">
       <DependentUpon>BackgroundOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +236,10 @@
     <EmbeddedResource Include="RegistarPosto\AskForPasswordForm.resx">
       <DependentUpon>AskForPasswordForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Libraries\DigitalTV.dll" />
@@ -251,6 +262,9 @@
       <Project>{6402e765-5743-471c-807c-864270421c08}</Project>
       <Name>TV2Lib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

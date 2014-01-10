@@ -16,6 +16,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Threading;
+using System.Runtime.InteropServices;
+
 using Assemblies.Components;
 using Assemblies.Configurations;
 using Assemblies.Factories;
@@ -25,12 +29,12 @@ using Assemblies.DataContracts;
 using Assemblies.PlayerComponents;
 using Assemblies.Options.OptionsGeneral;
 using Assemblies.Toolkit;
-using System.Xml.Serialization;
 using Assemblies.XMLSerialization.Components;
 using Assemblies.XMLSerialization;
-using System.IO;
-using System.Threading;
-using System.Runtime.InteropServices;
+using System.Xml.Serialization;
+
+using Client.Linq;
+using System.ServiceModel;
 
 namespace Client
 {
@@ -43,6 +47,8 @@ namespace Client
         #endregion
 
         //Dictionary<PlayerPC, Dictionary<ScreenInformation, List<ComposerComponent>>> allPlayersConfiguration = new Dictionary<PlayerPC, Dictionary<ScreenInformation, List<ComposerComponent>>>(); //Ainda não está a ser usado
+
+        private object oLock = 0;
 
         private List<string> logs = new List<string>();
 
@@ -397,7 +403,7 @@ namespace Client
 
                 statusLines.Clear();
 
-                SetStatusLine("Geral", "Nome do dispositivo", MyToolkit.Networking.resolveIP(connection.ServerIP));
+                SetStatusLine("Geral", "Nome do dispositivo", MyToolkit.Networking.ResolveIP(connection.ServerIP));
                 SetStatusLine("Geral", "Endereço IP", connection.ServerIP);
                 SetStatusLine("Geral", "Monitores", connection.GetDisplayInformation().Length + "");
 
@@ -586,7 +592,7 @@ namespace Client
 
             //t.Start();
 
-            this.ScanPlayersAsync();
+            this.GetPlayersFromDatabase();
 
         }
         /// <summary>
@@ -692,6 +698,132 @@ namespace Client
 
                 treeViewRede.Nodes.Add(nodePC);
             }
+        }
+
+        private void GetPlayersFromDatabase()
+        {
+            List<Player> players = new List<Player>();
+
+            using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados)) players = db.Players.Where(x => x.isActive).ToList();
+
+            List<Clinica> clinicas = new List<Clinica>();
+
+            using (var db = new ClinicasDataContext(Program.LigacaoClinicas)) clinicas = db.Clinicas.Where(x => x.isActive ?? false && players.Select(y => y.idClinica).Contains(x.idClinica)).ToList();
+
+            foreach (var player in players)
+            {
+                string clinicLocation = clinicas.Single(x => x.idClinica == player.idClinica).Localidade;
+                string clinicName = clinicas.Single(x => x.idClinica == player.idClinica).Nome;
+
+                string clinicScreenName = string.Format("{0} ({1})", clinicName, clinicLocation);
+
+                BackgroundWorker worker = new BackgroundWorker();
+
+                worker.DoWork += worker_DoWorkAddPlayerToTreeView;
+
+                worker.RunWorkerAsync(new object[] { player, clinicScreenName });
+            }
+            //using (var db = new ClinicaDataContext(Program.LigacaoClinica)) thisClinic = db.ClinicaDados.FirstOrDefault();
+        }
+
+        void worker_DoWorkAddPlayerToTreeView(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                Player player = (e.Argument as object[])[0] as Player;
+                string clinicScreenName = (e.Argument as object[])[1] as string;
+
+                string endpointString = player.wcfEndpoint;
+
+                if (!(player.publicIPAddress == MyToolkit.Networking.PublicIPAddress.ToString() && MyToolkit.Networking.IsLocal(player.privateIPAddress)))
+                    endpointString = this.PrivateToPublicEndpoint(player);
+
+                EndpointAddress endpoint = new EndpointAddress(endpointString);
+
+                NetTcpBinding bindingPC = new NetTcpBinding();
+                bindingPC.Security.Mode = SecurityMode.None;
+                bindingPC.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+                bindingPC.CloseTimeout = new TimeSpan(0, 0, 2);
+
+                PlayerProxy client = new PlayerProxy(bindingPC, endpoint);
+
+                client.Open();
+
+                List<WCFScreenInformation> displays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
+
+                client.Close();
+
+                if (displays.Count < 1) return;
+                lock (oLock)
+                {
+                    this.Invoke((MethodInvoker)(() =>
+                    {
+                        WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays, Endpoint = new EndpointAddress(endpointString) };
+
+                        TreeNode nodeClinic;
+                        bool newClinicNode = true;
+
+                        if (treeViewRede.Nodes.OfType<TreeNode>().Where(x => x.Text == clinicScreenName).Count() > 0)
+                        {
+                            newClinicNode = false;
+                            nodeClinic = treeViewRede.Nodes.OfType<TreeNode>().Single(x => x.Text == clinicScreenName);
+                        }
+                        else
+                        {
+                            nodeClinic = new TreeNode
+                            {
+                                Text = clinicScreenName,
+                                ImageKey = "Clinic",
+                                SelectedImageKey = "Clinic"
+                            };
+                        }
+
+                        TreeNode nodePC = new TreeNode
+                        {
+                            Text = player.privateHostname,
+                            //ToolTipText = string.Format("IP: {0}", pc.IP),
+                            Tag = pc,
+                            ImageKey = "Computer",
+                            SelectedImageKey = "Computer"
+                        };
+
+                        nodeClinic.Nodes.Add(nodePC);
+
+                        foreach (var display in pc.Displays)
+                        {
+                            string tempDispName = string.Format("{0} (X: {1}, Y: {2})", display.Name, display.Bounds.X, display.Bounds.Y);
+
+                            TreeNode t = new TreeNode()
+                            {
+                                Text = tempDispName,
+                                ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
+                                Tag = display,
+                                ImageKey = "Monitor",
+                                SelectedImageKey = "Monitor"
+                            };
+
+                            nodePC.Nodes.Add(t);
+                        }
+                        if(newClinicNode)
+                            treeViewRede.Nodes.Add(nodeClinic);
+                    }));
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private string PrivateToPublicEndpoint(Player player)
+        {
+            string result = player.wcfEndpoint;
+
+            result = result.Replace(player.privateIPAddress, player.publicIPAddress);
+            result = result.Replace(player.privatePort, player.publicPort);
+
+            return result;
+
+
         }
 
         private void ligarToolStripMenuItem_Click(object sender, EventArgs e)

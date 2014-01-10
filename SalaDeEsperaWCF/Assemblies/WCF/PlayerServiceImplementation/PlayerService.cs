@@ -15,6 +15,7 @@ using Assemblies.PlayerServiceContracts;
 
 namespace Assemblies.PlayerServiceImplementation
 {
+    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any)]
     public class PlayerService : IPlayer
     {
         #region Events

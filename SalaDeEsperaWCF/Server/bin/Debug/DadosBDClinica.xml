@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Dados referentes a base de dados-->
+<Dados>
+  <CaminhoBD></CaminhoBD>
+  <NomeServidor>clicenter-pl.no-ip.org,1458</NomeServidor>
+</Dados>

@@ -17,12 +17,12 @@ namespace Server
 {
     static class Program
     {
-        public static SqlConnection LigacaoClinicas
+        public static SqlConnection LigacaoClinica
         {
             get
             {
                 string NomeServidor = "";
-                string ficheiro = Application.StartupPath + "\\DadosBDClinicas.xml";
+                string ficheiro = Application.StartupPath + "\\DadosBDClinica.xml";
 
                 try
                 {
@@ -83,6 +83,39 @@ namespace Server
             }
         }
 
+        public static SqlConnection LigacaoPlayersLigados
+        {
+            get
+            {
+                string NomeServidor = "";
+                string ficheiro = Application.StartupPath + "\\DadosBDDigitalSignage.xml";
+
+                try
+                {
+                    XmlTextReader lerXml = new XmlTextReader(ficheiro);
+                    while (lerXml.Read())
+                    {
+                        if (lerXml.IsStartElement("NomeServidor"))
+                            NomeServidor = lerXml.ReadElementString("NomeServidor");
+                    }
+
+                    lerXml.Close();
+                }
+                catch (IOException IOex)
+                {
+                    MessageBox.Show(IOex.Message, "Erro na Leitura", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro na Leitura", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+
+                return new SqlConnection("Server=" + NomeServidor + "; Database=DigitalSignage; User ID=Cliente; Password=cliente; Trusted_Connection=False;");
+            }
+        }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -97,11 +130,13 @@ namespace Server
             try
             {
                 RegistarPostoDataContext dbRegistarPosto = new RegistarPostoDataContext(LigacaoRegistarPosto);
-                ClinicasDataContext dbClinicas = new ClinicasDataContext(LigacaoClinicas);
+                ClinicaDataContext dbClinica = new ClinicaDataContext(LigacaoClinica);
 
-                int idClinica = dbClinicas.Clinicas.Single(x => x.Estado == true).idClinica;
+                int idClinica = dbClinica.ClinicaDados.Single().idClinicaMulti ?? -1;
 
-                bool postoRegistado = dbRegistarPosto.WorkStations.Where(x => x.idClinic == idClinica && x.uuid == MyToolkit.Hardware.UUID && x.macAddress == MyToolkit.Networking.HardwareAddress.ToString() && x.isActive == true).Count() > 0;
+                if (idClinica < 0) throw new ArgumentException("Esta clínica não está registada");
+
+                bool postoRegistado = dbRegistarPosto.WorkStations.Where(x => x.idClinic == idClinica && x.uuid == MyToolkit.Hardware.UUID && x.isActive == true).Count() > 0;
 
             #endregion
 
@@ -117,7 +152,7 @@ namespace Server
                             idClinic = idClinica,
                             isActive = true,
                             macAddress = MyToolkit.Networking.HardwareAddress.ToString(),
-                            name = MyToolkit.Networking.Hostname,
+                            name = MyToolkit.Networking.PrivateHostname,
                             uuid = MyToolkit.Hardware.UUID
                         });
 
@@ -125,6 +160,11 @@ namespace Server
                     }
                     else return;
                 }
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message + Environment.NewLine + "O programa irá agora sair.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             catch
             {
@@ -143,7 +183,7 @@ namespace Server
             }
             finally
             {
-                if (!form.TryCloseService()) form.ForceCloseService();
+                form.CloseServiceWithDatabase();
             }
         }
 

@@ -28,14 +28,29 @@ using System.Threading;
 using TV2Lib;
 using DirectShowLib;
 using Server.Linq;
+using System.Data.SqlClient;
+using System.Xml;
+using System.IO;
+using System.ComponentModel;
 
 namespace Server.View
 {
     public partial class ListeningForm : Form
     {
+        private const string OBTAININGADDRESSES_TEXTBOX_TEXT = "A obter...",
+                             UNAVAILABE_TEXTBOX_TEXT = "Indisponível. Verifique a ligação à Internet e clique em Actualizar.";
+
         private ServiceHost serviceHost;
 
         private Dictionary<string, FormJanelaFinal> playerWindows = new Dictionary<string, FormJanelaFinal>();
+
+        string publicIP = "",
+               publicHostname = "",
+
+               privateIP = "",
+               privateHostname = "";
+
+        int idClinicaMulti = 0;
 
         public ListeningForm()
         {
@@ -75,9 +90,205 @@ namespace Server.View
             PlayerService.SendMPEG2Decoders += PlayerService_SendMPEG2Decoders;
 
             #endregion
-
-            textBoxLocalIP.Text = MyToolkit.Networking.LocalIPAddress.ToString();
         }
+
+        private void ListeningForm_Load(object sender, EventArgs e)
+        {
+            buttonConnect.Enabled = false;
+            this.RefreshIPAndHostnameTextboxes();
+
+            using (var db = new ClinicaDataContext(Program.LigacaoClinica)) idClinicaMulti = db.ClinicaDados.Single().idClinicaMulti ?? -1;
+        }
+
+        #region Preenchimento dos ips e hostnames, actualização dos estados dos botões
+
+        private void buttonRefreshPrivate_Click(object sender, EventArgs e)
+        {
+            buttonConnect.Enabled = false;
+
+            this.RefreshPrivateIPAndHostnameTextboxes();
+        }
+
+        private void buttonRefreshPublic_Click(object sender, EventArgs e)
+        {
+            buttonConnect.Enabled = false;
+            this.RefreshPublicIPAndHostnameTextboxes();
+        }
+
+        #region RefreshPrivateIPAndHostnameTextboxes
+
+        private void RefreshPrivateIPAndHostnameTextboxes()
+        {
+            textBoxPrivateIP.Text = textBoxPrivateHostname.Text = OBTAININGADDRESSES_TEXTBOX_TEXT;
+
+            BackgroundWorker workerGetPrivateIP = new BackgroundWorker(),
+                             workerGetPrivateHostname = new BackgroundWorker();
+
+
+            workerGetPrivateIP.DoWork += workerGetPrivateIP_DoWork;
+            workerGetPrivateIP.RunWorkerCompleted += workerGetPrivateIP_RunWorkerCompleted;
+
+            workerGetPrivateHostname.DoWork += workerGetPrivateHostname_DoWork;
+            workerGetPrivateHostname.RunWorkerCompleted += workerGetPrivateHostname_RunWorkerCompleted;
+
+            buttonRefreshPrivate.Enabled = false;
+
+            workerGetPrivateIP.RunWorkerAsync();
+            workerGetPrivateHostname.RunWorkerAsync();
+        }
+
+        void workerGetPrivateHostname_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                privateHostname = MyToolkit.Networking.PrivateHostname;
+            }
+            catch
+            {
+                privateHostname = UNAVAILABE_TEXTBOX_TEXT;
+            }
+        }
+        void workerGetPrivateHostname_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { textBoxPrivateHostname.Text = privateHostname; }));
+            else textBoxPrivateHostname.Text = privateHostname;
+
+            UpdateButtonStatus();
+            RemoveSelectionFromTextboxes();
+        }
+
+        void workerGetPrivateIP_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                privateIP = MyToolkit.Networking.PrivateIPAddress.ToString();
+            }
+            catch
+            {
+                privateIP = UNAVAILABE_TEXTBOX_TEXT;
+            }
+        }
+        void workerGetPrivateIP_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { textBoxPrivateIP.Text = privateIP; }));
+            else textBoxPrivateIP.Text = privateIP;
+
+            UpdateButtonStatus();
+            RemoveSelectionFromTextboxes();
+        }
+
+        #endregion
+
+        #region RefreshPublicIPAndHostnameTextboxes
+
+        private void RefreshPublicIPAndHostnameTextboxes()
+        {
+            textBoxPublicIP.Text = textBoxPublicHostname.Text = OBTAININGADDRESSES_TEXTBOX_TEXT;
+
+            BackgroundWorker workerGetPublicIP = new BackgroundWorker(),
+                             workerGetPublicHostname = new BackgroundWorker();
+
+            workerGetPublicIP.DoWork += workerGetPublicIP_DoWork;
+            workerGetPublicIP.RunWorkerCompleted += workerGetPublicIP_RunWorkerCompleted;
+
+            workerGetPublicHostname.DoWork += workerGetPublicHostname_DoWork;
+            workerGetPublicHostname.RunWorkerCompleted += workerGetPublicHostname_RunWorkerCompleted;
+
+            buttonRefreshPublic.Enabled = false;
+
+            workerGetPublicIP.RunWorkerAsync();
+            workerGetPublicHostname.RunWorkerAsync();
+        }
+
+        void workerGetPublicHostname_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                string tempHostname = "";
+
+                using (var db = new ClinicaDataContext(Program.LigacaoClinica))
+                {
+                    tempHostname = db.ClinicaDados.Single().DNS;
+                }
+
+                if (string.IsNullOrWhiteSpace(tempHostname))
+                    publicHostname = MyToolkit.Networking.PublicHostname;
+                else publicHostname = tempHostname;
+            }
+            catch
+            {
+                publicHostname = UNAVAILABE_TEXTBOX_TEXT;
+            }
+        }
+        void workerGetPublicHostname_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { textBoxPublicHostname.Text = publicHostname; }));
+            else textBoxPublicHostname.Text = publicHostname;
+
+            UpdateButtonStatus();
+            RemoveSelectionFromTextboxes();
+        }
+
+        void workerGetPublicIP_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                publicIP = MyToolkit.Networking.PublicIPAddress.ToString();
+            }
+            catch
+            {
+                publicIP = UNAVAILABE_TEXTBOX_TEXT;
+            }
+        }
+        void workerGetPublicIP_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { textBoxPublicIP.Text = publicIP; }));
+            else textBoxPublicIP.Text = publicIP;
+
+            UpdateButtonStatus();
+            RemoveSelectionFromTextboxes();
+        }
+
+        #endregion
+
+        private void RefreshIPAndHostnameTextboxes()
+        {
+            RefreshPublicIPAndHostnameTextboxes();
+            RefreshPrivateIPAndHostnameTextboxes();
+        }
+
+        private void UpdateButtonStatus()
+        {
+            bool scanningPrivate = privateIP == OBTAININGADDRESSES_TEXTBOX_TEXT ||
+                                   privateHostname == OBTAININGADDRESSES_TEXTBOX_TEXT,
+
+                 scanningPublic = publicIP == OBTAININGADDRESSES_TEXTBOX_TEXT ||
+                                  publicHostname == OBTAININGADDRESSES_TEXTBOX_TEXT;
+
+            bool privateReady = !scanningPrivate &&
+
+                                privateIP != UNAVAILABE_TEXTBOX_TEXT &&
+                                privateHostname != UNAVAILABE_TEXTBOX_TEXT;
+
+            bool publicReady = !scanningPublic &&
+
+                               publicIP != UNAVAILABE_TEXTBOX_TEXT &&
+                               publicHostname != UNAVAILABE_TEXTBOX_TEXT;
+
+            buttonRefreshPrivate.Enabled = !scanningPrivate;
+            buttonRefreshPublic.Enabled = !scanningPublic;
+
+            buttonConnect.Enabled = privateReady && publicReady;
+        }
+        private void RemoveSelectionFromTextboxes()
+        {
+            textBoxPrivateIP.Select(textBoxPrivateIP.Text.Length - 1, 0);
+            textBoxPrivateHostname.Select(textBoxPrivateHostname.Text.Length - 1, 0);
+            textBoxPublicIP.Select(textBoxPublicIP.Text.Length - 1, 0);
+            textBoxPublicHostname.Select(textBoxPublicHostname.Text.Length - 1, 0);
+        }
+
+        #endregion
 
         #region Eventos do serviço
 
@@ -223,51 +434,16 @@ namespace Server.View
         #region Close
         private void ListeningForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!this.TryCloseService()) this.ForceCloseService();
+            this.CloseServiceWithDatabase();
         }
         private void ListeningForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (!this.TryCloseService()) this.ForceCloseService();
+            if(serviceHost != null && serviceHost.State != CommunicationState.Closed) this.CloseServiceWithDatabase();
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        /// <summary>
-        /// Tries to close the service smoothly
-        /// </summary>
-        /// <returns></returns>
-        public bool TryCloseService()
-        {
-            if (serviceHost != null && serviceHost.State != CommunicationState.Closed)
-            {
-                try
-                {
-                    serviceHost.Close();
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-
-            return serviceHost == null || serviceHost.State == CommunicationState.Closed;
-        }
-        /// <summary>
-        /// Tries to close the service. If it fails, aborts it
-        /// </summary>
-        public void ForceCloseService()
-        {
-            if (serviceHost != null) try
-                {
-                    serviceHost.Close();
-                }
-                catch
-                {
-                    serviceHost.Abort();
-                }
         }
         #endregion
 
@@ -282,7 +458,11 @@ namespace Server.View
                     try
                     {
                         #region Checks
-                        string serverIP = textBoxServerIP.Text, serverPort = textBoxServerPort.Text, localPort = textBoxLocalPort.Text;
+                        string  publicIP = textBoxPublicIP.Text, 
+                                publicPort = textBoxPublicPort.Text,
+                                privateIP = textBoxPrivateIP.Text,
+                                privatePort = textBoxPrivatePort.Text;
+
                         bool ready = true;
 
                         //var ips = MyToolkit.Networking.resolveHostname(serverIP);
@@ -292,51 +472,52 @@ namespace Server.View
                         //    serverIP = ips[0].ToString();
                         //}
 
-                        if (!MyToolkit.Networking.ValidateAddress(serverIP))
+                        if (!MyToolkit.Networking.ValidateAddress(publicIP))
                         {
                             ready = false;
-                            Transition.run(textBoxServerIP, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
+                            Transition.run(textBoxPublicIP, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
                         }
                         else
                         {
-                            Transition.run(textBoxServerIP, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
+                            Transition.run(textBoxPublicIP, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
                         }
 
-                        if (!MyToolkit.Networking.ValidatePort(serverPort))
+                        if (!MyToolkit.Networking.ValidatePort(publicPort))
                         {
                             ready = false;
-                            Transition.run(textBoxServerPort, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
+                            Transition.run(textBoxPublicPort, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
                         }
                         else
                         {
-                            Transition.run(textBoxServerPort, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
+                            Transition.run(textBoxPublicPort, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
                         }
 
-                        if (!MyToolkit.Networking.ValidatePort(localPort))
+                        if (!MyToolkit.Networking.ValidatePort(privatePort))
                         {
                             ready = false;
-                            Transition.run(textBoxLocalPort, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
+                            Transition.run(textBoxPrivatePort, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
                         }
                         else
                         {
-                            Transition.run(textBoxLocalPort, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
+                            Transition.run(textBoxPrivatePort, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
                         }
                         #endregion
 
                         if (ready)
                         {
                             this.Log("A iniciar o serviço");
-                            StartService(serverIP, serverPort, localPort);
+                            //StartServiceWithDiscoveryServer(serverIP, serverPort, localPort);
+                            StartServiceWithDatabase(privatePort, publicPort);
                         }
-                        if (serviceHost.State == CommunicationState.Opened || serviceHost.State == CommunicationState.Opening)
+                        if (serviceHost != null && (serviceHost.State == CommunicationState.Opened || serviceHost.State == CommunicationState.Opening))
                         {
-                            this.Log(string.Format("Ligado ao servidor {0}:{1}", serverIP, serverPort));
+                            //this.Log(string.Format("Ligado ao servidor {0}:{1}", publicIP, publicPort));
                             this.Log(string.Format("Endpoint: {0}", serviceHost.Description.Endpoints[0].Address));
                             (sender as Button).Text = "Desligar";
                         }
                         else
                         {
-                            this.Log(string.Format("Problema a ligar ao servidor {0}:{1}", serverIP, serverPort));
+                            //this.Log(string.Format("Problema a ligar ao servidor {0}:{1}", publicIP, publicPort));
                         }
                     }
                     catch (ArgumentException ex)
@@ -354,19 +535,9 @@ namespace Server.View
                 }
                 else
                 {
-                    try
-                    {
-                        this.Log("A fechar o serviço");
-                        serviceHost.Close();
-                        this.Log("Serviço fechado com sucesso");
-                    }
-                    catch (Exception ex)
-                    {
-                        this.Log(ex);
-                        this.Log("A abortar o serviço");
-                        serviceHost.Abort();
-                        this.Log("Serviço abortado");
-                    }
+                    //CloseServiceWithDiscoveryServer();
+                    CloseServiceWithDatabase();
+
                     if (serviceHost.State == CommunicationState.Closed || serviceHost.State == CommunicationState.Closing)
                         (sender as Button).Text = "Ligar";
 
@@ -375,18 +546,14 @@ namespace Server.View
                 (sender as Button).Enabled = true;
             });
         }
-        private void buttonRandomize_Click(object sender, EventArgs e)
-        {
-            textBoxLocalPort.Text = MyToolkit.Networking.RandomPort().ToString();
-        }
 
-        private void StartService(string serverIP, string serverPort, string localPort)
+        private void StartServiceWithDiscoveryServer(string serverIP, string serverPort, string localPort)
         {
             //if (!(MyToolkit.Networking.ValidateIPAddress(serverIP) && MyToolkit.Networking.ValidatePort(serverPort) && MyToolkit.Networking.ValidatePort(localPort)))
             //    throw new ArgumentException() { Source = "ListeningForm.StartService(string serverIP, string serverPort, string localPort)" }; 
 
             ////endereço do player
-            Uri baseAddress = new Uri(String.Format("net.tcp://{0}:{1}/PlayerService/{2}", MyToolkit.Networking.LocalIPAddress, localPort, Guid.NewGuid()));
+            Uri baseAddress = new Uri(String.Format("net.tcp://{0}:{1}/PlayerService/{2}", MyToolkit.Networking.PrivateIPAddress, localPort, Guid.NewGuid()));
             ////endpoint para onde as mensagens de announcement serão enviadas
             Uri announcementEndpointAddress = new Uri(String.Format("net.tcp://{0}:{1}/Announcement", serverIP, serverPort));
 
@@ -453,6 +620,196 @@ namespace Server.View
                 Log(e);
             }
         }
+        private void StartServiceWithDatabase(string privatePort, string publicPort)
+        {
+            try
+            {
+                using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados))
+                {
+                    foreach (var pl in db.Players.Where(x => x.isActive && x.privatePort == privatePort && x.privateIPAddress != privateIP && x.publicIPAddress == publicIP))
+                    {
+                        if (MyToolkit.Networking.StringToIPAddress(pl.publicIPAddress).ToString() == MyToolkit.Networking.PublicIPAddress.ToString()) throw new ApplicationException("Já existe um player com esta porta");
+                    }
+
+                    //MyToolkit.Networking.StringToIPAddress(x.publicIPAddress).ToString()
+                    //Parece estúpido, mas é uma forma de garantir que 10.0.000000.1 é o mesmo que 10.0.0.1
+                }
+
+                ////endereço do player
+                Uri baseAddress = new Uri(String.Format("net.tcp://{0}:{1}/PlayerService", textBoxPrivateIP.Text, privatePort));
+
+                //criar o host do serviço
+                serviceHost = new ServiceHost(typeof(PlayerService), baseAddress);
+                NetTcpBinding tcpBindingAnnouncement = new NetTcpBinding();
+                tcpBindingAnnouncement.Security.Mode = SecurityMode.None; //Alterar a autenticação para um modelo melhor
+
+                ////http://nerdwords.blogspot.pt/2008/01/wcf-error-socket-connection-was-aborted.html
+#if EXPOSE_METADATA
+
+                //Adicionar um endpoint MEX (Metadata EXchange) por TCP
+                System.ServiceModel.Channels.BindingElement bindingElement = new System.ServiceModel.Channels.TcpTransportBindingElement();
+                System.ServiceModel.Channels.CustomBinding binding = new System.ServiceModel.Channels.CustomBinding(bindingElement);
+                System.ServiceModel.Description.ServiceMetadataBehavior metadataBehavior = serviceHost.Description.Behaviors.Find<System.ServiceModel.Description.ServiceMetadataBehavior>();
+
+                if (metadataBehavior == null)
+                {
+                    metadataBehavior = new System.ServiceModel.Description.ServiceMetadataBehavior();
+                    serviceHost.Description.Behaviors.Add(metadataBehavior);
+                }
+
+                serviceHost.AddServiceEndpoint(typeof(System.ServiceModel.Description.IMetadataExchange), binding, "MEX");
+#endif
+
+                serviceHost.Open();
+
+                try
+                {
+                    using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados))
+                    {
+                        List<Player> conflictingPlayers = new List<Player>();
+                        var conflictingPlayersTemp = db.Players.Where(x => x.isActive && x.privatePort == privatePort);
+
+                        foreach (var pl in conflictingPlayersTemp)
+                        {
+                            if (pl.privateIPAddress == privateIP && pl.publicIPAddress == publicIP)
+                                conflictingPlayers.Add(pl);
+                        }
+
+                        foreach (var pl in conflictingPlayers)
+                        {
+                            pl.isActive = false;
+                        }
+
+                        db.SubmitChanges();
+
+                        //Encontrar os players com os mesmos dados deste mas que estão inactivos
+                        var tempOverlappingPlayersInactive = db.Players.Where(x =>
+                                                            !x.isActive &&
+                                                            x.idClinica == idClinicaMulti &&
+                                                            x.privateIPAddress == privateIP &&
+                                                            x.publicIPAddress == publicIP &&
+                                                            x.privatePort == privatePort &&
+                                                            x.publicPort == publicPort &&
+                                                            x.privateHostname == privateHostname &&
+                                                            x.publicHostname == publicHostname &&
+                                                            x.wcfEndpoint == serviceHost.Description.Endpoints[0].Address.ToString()
+                                                            );
+
+                        //Apagar todos excepto o mais recente
+                        if (tempOverlappingPlayersInactive.Count() > 1)
+                        {
+                            foreach (var pl in tempOverlappingPlayersInactive)
+                            {
+                                if(pl.ID != tempOverlappingPlayersInactive.Max(x=>x.ID))
+                                    db.Players.DeleteOnSubmit(pl);
+                            }
+
+                            db.SubmitChanges();
+                        }
+
+                        //Se já existia um, activa-lo, senão adicionar
+                        if (tempOverlappingPlayersInactive.Count() == 1) tempOverlappingPlayersInactive.Single().isActive = true;
+                        else
+                        {
+                            db.Players.InsertOnSubmit(new Player()
+                            {
+                                isActive = true,
+                                idClinica = idClinicaMulti,
+                                privateIPAddress = privateIP,
+                                publicIPAddress = publicIP,
+                                privatePort = privatePort,
+                                publicPort = publicPort,
+                                privateHostname = privateHostname,
+                                publicHostname = publicHostname,
+                                wcfEndpoint = serviceHost.Description.Endpoints[0].Address.ToString()
+                            }
+                            );
+                        }
+
+                        db.SubmitChanges();
+                    }
+                }
+                catch
+                {
+                }
+            }
+            catch (CommunicationException e)
+            {
+                Log(e);
+            }
+            catch (TimeoutException e)
+            {
+                Log(e);
+            }
+            catch (Exception e)
+            {
+                Log(e);
+            }
+        }
+        private void CloseServiceWithDiscoveryServer()
+        {
+            try
+            {
+                this.Log("A fechar o serviço");
+                serviceHost.Close();
+                this.Log("Serviço fechado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                this.Log(ex);
+                this.Log("A abortar o serviço");
+                serviceHost.Abort();
+                this.Log("Serviço abortado");
+            }
+        }
+        public void CloseServiceWithDatabase()
+        {
+            try
+            {
+                if (serviceHost == null) return;
+
+                this.Log("A fechar o serviço");
+                serviceHost.Close();
+                this.Log("Serviço fechado com sucesso");
+
+                using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados))
+                {
+                    string publicIPAddress = MyToolkit.Networking.PublicIPAddress.ToString();
+
+                    string endpoint = serviceHost.Description.Endpoints[0].Address.ToString();
+
+                    foreach (var pl in db.Players.Where(x => x.isActive && x.publicIPAddress == publicIPAddress && x.wcfEndpoint == endpoint))
+                        pl.isActive = false;
+
+                    db.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Log(ex);
+                this.Log("A abortar o serviço");
+                serviceHost.Abort();
+                this.Log("Serviço abortado");
+
+                try
+                {
+                    using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados))
+                    {
+                        string publicIPAddress = MyToolkit.Networking.PublicIPAddress.ToString();
+
+                        string endpoint = serviceHost.Description.Endpoints.ToString();
+
+                        foreach (var pl in db.Players.Where(x => x.isActive && x.publicIPAddress == publicIPAddress && x.wcfEndpoint == endpoint))
+                            pl.isActive = false;
+
+                        db.SubmitChanges();
+                    }
+                }
+                catch
+                {
+                }
+            }
+        }
 
         void serviceHost_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
         {
@@ -466,47 +823,53 @@ namespace Server.View
 
         private void RefreshState()
         {
-            this.BeginInvoke((MethodInvoker)delegate
-                {
-                    try
+            try
+            {
+                this.BeginInvoke((MethodInvoker)delegate
                     {
-                        switch (serviceHost.State)
+                        try
                         {
-                            case CommunicationState.Closed:
-                                labelEstado.Text = "Fechado";
-                                labelEstado.ForeColor = Color.Red;
-                                break;
-                            case CommunicationState.Closing:
-                                labelEstado.Text = "A fechar";
-                                labelEstado.ForeColor = Color.Goldenrod;
-                                break;
-                            case CommunicationState.Opening:
-                                labelEstado.Text = "A abrir";
-                                labelEstado.ForeColor = Color.Goldenrod;
-                                break;
-                            case CommunicationState.Opened:
-                                labelEstado.Text = "Aberto";
-                                labelEstado.ForeColor = Color.ForestGreen;
-                                break;
-                            case CommunicationState.Faulted:
-                                labelEstado.Text = "Falha";
-                                labelEstado.ForeColor = Color.Red;
-                                break;
-                            case CommunicationState.Created:
-                                labelEstado.Text = "Pronto";
-                                labelEstado.ForeColor = Color.Blue;
-                                break;
+                            switch (serviceHost.State)
+                            {
+                                case CommunicationState.Closed:
+                                    labelEstado.Text = "Fechado";
+                                    labelEstado.ForeColor = Color.Red;
+                                    break;
+                                case CommunicationState.Closing:
+                                    labelEstado.Text = "A fechar";
+                                    labelEstado.ForeColor = Color.Goldenrod;
+                                    break;
+                                case CommunicationState.Opening:
+                                    labelEstado.Text = "A abrir";
+                                    labelEstado.ForeColor = Color.Goldenrod;
+                                    break;
+                                case CommunicationState.Opened:
+                                    labelEstado.Text = "Aberto";
+                                    labelEstado.ForeColor = Color.ForestGreen;
+                                    break;
+                                case CommunicationState.Faulted:
+                                    labelEstado.Text = "Falha";
+                                    labelEstado.ForeColor = Color.Red;
+                                    break;
+                                case CommunicationState.Created:
+                                    labelEstado.Text = "Pronto";
+                                    labelEstado.ForeColor = Color.Blue;
+                                    break;
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        labelEstado.Text = "Erro";
-                        labelEstado.ForeColor = Color.Red;
+                        catch (Exception ex)
+                        {
+                            labelEstado.Text = "Erro";
+                            labelEstado.ForeColor = Color.Red;
 
-                        if (serviceHost != null) Log(ex);
-                    }
+                            if (serviceHost != null) Log(ex);
+                        }
 
-                });
+                    });
+            }
+            catch
+            {
+            }
         }
 
         private void Log(string message)
@@ -525,5 +888,7 @@ namespace Server.View
         {
             Log(string.Format("EXCEPTION: {1}{0}MESSAGE: {2}{0}INNER EXCEPTION: {3}{0}INNER EXCEPTION MESSAGE: {4}", Environment.NewLine, ex.GetType().ToString(), ex.Message, ex.InnerException == null ? "null" : ex.InnerException.GetType().ToString(), ex.InnerException == null ? "null" : ex.InnerException.Message));
         }
+
+
     }
 }

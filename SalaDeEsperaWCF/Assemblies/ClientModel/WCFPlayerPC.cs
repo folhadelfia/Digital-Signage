@@ -19,7 +19,7 @@ namespace Assemblies.ClientModel
             {
                 this.ip = value.Uri.Host;
                 this.port = value.Uri.Port.ToString();
-                this.name = MyToolkit.Networking.resolveIP(value.Uri.Host);
+                this.name = MyToolkit.Networking.ResolveIP(value.Uri.Host);
                 endpoint = value; 
             }
         }

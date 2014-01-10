@@ -16,9 +16,13 @@ namespace Assemblies.Toolkit
         {
             public const int MaxPortNumber = 65535;
 
-            public static IPAddress LocalIPAddress
+            public static IPAddress PrivateIPAddress
             {
                 get { return GetLocalIPAddress(); }
+            }
+            public static IPAddress PublicIPAddress
+            {
+                get { return GetPublicIPAddress(); }
             }
 
             private static IPAddress GetLocalIPAddress()
@@ -37,12 +41,6 @@ namespace Assemblies.Toolkit
                 if (!(localIP == null)) return localIP;
                 else throw new ApplicationException("No physical address found", null);
             }
-
-            public static IPAddress PublicIPAddress
-            {
-                get { return GetPublicIPAddress(); }
-            }
-
             private static IPAddress GetPublicIPAddress()
             {
                 string url = "http://checkip.dyndns.org";
@@ -55,26 +53,132 @@ namespace Assemblies.Toolkit
                 string[] a3 = a2.Split('<');
                 string a4 = a3[0];
 
-                string[] a5 = a4.Split('.');
+                return StringToIPAddress(a4);
+            }
+
+            public static IPAddress StringToIPAddress(string address)
+            {
+
+                string[] a5 = address.Split('.');
 
                 byte[] ipByte = new byte[] { Convert.ToByte(a5[0], 10), Convert.ToByte(a5[1], 10), Convert.ToByte(a5[2], 10), Convert.ToByte(a5[3], 10) };
 
                 return new IPAddress(ipByte);
             }
 
+            public static IPAddress SubnetMask
+            {
+                get { return GetSubnetMask(); }
+            }
+
+            public static IPAddress GetSubnetMask()
+            {
+                foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
+                {
+                    foreach (UnicastIPAddressInformation unicastIPAddressInformation in adapter.GetIPProperties().UnicastAddresses)
+                    {
+                        if (unicastIPAddressInformation.Address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            if (PrivateIPAddress.Equals(unicastIPAddressInformation.Address))
+                            {
+                                return unicastIPAddressInformation.IPv4Mask;
+                            }
+                        }
+                    }
+                }
+                throw new ArgumentException(string.Format("Can't find subnetmask for IP address '{0}'", PrivateIPAddress));
+            }
+
+            #region Descobrir se está na mesma subrede
+
+            public static bool IsLocal(string address)
+            {
+                return IsLocal(StringToIPAddress(address));
+            }
+
+            public static bool IsLocal(IPEndPoint endpoint)
+            {
+                if (endpoint == null)
+                    return false;
+                return IsLocal(endpoint.Address);
+            }
+
+            /// <summary>
+            /// Returns true if the IPAddress supplied is on the same subnet as this host
+            /// </summary>
+            public static bool IsLocal(IPAddress remote)
+            {
+                IPAddress mask = SubnetMask;
+                IPAddress local = PrivateIPAddress;
+
+                if (mask == null)
+                    return false;
+
+                uint maskBits = BitConverter.ToUInt32(mask.GetAddressBytes(), 0);
+                uint remoteBits = BitConverter.ToUInt32(remote.GetAddressBytes(), 0);
+                uint localBits = BitConverter.ToUInt32(local.GetAddressBytes(), 0);
+
+                // compare network portions
+                return ((remoteBits & maskBits) == (localBits & maskBits));
+            }
+
+            #endregion
+
+
+            public static string PrivateHostname
+            {
+                get
+                {
+                    return ResolveIP(Networking.PrivateIPAddress);
+                }
+            }
+            public static string PublicHostname
+            {
+                get
+                {
+                    return ResolveIP(Networking.PublicIPAddress);
+                }
+            }
+
+            public static string ResolveIP(IPAddress ip)
+            {
+                return ResolveIP(ip.ToString());
+            }
+            public static string ResolveIP(string ip)
+            {
+                try
+                {
+
+                    IPHostEntry ipResolvido = Dns.GetHostEntry(ip);
+                    return ipResolvido.HostName;
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+            }
+
+            public static IPAddress[] ResolveHostname(string name)
+            {
+                try
+                {
+                    IPHostEntry enderecoResolvido = Dns.GetHostEntry(name);
+
+                    return enderecoResolvido.AddressList;
+                }
+                catch
+                {
+                    return null;
+                }
+
+
+            }
+
+
             public static PhysicalAddress HardwareAddress
             {
                 get { return GetPhysicalAddress(); }
             }
-
-            public static string Hostname
-            {
-                get
-                {
-                    return resolveIP(Networking.LocalIPAddress);
-                }
-            }
-
             private static PhysicalAddress GetPhysicalAddress()
             {
                 foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
@@ -103,13 +207,12 @@ namespace Assemblies.Toolkit
 
             public static bool ValidateAddress(string address)
             {
-                var ips = Networking.resolveHostname(address);
+                var ips = Networking.ResolveHostname(address);
 
                 if (ips.Length > 0) address = ips.Where(x => Networking.ValidateIPAddress(x.ToString())).FirstOrDefault().ToString();
 
                 return !string.IsNullOrEmpty(address) && Networking.ValidateIPAddress(address);
             }
-
             public static bool ValidateIPAddress(string address)
             {
                 if (address == "localhost") return true;
@@ -134,48 +237,12 @@ namespace Assemblies.Toolkit
 
                 return true;
             }
-
             public static bool ValidatePort(string port)
             {
                 int portNumber = 0;
                 if (int.TryParse(port, out portNumber))
                     return portNumber >= 0 && portNumber <= MaxPortNumber;
                 else return false;
-            }
-
-            public static string resolveIP(IPAddress ip)
-            {
-                return resolveIP(ip.ToString());
-            }
-
-            public static string resolveIP(string ip)
-            {
-                try
-                {
-
-                    IPHostEntry ipResolvido = Dns.GetHostEntry(ip);
-                    return ipResolvido.HostName;
-                }
-                catch
-                {
-                    return string.Empty;
-                }
-            }
-
-            public static IPAddress[] resolveHostname(string name)
-            {
-                try
-                {
-                    IPHostEntry enderecoResolvido = Dns.GetHostEntry(name);
-
-                    return enderecoResolvido.AddressList;
-                }
-                catch
-                {
-                    return null;
-                }
-
-
             }
         }
 
@@ -200,6 +267,14 @@ namespace Assemblies.Toolkit
                 }
 
                 return uuid;
+            }
+        }
+
+        public static class EnumUtilities
+        {
+            public static IEnumerable<T> GetValues<T>()
+            {
+                return Enum.GetValues(typeof(T)).Cast<T>();
             }
         }
     }

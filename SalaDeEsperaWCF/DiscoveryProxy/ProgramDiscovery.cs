@@ -107,8 +107,8 @@ namespace ServiceDiscoveryProxy
                 #endregion
             }
 
-            Uri probeEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.LocalIPAddress + ":" + probePort + "/Probe"),
-                announcementEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.LocalIPAddress + ":" + announcementPort + "/Announcement");
+            Uri probeEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.PrivateIPAddress + ":" + probePort + "/Probe"),
+                announcementEndpointAddress = new Uri("net.tcp://" + MyToolkit.Networking.PrivateIPAddress + ":" + announcementPort + "/Announcement");
             //Host the DiscoveryProxy service
             ServiceDiscoveryProxy proxyServiceInstance = new ServiceDiscoveryProxy();
             ServiceHost proxyServiceHost = new ServiceHost(proxyServiceInstance);

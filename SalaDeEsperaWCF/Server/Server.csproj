@@ -83,10 +83,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Linq\Clinicas.designer.cs">
+    <Compile Include="Linq\Clinica.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Clinicas.dbml</DependentUpon>
+      <DependentUpon>Clinica.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Linq\PlayersLigados.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayersLigados.dbml</DependentUpon>
     </Compile>
     <Compile Include="Linq\RegistarPosto.designer.cs">
       <AutoGen>True</AutoGen>
@@ -119,23 +124,31 @@
     <Compile Include="View\LogForm.Designer.cs">
       <DependentUpon>LogForm.cs</DependentUpon>
     </Compile>
+    <None Include="Linq\Clinica.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Clinica.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Linq\PlayersLigados.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>PlayersLigados.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Linq\RegistarPosto.dbml.layout">
+      <DependentUpon>RegistarPosto.dbml</DependentUpon>
+    </None>
+    <None Include="Linq\PlayersLigados.dbml.layout">
+      <DependentUpon>PlayersLigados.dbml</DependentUpon>
+    </None>
+    <None Include="Linq\Clinica.dbml.layout">
+      <DependentUpon>Clinica.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="View\FormJanelaLigacao.resx">
       <DependentUpon>FormJanelaLigacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LogForm.resx">
       <DependentUpon>LogForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Linq\Clinicas.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Clinicas.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Linq\RegistarPosto.dbml.layout">
-      <DependentUpon>RegistarPosto.dbml</DependentUpon>
-    </None>
-    <None Include="Linq\Clinicas.dbml.layout">
-      <DependentUpon>Clinicas.dbml</DependentUpon>
-    </None>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

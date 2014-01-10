@@ -31,14 +31,13 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.labelIP = new System.Windows.Forms.Label();
             this.Porta = new System.Windows.Forms.Label();
-            this.textBoxServerIP = new System.Windows.Forms.TextBox();
-            this.textBoxServerPort = new System.Windows.Forms.TextBox();
+            this.textBoxPublicIP = new System.Windows.Forms.TextBox();
+            this.textBoxPublicPort = new System.Windows.Forms.TextBox();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
             this.groupBoxLocal = new System.Windows.Forms.GroupBox();
-            this.buttonRandomize = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxLocalIP = new System.Windows.Forms.TextBox();
-            this.textBoxLocalPort = new System.Windows.Forms.TextBox();
+            this.textBoxPrivateIP = new System.Windows.Forms.TextBox();
+            this.textBoxPrivatePort = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBoxLog = new System.Windows.Forms.GroupBox();
             this.textBoxLog = new System.Windows.Forms.TextBox();
@@ -46,8 +45,14 @@
             this.groupBoxEstado = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.definiçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ligaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxPublicHostname = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxPrivateHostname = new System.Windows.Forms.TextBox();
+            this.buttonRefreshPrivate = new System.Windows.Forms.Button();
+            this.buttonRefreshPublic = new System.Windows.Forms.Button();
             this.groupBoxServer.SuspendLayout();
             this.groupBoxLocal.SuspendLayout();
             this.groupBoxLog.SuspendLayout();
@@ -57,7 +62,7 @@
             // 
             // buttonConnect
             // 
-            this.buttonConnect.Location = new System.Drawing.Point(91, 65);
+            this.buttonConnect.Location = new System.Drawing.Point(192, 379);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(75, 23);
             this.buttonConnect.TabIndex = 0;
@@ -68,7 +73,7 @@
             // labelIP
             // 
             this.labelIP.AutoSize = true;
-            this.labelIP.Location = new System.Drawing.Point(24, 16);
+            this.labelIP.Location = new System.Drawing.Point(59, 16);
             this.labelIP.Name = "labelIP";
             this.labelIP.Size = new System.Drawing.Size(17, 13);
             this.labelIP.TabIndex = 1;
@@ -77,95 +82,91 @@
             // Porta
             // 
             this.Porta.AutoSize = true;
-            this.Porta.Location = new System.Drawing.Point(6, 42);
+            this.Porta.Location = new System.Drawing.Point(41, 68);
             this.Porta.Name = "Porta";
             this.Porta.Size = new System.Drawing.Size(32, 13);
             this.Porta.TabIndex = 2;
             this.Porta.Text = "Porta";
             // 
-            // textBoxServerIP
+            // textBoxPublicIP
             // 
-            this.textBoxServerIP.Location = new System.Drawing.Point(47, 13);
-            this.textBoxServerIP.Name = "textBoxServerIP";
-            this.textBoxServerIP.Size = new System.Drawing.Size(119, 20);
-            this.textBoxServerIP.TabIndex = 3;
-            this.textBoxServerIP.Text = "clicenter-pl.no-ip.org";
+            this.textBoxPublicIP.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxPublicIP.Location = new System.Drawing.Point(82, 13);
+            this.textBoxPublicIP.Name = "textBoxPublicIP";
+            this.textBoxPublicIP.ReadOnly = true;
+            this.textBoxPublicIP.Size = new System.Drawing.Size(167, 20);
+            this.textBoxPublicIP.TabIndex = 3;
             // 
-            // textBoxServerPort
+            // textBoxPublicPort
             // 
-            this.textBoxServerPort.Location = new System.Drawing.Point(47, 39);
-            this.textBoxServerPort.Name = "textBoxServerPort";
-            this.textBoxServerPort.Size = new System.Drawing.Size(119, 20);
-            this.textBoxServerPort.TabIndex = 4;
-            this.textBoxServerPort.Text = "9021";
+            this.textBoxPublicPort.Location = new System.Drawing.Point(82, 65);
+            this.textBoxPublicPort.Name = "textBoxPublicPort";
+            this.textBoxPublicPort.Size = new System.Drawing.Size(60, 20);
+            this.textBoxPublicPort.TabIndex = 4;
+            this.textBoxPublicPort.Text = "4848";
             // 
             // groupBoxServer
             // 
+            this.groupBoxServer.Controls.Add(this.buttonRefreshPublic);
+            this.groupBoxServer.Controls.Add(this.label3);
+            this.groupBoxServer.Controls.Add(this.textBoxPublicHostname);
             this.groupBoxServer.Controls.Add(this.labelIP);
-            this.groupBoxServer.Controls.Add(this.buttonConnect);
-            this.groupBoxServer.Controls.Add(this.textBoxServerPort);
+            this.groupBoxServer.Controls.Add(this.textBoxPublicPort);
             this.groupBoxServer.Controls.Add(this.Porta);
-            this.groupBoxServer.Controls.Add(this.textBoxServerIP);
-            this.groupBoxServer.Location = new System.Drawing.Point(12, 128);
+            this.groupBoxServer.Controls.Add(this.textBoxPublicIP);
+            this.groupBoxServer.Location = new System.Drawing.Point(12, 133);
             this.groupBoxServer.Name = "groupBoxServer";
-            this.groupBoxServer.Size = new System.Drawing.Size(172, 95);
+            this.groupBoxServer.Size = new System.Drawing.Size(255, 100);
             this.groupBoxServer.TabIndex = 5;
             this.groupBoxServer.TabStop = false;
-            this.groupBoxServer.Text = "Servidor";
+            this.groupBoxServer.Text = "Externo";
             // 
             // groupBoxLocal
             // 
-            this.groupBoxLocal.Controls.Add(this.buttonRandomize);
+            this.groupBoxLocal.Controls.Add(this.buttonRefreshPrivate);
+            this.groupBoxLocal.Controls.Add(this.label4);
+            this.groupBoxLocal.Controls.Add(this.textBoxPrivateHostname);
             this.groupBoxLocal.Controls.Add(this.label1);
-            this.groupBoxLocal.Controls.Add(this.textBoxLocalIP);
-            this.groupBoxLocal.Controls.Add(this.textBoxLocalPort);
+            this.groupBoxLocal.Controls.Add(this.textBoxPrivateIP);
+            this.groupBoxLocal.Controls.Add(this.textBoxPrivatePort);
             this.groupBoxLocal.Controls.Add(this.label2);
             this.groupBoxLocal.Location = new System.Drawing.Point(12, 27);
             this.groupBoxLocal.Name = "groupBoxLocal";
-            this.groupBoxLocal.Size = new System.Drawing.Size(172, 95);
+            this.groupBoxLocal.Size = new System.Drawing.Size(255, 100);
             this.groupBoxLocal.TabIndex = 6;
             this.groupBoxLocal.TabStop = false;
             this.groupBoxLocal.Text = "Local";
             // 
-            // buttonRandomize
-            // 
-            this.buttonRandomize.Location = new System.Drawing.Point(91, 65);
-            this.buttonRandomize.Name = "buttonRandomize";
-            this.buttonRandomize.Size = new System.Drawing.Size(75, 23);
-            this.buttonRandomize.TabIndex = 7;
-            this.buttonRandomize.Text = "Aleatória";
-            this.buttonRandomize.UseVisualStyleBackColor = true;
-            this.buttonRandomize.Click += new System.EventHandler(this.buttonRandomize_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 16);
+            this.label1.Location = new System.Drawing.Point(56, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(17, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "IP";
             // 
-            // textBoxLocalIP
+            // textBoxPrivateIP
             // 
-            this.textBoxLocalIP.Location = new System.Drawing.Point(47, 13);
-            this.textBoxLocalIP.Name = "textBoxLocalIP";
-            this.textBoxLocalIP.ReadOnly = true;
-            this.textBoxLocalIP.Size = new System.Drawing.Size(119, 20);
-            this.textBoxLocalIP.TabIndex = 7;
+            this.textBoxPrivateIP.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxPrivateIP.Location = new System.Drawing.Point(82, 13);
+            this.textBoxPrivateIP.Name = "textBoxPrivateIP";
+            this.textBoxPrivateIP.ReadOnly = true;
+            this.textBoxPrivateIP.Size = new System.Drawing.Size(167, 20);
+            this.textBoxPrivateIP.TabIndex = 7;
             // 
-            // textBoxLocalPort
+            // textBoxPrivatePort
             // 
-            this.textBoxLocalPort.Location = new System.Drawing.Point(47, 39);
-            this.textBoxLocalPort.Name = "textBoxLocalPort";
-            this.textBoxLocalPort.Size = new System.Drawing.Size(119, 20);
-            this.textBoxLocalPort.TabIndex = 8;
-            this.textBoxLocalPort.Text = "4848";
+            this.textBoxPrivatePort.Location = new System.Drawing.Point(82, 67);
+            this.textBoxPrivatePort.Name = "textBoxPrivatePort";
+            this.textBoxPrivatePort.Size = new System.Drawing.Size(60, 20);
+            this.textBoxPrivatePort.TabIndex = 8;
+            this.textBoxPrivatePort.Text = "4848";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 42);
+            this.label2.Location = new System.Drawing.Point(41, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 6;
@@ -177,9 +178,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxLog.Controls.Add(this.textBoxLog);
-            this.groupBoxLog.Location = new System.Drawing.Point(190, 27);
+            this.groupBoxLog.Location = new System.Drawing.Point(273, 27);
             this.groupBoxLog.Name = "groupBoxLog";
-            this.groupBoxLog.Size = new System.Drawing.Size(517, 387);
+            this.groupBoxLog.Size = new System.Drawing.Size(434, 378);
             this.groupBoxLog.TabIndex = 7;
             this.groupBoxLog.TabStop = false;
             this.groupBoxLog.Text = "Log";
@@ -194,15 +195,16 @@
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
-            this.textBoxLog.Size = new System.Drawing.Size(505, 361);
+            this.textBoxLog.Size = new System.Drawing.Size(422, 352);
             this.textBoxLog.TabIndex = 0;
             // 
             // labelEstado
             // 
+            this.labelEstado.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelEstado.AutoSize = true;
             this.labelEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEstado.ForeColor = System.Drawing.Color.Blue;
-            this.labelEstado.Location = new System.Drawing.Point(51, 30);
+            this.labelEstado.Location = new System.Drawing.Point(92, 30);
             this.labelEstado.Name = "labelEstado";
             this.labelEstado.Size = new System.Drawing.Size(75, 25);
             this.labelEstado.TabIndex = 8;
@@ -211,9 +213,9 @@
             // groupBoxEstado
             // 
             this.groupBoxEstado.Controls.Add(this.labelEstado);
-            this.groupBoxEstado.Location = new System.Drawing.Point(12, 229);
+            this.groupBoxEstado.Location = new System.Drawing.Point(12, 239);
             this.groupBoxEstado.Name = "groupBoxEstado";
-            this.groupBoxEstado.Size = new System.Drawing.Size(172, 80);
+            this.groupBoxEstado.Size = new System.Drawing.Size(255, 80);
             this.groupBoxEstado.TabIndex = 9;
             this.groupBoxEstado.TabStop = false;
             this.groupBoxEstado.Text = "Estado";
@@ -237,28 +239,85 @@
             this.definiçõesToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.definiçõesToolStripMenuItem.Text = "Definições";
             // 
-            // sairToolStripMenuItem
-            // 
-            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sairToolStripMenuItem.Text = "Sair";
-            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
-            // 
             // ligaçãoToolStripMenuItem
             // 
             this.ligaçãoToolStripMenuItem.Name = "ligaçãoToolStripMenuItem";
-            this.ligaçãoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ligaçãoToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.ligaçãoToolStripMenuItem.Text = "Ligação";
+            // 
+            // sairToolStripMenuItem
+            // 
+            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.sairToolStripMenuItem.Text = "Sair";
+            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Hostname";
+            // 
+            // textBoxPublicHostname
+            // 
+            this.textBoxPublicHostname.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxPublicHostname.Location = new System.Drawing.Point(82, 39);
+            this.textBoxPublicHostname.Name = "textBoxPublicHostname";
+            this.textBoxPublicHostname.ReadOnly = true;
+            this.textBoxPublicHostname.Size = new System.Drawing.Size(167, 20);
+            this.textBoxPublicHostname.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(18, 42);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Hostname";
+            // 
+            // textBoxPrivateHostname
+            // 
+            this.textBoxPrivateHostname.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxPrivateHostname.Location = new System.Drawing.Point(82, 39);
+            this.textBoxPrivateHostname.Name = "textBoxPrivateHostname";
+            this.textBoxPrivateHostname.ReadOnly = true;
+            this.textBoxPrivateHostname.Size = new System.Drawing.Size(167, 20);
+            this.textBoxPrivateHostname.TabIndex = 10;
+            // 
+            // buttonRefreshPrivate
+            // 
+            this.buttonRefreshPrivate.Location = new System.Drawing.Point(174, 64);
+            this.buttonRefreshPrivate.Name = "buttonRefreshPrivate";
+            this.buttonRefreshPrivate.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefreshPrivate.TabIndex = 11;
+            this.buttonRefreshPrivate.Text = "Actualizar";
+            this.buttonRefreshPrivate.UseVisualStyleBackColor = true;
+            this.buttonRefreshPrivate.Click += new System.EventHandler(this.buttonRefreshPrivate_Click);
+            // 
+            // buttonRefreshPublic
+            // 
+            this.buttonRefreshPublic.Location = new System.Drawing.Point(174, 63);
+            this.buttonRefreshPublic.Name = "buttonRefreshPublic";
+            this.buttonRefreshPublic.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefreshPublic.TabIndex = 12;
+            this.buttonRefreshPublic.Text = "Actualizar";
+            this.buttonRefreshPublic.UseVisualStyleBackColor = true;
+            this.buttonRefreshPublic.Click += new System.EventHandler(this.buttonRefreshPublic_Click);
             // 
             // ListeningForm
             // 
             this.AcceptButton = this.buttonConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 423);
+            this.ClientSize = new System.Drawing.Size(719, 414);
             this.Controls.Add(this.groupBoxEstado);
             this.Controls.Add(this.groupBoxLog);
             this.Controls.Add(this.groupBoxLocal);
+            this.Controls.Add(this.buttonConnect);
             this.Controls.Add(this.groupBoxServer);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -269,6 +328,7 @@
             this.Text = "Ligação Player";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ListeningForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ListeningForm_FormClosed);
+            this.Load += new System.EventHandler(this.ListeningForm_Load);
             this.groupBoxServer.ResumeLayout(false);
             this.groupBoxServer.PerformLayout();
             this.groupBoxLocal.ResumeLayout(false);
@@ -289,15 +349,14 @@
         private System.Windows.Forms.Button buttonConnect;
         private System.Windows.Forms.Label labelIP;
         private System.Windows.Forms.Label Porta;
-        private System.Windows.Forms.TextBox textBoxServerIP;
-        private System.Windows.Forms.TextBox textBoxServerPort;
+        private System.Windows.Forms.TextBox textBoxPublicIP;
+        private System.Windows.Forms.TextBox textBoxPublicPort;
         private System.Windows.Forms.GroupBox groupBoxServer;
         private System.Windows.Forms.GroupBox groupBoxLocal;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxLocalIP;
-        private System.Windows.Forms.TextBox textBoxLocalPort;
+        private System.Windows.Forms.TextBox textBoxPrivateIP;
+        private System.Windows.Forms.TextBox textBoxPrivatePort;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button buttonRandomize;
         private System.Windows.Forms.GroupBox groupBoxLog;
         private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.Label labelEstado;
@@ -306,5 +365,11 @@
         private System.Windows.Forms.ToolStripMenuItem definiçõesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ligaçãoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxPublicHostname;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxPrivateHostname;
+        private System.Windows.Forms.Button buttonRefreshPublic;
+        private System.Windows.Forms.Button buttonRefreshPrivate;
     }
 }

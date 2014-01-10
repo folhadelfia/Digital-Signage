@@ -1,90 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.375, 8.5" name="RegistarPosto">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="RegistarPosto">
   <DataContextMoniker Name="/RegistarPostoDataContext" />
   <nestedChildShapes>
-    <classShape Id="b51464b8-4628-4fb5-b46e-539c96fd7b19" absoluteBounds="3.75, 1.25, 2, 2.1554996744791666">
+    <classShape Id="fa625343-3701-4829-a8a3-a117b90ce069" absoluteBounds="4.5, 3.5, 2, 2.1554996744791666">
       <DataClassMoniker Name="/RegistarPostoDataContext/WorkStation" />
       <nestedChildShapes>
-        <elementListCompartment Id="c939a67a-e2b7-4e0e-a9a8-63ed1fef0f72" absoluteBounds="3.7649999999999997, 1.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="46f81864-e2a9-4ccf-9699-0cbdb06c146c" absoluteBounds="4.515, 3.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1b8c2570-4c12-4109-a4b7-0cf84b1e9b2f" absoluteBounds="0.75, 1.375, 2, 1.3862939453125005">
-      <DataClassMoniker Name="/RegistarPostoDataContext/WorkStationDadosPendente" />
-      <nestedChildShapes>
-        <elementListCompartment Id="341950d5-b9fb-4c9f-a21a-3fe6bb73843c" absoluteBounds="0.76499999999999968, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="bdd3999f-92e7-43b3-a9a4-88655b2e9606" absoluteBounds="3.625, 4.625, 2, 1.3862939453125005">
-      <DataClassMoniker Name="/RegistarPostoDataContext/WorkStationPendente" />
-      <nestedChildShapes>
-        <elementListCompartment Id="44c910c6-7acd-4400-ba2d-b0193ae7ba24" absoluteBounds="3.6399999999999997, 5.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(3.75 : 2.06814697265625); (2.75 : 2.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/RegistarPostoDataContext/WorkStation/WorkStation_WorkStationDadosPendente" />
-      <nodes>
-        <classShapeMoniker Id="b51464b8-4628-4fb5-b46e-539c96fd7b19" />
-        <classShapeMoniker Id="1b8c2570-4c12-4109-a4b7-0cf84b1e9b2f" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(4.6875 : 3.40549967447917); (4.6875 : 4.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/RegistarPostoDataContext/WorkStation/WorkStation_WorkStationPendente" />
-      <nodes>
-        <classShapeMoniker Id="b51464b8-4628-4fb5-b46e-539c96fd7b19" />
-        <classShapeMoniker Id="bdd3999f-92e7-43b3-a9a4-88655b2e9606" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="1820caef-f7b2-4583-8a6f-f77a0dbff343" absoluteBounds="7.25, 0.5, 2, 4.6554182942708326">
-      <DataClassMoniker Name="/RegistarPostoDataContext/Device" />
-      <nestedChildShapes>
-        <elementListCompartment Id="a6ace3c0-e9ed-48bb-9840-6b3747e17ce6" absoluteBounds="7.265, 0.96, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="1039eb72-fcd7-405a-89f8-0c15e7e67aef" absoluteBounds="7.375, 5.875, 2, 1.9631982421875005">
-      <DataClassMoniker Name="/RegistarPostoDataContext/DeviceType" />
-      <nestedChildShapes>
-        <elementListCompartment Id="21e1671d-72b0-4a6a-85d1-553c5ca9fa58" absoluteBounds="7.3900000000000006, 6.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="f87edf65-f381-48be-a3ef-076848e09386" absoluteBounds="9.875, 2.125, 2, 1.3862939453125005">
-      <DataClassMoniker Name="/RegistarPostoDataContext/DevicesDadosPendente" />
-      <nestedChildShapes>
-        <elementListCompartment Id="9fccd545-0cae-46f5-adee-0ed2bb0ffce4" absoluteBounds="9.89, 2.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="cc0d78cb-88aa-4eec-bb85-b7c62bc6fd14" absoluteBounds="10.125, 0.5, 2, 1.3862939453125005">
-      <DataClassMoniker Name="/RegistarPostoDataContext/DevicesPendente" />
-      <nestedChildShapes>
-        <elementListCompartment Id="5a66b622-81da-43ec-921e-961bb49f591b" absoluteBounds="10.14, 0.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(5.75 : 2.32774983723958); (7.25 : 2.32774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/RegistarPostoDataContext/WorkStation/WorkStation_Device" />
-      <nodes>
-        <classShapeMoniker Id="b51464b8-4628-4fb5-b46e-539c96fd7b19" />
-        <classShapeMoniker Id="1820caef-f7b2-4583-8a6f-f77a0dbff343" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(8.3125 : 5.875); (8.3125 : 5.15541829427083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/RegistarPostoDataContext/DeviceType/DeviceType_Device" />
-      <nodes>
-        <classShapeMoniker Id="1039eb72-fcd7-405a-89f8-0c15e7e67aef" />
-        <classShapeMoniker Id="1820caef-f7b2-4583-8a6f-f77a0dbff343" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(9.25 : 2.81814697265625); (9.875 : 2.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/RegistarPostoDataContext/Device/Device_DevicesDadosPendente" />
-      <nodes>
-        <classShapeMoniker Id="1820caef-f7b2-4583-8a6f-f77a0dbff343" />
-        <classShapeMoniker Id="f87edf65-f381-48be-a3ef-076848e09386" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(9.25 : 1.19314697265625); (10.125 : 1.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/RegistarPostoDataContext/Device/Device_DevicesPendente" />
-      <nodes>
-        <classShapeMoniker Id="1820caef-f7b2-4583-8a6f-f77a0dbff343" />
-        <classShapeMoniker Id="cc0d78cb-88aa-4eec-bb85-b7c62bc6fd14" />
-      </nodes>
-    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
