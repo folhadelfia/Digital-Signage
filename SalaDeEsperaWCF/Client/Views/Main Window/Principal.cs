@@ -721,6 +721,8 @@ namespace Client
 
                 worker.DoWork += worker_DoWorkAddPlayerToTreeView;
 
+
+                treeViewRede.Nodes.Clear();
                 worker.RunWorkerAsync(new object[] { player, clinicScreenName });
             }
             //using (var db = new ClinicaDataContext(Program.LigacaoClinica)) thisClinic = db.ClinicaDados.FirstOrDefault();
