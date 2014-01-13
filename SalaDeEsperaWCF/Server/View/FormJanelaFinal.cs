@@ -90,7 +90,7 @@ namespace Server.View
         /// </summary>
         Control menuSource = null;
 
-
+        private Timer mouseHideTimer = new Timer();
 
         /// <summary>
         /// Contém o tamanho e a localização que foi dada quando a janela foi aberta. É preciso para poder reposicionar a janela correctamente no monitor dado pelo PlayerWindowInformation
@@ -119,6 +119,37 @@ namespace Server.View
 
         private void FormJanelaFinal_Load(object sender, EventArgs e)
         {
+            mouseHideTimer.Interval = 5000;
+
+            mouseHideTimer.Tick += mouseHideTimer_Tick;
+            this.MouseMove += General_MouseMove;
+
+            mouseHideTimer.Start();
+        }
+
+        void General_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseHidden && lastMousePos != Cursor.Position)
+            {
+                Cursor.Show();
+                mouseHidden = false;
+            }
+
+            mouseHideTimer.Stop();
+            mouseHideTimer.Start();
+        }
+
+
+        bool mouseHidden = false;
+        Point lastMousePos = new Point();
+        void mouseHideTimer_Tick(object sender, EventArgs e)
+        {
+            if (!mouseHidden)
+            {
+                Cursor.Hide();
+                lastMousePos = Cursor.Position;
+                mouseHidden = true;
+            }
         }
 
         private void reposicionarJanelaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -547,6 +578,8 @@ namespace Server.View
 
                     this.Controls.Add(markee);
 
+                    markee.MouseMove += General_MouseMove;
+
                     markee.Run();
 
                 }
@@ -590,7 +623,9 @@ namespace Server.View
                         tvScreen.Devices.TunerDevice = dev;
 
                     tvScreen.ContextMenuStrip = contextMSTV;
-                    
+
+                    tvScreen.MouseMove += General_MouseMove;
+
                     this.Controls.Add(tvScreen);
 
                     try

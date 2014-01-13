@@ -74,13 +74,21 @@ namespace Assemblies.Components
         protected Form optionsForm;
         protected override void OnMouseEnter(EventArgs e)
         {
-            if (TargetSite != ComponentTargetSite.Builder) return;
+            if (TargetSite != ComponentTargetSite.Builder)
+            {
+                base.OnMouseEnter(e);
+                return;
+            }
             this.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             base.OnMouseEnter(e);
         }
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            if (TargetSite != ComponentTargetSite.Builder) return;
+            if (TargetSite != ComponentTargetSite.Builder)
+            {
+                base.OnMouseDown(e);
+                return;
+            }
             try
             {
                 Checked = !Checked;
@@ -154,7 +162,6 @@ namespace Assemblies.Components
                 else
                 {
                     offset = e.Location;
-                    base.OnMouseDown(e);
                 }
             }
             catch (Exception ex)
@@ -163,10 +170,18 @@ namespace Assemblies.Components
                 MessageBox.Show(ex.Message);
 #endif
             }
+            finally
+            {
+                base.OnMouseDown(e);
+            }
         }
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            if (TargetSite != ComponentTargetSite.Builder) return;
+            if (TargetSite != ComponentTargetSite.Builder)
+            {
+                base.OnMouseMove(e);
+                return;
+            }
             try
             {
                 if (e.Button == System.Windows.Forms.MouseButtons.Left)
@@ -209,33 +224,33 @@ namespace Assemblies.Components
 
                 #region Valores dos pixeis antigos
                 //if (!triggeredByDesignationLabel)
-                    //{
-                    //    if (e.Y < 8)
-                    //    {
-                    //        if (e.X < 12) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
-                    //        else if (e.X > Width - 12) base.Cursor = Cursors.SizeNESW; //Topo direita
-                    //        else base.Cursor = Cursors.SizeNS; //Topo
-                    //    }
-                    //    else if (e.X < 8)
-                    //    {
-                    //        if (e.Y < 12) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
-                    //        else if (e.Y > Height - 12) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
-                    //        else base.Cursor = Cursors.SizeWE; //Esquerda
-                    //    }
-                    //    else if (e.Y > Height - 9)
-                    //    {
-                    //        if (e.X < 12) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
-                    //        else if (e.X > Width - 12) base.Cursor = Cursors.SizeNWSE; //Fundo direita
-                    //        else base.Cursor = Cursors.SizeNS; //Fundo
-                    //    }
-                    //    else if (e.X > Width - 9)
-                    //    {
-                    //        if (e.Y < 12) base.Cursor = Cursors.SizeNESW;
-                    //        else if (e.Y > Height - 12) base.Cursor = Cursors.SizeNWSE;
-                    //        else base.Cursor = Cursors.SizeWE;
-                    //    }
-                    //    else this.Cursor = Cursors.SizeAll;
-                    //}
+                //{
+                //    if (e.Y < 8)
+                //    {
+                //        if (e.X < 12) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
+                //        else if (e.X > Width - 12) base.Cursor = Cursors.SizeNESW; //Topo direita
+                //        else base.Cursor = Cursors.SizeNS; //Topo
+                //    }
+                //    else if (e.X < 8)
+                //    {
+                //        if (e.Y < 12) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
+                //        else if (e.Y > Height - 12) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
+                //        else base.Cursor = Cursors.SizeWE; //Esquerda
+                //    }
+                //    else if (e.Y > Height - 9)
+                //    {
+                //        if (e.X < 12) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
+                //        else if (e.X > Width - 12) base.Cursor = Cursors.SizeNWSE; //Fundo direita
+                //        else base.Cursor = Cursors.SizeNS; //Fundo
+                //    }
+                //    else if (e.X > Width - 9)
+                //    {
+                //        if (e.Y < 12) base.Cursor = Cursors.SizeNESW;
+                //        else if (e.Y > Height - 12) base.Cursor = Cursors.SizeNWSE;
+                //        else base.Cursor = Cursors.SizeWE;
+                //    }
+                //    else this.Cursor = Cursors.SizeAll;
+                //}
                 //else this.Cursor = Cursors.SizeAll;
                 #endregion
             }
@@ -245,10 +260,18 @@ namespace Assemblies.Components
                 MessageBox.Show(ex.Message);
 #endif
             }
+            finally
+            {
+                base.OnMouseMove(e);
+            }
         }
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            if (TargetSite != ComponentTargetSite.Builder) return;
+            if (TargetSite != ComponentTargetSite.Builder)
+            {
+                base.OnMouseUp(e);
+                return;
+            }
             try
             {
                 dragging = false;
@@ -259,11 +282,21 @@ namespace Assemblies.Components
                 MessageBox.Show(ex.Message);
 #endif
             }
+            finally
+            {
+                base.OnMouseUp(e);
+            }
         }
         protected override void OnMouseLeave(EventArgs e)
         {
-            if (TargetSite != ComponentTargetSite.Builder) return;
+            if (TargetSite != ComponentTargetSite.Builder)
+            {
+                base.OnMouseLeave(e);
+                return;
+            }
             this.Cursor = Cursors.Default;
+
+            base.OnMouseLeave(e);
         }
         #endregion
 
