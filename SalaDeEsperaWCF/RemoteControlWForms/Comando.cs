@@ -107,6 +107,9 @@ namespace RemoteControlWForms
             pictureBoxTVI.Click += Blink;
             pictureBoxVolDown.Click += Blink;
             pictureBoxVolUp.Click += Blink;
+
+            pictureBoxVolDown.Visible = false;
+            pictureBoxVolUp.Visible = false;
         }
 
         private void pictureBoxClose_Click(object sender, EventArgs e)

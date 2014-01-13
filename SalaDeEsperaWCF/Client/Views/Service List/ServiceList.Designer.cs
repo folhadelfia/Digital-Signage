@@ -31,14 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServiceList));
             this.groupBoxPCS = new System.Windows.Forms.GroupBox();
+            this.treeViewRede = new System.Windows.Forms.TreeView();
+            this.imageListServiceList = new System.Windows.Forms.ImageList(this.components);
             this.buttonOk = new System.Windows.Forms.Button();
             this.menuStripServiceList = new System.Windows.Forms.MenuStrip();
             this.fICHEIROToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonSearchServices = new System.Windows.Forms.Button();
+            this.buttonScan = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.treeViewRede = new System.Windows.Forms.TreeView();
-            this.imageListServiceList = new System.Windows.Forms.ImageList(this.components);
+            this.progressBarScan = new System.Windows.Forms.ProgressBar();
             this.groupBoxPCS.SuspendLayout();
             this.menuStripServiceList.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +49,7 @@
             this.groupBoxPCS.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxPCS.Controls.Add(this.progressBarScan);
             this.groupBoxPCS.Controls.Add(this.treeViewRede);
             this.groupBoxPCS.Location = new System.Drawing.Point(12, 27);
             this.groupBoxPCS.Name = "groupBoxPCS";
@@ -55,6 +57,25 @@
             this.groupBoxPCS.TabIndex = 1;
             this.groupBoxPCS.TabStop = false;
             this.groupBoxPCS.Text = "Computadores disponíveis";
+            // 
+            // treeViewRede
+            // 
+            this.treeViewRede.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewRede.ImageIndex = 0;
+            this.treeViewRede.ImageList = this.imageListServiceList;
+            this.treeViewRede.Location = new System.Drawing.Point(3, 16);
+            this.treeViewRede.Name = "treeViewRede";
+            this.treeViewRede.SelectedImageIndex = 0;
+            this.treeViewRede.Size = new System.Drawing.Size(333, 169);
+            this.treeViewRede.TabIndex = 0;
+            this.treeViewRede.DoubleClick += new System.EventHandler(this.treeViewRede_DoubleClick);
+            // 
+            // imageListServiceList
+            // 
+            this.imageListServiceList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListServiceList.ImageStream")));
+            this.imageListServiceList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListServiceList.Images.SetKeyName(0, "Monitor");
+            this.imageListServiceList.Images.SetKeyName(1, "Computer");
             // 
             // buttonOk
             // 
@@ -92,15 +113,15 @@
             this.configurarToolStripMenuItem.Text = "Configurar";
             this.configurarToolStripMenuItem.Click += new System.EventHandler(this.configurarToolStripMenuItem_Click);
             // 
-            // buttonSearchServices
+            // buttonScan
             // 
-            this.buttonSearchServices.Location = new System.Drawing.Point(12, 221);
-            this.buttonSearchServices.Name = "buttonSearchServices";
-            this.buttonSearchServices.Size = new System.Drawing.Size(75, 23);
-            this.buttonSearchServices.TabIndex = 4;
-            this.buttonSearchServices.Text = "Procurar";
-            this.buttonSearchServices.UseVisualStyleBackColor = true;
-            this.buttonSearchServices.Click += new System.EventHandler(this.buttonSearchServices_Click);
+            this.buttonScan.Location = new System.Drawing.Point(12, 221);
+            this.buttonScan.Name = "buttonScan";
+            this.buttonScan.Size = new System.Drawing.Size(75, 23);
+            this.buttonScan.TabIndex = 4;
+            this.buttonScan.Text = "Procurar";
+            this.buttonScan.UseVisualStyleBackColor = true;
+            this.buttonScan.Click += new System.EventHandler(this.buttonSearchServices_Click);
             // 
             // buttonCancel
             // 
@@ -112,24 +133,14 @@
             this.buttonCancel.Text = "Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // treeViewRede
+            // progressBarScan
             // 
-            this.treeViewRede.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewRede.ImageIndex = 0;
-            this.treeViewRede.ImageList = this.imageListServiceList;
-            this.treeViewRede.Location = new System.Drawing.Point(3, 16);
-            this.treeViewRede.Name = "treeViewRede";
-            this.treeViewRede.SelectedImageIndex = 0;
-            this.treeViewRede.Size = new System.Drawing.Size(333, 169);
-            this.treeViewRede.TabIndex = 0;
-            this.treeViewRede.DoubleClick += new System.EventHandler(this.treeViewRede_DoubleClick);
-            // 
-            // imageListServiceList
-            // 
-            this.imageListServiceList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListServiceList.ImageStream")));
-            this.imageListServiceList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListServiceList.Images.SetKeyName(0, "Monitor");
-            this.imageListServiceList.Images.SetKeyName(1, "Computer");
+            this.progressBarScan.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBarScan.Location = new System.Drawing.Point(3, 175);
+            this.progressBarScan.Name = "progressBarScan";
+            this.progressBarScan.Size = new System.Drawing.Size(333, 10);
+            this.progressBarScan.TabIndex = 1;
             // 
             // ServiceList
             // 
@@ -139,7 +150,7 @@
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(362, 256);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonSearchServices);
+            this.Controls.Add(this.buttonScan);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.groupBoxPCS);
             this.Controls.Add(this.menuStripServiceList);
@@ -162,9 +173,10 @@
         private System.Windows.Forms.MenuStrip menuStripServiceList;
         private System.Windows.Forms.ToolStripMenuItem fICHEIROToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem configurarToolStripMenuItem;
-        private System.Windows.Forms.Button buttonSearchServices;
+        private System.Windows.Forms.Button buttonScan;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.TreeView treeViewRede;
         private System.Windows.Forms.ImageList imageListServiceList;
+        private System.Windows.Forms.ProgressBar progressBarScan;
     }
 }

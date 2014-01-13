@@ -33,7 +33,7 @@ using Assemblies.XMLSerialization.Components;
 using Assemblies.XMLSerialization;
 using System.Xml.Serialization;
 
-using Client.Linq;
+using Assemblies.Linq;
 using System.ServiceModel;
 
 namespace Client
@@ -713,14 +713,14 @@ namespace Client
         {
             List<Player> players = new List<Player>();
 
-            using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados)) players = db.Players.Where(x => x.isActive).ToList();
+            using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados)) players = db.Players.Where(x => x.isActive).ToList();
 
             playersFound = players.Count;
             playersScanned = 0;
 
             List<Clinica> clinicas = new List<Clinica>();
 
-            using (var db = new ClinicasDataContext(Program.LigacaoClinicas)) clinicas = db.Clinicas.Where(x => x.isActive ?? false && players.Select(y => y.idClinica).Contains(x.idClinica)).ToList();
+            using (var db = new ClinicasDataContext(LinqConnectionStrings.LigacaoClinicas)) clinicas = db.Clinicas.Where(x => x.isActive ?? false && players.Select(y => y.idClinica).Contains(x.idClinica)).ToList();
 
             foreach (var player in players)
             {
@@ -737,7 +737,7 @@ namespace Client
                 treeViewRede.Nodes.Clear();
                 worker.RunWorkerAsync(new object[] { player, clinicScreenName });
             }
-            //using (var db = new ClinicaDataContext(Program.LigacaoClinica)) thisClinic = db.ClinicaDados.FirstOrDefault();
+            //using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) thisClinic = db.ClinicaDados.FirstOrDefault();
         }
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

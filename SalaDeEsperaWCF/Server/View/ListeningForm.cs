@@ -27,11 +27,12 @@ using Transitions;
 using System.Threading;
 using TV2Lib;
 using DirectShowLib;
-using Server.Linq;
 using System.Data.SqlClient;
 using System.Xml;
 using System.IO;
 using System.ComponentModel;
+
+using Assemblies.Linq;
 
 namespace Server.View
 {
@@ -97,7 +98,7 @@ namespace Server.View
             buttonConnect.Enabled = false;
             this.RefreshIPAndHostnameTextboxes();
 
-            using (var db = new ClinicaDataContext(Program.LigacaoClinica)) idClinicaMulti = db.ClinicaDados.Single().idClinicaMulti ?? -1;
+            using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) idClinicaMulti = db.ClinicaDados.Single().idClinicaMulti ?? -1;
         }
 
         #region Preenchimento dos ips e hostnames, actualização dos estados dos botões
@@ -206,7 +207,7 @@ namespace Server.View
             {
                 //string tempHostname = "";
 
-                //using (var db = new ClinicaDataContext(Program.LigacaoClinica))
+                //using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica))
                 //{
                 //    tempHostname = db.ClinicaDados.Single().DNS;
                 //}
@@ -221,7 +222,7 @@ namespace Server.View
 
                 if (string.IsNullOrWhiteSpace(tempHostname))
                 {
-                    using (var db = new ClinicaDataContext(Program.LigacaoClinica))
+                    using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica))
                         tempHostname = db.ClinicaDados.Single().DNS;
                 }
 
@@ -636,7 +637,7 @@ namespace Server.View
         {
             try
             {
-                using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados))
+                using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
                 {
                     foreach (var pl in db.Players.Where(x => x.isActive && x.privatePort == privatePort && x.privateIPAddress != privateIP && x.publicIPAddress == publicIP))
                     {
@@ -676,7 +677,7 @@ namespace Server.View
 
                 try
                 {
-                    using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados))
+                    using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
                     {
                         List<Player> conflictingPlayers = new List<Player>();
                         var conflictingPlayersTemp = db.Players.Where(x => x.isActive && x.privatePort == privatePort);
@@ -784,7 +785,7 @@ namespace Server.View
                 serviceHost.Close();
                 this.Log("Serviço fechado com sucesso");
 
-                using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados))
+                using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
                 {
                     string publicIPAddress = MyToolkit.Networking.PublicIPAddress.ToString();
 
@@ -805,7 +806,7 @@ namespace Server.View
 
                 try
                 {
-                    using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados))
+                    using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
                     {
                         string publicIPAddress = MyToolkit.Networking.PublicIPAddress.ToString();
 

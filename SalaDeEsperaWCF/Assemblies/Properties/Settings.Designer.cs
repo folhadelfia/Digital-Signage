@@ -32,5 +32,37 @@ namespace Assemblies.Properties {
                 return ((string)(this["DigitalSignageConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SERVERDEV;Initial Catalog=GestProgram;User ID=cliente;Password=client" +
+            "e")]
+        public string GestProgramConnectionString {
+            get {
+                return ((string)(this["GestProgramConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SERVERDEV;Initial Catalog=GestMulti;User ID=cliente;Password=cliente")]
+        public string GestMultiConnectionString {
+            get {
+                return ((string)(this["GestMultiConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SERVERDEV;Initial Catalog=DigitalSignage;User ID=cliente;Password=cli" +
+            "ente")]
+        public string DigitalSignageConnectionString1 {
+            get {
+                return ((string)(this["DigitalSignageConnectionString1"]));
+            }
+        }
     }
 }

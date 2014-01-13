@@ -56,6 +56,7 @@
             this.contextMenuStripTreeViewRede = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ligarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxRede = new System.Windows.Forms.GroupBox();
+            this.progressBarScan = new System.Windows.Forms.ProgressBar();
             this.buttonScan = new System.Windows.Forms.Button();
             this.groupBoxBuilder = new System.Windows.Forms.GroupBox();
             this.groupBoxStatus = new System.Windows.Forms.GroupBox();
@@ -64,7 +65,6 @@
             this.listViewStatusColValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainerGeral = new System.Windows.Forms.SplitContainer();
             this.splitContainerRedeStatus = new System.Windows.Forms.SplitContainer();
-            this.progressBarScan = new System.Windows.Forms.ProgressBar();
             this.groupBoxComponents.SuspendLayout();
             this.contextMenuStripBackground.SuspendLayout();
             this.contextMenuStripComponents.SuspendLayout();
@@ -259,7 +259,7 @@
             // abrirPlayerToolStripMenuItem
             // 
             this.abrirPlayerToolStripMenuItem.Name = "abrirPlayerToolStripMenuItem";
-            this.abrirPlayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abrirPlayerToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.abrirPlayerToolStripMenuItem.Text = "Abrir Player";
             this.abrirPlayerToolStripMenuItem.Click += new System.EventHandler(this.abrirPlayerToolStripMenuItem_Click);
             // 
@@ -333,6 +333,16 @@
             this.groupBoxRede.TabIndex = 9;
             this.groupBoxRede.TabStop = false;
             this.groupBoxRede.Text = "Rede";
+            // 
+            // progressBarScan
+            // 
+            this.progressBarScan.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBarScan.Location = new System.Drawing.Point(3, 182);
+            this.progressBarScan.Name = "progressBarScan";
+            this.progressBarScan.Size = new System.Drawing.Size(316, 10);
+            this.progressBarScan.TabIndex = 13;
+            this.progressBarScan.Visible = false;
             // 
             // buttonScan
             // 
@@ -437,14 +447,6 @@
             this.splitContainerRedeStatus.SplitterDistance = 226;
             this.splitContainerRedeStatus.SplitterWidth = 5;
             this.splitContainerRedeStatus.TabIndex = 0;
-            // 
-            // progressBarScan
-            // 
-            this.progressBarScan.Location = new System.Drawing.Point(3, 182);
-            this.progressBarScan.Name = "progressBarScan";
-            this.progressBarScan.Size = new System.Drawing.Size(316, 10);
-            this.progressBarScan.TabIndex = 13;
-            this.progressBarScan.Visible = false;
             // 
             // Principal
             // 

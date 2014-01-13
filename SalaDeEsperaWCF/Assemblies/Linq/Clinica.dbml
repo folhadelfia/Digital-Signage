@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GestProgram" Class="ClinicaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SERVERDEV;Initial Catalog=GestProgram;User ID=cliente" SettingsObjectName="Assemblies.Properties.Settings" SettingsPropertyName="GestProgramConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ClinicaDados" Member="ClinicaDados">
+    <Type Name="ClinicaDado">
+      <Column Name="idClinicaDados" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Morada" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Localidade" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CP4" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CP3" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Logotipo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LogotipoCaminho" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="EnderecoIP" Type="System.String" DbType="NVarChar(240)" CanBeNull="true" />
+      <Column Name="DNS" Type="System.String" DbType="NVarChar(240)" CanBeNull="true" />
+      <Column Name="Porta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UtilizadorBD" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordBD" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordAdmin" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="idClinicaMulti" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HIM" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="HFM" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="HIT" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="HFT" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

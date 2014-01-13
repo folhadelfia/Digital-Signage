@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="RegistarPosto">
+  <DataContextMoniker Name="/RegistarPostoDataContext" />
+  <nestedChildShapes>
+    <classShape Id="5a50891e-a54f-44b5-a57f-d0a7a440d476" absoluteBounds="5, 2, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/RegistarPostoDataContext/WorkStation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="84487e82-92fe-4e9a-ada7-8bcc1c4b7c21" absoluteBounds="5.015, 2.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
