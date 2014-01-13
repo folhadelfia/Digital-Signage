@@ -344,7 +344,11 @@ namespace Server.View
 
             //temp.Channels.TuneChannelAsync(ch, TuneChannelCallback);
 
-            temp.Channels.TuneChannel(ch);
+            BackgroundWorker worker = new BackgroundWorker();
+
+            worker.DoWork += (sender, e) => { temp.Channels.TuneChannel(ch); };
+
+            worker.RunWorkerAsync();
         }
 
         private void TuneChannelCallback(DigitalTVScreen screen, Channel ch, bool result)
