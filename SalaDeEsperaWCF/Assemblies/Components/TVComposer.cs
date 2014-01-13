@@ -20,6 +20,8 @@ namespace Assemblies.Components
 
         public TVComposer(TVConfiguration config)
         {
+            this.SuspendLayout();
+
             base.BackColor = Color.Navy;
 
             base.Configuration = config;
@@ -29,6 +31,12 @@ namespace Assemblies.Components
             ToolTip tt = new ToolTip();
 
             tt.SetToolTip(this, this.ToString());
+
+            Designation = "TV";
+            DesignationLabel.ForeColor = SystemColors.Window;
+
+            this.ResumeLayout();
+            this.PerformLayout();
         }
 
         #region Configuração

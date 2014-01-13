@@ -50,13 +50,13 @@
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ferramentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonFechar = new System.Windows.Forms.Button();
-            this.buttonPlayer = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonConnect = new System.Windows.Forms.Button();
             this.treeViewRede = new System.Windows.Forms.TreeView();
             this.contextMenuStripTreeViewRede = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ligarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxRede = new System.Windows.Forms.GroupBox();
-            this.buttonPause = new System.Windows.Forms.Button();
+            this.buttonScan = new System.Windows.Forms.Button();
             this.groupBoxBuilder = new System.Windows.Forms.GroupBox();
             this.groupBoxStatus = new System.Windows.Forms.GroupBox();
             this.listViewPlayerStatus = new System.Windows.Forms.ListView();
@@ -64,6 +64,7 @@
             this.listViewStatusColValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainerGeral = new System.Windows.Forms.SplitContainer();
             this.splitContainerRedeStatus = new System.Windows.Forms.SplitContainer();
+            this.progressBarScan = new System.Windows.Forms.ProgressBar();
             this.groupBoxComponents.SuspendLayout();
             this.contextMenuStripBackground.SuspendLayout();
             this.contextMenuStripComponents.SuspendLayout();
@@ -258,31 +259,31 @@
             // abrirPlayerToolStripMenuItem
             // 
             this.abrirPlayerToolStripMenuItem.Name = "abrirPlayerToolStripMenuItem";
-            this.abrirPlayerToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.abrirPlayerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.abrirPlayerToolStripMenuItem.Text = "Abrir Player";
             this.abrirPlayerToolStripMenuItem.Click += new System.EventHandler(this.abrirPlayerToolStripMenuItem_Click);
             // 
-            // buttonFechar
+            // buttonClose
             // 
-            this.buttonFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonFechar.Location = new System.Drawing.Point(87, 197);
-            this.buttonFechar.Name = "buttonFechar";
-            this.buttonFechar.Size = new System.Drawing.Size(75, 23);
-            this.buttonFechar.TabIndex = 8;
-            this.buttonFechar.Text = "Fechar Player";
-            this.buttonFechar.UseVisualStyleBackColor = true;
-            this.buttonFechar.Click += new System.EventHandler(this.buttonFechar_Click);
+            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonClose.Location = new System.Drawing.Point(87, 197);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.TabIndex = 8;
+            this.buttonClose.Text = "Fechar Player";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonFechar_Click);
             // 
-            // buttonPlayer
+            // buttonConnect
             // 
-            this.buttonPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonPlayer.Location = new System.Drawing.Point(6, 197);
-            this.buttonPlayer.Name = "buttonPlayer";
-            this.buttonPlayer.Size = new System.Drawing.Size(75, 23);
-            this.buttonPlayer.TabIndex = 7;
-            this.buttonPlayer.Text = "Abrir Player";
-            this.buttonPlayer.UseVisualStyleBackColor = true;
-            this.buttonPlayer.Click += new System.EventHandler(this.buttonPlayer_Click);
+            this.buttonConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonConnect.Location = new System.Drawing.Point(6, 197);
+            this.buttonConnect.Name = "buttonConnect";
+            this.buttonConnect.Size = new System.Drawing.Size(75, 23);
+            this.buttonConnect.TabIndex = 7;
+            this.buttonConnect.Text = "Abrir Player";
+            this.buttonConnect.UseVisualStyleBackColor = true;
+            this.buttonConnect.Click += new System.EventHandler(this.buttonPlayer_Click);
             // 
             // treeViewRede
             // 
@@ -319,9 +320,10 @@
             // 
             // groupBoxRede
             // 
-            this.groupBoxRede.Controls.Add(this.buttonFechar);
-            this.groupBoxRede.Controls.Add(this.buttonPause);
-            this.groupBoxRede.Controls.Add(this.buttonPlayer);
+            this.groupBoxRede.Controls.Add(this.progressBarScan);
+            this.groupBoxRede.Controls.Add(this.buttonClose);
+            this.groupBoxRede.Controls.Add(this.buttonScan);
+            this.groupBoxRede.Controls.Add(this.buttonConnect);
             this.groupBoxRede.Controls.Add(this.treeViewRede);
             this.groupBoxRede.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxRede.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -332,16 +334,16 @@
             this.groupBoxRede.TabStop = false;
             this.groupBoxRede.Text = "Rede";
             // 
-            // buttonPause
+            // buttonScan
             // 
-            this.buttonPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPause.Location = new System.Drawing.Point(241, 197);
-            this.buttonPause.Name = "buttonPause";
-            this.buttonPause.Size = new System.Drawing.Size(75, 23);
-            this.buttonPause.TabIndex = 9;
-            this.buttonPause.Text = "Procurar";
-            this.buttonPause.UseVisualStyleBackColor = true;
-            this.buttonPause.Click += new System.EventHandler(this.buttonScan_Click);
+            this.buttonScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonScan.Location = new System.Drawing.Point(241, 197);
+            this.buttonScan.Name = "buttonScan";
+            this.buttonScan.Size = new System.Drawing.Size(75, 23);
+            this.buttonScan.TabIndex = 9;
+            this.buttonScan.Text = "Procurar";
+            this.buttonScan.UseVisualStyleBackColor = true;
+            this.buttonScan.Click += new System.EventHandler(this.buttonScan_Click);
             // 
             // groupBoxBuilder
             // 
@@ -436,6 +438,14 @@
             this.splitContainerRedeStatus.SplitterWidth = 5;
             this.splitContainerRedeStatus.TabIndex = 0;
             // 
+            // progressBarScan
+            // 
+            this.progressBarScan.Location = new System.Drawing.Point(3, 182);
+            this.progressBarScan.Name = "progressBarScan";
+            this.progressBarScan.Size = new System.Drawing.Size(316, 10);
+            this.progressBarScan.TabIndex = 13;
+            this.progressBarScan.Visible = false;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -487,9 +497,9 @@
         private System.Windows.Forms.ToolStripMenuItem abrirPlayerToolStripMenuItem;
         private System.Windows.Forms.TreeView treeViewRede;
         private System.Windows.Forms.GroupBox groupBoxRede;
-        private System.Windows.Forms.Button buttonPause;
-        private System.Windows.Forms.Button buttonFechar;
-        private System.Windows.Forms.Button buttonPlayer;
+        private System.Windows.Forms.Button buttonScan;
+        private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Button buttonConnect;
         private System.Windows.Forms.GroupBox groupBoxBuilder;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripBackground;
         private System.Windows.Forms.ToolStripMenuItem propriedadesBackgroundToolStripMenuItem;
@@ -509,6 +519,7 @@
         private System.Windows.Forms.ToolStripMenuItem ligarToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainerGeral;
         private System.Windows.Forms.SplitContainer splitContainerRedeStatus;
+        private System.Windows.Forms.ProgressBar progressBarScan;
     }
 }
 

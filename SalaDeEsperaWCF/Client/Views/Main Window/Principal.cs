@@ -592,6 +592,11 @@ namespace Client
 
             //t.Start();
 
+            buttonScan.Enabled = false;
+
+            progressBarScan.Value = 0;
+            progressBarScan.Visible = true;
+
             this.GetPlayersFromDatabase();
 
         }
@@ -700,11 +705,18 @@ namespace Client
             }
         }
 
+        int playersFound = 0,
+            playersScanned = 0;
+
+
         private void GetPlayersFromDatabase()
         {
             List<Player> players = new List<Player>();
 
             using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados)) players = db.Players.Where(x => x.isActive).ToList();
+
+            playersFound = players.Count;
+            playersScanned = 0;
 
             List<Clinica> clinicas = new List<Clinica>();
 
@@ -720,12 +732,25 @@ namespace Client
                 BackgroundWorker worker = new BackgroundWorker();
 
                 worker.DoWork += worker_DoWorkAddPlayerToTreeView;
-
+                worker.RunWorkerCompleted += worker_RunWorkerCompleted;
 
                 treeViewRede.Nodes.Clear();
                 worker.RunWorkerAsync(new object[] { player, clinicScreenName });
             }
             //using (var db = new ClinicaDataContext(Program.LigacaoClinica)) thisClinic = db.ClinicaDados.FirstOrDefault();
+        }
+
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            playersScanned++;
+
+            if (playersFound != 0) //para não dividir por zero, just in case. se o programa chegou aqui é porque à partida é != 0, mas mesmo assim...
+            {
+                progressBarScan.Value = Convert.ToInt32(Math.Round((playersScanned / playersFound) * 100f));
+            }
+
+            buttonScan.Enabled = playersScanned >= playersFound;
+            progressBarScan.Visible = !buttonScan.Enabled;
         }
 
         void worker_DoWorkAddPlayerToTreeView(object sender, DoWorkEventArgs e)
@@ -853,12 +878,14 @@ namespace Client
                 selectedScreen = NetWCFConverter.ToNET(treeViewRede.SelectedNode.Tag as WCFScreenInformation);
 
                 UpdatePlayerStatus();
-
-                foreach (var parentNode in treeViewRede.Nodes.OfType<TreeNode>())
+                foreach (var clinicNode in treeViewRede.Nodes.OfType<TreeNode>())
                 {
-                    foreach (var node in parentNode.Nodes.OfType<TreeNode>())
+                    foreach (var parentNode in clinicNode.Nodes.OfType<TreeNode>())
                     {
-                        node.BackColor = SystemColors.Window;
+                        foreach (var node in parentNode.Nodes.OfType<TreeNode>())
+                        {
+                            node.BackColor = SystemColors.Window;
+                        }
                     }
                 }
 

@@ -26,6 +26,8 @@ namespace Assemblies.Configurations
 
         public bool TransparentBackground { get; set; }
 
+        public bool Border { get; set; }
+
         #endregion
     }
 }

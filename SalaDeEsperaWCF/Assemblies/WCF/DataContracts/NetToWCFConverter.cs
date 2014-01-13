@@ -140,7 +140,8 @@ namespace Assemblies.DataContracts
                     Resolution = ToWCF(footer.Resolution),
                     Size = ToWCF(footer.Size),
                     Speed = footer.Speed,
-                    TextList = footer.Text.ToArray()
+                    TextList = footer.Text.ToArray(),
+                    Border = footer.Border
                 };
             }
             else if (item is TVConfiguration)
@@ -186,7 +187,8 @@ namespace Assemblies.DataContracts
                     Size = ToNET(footer.Size),
                     Speed = footer.Speed,
                     Text = textos,
-                    TransparentBackground = footer.TransparentBackground
+                    TransparentBackground = footer.TransparentBackground,
+                    Border = footer.Border
                 };
             }
             else if (item is WCFTVConfiguration)

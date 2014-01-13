@@ -81,7 +81,7 @@ namespace Assemblies.Options
             down.SetToolTip(buttonMoveItemsDown, "Mover os items seleccionados para baixo");
             remove.SetToolTip(buttonRemoveItems, "Remover os items seleccionados");
 
-            markee = new Markee(ComponentTargetSite.OptionsMenu) { TextList = temp.TextList, Speed = temp.Speed, BackColor = temp.BackColor, TextColor = temp.TextColor, MarkeeFont = temp.MarkeeFont, Direction = markee.Direction };
+            markee = new Markee(ComponentTargetSite.OptionsMenu) { TextList = temp.TextList, Speed = temp.Speed, BackColor = temp.BackColor, TextColor = temp.TextColor, MarkeeFont = temp.MarkeeFont, Direction = markee.Direction, BorderStyle = temp.BorderStyle };
 
             foreach (var item in markee.TextList) listBoxTextList.Items.Add(item);
 
@@ -89,6 +89,8 @@ namespace Assemblies.Options
             markee.Dock = DockStyle.Fill;
 
             trackBarSpeed.Value = markee.Speed;
+
+            checkBoxBorder.Checked = markee.BorderStyle == BorderStyle.FixedSingle;
 
             markee.Run();
         }
@@ -116,7 +118,8 @@ namespace Assemblies.Options
                 BackColor = config.BackColor,
                 TextColor = config.TextColor,
                 MarkeeFont = config.Font,
-                Direction = config.Direction
+                Direction = config.Direction,
+                BorderStyle = config.Border ? BorderStyle.FixedSingle : BorderStyle.None
             };
 
             foreach (var item in markee.TextList) listBoxTextList.Items.Add(item);
@@ -536,6 +539,18 @@ namespace Assemblies.Options
                 MessageBox.Show("UpdateFooterTextList" + Environment.NewLine + ex.Message);
 #endif
             }
+        }
+
+        #endregion
+
+        #region Border
+
+        public bool Border { get; set; }
+
+        private void checkBoxBorder_CheckedChanged(object sender, EventArgs e)
+        {
+            markee.BorderStyle = (sender as CheckBox).Checked ? BorderStyle.FixedSingle : BorderStyle.None;
+            this.Border = (sender as CheckBox).Checked;
         }
 
         #endregion

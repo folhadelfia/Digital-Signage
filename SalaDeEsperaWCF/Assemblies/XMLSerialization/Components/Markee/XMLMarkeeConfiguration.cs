@@ -56,5 +56,7 @@ namespace Assemblies.XMLSerialization.Components
             get;
             set;
         }
+
+        public bool Border { get; set; }
     }
 }

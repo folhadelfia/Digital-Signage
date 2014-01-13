@@ -204,16 +204,28 @@ namespace Server.View
         {
             try
             {
+                //string tempHostname = "";
+
+                //using (var db = new ClinicaDataContext(Program.LigacaoClinica))
+                //{
+                //    tempHostname = db.ClinicaDados.Single().DNS;
+                //}
+
+                //if (string.IsNullOrWhiteSpace(tempHostname))
+                //    publicHostname = MyToolkit.Networking.PublicHostname;
+                //else publicHostname = tempHostname;
+
                 string tempHostname = "";
 
-                using (var db = new ClinicaDataContext(Program.LigacaoClinica))
-                {
-                    tempHostname = db.ClinicaDados.Single().DNS;
-                }
+                tempHostname = MyToolkit.Networking.PublicHostname;
 
                 if (string.IsNullOrWhiteSpace(tempHostname))
-                    publicHostname = MyToolkit.Networking.PublicHostname;
-                else publicHostname = tempHostname;
+                {
+                    using (var db = new ClinicaDataContext(Program.LigacaoClinica))
+                        tempHostname = db.ClinicaDados.Single().DNS;
+                }
+
+                publicHostname = tempHostname;
             }
             catch
             {

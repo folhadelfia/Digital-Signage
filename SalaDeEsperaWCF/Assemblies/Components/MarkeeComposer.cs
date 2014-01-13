@@ -20,6 +20,7 @@ namespace Assemblies.Components
         public MarkeeComposer(MarkeeConfiguration config)
         {
             base.BackColor = Color.Green;
+            base.BorderStyle = config.Border ? System.Windows.Forms.BorderStyle.FixedSingle : System.Windows.Forms.BorderStyle.None;
 
             base.Configuration = config;
 

@@ -92,6 +92,8 @@ namespace Assemblies.PlayerComponents
 
         public Markee(ComponentTargetSite targetSite) : base(targetSite)
         {
+            this.DesignationLabel.Visible = false;
+
             label = new Label() { BackColor = Color.FromArgb(0, 0, 0, 0) };
             textList = new List<string>();
 
@@ -302,6 +304,7 @@ namespace Assemblies.PlayerComponents
                     (this.Configuration as MarkeeConfiguration).Font = options.MarkeeFont;
                     (this.Configuration as MarkeeConfiguration).TextColor = options.MarkeeTextColor;
                     (this.Configuration as MarkeeConfiguration).BackColor = options.MarkeeBackColor;
+
                     
 
                     this.TextList = options.MarkeeTextList;
@@ -310,6 +313,8 @@ namespace Assemblies.PlayerComponents
                     this.MarkeeFont = options.MarkeeFont;
                     this.TextColor = options.MarkeeTextColor;
                     this.BackColor = options.MarkeeBackColor;
+                    this.BorderStyle = options.Border ? System.Windows.Forms.BorderStyle.FixedSingle : System.Windows.Forms.BorderStyle.None;
+
 
                     if (this.State != TransitionState.Running) this.Run();
                 }

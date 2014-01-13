@@ -49,6 +49,7 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonPause = new System.Windows.Forms.Button();
+            this.checkBoxBorder = new System.Windows.Forms.CheckBox();
             this.groupBoxTextList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             this.groupBoxProperties.SuspendLayout();
@@ -158,6 +159,7 @@
             // 
             this.groupBoxProperties.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxProperties.Controls.Add(this.checkBoxBorder);
             this.groupBoxProperties.Controls.Add(this.label1);
             this.groupBoxProperties.Controls.Add(this.trackBarBackgroundTransparency);
             this.groupBoxProperties.Controls.Add(this.buttonBackColor);
@@ -176,7 +178,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(345, 53);
+            this.label1.Location = new System.Drawing.Point(341, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 18;
@@ -280,7 +282,19 @@
             this.buttonPause.UseVisualStyleBackColor = true;
             this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
             // 
-            // FooterOptions
+            // checkBoxBorder
+            // 
+            this.checkBoxBorder.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.checkBoxBorder.AutoSize = true;
+            this.checkBoxBorder.Location = new System.Drawing.Point(160, 50);
+            this.checkBoxBorder.Name = "checkBoxBorder";
+            this.checkBoxBorder.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxBorder.TabIndex = 19;
+            this.checkBoxBorder.Text = "Limite";
+            this.checkBoxBorder.UseVisualStyleBackColor = true;
+            this.checkBoxBorder.CheckedChanged += new System.EventHandler(this.checkBoxBorder_CheckedChanged);
+            // 
+            // MarkeeOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -296,7 +310,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(394, 442);
-            this.Name = "FooterOptions";
+            this.Name = "MarkeeOptions";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "FooterOptions";
             this.Load += new System.EventHandler(this.FooterOptions_Load);
@@ -333,5 +347,6 @@
         private Dotnetrix.Controls.TrackBar trackBarBackgroundTransparency;
         private System.Windows.Forms.Button buttonBackColor;
         private System.Windows.Forms.Button buttonTextColor;
+        private System.Windows.Forms.CheckBox checkBoxBorder;
     }
 }

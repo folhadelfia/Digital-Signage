@@ -15,16 +15,57 @@ namespace Assemblies.Components
     {
         private ComponentTargetSite TargetSite { get; set; }
 
-        protected ComposerComponent()
+        protected Label DesignationLabel = new Label();
+        public string Designation
         {
-            InitializeComponent();
-            TargetSite = ComponentTargetSite.Builder;
-
-            base.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            get { return DesignationLabel.Text; }
+            protected set { DesignationLabel.Text = value; }
         }
+
+        protected ComposerComponent():this(ComponentTargetSite.Builder)
+        {
+        }
+
         protected ComposerComponent(ComponentTargetSite targetSite)
         {
+            InitializeComponent();
             TargetSite = targetSite;
+
+            base.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+
+            DesignationLabel.Location = new Point(10, 10);
+            DesignationLabel.Text = "General Component";
+            DesignationLabel.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+
+            DesignationLabel.DoubleClick += (sender, e) => { this.OnDoubleClick(e); };
+            DesignationLabel.MouseDown += DesignationLabel_MouseDown;
+            DesignationLabel.MouseUp += DesignationLabel_MouseUp;
+            DesignationLabel.MouseMove += DesignationLabel_MouseMove;
+
+            this.Controls.Add(DesignationLabel);
+        }
+
+        bool triggeredByDesignationLabel = false;
+
+        void DesignationLabel_MouseMove(object sender, MouseEventArgs e)
+        {
+            triggeredByDesignationLabel = true;
+            this.OnMouseMove(e);
+            triggeredByDesignationLabel = false;
+        }
+
+        void DesignationLabel_MouseUp(object sender, MouseEventArgs e)
+        {
+            triggeredByDesignationLabel = true;
+            this.OnMouseUp(e);
+            triggeredByDesignationLabel = false;
+        }
+
+        void DesignationLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            triggeredByDesignationLabel = true;
+            this.OnMouseDown(e);
+            triggeredByDesignationLabel = false;
         }
 
         #region Resize e drag em runtime
@@ -50,30 +91,59 @@ namespace Assemblies.Components
 
                 this.BringToFront();
 
-                if (e.Y < 8)
+                if (e.Y < 5)
                 {
                     msg = 12; //Top
-                    if (e.X < 12) msg = 13; //Top Left
-                    if (e.X > Width - 12) msg = 14; //Top Right
+                    if (e.X < 6) msg = 13; //Top Left
+                    if (e.X > Width - 6) msg = 14; //Top Right
                 }
-                else if (e.X < 8)
+                else if (e.X < 5)
                 {
                     msg = 10; //Left
-                    if (e.Y < 12) msg = 13;
-                    if (e.Y > Height - 12) msg = 16;
+                    if (e.Y < 6) msg = 13;
+                    if (e.Y > Height - 6) msg = 16;
                 }
-                else if (e.Y > Height - 9)
+                else if (e.Y > Height - 5)
                 {
                     msg = 15; //Bottom
-                    if (e.X < 12) msg = 16;
-                    if (e.X > Width - 12) msg = 17;
+                    if (e.X < 6) msg = 16;
+                    if (e.X > Width - 6) msg = 17;
                 }
-                else if (e.X > Width - 9)
+                else if (e.X > Width - 5)
                 {
                     msg = 11; //Right
-                    if (e.Y < 12) msg = 14;
-                    if (e.Y > Height - 12) msg = 17;
+                    if (e.Y < 6) msg = 14;
+                    if (e.Y > Height - 6) msg = 17;
                 }
+
+                #region Valores dos pixeis antigos
+
+                //if (e.Y < 8)
+                //{
+                //    msg = 12; //Top
+                //    if (e.X < 12) msg = 13; //Top Left
+                //    if (e.X > Width - 12) msg = 14; //Top Right
+                //}
+                //else if (e.X < 8)
+                //{
+                //    msg = 10; //Left
+                //    if (e.Y < 12) msg = 13;
+                //    if (e.Y > Height - 12) msg = 16;
+                //}
+                //else if (e.Y > Height - 9)
+                //{
+                //    msg = 15; //Bottom
+                //    if (e.X < 12) msg = 16;
+                //    if (e.X > Width - 12) msg = 17;
+                //}
+                //else if (e.X > Width - 9)
+                //{
+                //    msg = 11; //Right
+                //    if (e.Y < 12) msg = 14;
+                //    if (e.Y > Height - 12) msg = 17;
+                //}
+
+                #endregion
 
                 if (msg != -1)
                 {
@@ -106,31 +176,68 @@ namespace Assemblies.Components
 
                     Checked = true;
                 }
-                else if (e.Y < 8)
-                {
-                    if (e.X < 12) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
-                    else if (e.X > Width - 12) base.Cursor = Cursors.SizeNESW; //Topo direita
-                    else base.Cursor = Cursors.SizeNS; //Topo
-                }
-                else if (e.X < 8)
-                {
-                    if (e.Y < 12) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
-                    else if (e.Y > Height - 12) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
-                    else base.Cursor = Cursors.SizeWE; //Esquerda
-                }
-                else if (e.Y > Height - 9)
-                {
-                    if (e.X < 12) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
-                    else if (e.X > Width - 12) base.Cursor = Cursors.SizeNWSE; //Fundo direita
-                    else base.Cursor = Cursors.SizeNS; //Fundo
-                }
-                else if (e.X > Width - 9)
-                {
-                    if (e.Y < 12) base.Cursor = Cursors.SizeNESW;
-                    else if (e.Y > Height - 12) base.Cursor = Cursors.SizeNWSE;
-                    else base.Cursor = Cursors.SizeWE;
-                }
-                else this.Cursor = Cursors.SizeAll;
+                else
+                    if (!triggeredByDesignationLabel)
+                    {
+                        if (e.Y < 5)
+                        {
+                            if (e.X < 6) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
+                            else if (e.X > Width - 6) base.Cursor = Cursors.SizeNESW; //Topo direita
+                            else base.Cursor = Cursors.SizeNS; //Topo
+                        }
+                        else if (e.X < 5)
+                        {
+                            if (e.Y < 6) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
+                            else if (e.Y > Height - 6) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
+                            else base.Cursor = Cursors.SizeWE; //Esquerda
+                        }
+                        else if (e.Y > Height - 5)
+                        {
+                            if (e.X < 6) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
+                            else if (e.X > Width - 6) base.Cursor = Cursors.SizeNWSE; //Fundo direita
+                            else base.Cursor = Cursors.SizeNS; //Fundo
+                        }
+                        else if (e.X > Width - 5)
+                        {
+                            if (e.Y < 6) base.Cursor = Cursors.SizeNESW;
+                            else if (e.Y > Height - 6) base.Cursor = Cursors.SizeNWSE;
+                            else base.Cursor = Cursors.SizeWE;
+                        }
+                        else this.Cursor = Cursors.SizeAll;
+                    }
+                    else this.Cursor = Cursors.SizeAll;
+
+                #region Valores dos pixeis antigos
+                //if (!triggeredByDesignationLabel)
+                    //{
+                    //    if (e.Y < 8)
+                    //    {
+                    //        if (e.X < 12) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
+                    //        else if (e.X > Width - 12) base.Cursor = Cursors.SizeNESW; //Topo direita
+                    //        else base.Cursor = Cursors.SizeNS; //Topo
+                    //    }
+                    //    else if (e.X < 8)
+                    //    {
+                    //        if (e.Y < 12) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
+                    //        else if (e.Y > Height - 12) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
+                    //        else base.Cursor = Cursors.SizeWE; //Esquerda
+                    //    }
+                    //    else if (e.Y > Height - 9)
+                    //    {
+                    //        if (e.X < 12) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
+                    //        else if (e.X > Width - 12) base.Cursor = Cursors.SizeNWSE; //Fundo direita
+                    //        else base.Cursor = Cursors.SizeNS; //Fundo
+                    //    }
+                    //    else if (e.X > Width - 9)
+                    //    {
+                    //        if (e.Y < 12) base.Cursor = Cursors.SizeNESW;
+                    //        else if (e.Y > Height - 12) base.Cursor = Cursors.SizeNWSE;
+                    //        else base.Cursor = Cursors.SizeWE;
+                    //    }
+                    //    else this.Cursor = Cursors.SizeAll;
+                    //}
+                //else this.Cursor = Cursors.SizeAll;
+                #endregion
             }
             catch (Exception ex)
             {

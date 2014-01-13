@@ -58,5 +58,8 @@ namespace Assemblies.DataContracts
             get;
             set;
         }
+
+        [DataMember]
+        public bool Border { get; set; }
     }
 }
