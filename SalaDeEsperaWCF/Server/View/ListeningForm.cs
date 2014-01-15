@@ -887,15 +887,19 @@ namespace Server.View
 
         private void Log(string message)
         {
-            RefreshState();
+            try
+            {
+                RefreshState();
 
-            if(this.InvokeRequired)
-                this.BeginInvoke((MethodInvoker) delegate
-                {
+                if (this.InvokeRequired)
+                    this.BeginInvoke((MethodInvoker)delegate
+                    {
+                        textBoxLog.AppendText(string.Format("[{0}] {1}{2}", DateTime.Now.ToString("HH:mm:ss"), message, Environment.NewLine));
+                    });
+                else
                     textBoxLog.AppendText(string.Format("[{0}] {1}{2}", DateTime.Now.ToString("HH:mm:ss"), message, Environment.NewLine));
-                });
-            else
-                textBoxLog.AppendText(string.Format("[{0}] {1}{2}", DateTime.Now.ToString("HH:mm:ss"), message, Environment.NewLine));
+            }
+            catch { }
         }
         private void Log(Exception ex)
         {

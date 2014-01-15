@@ -12,11 +12,15 @@ namespace Assemblies.Components
     {
         public VideoComposer()
         {
-            base.BackColor = Color.Chocolate;
+            base.BackColor = Color.MediumSlateBlue;
 
             ToolTip tt = new ToolTip();
 
             tt.SetToolTip(this, this.ToString());
+
+            this.Configuration = new Configurations.VideoConfiguration();
+
+            this.Designation = "Video";
         }
 
         #region

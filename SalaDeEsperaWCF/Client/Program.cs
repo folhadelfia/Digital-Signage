@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Xml;
 using Assemblies.RegistarPosto;
 using Assemblies.Toolkit;
-using Client.Linq;
+using Assemblies.Linq;
 
 namespace Client
 {

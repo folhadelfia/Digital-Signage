@@ -79,6 +79,7 @@ namespace Assemblies.Components
                 base.OnMouseEnter(e);
                 return;
             }
+
             this.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             base.OnMouseEnter(e);
         }

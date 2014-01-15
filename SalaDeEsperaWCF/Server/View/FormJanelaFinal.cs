@@ -129,7 +129,13 @@ namespace Server.View
 
         void General_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mouseHidden && lastMousePos != Cursor.Position)
+            Point lkmp = lastMousePos,
+                  cp = Cursor.Position;
+
+            lkmp.Offset(0,0);
+            cp.Offset(0,0);
+
+            if (mouseHidden && lkmp != cp)
             {
                 Cursor.Show();
                 mouseHidden = false;
@@ -144,7 +150,7 @@ namespace Server.View
         Point lastMousePos = new Point();
         void mouseHideTimer_Tick(object sender, EventArgs e)
         {
-            if (!mouseHidden)
+            //if (!mouseHidden)
             {
                 Cursor.Hide();
                 lastMousePos = Cursor.Position;

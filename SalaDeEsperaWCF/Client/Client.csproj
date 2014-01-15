@@ -89,26 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationConfiguration.cs" />
-    <Compile Include="Linq\Clinica.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Clinica.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Linq\Clinicas.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Clinicas.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Linq\PlayersLigados.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PlayersLigados.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Linq\RegistarPosto.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RegistarPosto.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Service List\Option Views\Configure.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,28 +109,6 @@
     <Compile Include="Views\Service List\ServiceList.Designer.cs">
       <DependentUpon>ServiceList.cs</DependentUpon>
     </Compile>
-    <None Include="Linq\Clinica.dbml.layout">
-      <DependentUpon>Clinica.dbml</DependentUpon>
-    </None>
-    <None Include="Linq\Clinicas.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Clinicas.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Linq\PlayersLigados.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>PlayersLigados.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Linq\RegistarPosto.dbml.layout">
-      <DependentUpon>RegistarPosto.dbml</DependentUpon>
-    </None>
-    <None Include="Linq\PlayersLigados.dbml.layout">
-      <DependentUpon>PlayersLigados.dbml</DependentUpon>
-    </None>
-    <None Include="Linq\Clinicas.dbml.layout">
-      <DependentUpon>Clinicas.dbml</DependentUpon>
-    </None>
     <EmbeddedResource Include="Views\Main Window\Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,16 +128,6 @@
     <EmbeddedResource Include="Views\Service List\ServiceList.resx">
       <DependentUpon>ServiceList.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Linq\Clinica.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Clinica.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Linq\RegistarPosto.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>RegistarPosto.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="output.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

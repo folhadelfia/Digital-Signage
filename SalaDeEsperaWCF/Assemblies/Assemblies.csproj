@@ -87,6 +87,7 @@
     <Compile Include="ClientModel\WCFConnection.cs" />
     <Compile Include="ClientModel\WCFPlayerPC.cs" />
     <Compile Include="Components\ComponentTargetSite.cs" />
+    <Compile Include="Configurations\VideoConfiguration.cs" />
     <Compile Include="Linq\Clinica.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

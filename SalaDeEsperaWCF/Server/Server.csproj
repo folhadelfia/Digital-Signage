@@ -83,21 +83,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Linq\Clinica.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Clinica.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Linq\PlayersLigados.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PlayersLigados.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Linq\RegistarPosto.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RegistarPosto.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\FormJanelaFinal.cs">
@@ -124,25 +109,6 @@
     <Compile Include="View\LogForm.Designer.cs">
       <DependentUpon>LogForm.cs</DependentUpon>
     </Compile>
-    <None Include="Linq\Clinica.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Clinica.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Linq\PlayersLigados.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>PlayersLigados.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Linq\RegistarPosto.dbml.layout">
-      <DependentUpon>RegistarPosto.dbml</DependentUpon>
-    </None>
-    <None Include="Linq\PlayersLigados.dbml.layout">
-      <DependentUpon>PlayersLigados.dbml</DependentUpon>
-    </None>
-    <None Include="Linq\Clinica.dbml.layout">
-      <DependentUpon>Clinica.dbml</DependentUpon>
-    </None>
     <EmbeddedResource Include="View\FormJanelaLigacao.resx">
       <DependentUpon>FormJanelaLigacao.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,11 +131,6 @@
     <EmbeddedResource Include="View\ListeningForm.resx">
       <DependentUpon>ListeningForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Linq\RegistarPosto.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>RegistarPosto.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
