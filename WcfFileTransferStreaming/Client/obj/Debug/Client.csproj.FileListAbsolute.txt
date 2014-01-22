@@ -1,0 +1,10 @@
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\bin\Debug\Client.exe
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\bin\Debug\Client.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\obj\Debug\Client.ClientWindow.resources
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\obj\Debug\Client.Properties.Resources.resources
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\obj\Debug\Client.csproj.GenerateResource.Cache
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\obj\Debug\Client.exe
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\obj\Debug\Client.pdb
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\bin\Debug\Assemblies.dll
+C:\Users\Cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Client\bin\Debug\Assemblies.pdb

@@ -1,0 +1,5 @@
+c:\users\cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Assemblies\bin\Debug\Assemblies.dll
+c:\users\cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Assemblies\bin\Debug\Assemblies.pdb
+c:\users\cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Assemblies\obj\Debug\Assemblies.csprojResolveAssemblyReference.cache
+c:\users\cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Assemblies\obj\Debug\Assemblies.dll
+c:\users\cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Assemblies\obj\Debug\Assemblies.pdb
