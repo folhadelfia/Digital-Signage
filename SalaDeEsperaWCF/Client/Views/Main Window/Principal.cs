@@ -56,6 +56,8 @@ namespace Client
 
         private bool cancelTreeViewContextMenu = false;
 
+        private System.Windows.Forms.Timer searchPlayersTimer = new System.Windows.Forms.Timer();
+
         public Principal()
         {
             InitializeComponent();
@@ -66,7 +68,15 @@ namespace Client
                 {
                     cancelTreeViewContextMenu = args.Button == System.Windows.Forms.MouseButtons.Right && treeViewRede.GetNodeAt(args.Location) == null;
                 }; //Só deixa abrir o menu d contexto em cima de um nó
+
+            //searchPlayersTimer.Interval = 10000;
+            //searchPlayersTimer.Tick += searchPlayersTimer_Tick;
         }
+
+        //void searchPlayersTimer_Tick(object sender, EventArgs e)
+        //{
+        //    ScanAndUpdateUI();
+        //}
 
         private void Principal_Load(object sender, EventArgs e)
         {
@@ -82,6 +92,12 @@ namespace Client
                 listViewComponents.Items.Add(new ListViewItem() { Text = "Tabela de Preços", Tag = new PriceListCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("PriceList") });
                 listViewComponents.Items.Add(new ListViewItem() { Text = "TV", Tag = new TVCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("TV") });
                 listViewComponents.Items.Add(new ListViewItem() { Text = "Video", Tag = new VideoCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("Video") });
+                #endregion
+
+                #region Pesquisar periodicamente por players
+
+                this.ScanAndUpdateUI();
+
                 #endregion
             }
             catch(Exception ex)
@@ -586,18 +602,22 @@ namespace Client
             }
         }
 
-        private void buttonScan_Click(object sender, EventArgs e)
+        private void ScanAndUpdateUI()
         {
-            //Thread t = new Thread(new ThreadStart(ScanPlayers));
-
-            //t.Start();
-
             buttonScan.Enabled = false;
 
             progressBarScan.Value = 0;
             progressBarScan.Visible = true;
 
             this.GetPlayersFromDatabase();
+        }
+        private void buttonScan_Click(object sender, EventArgs e)
+        {
+            //Thread t = new Thread(new ThreadStart(ScanPlayers));
+
+            //t.Start();
+
+            this.ScanAndUpdateUI();
 
         }
         /// <summary>
@@ -734,7 +754,13 @@ namespace Client
                 worker.DoWork += worker_DoWorkAddPlayerToTreeView;
                 worker.RunWorkerCompleted += worker_RunWorkerCompleted;
 
-                treeViewRede.Nodes.Clear();
+                if (this.InvokeRequired) treeViewRede.Invoke((MethodInvoker)(() =>
+                {
+                    treeViewRede.Nodes.Clear();
+                }));
+                else
+                    treeViewRede.Nodes.Clear();
+
                 worker.RunWorkerAsync(new object[] { player, clinicScreenName });
             }
             //using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) thisClinic = db.ClinicaDados.FirstOrDefault();

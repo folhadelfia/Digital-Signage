@@ -6,3 +6,10 @@ c:\users\cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\Video
 c:\users\cláudio\documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.pdb
 C:\Users\Cláudio\Documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Documents\visual studio 2012\Projects\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.VideoControl.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\VideoPlayerControl\VideoPlayer\bin\Debug\VideoPlayer.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\VideoPlayerControl\VideoPlayer\bin\Debug\VideoPlayer.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.VideoControl.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\VideoPlayerControl\VideoPlayer\obj\Debug\VideoPlayer.pdb

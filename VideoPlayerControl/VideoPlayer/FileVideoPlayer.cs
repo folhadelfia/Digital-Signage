@@ -31,7 +31,7 @@ namespace VideoPlayer
         public event SourceChangedEventHandler SourceChanged;
         private void OnSourceChanged(string oldSource, string newSource)
         {
-            if (!string.IsNullOrWhiteSpace(newSource) && this.Autoplay) this.Restart();
+            if (!string.IsNullOrWhiteSpace(newSource) && this.Playlist.Autoplay) this.Restart();
             else if (string.IsNullOrWhiteSpace(newSource)) this.Stop();
 
             if (SourceChanged != null) SourceChanged(this, new SourceChangedEventArgs(oldSource, newSource));
@@ -69,8 +69,6 @@ namespace VideoPlayer
             }
         }
 
-        public bool Autoplay { get; set; }
-
         #region Playlist
 
         public class VideoPlaylist
@@ -82,6 +80,11 @@ namespace VideoPlayer
             private FileVideoPlayer owner;
             private Dictionary<int, string> playList = new Dictionary<int, string>();
 
+            public List<string> Files { get { return playList.Values.ToList(); } }
+
+            public bool Replay { get; set; }
+            public bool Autoplay { get; set; }
+
             public event VideoAddedEventHandler VideoAdded;
             public event VideoRemovedEventHandler VideoRemoved;
             public event VideoMovedEventHandler VideoMoved;
@@ -90,6 +93,8 @@ namespace VideoPlayer
             {
                 if (VideoAdded != null)
                     VideoAdded(this, new VideoAddedEventArgs(videoNumber, file));
+
+                if (Autoplay) this.TrackNumber = videoNumber;
             }
             private void OnVideoRemoved(int videoNumber, string file)
             {
@@ -107,19 +112,7 @@ namespace VideoPlayer
             public int TrackNumber 
             {
                 get { return trackNumber; }
-                set 
-                {
-                    try
-                    {
-                        trackNumber = value;
-                        owner.Source = playList[value];
-                    }
-                    catch
-                    {
-                        trackNumber = 0;
-                        owner.Source = "";
-                    }
-                }
+                set  { trackNumber = value; }
             }
 
             public bool Add(string file)
@@ -359,20 +352,7 @@ namespace VideoPlayer
         public string Source 
         { 
             get { return fileSource; }
-            set 
-            {
-                if (this.Source != value)
-                {
-                    string oldSource, newSource;
-
-                    oldSource = this.Source;
-                    newSource = value;
-
-                    fileSource = value;
-
-                    OnSourceChanged(oldSource, newSource);
-                }
-            }
+            internal set  { fileSource = value; }
         }
 
         private void Initialize()
@@ -383,6 +363,7 @@ namespace VideoPlayer
             base.SizeChanged += VideoPlayer_SizeChanged;
         }
 
+        private int globalFileErrorCount = 0;
         public void Run()
         {
             if(!string.IsNullOrWhiteSpace(this.Source))
@@ -391,6 +372,8 @@ namespace VideoPlayer
                 {
                     try
                     {
+
+
                         filterGraph = new FilgraphManager();
 
                         this.filterGraph.RenderFile(this.Source);
@@ -416,6 +399,13 @@ namespace VideoPlayer
                         mediaPosition = filterGraph as IMediaPosition;
 
                         mediaControl = filterGraph as IMediaControl;
+
+
+                    }
+                    catch (COMException ex)
+                    {
+                        this.Next();
+                        this.Run();
                     }
                     catch
                     {
@@ -482,6 +472,8 @@ namespace VideoPlayer
                     throw;
                 }
 
+                mediaPosition.CurrentPosition = 0;
+
                 this.CleanUp();
                 this.State = MediaStatus.Stopped;
             }
@@ -490,6 +482,55 @@ namespace VideoPlayer
         {
             this.Stop();
             this.Run();
+        }
+
+        public void Next()
+        {
+            this.Playlist.TrackNumber++;
+
+            if (this.Playlist.TrackNumber >= this.playlist.Count)
+            {
+                if (this.Playlist.Replay) this.Playlist.TrackNumber = 0;
+                else return;
+            }
+
+            try
+            {
+                this.Source = this.Playlist.Files[this.Playlist.TrackNumber];
+
+                if (this.State == MediaStatus.Running) this.Restart();
+            }
+            catch
+            {
+                this.Playlist.TrackNumber--;
+            }
+        }
+        public void Previous()
+        {
+            this.Playlist.TrackNumber--;
+
+            try
+            {
+                this.Source = this.Playlist.Files[this.Playlist.TrackNumber];
+
+                if (this.State == MediaStatus.Running) this.Restart();
+            }
+            catch
+            {
+                this.Playlist.TrackNumber++;
+            }
+        }
+
+        private void OnMediaEvent(int eventCode)
+        {
+            switch (eventCode)
+            {
+                case EC_COMPLETE:
+                    this.Next();
+                    break;
+                default:
+                    break;
+            }
         }
 
         void VideoPlayer_SizeChanged(object sender, EventArgs e)
@@ -558,12 +599,7 @@ namespace VideoPlayer
 
                         mediaEventEx.FreeEventParams(lEventCode, lParam1, lParam2);
 
-                        if (lEventCode == EC_COMPLETE)
-                        {
-                            this.Stop();
-                            mediaPosition.CurrentPosition = 0;
-                            this.State = MediaStatus.Stopped;
-                        }
+                        this.OnMediaEvent(lEventCode);
                     }
                     catch (Exception)
                     {

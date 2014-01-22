@@ -38,6 +38,7 @@
             this.buttonTestRemove = new System.Windows.Forms.Button();
             this.buttonTestMove = new System.Windows.Forms.Button();
             this.buttonTestClear = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this._fileVideoPlayer = new VideoPlayer.FileVideoPlayer();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -155,15 +156,23 @@
             this.buttonTestClear.UseVisualStyleBackColor = true;
             this.buttonTestClear.Click += new System.EventHandler(this.buttonTestClear_Click);
             // 
-            // FileVideoPlayer
+            // listBox1
             // 
-            this._fileVideoPlayer.Autoplay = false;
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(622, 28);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(238, 459);
+            this.listBox1.TabIndex = 6;
+            // 
+            // _fileVideoPlayer
+            // 
             this._fileVideoPlayer.BackColor = System.Drawing.Color.Black;
             this._fileVideoPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
             this._fileVideoPlayer.Location = new System.Drawing.Point(3, 41);
             this._fileVideoPlayer.Name = "_fileVideoPlayer";
             this._fileVideoPlayer.Size = new System.Drawing.Size(598, 435);
-            this._fileVideoPlayer.Source = "";
             this._fileVideoPlayer.TabIndex = 2;
             this._fileVideoPlayer.UseBlackBands = false;
             // 
@@ -171,7 +180,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 532);
+            this.ClientSize = new System.Drawing.Size(872, 532);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.buttonTestClear);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonTestMove);
@@ -200,6 +210,7 @@
         private System.Windows.Forms.Button buttonTestMove;
         private System.Windows.Forms.Button buttonTestClear;
         private VideoPlayer.FileVideoPlayer _fileVideoPlayer;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

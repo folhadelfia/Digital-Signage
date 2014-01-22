@@ -98,6 +98,8 @@ namespace Server.View
             buttonConnect.Enabled = false;
             this.RefreshIPAndHostnameTextboxes();
 
+            this.textBoxPrivatePort.Text = MyToolkit.Networking.RandomPort().ToString();
+
             using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) idClinicaMulti = db.ClinicaDados.Single().idClinicaMulti ?? -1;
         }
 
