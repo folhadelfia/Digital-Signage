@@ -77,66 +77,67 @@ namespace Client
             this.GetPlayersFromDatabase();
         }
 
-        private void ScanPlayersAsync()
-        {
-            Thread t = new Thread(new ThreadStart(() =>
-            {
-                try
-                {
-                    using (Assemblies.ClientModel.Connection discoveryServerConnection = new WCFConnection()
-                    {
-                        ServerIP = SERVERIP_CONST,
-                        ServerPort = SERVERPORT_CONST
-                    })
-                    {
-                        treeViewRede.Nodes.Clear();
-                        discoveryServerConnection.Open();
+        #region A usar discovery server
+        //private void ScanPlayersAsync()
+        //{
+        //    Thread t = new Thread(new ThreadStart(() =>
+        //    {
+        //        try
+        //        {
+        //            using (Assemblies.ClientModel.Connection discoveryServerConnection = new WCFConnection()
+        //            {
+        //                ServerIP = SERVERIP_CONST,
+        //                ServerPort = SERVERPORT_CONST
+        //            })
+        //            {
+        //                treeViewRede.Nodes.Clear();
+        //                discoveryServerConnection.Open();
 
-                        discoveryServerConnection.GetPlayersAsync(ScanPlayersCallback);
-                    }
-                }
-                catch
-                {
-                }
-            }));
+        //                discoveryServerConnection.GetPlayersAsync(ScanPlayersCallback);
+        //            }
+        //        }
+        //        catch
+        //        {
+        //        }
+        //    }));
 
-            t.Start();
-        }
-        private void ScanPlayersCallback(PlayerPC pc)
-        {
-            TreeNode nodePC = new TreeNode
-            {
-                Text = pc.Name,
-                ToolTipText = string.Format("IP: {0}", pc.IP),
-                Tag = pc,
-                ImageKey = "Computer",
-                SelectedImageKey = "Computer"
-            };
+        //    t.Start();
+        //}
+        //private void ScanPlayersCallback(PlayerPC pc)
+        //{
+        //    TreeNode nodePC = new TreeNode
+        //    {
+        //        Text = pc.Name,
+        //        ToolTipText = string.Format("IP: {0}", pc.IP),
+        //        Tag = pc,
+        //        ImageKey = "Computer",
+        //        SelectedImageKey = "Computer"
+        //    };
 
-            foreach (var display in pc.Displays)
-            {
-                string tempDispName = string.Format("{0} (X: {1}, Y: {2})", display.Name, display.Bounds.X, display.Bounds.Y);
+        //    foreach (var display in pc.Displays)
+        //    {
+        //        string tempDispName = string.Format("{0} (X: {1}, Y: {2})", display.Name, display.Bounds.X, display.Bounds.Y);
 
-                TreeNode t = new TreeNode()
-                {
-                    Text = tempDispName,
-                    ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
-                    Tag = display,
-                    ImageKey = "Monitor",
-                    SelectedImageKey = "Monitor"
-                };
+        //        TreeNode t = new TreeNode()
+        //        {
+        //            Text = tempDispName,
+        //            ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
+        //            Tag = display,
+        //            ImageKey = "Monitor",
+        //            SelectedImageKey = "Monitor"
+        //        };
 
-                nodePC.Nodes.Add(t);
-            }
+        //        nodePC.Nodes.Add(t);
+        //    }
 
 
-            if (this.InvokeRequired)
-                this.Invoke((MethodInvoker)(() => { treeViewRede.Nodes.Add(nodePC); }));
-            else
-                treeViewRede.Nodes.Add(nodePC);
+        //    if (this.InvokeRequired)
+        //        this.Invoke((MethodInvoker)(() => { treeViewRede.Nodes.Add(nodePC); }));
+        //    else
+        //        treeViewRede.Nodes.Add(nodePC);
             
-        }
-
+        //}
+        #endregion
 
         private void ChoosePlayerFromTreeView()
         {
@@ -257,10 +258,10 @@ namespace Client
                 Player player = (e.Argument as object[])[0] as Player;
                 string clinicScreenName = (e.Argument as object[])[1] as string;
 
-                string endpointString = player.wcfEndpoint;
+                string endpointString = player.Endpoints.Single(x=>x.Type == (int)EndpointTypeEnum.Player).Address;
 
                 if (!(player.publicIPAddress == MyToolkit.Networking.PublicIPAddress.ToString() && MyToolkit.Networking.IsLocal(player.privateIPAddress)))
-                    endpointString = this.PrivateToPublicEndpoint(player);
+                    endpointString = this.PrivateToPublicEndpoint(player, EndpointTypeEnum.Player);
 
                 EndpointAddress endpoint = new EndpointAddress(endpointString);
 
@@ -290,7 +291,7 @@ namespace Client
                 {
                     this.Invoke((MethodInvoker)(() =>
                     {
-                        WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays.Keys, Endpoint = new EndpointAddress(endpointString) };
+                        WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays.Keys, PlayerEndpoint = new EndpointAddress(endpointString) };
 
                         TreeNode nodeClinic;
                         bool newClinicNode = true;
@@ -349,12 +350,12 @@ namespace Client
             }
         }
 
-        private string PrivateToPublicEndpoint(Player player)
+        private string PrivateToPublicEndpoint(Player player, EndpointTypeEnum type)
         {
-            string result = player.wcfEndpoint;
+            string result = player.Endpoints.Single(x => x.Type == (int)type).Address;
 
             result = result.Replace(player.privateIPAddress, player.publicIPAddress);
-            result = result.Replace(player.privatePort, player.publicPort);
+            result = result.Replace(player.Endpoints.Single(x => x.Type == (int)type).PrivatePort, player.Endpoints.Single(x => x.Type == (int)type).PublicPort);
 
             return result;
 

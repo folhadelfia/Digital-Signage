@@ -33,6 +33,12 @@ namespace Assemblies.Linq
     partial void InsertPlayer(Player instance);
     partial void UpdatePlayer(Player instance);
     partial void DeletePlayer(Player instance);
+    partial void InsertEndpoint(Endpoint instance);
+    partial void UpdateEndpoint(Endpoint instance);
+    partial void DeleteEndpoint(Endpoint instance);
+    partial void InsertEndpointType(EndpointType instance);
+    partial void UpdateEndpointType(EndpointType instance);
+    partial void DeleteEndpointType(EndpointType instance);
     #endregion
 		
 		public PlayersLigadosDataContext() : 
@@ -72,6 +78,22 @@ namespace Assemblies.Linq
 				return this.GetTable<Player>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Endpoint> Endpoints
+		{
+			get
+			{
+				return this.GetTable<Endpoint>();
+			}
+		}
+		
+		public System.Data.Linq.Table<EndpointType> EndpointTypes
+		{
+			get
+			{
+				return this.GetTable<EndpointType>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Player")]
@@ -88,17 +110,13 @@ namespace Assemblies.Linq
 		
 		private string _publicIPAddress;
 		
-		private string _privatePort;
-		
-		private string _publicPort;
-		
 		private string _privateHostname;
 		
 		private string _publicHostname;
 		
-		private string _wcfEndpoint;
-		
 		private bool _isActive;
+		
+		private EntitySet<Endpoint> _Endpoints;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -112,22 +130,17 @@ namespace Assemblies.Linq
     partial void OnprivateIPAddressChanged();
     partial void OnpublicIPAddressChanging(string value);
     partial void OnpublicIPAddressChanged();
-    partial void OnprivatePortChanging(string value);
-    partial void OnprivatePortChanged();
-    partial void OnpublicPortChanging(string value);
-    partial void OnpublicPortChanged();
     partial void OnprivateHostnameChanging(string value);
     partial void OnprivateHostnameChanged();
     partial void OnpublicHostnameChanging(string value);
     partial void OnpublicHostnameChanged();
-    partial void OnwcfEndpointChanging(string value);
-    partial void OnwcfEndpointChanged();
     partial void OnisActiveChanging(bool value);
     partial void OnisActiveChanged();
     #endregion
 		
 		public Player()
 		{
+			this._Endpoints = new EntitySet<Endpoint>(new Action<Endpoint>(this.attach_Endpoints), new Action<Endpoint>(this.detach_Endpoints));
 			OnCreated();
 		}
 		
@@ -211,46 +224,6 @@ namespace Assemblies.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_privatePort", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
-		public string privatePort
-		{
-			get
-			{
-				return this._privatePort;
-			}
-			set
-			{
-				if ((this._privatePort != value))
-				{
-					this.OnprivatePortChanging(value);
-					this.SendPropertyChanging();
-					this._privatePort = value;
-					this.SendPropertyChanged("privatePort");
-					this.OnprivatePortChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publicPort", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
-		public string publicPort
-		{
-			get
-			{
-				return this._publicPort;
-			}
-			set
-			{
-				if ((this._publicPort != value))
-				{
-					this.OnpublicPortChanging(value);
-					this.SendPropertyChanging();
-					this._publicPort = value;
-					this.SendPropertyChanged("publicPort");
-					this.OnpublicPortChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_privateHostname", DbType="VarChar(MAX)")]
 		public string privateHostname
 		{
@@ -291,26 +264,6 @@ namespace Assemblies.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_wcfEndpoint", DbType="VarChar(MAX)")]
-		public string wcfEndpoint
-		{
-			get
-			{
-				return this._wcfEndpoint;
-			}
-			set
-			{
-				if ((this._wcfEndpoint != value))
-				{
-					this.OnwcfEndpointChanging(value);
-					this.SendPropertyChanging();
-					this._wcfEndpoint = value;
-					this.SendPropertyChanged("wcfEndpoint");
-					this.OnwcfEndpointChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isActive", DbType="Bit NOT NULL")]
 		public bool isActive
 		{
@@ -327,6 +280,295 @@ namespace Assemblies.Linq
 					this._isActive = value;
 					this.SendPropertyChanged("isActive");
 					this.OnisActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Player_Endpoint", Storage="_Endpoints", ThisKey="ID", OtherKey="IDPlayer")]
+		public EntitySet<Endpoint> Endpoints
+		{
+			get
+			{
+				return this._Endpoints;
+			}
+			set
+			{
+				this._Endpoints.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Endpoints(Endpoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.Player = this;
+		}
+		
+		private void detach_Endpoints(Endpoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.Player = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Endpoint")]
+	public partial class Endpoint : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _ID;
+		
+		private int _Type;
+		
+		private long _IDPlayer;
+		
+		private string _Address;
+		
+		private string _PublicPort;
+		
+		private string _PrivatePort;
+		
+		private EntityRef<Player> _Player;
+		
+		private EntityRef<EndpointType> _EndpointType;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(long value);
+    partial void OnIDChanged();
+    partial void OnTypeChanging(int value);
+    partial void OnTypeChanged();
+    partial void OnIDPlayerChanging(long value);
+    partial void OnIDPlayerChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnPublicPortChanging(string value);
+    partial void OnPublicPortChanged();
+    partial void OnPrivatePortChanging(string value);
+    partial void OnPrivatePortChanged();
+    #endregion
+		
+		public Endpoint()
+		{
+			this._Player = default(EntityRef<Player>);
+			this._EndpointType = default(EntityRef<EndpointType>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					if (this._EndpointType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPlayer", DbType="BigInt NOT NULL")]
+		public long IDPlayer
+		{
+			get
+			{
+				return this._IDPlayer;
+			}
+			set
+			{
+				if ((this._IDPlayer != value))
+				{
+					if (this._Player.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDPlayerChanging(value);
+					this.SendPropertyChanging();
+					this._IDPlayer = value;
+					this.SendPropertyChanged("IDPlayer");
+					this.OnIDPlayerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicPort", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string PublicPort
+		{
+			get
+			{
+				return this._PublicPort;
+			}
+			set
+			{
+				if ((this._PublicPort != value))
+				{
+					this.OnPublicPortChanging(value);
+					this.SendPropertyChanging();
+					this._PublicPort = value;
+					this.SendPropertyChanged("PublicPort");
+					this.OnPublicPortChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrivatePort", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string PrivatePort
+		{
+			get
+			{
+				return this._PrivatePort;
+			}
+			set
+			{
+				if ((this._PrivatePort != value))
+				{
+					this.OnPrivatePortChanging(value);
+					this.SendPropertyChanging();
+					this._PrivatePort = value;
+					this.SendPropertyChanged("PrivatePort");
+					this.OnPrivatePortChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Player_Endpoint", Storage="_Player", ThisKey="IDPlayer", OtherKey="ID", IsForeignKey=true)]
+		public Player Player
+		{
+			get
+			{
+				return this._Player.Entity;
+			}
+			set
+			{
+				Player previousValue = this._Player.Entity;
+				if (((previousValue != value) 
+							|| (this._Player.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Player.Entity = null;
+						previousValue.Endpoints.Remove(this);
+					}
+					this._Player.Entity = value;
+					if ((value != null))
+					{
+						value.Endpoints.Add(this);
+						this._IDPlayer = value.ID;
+					}
+					else
+					{
+						this._IDPlayer = default(long);
+					}
+					this.SendPropertyChanged("Player");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EndpointType_Endpoint", Storage="_EndpointType", ThisKey="Type", OtherKey="ID", IsForeignKey=true)]
+		public EndpointType EndpointType
+		{
+			get
+			{
+				return this._EndpointType.Entity;
+			}
+			set
+			{
+				EndpointType previousValue = this._EndpointType.Entity;
+				if (((previousValue != value) 
+							|| (this._EndpointType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EndpointType.Entity = null;
+						previousValue.Endpoints.Remove(this);
+					}
+					this._EndpointType.Entity = value;
+					if ((value != null))
+					{
+						value.Endpoints.Add(this);
+						this._Type = value.ID;
+					}
+					else
+					{
+						this._Type = default(int);
+					}
+					this.SendPropertyChanged("EndpointType");
 				}
 			}
 		}
@@ -349,6 +591,120 @@ namespace Assemblies.Linq
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EndpointType")]
+	public partial class EndpointType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Description;
+		
+		private EntitySet<Endpoint> _Endpoints;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public EndpointType()
+		{
+			this._Endpoints = new EntitySet<Endpoint>(new Action<Endpoint>(this.attach_Endpoints), new Action<Endpoint>(this.detach_Endpoints));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EndpointType_Endpoint", Storage="_Endpoints", ThisKey="ID", OtherKey="Type")]
+		public EntitySet<Endpoint> Endpoints
+		{
+			get
+			{
+				return this._Endpoints;
+			}
+			set
+			{
+				this._Endpoints.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Endpoints(Endpoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.EndpointType = this;
+		}
+		
+		private void detach_Endpoints(Endpoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.EndpointType = null;
 		}
 	}
 }

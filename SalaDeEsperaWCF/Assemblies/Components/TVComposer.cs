@@ -40,31 +40,31 @@ namespace Assemblies.Components
         }
 
         #region Configuração
-        int frequency = 754000, 
-            onid = -1, 
-            tsid = -1, 
-            sid = 1103;
+        //int frequency = 754000, 
+        //    onid = -1, 
+        //    tsid = -1, 
+        //    sid = 1103;
 
-        public int Frequency
-        {
-            get { return frequency; }
-            set { frequency = value; }
-        }
-        public int ONID
-        {
-            get { return onid; }
-            set { onid = value; }
-        }
-        public int TSID
-        {
-            get { return tsid; }
-            set { tsid = value; }
-        }
-        public int SID
-        {
-            get { return sid; }
-            set { sid = value; }
-        }
+        //public int Frequency
+        //{
+        //    get { return frequency; }
+        //    set { frequency = value; }
+        //}
+        //public int ONID
+        //{
+        //    get { return onid; }
+        //    set { onid = value; }
+        //}
+        //public int TSID
+        //{
+        //    get { return tsid; }
+        //    set { tsid = value; }
+        //}
+        //public int SID
+        //{
+        //    get { return sid; }
+        //    set { sid = value; }
+        //}
         #endregion
 
         public void SetOptionsWindowConnection(Connection con)

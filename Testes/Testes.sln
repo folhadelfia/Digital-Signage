@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV-2", "TV-2\TV-2.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV2Lib", "TV2Lib\TV2Lib.csproj", "{6402E765-5743-471C-807C-864270421C08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopiasPorReferencia", "CopiasPorReferencia\CopiasPorReferencia.csproj", "{645DF069-C38D-4274-A4C9-2C54DDEADFA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,16 @@ Global
 		{6402E765-5743-471C-807C-864270421C08}.Release x86|Any CPU.Build.0 = Release x86|Any CPU
 		{6402E765-5743-471C-807C-864270421C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6402E765-5743-471C-807C-864270421C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Deploy to working dir|Any CPU.ActiveCfg = Debug|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Deploy to working dir|Any CPU.Build.0 = Debug|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Release x64|Any CPU.ActiveCfg = Release|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Release x64|Any CPU.Build.0 = Release|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Release x86|Any CPU.ActiveCfg = Release|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Release x86|Any CPU.Build.0 = Release|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{645DF069-C38D-4274-A4C9-2C54DDEADFA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

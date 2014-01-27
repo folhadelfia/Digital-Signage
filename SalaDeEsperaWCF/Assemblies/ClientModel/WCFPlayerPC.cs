@@ -10,18 +10,25 @@ namespace Assemblies.ClientModel
 {
     public class WCFPlayerPC : PlayerPC
     {
-        private EndpointAddress endpoint;
+        private EndpointAddress playerEndpoint;
+        private EndpointAddress fileTransferEndpoint;
 
-        public EndpointAddress Endpoint
+        public EndpointAddress PlayerEndpoint
         {
-            get { return endpoint; }
+            get { return playerEndpoint; }
             set 
             {
                 this.ip = value.Uri.Host;
-                this.port = value.Uri.Port.ToString();
+                //this.port = value.Uri.Port.ToString();
                 this.name = MyToolkit.Networking.ResolveIP(value.Uri.Host);
-                endpoint = value; 
+                playerEndpoint = value; 
             }
+        }
+
+        public EndpointAddress FileTransferEndpoint
+        {
+            get { return fileTransferEndpoint; }
+            set { fileTransferEndpoint = value; }
         }
     }
 }

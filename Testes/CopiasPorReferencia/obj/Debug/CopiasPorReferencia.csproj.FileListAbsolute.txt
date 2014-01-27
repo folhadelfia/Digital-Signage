@@ -1,0 +1,8 @@
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\bin\Debug\CopiasPorReferencia.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\bin\Debug\CopiasPorReferencia.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.Form1.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.Properties.Resources.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.pdb

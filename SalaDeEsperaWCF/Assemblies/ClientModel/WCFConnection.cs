@@ -11,19 +11,22 @@ using Assemblies.ClientProxies;
 using Assemblies.DataContracts;
 using Assemblies.PlayerServiceContracts;
 using System.Threading;
+using System.IO;
+using Assemblies.PlayerServiceImplementation;
 
 namespace Assemblies.ClientModel
 {
     public class WCFConnection : Connection
     {
         private PlayerProxy player;
+        private FileStreamingServiceProxy fileTransfer;
 
         #region Members of IConnection
 
-        public override string CompleteServerAddress
-        {
-            get { return string.Format(@"net.tcp://{0}:{1}/Probe", ServerIP, ServerPort); }
-        } //Feito
+        //public override string CompleteServerAddress
+        //{
+        //    get { return string.Format(@"net.tcp://{0}:{1}/Probe", ServerIP, ServerPort); }
+        //} //Feito
         public override ConnectionState State
         {
             get 
@@ -46,8 +49,24 @@ namespace Assemblies.ClientModel
         public WCFConnection() { }
         public WCFConnection(WCFPlayerPC pc) : base(pc) 
         { 
-            this.ServerIP = pc.IP;
-            this.ServerPort = pc.Port;
+            this.PlayerIP = pc.IP;
+            this.PlayerEndpoint = pc.PlayerEndpoint;
+            this.FileTransferEndpoint = pc.FileTransferEndpoint;
+        }
+
+        EndpointAddress playerEndpoint,
+               fileTransferEndpoint;
+
+        public EndpointAddress PlayerEndpoint
+        {
+            get { return playerEndpoint; }
+            set { playerEndpoint = value; }
+        }
+
+        public EndpointAddress FileTransferEndpoint
+        {
+            get { return fileTransferEndpoint; }
+            set { fileTransferEndpoint = value; }
         }
 
         public override void Open()
@@ -57,14 +76,27 @@ namespace Assemblies.ClientModel
 
             try
             {
-                NetTcpBinding binding = new NetTcpBinding(SecurityMode.None) { ReceiveTimeout = new TimeSpan(0, 5, 0), SendTimeout = new TimeSpan(0, 5, 0) };
+                #region Player
+
+                NetTcpBinding playerBinding = new NetTcpBinding(SecurityMode.None) { ReceiveTimeout = new TimeSpan(0, 5, 0), SendTimeout = new TimeSpan(0, 5, 0) };
                 WCFPlayerPC wcfComputer = pc as WCFPlayerPC;
-                player = new PlayerProxy(binding, wcfComputer.Endpoint);
+                player = new PlayerProxy(playerBinding, wcfComputer.PlayerEndpoint);
                 player.Open();
+
+                #endregion
+
+                #region File transfer
+
+                fileTransfer = FileStreamingService.CreateClient(fileTransferEndpoint);
+
+                fileTransfer.Open();
+
+                #endregion
             }
             catch
             {
-
+                if (player != null && player.State != CommunicationState.Closed) player.Abort();
+                if (fileTransfer != null && fileTransfer.State != CommunicationState.Closed) fileTransfer.Abort();
             }
         }//Feito
         public override void Close()
@@ -72,151 +104,155 @@ namespace Assemblies.ClientModel
             try
             {
                 player.Close();
+                fileTransfer.Close();
             }
             catch
             {
             }
         } //Feito
-        public override IEnumerable<PlayerPC> GetPlayers()
-        {
-            List<WCFPlayerPC> pcs = new List<WCFPlayerPC>();
+        #region A usar o discovery server
+        //public override IEnumerable<PlayerPC> GetPlayers()
+        //{
+        //    List<WCFPlayerPC> pcs = new List<WCFPlayerPC>();
 
-            Uri probeEndpointAddress = new Uri(CompleteServerAddress);
+        //    Uri probeEndpointAddress = new Uri(CompleteServerAddress);
 
-            NetTcpBinding binding = new NetTcpBinding();
-            binding.Security.Mode = SecurityMode.None;
-            binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+        //    NetTcpBinding binding = new NetTcpBinding();
+        //    binding.Security.Mode = SecurityMode.None;
+        //    binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
 
-            DiscoveryEndpoint discoveryEndpoint = new DiscoveryEndpoint(binding, new EndpointAddress(probeEndpointAddress));
+        //    DiscoveryEndpoint discoveryEndpoint = new DiscoveryEndpoint(binding, new EndpointAddress(probeEndpointAddress));
 
-            DiscoveryClient discoveryClient = new DiscoveryClient(discoveryEndpoint);
+        //    DiscoveryClient discoveryClient = new DiscoveryClient(discoveryEndpoint);
 
-            try
-            {
-                FindResponse findResponse = discoveryClient.Find(new FindCriteria(typeof(IPlayer)));
+        //    try
+        //    {
+        //        FindResponse findResponse = discoveryClient.Find(new FindCriteria(typeof(IPlayer)));
 
-                WCFPlayerPC pc;
+        //        WCFPlayerPC pc;
 
-                float totalPcs = findResponse.Endpoints.Count;
-                float currentPc = 1;
+        //        float totalPcs = findResponse.Endpoints.Count;
+        //        float currentPc = 1;
 
-                foreach (var endpoint in findResponse.Endpoints)
-                {
-                    int progress = Convert.ToInt32(Math.Round((currentPc / totalPcs) * 100f, 0, MidpointRounding.AwayFromZero));
-                    currentPc++;
+        //        foreach (var endpoint in findResponse.Endpoints)
+        //        {
+        //            int progress = Convert.ToInt32(Math.Round((currentPc / totalPcs) * 100f, 0, MidpointRounding.AwayFromZero));
+        //            currentPc++;
 
-                    try
-                    {
+        //            try
+        //            {
 
-                        NetTcpBinding bindingPC = new NetTcpBinding();
-                        binding.Security.Mode = SecurityMode.None;
-                        binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
-                        binding.CloseTimeout = new TimeSpan(0, 0, 2);
+        //                NetTcpBinding bindingPC = new NetTcpBinding();
+        //                binding.Security.Mode = SecurityMode.None;
+        //                binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+        //                binding.CloseTimeout = new TimeSpan(0, 0, 2);
 
-                        PlayerProxy client = new PlayerProxy(binding, endpoint.Address);
+        //                PlayerProxy client = new PlayerProxy(binding, endpoint.Address);
 
-                        client.Open();
+        //                client.Open();
 
-                        List<WCFScreenInformation> displays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
+        //                List<WCFScreenInformation> displays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
 
-                        client.Close();
+        //                client.Close();
 
-                        pc = new WCFPlayerPC() { Displays = displays, Endpoint = endpoint.Address };
+        //                pc = new WCFPlayerPC() { Displays = displays, PlayerEndpoint = endpoint.Address };
 
-                        pcs.Add(pc);
+        //                pcs.Add(pc);
 
-                        OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
-                    }
-                    catch (EndpointNotFoundException)
-                    {
-                        OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
-                        continue;
-                    }
-                }
-            }
-            catch
-            {
-                return null;
-            }
+        //                OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
+        //            }
+        //            catch (EndpointNotFoundException)
+        //            {
+        //                OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
+        //                continue;
+        //            }
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
 
-            return pcs.Cast<PlayerPC>();
-        } //Feito
-        public override void GetPlayersAsync(NewPlayerFoundDelegate callback)
-        {
-            Uri probeEndpointAddress = new Uri(CompleteServerAddress);
+        //    return pcs.Cast<PlayerPC>();
+        //} //Feito
+        //public override void GetPlayersAsync(NewPlayerFoundDelegate callback)
+        //{
+        //    Uri probeEndpointAddress = new Uri(CompleteServerAddress);
 
-            NetTcpBinding binding = new NetTcpBinding();
-            binding.Security.Mode = SecurityMode.None;
-            binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+        //    NetTcpBinding binding = new NetTcpBinding();
+        //    binding.Security.Mode = SecurityMode.None;
+        //    binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
 
-            DiscoveryEndpoint discoveryEndpoint = new DiscoveryEndpoint(binding, new EndpointAddress(probeEndpointAddress));
+        //    DiscoveryEndpoint discoveryEndpoint = new DiscoveryEndpoint(binding, new EndpointAddress(probeEndpointAddress));
 
-            DiscoveryClient discoveryClient = new DiscoveryClient(discoveryEndpoint);
+        //    DiscoveryClient discoveryClient = new DiscoveryClient(discoveryEndpoint);
 
-            try
-            {
-                FindResponse findResponse = discoveryClient.Find(new FindCriteria(typeof(IPlayer)));
+        //    try
+        //    {
+        //        FindResponse findResponse = discoveryClient.Find(new FindCriteria(typeof(IPlayer)));
 
-                WCFPlayerPC pc;
+        //        WCFPlayerPC pc;
 
-                float totalPcs = findResponse.Endpoints.Count;
-                float currentPc = 1;
+        //        float totalPcs = findResponse.Endpoints.Count;
+        //        float currentPc = 1;
 
-                List<Thread> threads = new List<Thread>();
+        //        List<Thread> threads = new List<Thread>();
 
-                foreach (var endpoint in findResponse.Endpoints)
-                {
-                    Thread t = new Thread(new ThreadStart(() =>
-                    {
-                        int progress = Convert.ToInt32(Math.Round((currentPc / totalPcs) * 100f, 0, MidpointRounding.AwayFromZero));
-                        currentPc++;
+        //        foreach (var endpoint in findResponse.Endpoints)
+        //        {
+        //            Thread t = new Thread(new ThreadStart(() =>
+        //            {
+        //                int progress = Convert.ToInt32(Math.Round((currentPc / totalPcs) * 100f, 0, MidpointRounding.AwayFromZero));
+        //                currentPc++;
 
-                        try
-                        {
+        //                try
+        //                {
 
-                            NetTcpBinding bindingPC = new NetTcpBinding();
-                            bindingPC.Security.Mode = SecurityMode.None;
-                            bindingPC.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
-                            bindingPC.CloseTimeout = new TimeSpan(0, 0, 2);
+        //                    NetTcpBinding bindingPC = new NetTcpBinding();
+        //                    bindingPC.Security.Mode = SecurityMode.None;
+        //                    bindingPC.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+        //                    bindingPC.CloseTimeout = new TimeSpan(0, 0, 2);
 
-                            PlayerProxy client = new PlayerProxy(bindingPC, endpoint.Address);
+        //                    PlayerProxy client = new PlayerProxy(bindingPC, endpoint.Address);
 
-                            client.Open();
+        //                    client.Open();
 
-                            List<WCFScreenInformation> displays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
+        //                    List<WCFScreenInformation> displays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
 
-                            client.Close();
+        //                    client.Close();
 
-                            pc = new WCFPlayerPC() { Displays = displays, Endpoint = endpoint.Address };
+        //                    pc = new WCFPlayerPC() { Displays = displays, PlayerEndpoint = endpoint.Address };
 
-                            callback(pc);
+        //                    callback(pc);
 
-                            OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
-                        }
-                        catch (EndpointNotFoundException)
-                        {
-                            OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
-                        }
-                        catch (TimeoutException)
-                        {
-                            OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
-                        }
-                    }));
+        //                    OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
+        //                }
+        //                catch (EndpointNotFoundException)
+        //                {
+        //                    OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
+        //                }
+        //                catch (TimeoutException)
+        //                {
+        //                    OnGetPlayersProgressChanged(progress, Convert.ToInt32(totalPcs));
+        //                }
+        //            }));
 
-                    threads.Add(t);
-                }
+        //            threads.Add(t);
+        //        }
 
-                foreach (var t in threads)
-                {
-                    t.Start();
-                }
-            }
-            catch
-            {
-                return;
-            }
+        //        foreach (var t in threads)
+        //        {
+        //            t.Start();
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return;
+        //    }
 
-        }
+        //}
+        #endregion
+
         public override event GetPlayersEventHandler GetPlayersProgressChanged;
         private void OnGetPlayersProgressChanged(int progress, int count)
         {
@@ -543,6 +579,41 @@ namespace Assemblies.ClientModel
             throw new NotImplementedException();
         }
         #endregion
+
+        #region Video files
+
+        public override bool SendVideoFile(StreamedFile file)
+        {
+            return fileTransfer.UploadFile(file);
+        }
+
+        public override IEnumerable<string> GetRemoteVideoFileNames()
+        {
+            return player.GetVideoFilePaths().ToList();
+        }
+
+        public override void StartVideo(string displayName, int videoPlayerID)
+        {
+            player.SetStartVideo(displayName, videoPlayerID);
+        }
+
+        public override void StopVideo(string displayName, int videoPlayerID)
+        {
+            player.SetStartVideo(displayName, videoPlayerID);
+        }
+
+        public override void PreviousVideo(string displayName, int videoPlayerID)
+        {
+            player.SetStartVideo(displayName, videoPlayerID);
+        }
+
+        public override void NextVideo(string displayName, int videoPlayerID)
+        {
+            player.SetStartVideo(displayName, videoPlayerID);
+        }
+
+        #endregion
+
         #endregion
     }
 }

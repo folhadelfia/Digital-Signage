@@ -2,11 +2,37 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="PlayersLigados">
   <DataContextMoniker Name="/PlayersLigadosDataContext" />
   <nestedChildShapes>
-    <classShape Id="bdc41a19-70bb-4dbd-a46f-0b35068f1580" absoluteBounds="5.75, 2.375, 2, 2.7324039713541666">
+    <classShape Id="0768651c-6a19-478b-9f69-34eb0b004c29" absoluteBounds="0.75, 3.875, 2, 2.1554996744791666">
       <DataClassMoniker Name="/PlayersLigadosDataContext/Player" />
       <nestedChildShapes>
-        <elementListCompartment Id="2aa3ac71-4a1f-4fb8-99c9-44559f617cd7" absoluteBounds="5.765, 2.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2c062cad-e766-4fe4-9a26-8df8077feaa1" absoluteBounds="0.765, 4.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="b905ddf1-201b-467b-809f-cd5b3476c9d8" absoluteBounds="3.5, 0.875, 2, 1.9631982421874998">
+      <DataClassMoniker Name="/PlayersLigadosDataContext/Endpoint" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1a837378-6b0e-4775-92e8-d781cf37a678" absoluteBounds="3.515, 1.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="67dfe7c1-010c-475c-adb5-ce9a9d128212" absoluteBounds="0.75, 1.25, 2, 1.1939925130208338">
+      <DataClassMoniker Name="/PlayersLigadosDataContext/EndpointType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="22becaf8-ee31-4d96-8789-076c8c12bf11" absoluteBounds="0.765, 1.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.95274983723958); (4.5 : 4.95274983723958); (4.5 : 2.8381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlayersLigadosDataContext/Player/Player_Endpoint" />
+      <nodes>
+        <classShapeMoniker Id="0768651c-6a19-478b-9f69-34eb0b004c29" />
+        <classShapeMoniker Id="b905ddf1-201b-467b-809f-cd5b3476c9d8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.84699625651042); (3.5 : 1.84699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlayersLigadosDataContext/EndpointType/EndpointType_Endpoint" />
+      <nodes>
+        <classShapeMoniker Id="67dfe7c1-010c-475c-adb5-ce9a9d128212" />
+        <classShapeMoniker Id="b905ddf1-201b-467b-809f-cd5b3476c9d8" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

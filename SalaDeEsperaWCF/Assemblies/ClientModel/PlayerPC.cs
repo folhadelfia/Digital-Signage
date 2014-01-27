@@ -10,7 +10,7 @@ namespace Assemblies.ClientModel
 {
     public abstract class PlayerPC
     {
-        protected string ip, port;
+        protected string ip; //, port;
         protected string name;
 
         protected IEnumerable<WCFScreenInformation> displays;
@@ -23,10 +23,10 @@ namespace Assemblies.ClientModel
         {
             get { return ip; }
         }
-        public string Port
-        {
-            get { return port; }
-        }
+        //public string Port
+        //{
+        //    get { return port; }
+        //}
 
         public IEnumerable<WCFScreenInformation> Displays
         {

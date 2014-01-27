@@ -20,6 +20,7 @@ using TV2Lib;
 
 using DirectShowLib;
 using System.Runtime.InteropServices;
+using VideoPlayer;
 
 namespace Server.View
 {
@@ -214,8 +215,12 @@ namespace Server.View
                         (component as DigitalTVScreen).Stop();
                         (component as DigitalTVScreen).Dispose();
                     }
-                    else if (component is VideoComposer)//MUDAR
+                    else if (component is FileVideoPlayer)
                     {
+                        FileVideoPlayer temp = component as FileVideoPlayer;
+
+                        if (temp.State != FileVideoPlayer.MediaStatus.Stopped) temp.Stop();
+                        temp.Dispose();
                     }
                     else if (component is WaitListComposer)//MUDAR
                     {
@@ -499,6 +504,31 @@ namespace Server.View
         #endregion
 
         #endregion
+
+        #region Video
+
+        public void StartVideo(int videoPlayerID)
+        {
+            if (this.Controls.OfType<FileVideoPlayer>().Where(x => x.ID == videoPlayerID).Count() != 1) return;
+            else this.Controls.OfType<FileVideoPlayer>().Single(x => x.ID == videoPlayerID).Run();
+        }
+        public void StopVideo(int videoPlayerID)
+        {
+            if (this.Controls.OfType<FileVideoPlayer>().Where(x => x.ID == videoPlayerID).Count() != 1) return;
+            else this.Controls.OfType<FileVideoPlayer>().Single(x => x.ID == videoPlayerID).Stop();
+        }
+        public void PreviousVideo(int videoPlayerID)
+        {
+            if (this.Controls.OfType<FileVideoPlayer>().Where(x => x.ID == videoPlayerID).Count() != 1) return;
+            else this.Controls.OfType<FileVideoPlayer>().Single(x => x.ID == videoPlayerID).Previous();
+        }
+        public void NextVideo(int videoPlayerID)
+        {
+            if (this.Controls.OfType<FileVideoPlayer>().Where(x => x.ID == videoPlayerID).Count() != 1) return;
+            else this.Controls.OfType<FileVideoPlayer>().Single(x => x.ID == videoPlayerID).Next();
+        }
+
+        #endregion
         #endregion
 
 
@@ -652,8 +682,24 @@ namespace Server.View
 
                     if (tvScreen.Channels.ChannelList.Count > 0) tvScreen.Channels.TuneChannel(tvScreen.Channels.ChannelList[0]);
                 }
-                else if (config is VideoComposer)//MUDAR
+                else if (config is VideoConfiguration)
                 {
+                    var temp = config as VideoConfiguration;
+
+                    if (this.Controls.OfType<FileVideoPlayer>().Where(x => x.ID == temp.ID).Count() > 0) return;
+
+                    FileVideoPlayer player = new FileVideoPlayer()
+                    {
+                        Location = temp.FinalLocation,
+                        Size = temp.FinalSize,
+                    };
+
+                    player.ID = temp.ID;
+                    player.Playlist.Add(temp.Playlist);
+
+                    this.Controls.Add(player);
+
+                    player.Run();
                 }
                 else if (config is WaitListComposer)//MUDAR
                 {

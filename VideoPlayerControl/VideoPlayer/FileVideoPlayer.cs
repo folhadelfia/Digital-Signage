@@ -12,6 +12,14 @@ namespace VideoPlayer
 {
     public class FileVideoPlayer : VideoControl
     {
+        /// <summary>
+        /// Supported extensions. Includes the dot (.mp4)
+        /// </summary>
+        /// <returns></returns>
+        public static string[] SupportedVideoExtensions() { return new string[] {".avi", ".mpg", ".mpeg", ".mp4", ".mkv", ".wmv" }; }
+
+        public int ID { get; set; }
+
         public FileVideoPlayer()
         {
             Initialize();

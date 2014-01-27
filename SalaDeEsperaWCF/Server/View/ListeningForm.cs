@@ -33,6 +33,7 @@ using System.IO;
 using System.ComponentModel;
 
 using Assemblies.Linq;
+using Assemblies.PlayerServiceContracts;
 
 namespace Server.View
 {
@@ -41,7 +42,7 @@ namespace Server.View
         private const string OBTAININGADDRESSES_TEXTBOX_TEXT = "A obter...",
                              UNAVAILABE_TEXTBOX_TEXT = "Indisponível. Verifique a ligação à Internet e clique em Actualizar.";
 
-        private ServiceHost serviceHost;
+        private ServiceHost serviceHost, fileTransferHost;
 
         private Dictionary<string, FormJanelaFinal> playerWindows = new Dictionary<string, FormJanelaFinal>();
 
@@ -90,15 +91,26 @@ namespace Server.View
             PlayerService.SendH264Decoders += PlayerService_SendH264Decoders;
             PlayerService.SendMPEG2Decoders += PlayerService_SendMPEG2Decoders;
 
+            #region Enviar ficheiros
+
+            FileStreamingService.FileReceived += FileStreamingService_FileReceived;
+
+            #endregion
+
+            PlayerService.SendVideoFilePaths += PlayerService_SendVideoFilePaths;
+
+            PlayerService.StartVideo += PlayerService_StartVideo;
+            PlayerService.StopVideo += PlayerService_StopVideo;
+            PlayerService.PreviousVideo += PlayerService_PreviousVideo;
+            PlayerService.NextVideo += PlayerService_NextVideo;
             #endregion
         }
-
         private void ListeningForm_Load(object sender, EventArgs e)
         {
             buttonConnect.Enabled = false;
             this.RefreshIPAndHostnameTextboxes();
 
-            this.textBoxPrivatePort.Text = MyToolkit.Networking.RandomPort().ToString();
+            this.textBoxPrivatePortPL.Text = MyToolkit.Networking.RandomPort().ToString();
 
             using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) idClinicaMulti = db.ClinicaDados.Single().idClinicaMulti ?? -1;
         }
@@ -444,6 +456,55 @@ namespace Server.View
             devs = DigitalTVScreen.DeviceStuff.MPEG2DecoderDevices.Values.Select(x => new GeneralDevice() { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
         }
 
+
+        #region Enviar ficheiros
+
+        void FileStreamingService_FileReceived(object sender, FileReceivedEventArgs e)
+        {
+            string videoFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+
+            //DirectoryInfo videos = new DirectoryInfo(videoFolder);
+
+            e.File.SaveToDisk(videoFolder);
+        }
+
+        #endregion
+
+        #region Video
+
+        void PlayerService_SendVideoFilePaths(out string[] paths)
+        {
+            DirectoryInfo videoFolder = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos));
+
+            List<string> files = new List<string>();
+
+            foreach (var file in videoFolder.EnumerateFiles().Where(x=>VideoPlayer.FileVideoPlayer.SupportedVideoExtensions().Contains(x.Extension.Trim().ToLower())))
+            {
+                files.Add(file.FullName);
+            }
+
+            paths = files.ToArray();
+        }
+
+        void PlayerService_StartVideo(string displayName, int videoPlayerID)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].StartVideo(videoPlayerID);
+        }
+        void PlayerService_StopVideo(string displayName, int videoPlayerID)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].StopVideo(videoPlayerID);
+        }
+        void PlayerService_PreviousVideo(string displayName, int videoPlayerID)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].PreviousVideo(videoPlayerID);
+        }
+        void PlayerService_NextVideo(string displayName, int videoPlayerID)
+        {
+            if (playerWindows.ContainsKey(displayName)) playerWindows[displayName].NextVideo(videoPlayerID);
+        }
+
+        #endregion
+
         #endregion
 
         #region Close
@@ -464,102 +525,127 @@ namespace Server.View
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            this.BeginInvoke((MethodInvoker)delegate
+            (sender as Button).Enabled = false;
+
+            if ((sender as Button).Text == "Ligar")
             {
-                (sender as Button).Enabled = false;
-
-                if ((sender as Button).Text == "Ligar")
+                try
                 {
-                    try
+                    #region Checks
+                    string  publicIP = textBoxPublicIP.Text,
+                            publicPortPlayer = textBoxPublicPortPL.Text,
+                            publicPortFileTransfer = textBoxPublicPortFT.Text,
+                            privateIP = textBoxPrivateIP.Text,
+                            privatePortPlayer = textBoxPrivatePortPL.Text,
+                            privatePortFileTransfer = textBoxPrivatePortFT.Text;
+
+                    bool ready = true;
+
+                    //var ips = MyToolkit.Networking.resolveHostname(serverIP);
+
+                    //if (ips != null && ips.Length > 0)
+                    //{
+                    //    serverIP = ips[0].ToString();
+                    //}
+
+                    if (!MyToolkit.Networking.ValidateIPAddress(publicIP))
                     {
-                        #region Checks
-                        string  publicIP = textBoxPublicIP.Text, 
-                                publicPort = textBoxPublicPort.Text,
-                                privateIP = textBoxPrivateIP.Text,
-                                privatePort = textBoxPrivatePort.Text;
-
-                        bool ready = true;
-
-                        //var ips = MyToolkit.Networking.resolveHostname(serverIP);
-
-                        //if (ips != null && ips.Length > 0)
-                        //{
-                        //    serverIP = ips[0].ToString();
-                        //}
-
-                        if (!MyToolkit.Networking.ValidateAddress(publicIP))
-                        {
-                            ready = false;
-                            Transition.run(textBoxPublicIP, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
-                        }
-                        else
-                        {
-                            Transition.run(textBoxPublicIP, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
-                        }
-
-                        if (!MyToolkit.Networking.ValidatePort(publicPort))
-                        {
-                            ready = false;
-                            Transition.run(textBoxPublicPort, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
-                        }
-                        else
-                        {
-                            Transition.run(textBoxPublicPort, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
-                        }
-
-                        if (!MyToolkit.Networking.ValidatePort(privatePort))
-                        {
-                            ready = false;
-                            Transition.run(textBoxPrivatePort, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
-                        }
-                        else
-                        {
-                            Transition.run(textBoxPrivatePort, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
-                        }
-                        #endregion
-
-                        if (ready)
-                        {
-                            this.Log("A iniciar o serviço");
-                            //StartServiceWithDiscoveryServer(serverIP, serverPort, localPort);
-                            StartServiceWithDatabase(privatePort, publicPort);
-                        }
-                        if (serviceHost != null && (serviceHost.State == CommunicationState.Opened || serviceHost.State == CommunicationState.Opening))
-                        {
-                            //this.Log(string.Format("Ligado ao servidor {0}:{1}", publicIP, publicPort));
-                            this.Log(string.Format("Endpoint: {0}", serviceHost.Description.Endpoints[0].Address));
-                            (sender as Button).Text = "Desligar";
-                        }
-                        else
-                        {
-                            //this.Log(string.Format("Problema a ligar ao servidor {0}:{1}", publicIP, publicPort));
-                        }
+                        ready = false;
+                        Transition.run(textBoxPublicIP, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
                     }
-                    catch (ArgumentException ex)
+                    else
                     {
-#if DEBUG
-                        this.Log(ex);
-#endif
+                        Transition.run(textBoxPublicIP, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
                     }
-                    catch (Exception ex)
+
+                    if (!MyToolkit.Networking.ValidatePort(publicPortPlayer))
                     {
-#if DEBUG
-                        this.Log(ex);
-#endif
+                        ready = false;
+                        Transition.run(textBoxPublicPortPL, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
+                    }
+                    else
+                    {
+                        Transition.run(textBoxPublicPortPL, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
+                    }
+
+                    if (!MyToolkit.Networking.ValidatePort(publicPortFileTransfer))
+                    {
+                        ready = false;
+                        Transition.run(textBoxPublicPortFT, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
+                    }
+                    else
+                    {
+                        Transition.run(textBoxPublicPortFT, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
+                    }
+
+                    if (!MyToolkit.Networking.ValidatePort(privatePortPlayer))
+                    {
+                        ready = false;
+                        Transition.run(textBoxPrivatePortPL, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
+                    }
+                    else
+                    {
+                        Transition.run(textBoxPrivatePortPL, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
+                    }
+
+                    if (!MyToolkit.Networking.ValidatePort(privatePortFileTransfer))
+                    {
+                        ready = false;
+                        Transition.run(textBoxPrivatePortFT, "BackColor", Color.MistyRose, new TransitionType_EaseInEaseOut(300));
+                    }
+                    else
+                    {
+                        Transition.run(textBoxPrivatePortFT, "BackColor", SystemColors.Window, new TransitionType_EaseInEaseOut(300));
+                    }
+                    #endregion
+
+                    if (ready)
+                    {
+                        this.Log("A iniciar o serviço");
+                        //StartServiceWithDiscoveryServer(serverIP, serverPort, localPort);
+                        StartServiceWithDatabase(
+                            privatePortPlayer: privatePortPlayer,
+                            privatePortFileTransfer: privatePortFileTransfer,
+                            publicPortPlayer: publicPortPlayer,
+                            publicPortFileTransfer: publicPortFileTransfer
+                            );
+
+                    }
+                    if ((serviceHost != null && (serviceHost.State == CommunicationState.Opened || serviceHost.State == CommunicationState.Opening)) && (fileTransferHost != null && (fileTransferHost.State == CommunicationState.Opened || fileTransferHost.State == CommunicationState.Opening)))
+                    {
+                        this.Log(string.Format("Player Endpoint: {0}", serviceHost.Description.Endpoints[0].Address));
+                        this.Log(string.Format("File Transfer Endpoint: {0}", fileTransferHost.Description.Endpoints[0].Address));
+                        (sender as Button).Text = "Desligar";
+                    }
+                    else
+                    {
+                        //this.Log(string.Format("Problema a ligar ao servidor {0}:{1}", publicIP, publicPort));
                     }
                 }
-                else
+                catch (ArgumentException ex)
                 {
-                    //CloseServiceWithDiscoveryServer();
-                    CloseServiceWithDatabase();
-
-                    if (serviceHost.State == CommunicationState.Closed || serviceHost.State == CommunicationState.Closing)
-                        (sender as Button).Text = "Ligar";
-
+#if DEBUG
+                    this.Log(ex);
+#endif
                 }
+                catch (Exception ex)
+                {
+#if DEBUG
+                    this.Log(ex);
+#endif
+                }
+            }
+            else
+            {
+                //CloseServiceWithDiscoveryServer();
+                CloseServiceWithDatabase();
+
+                if ((serviceHost.State == CommunicationState.Closed || serviceHost.State == CommunicationState.Closing) && (fileTransferHost.State == CommunicationState.Closed || fileTransferHost.State == CommunicationState.Closing))
+                    (sender as Button).Text = "Ligar";
+
+            }
                 
-                (sender as Button).Enabled = true;
-            });
+            (sender as Button).Enabled = true;
         }
 
         private void StartServiceWithDiscoveryServer(string serverIP, string serverPort, string localPort)
@@ -635,28 +721,37 @@ namespace Server.View
                 Log(e);
             }
         }
-        private void StartServiceWithDatabase(string privatePort, string publicPort)
+        private void StartServiceWithDatabase(string privatePortPlayer, string privatePortFileTransfer, string publicPortPlayer, string publicPortFileTransfer)
         {
             try
             {
-                using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
-                {
-                    foreach (var pl in db.Players.Where(x => x.isActive && x.privatePort == privatePort && x.privateIPAddress != privateIP && x.publicIPAddress == publicIP))
-                    {
-                        if (MyToolkit.Networking.StringToIPAddress(pl.publicIPAddress).ToString() == MyToolkit.Networking.PublicIPAddress.ToString()) throw new ApplicationException("Já existe um player com esta porta");
-                    }
+                //Usar um check diferente para a porta da transferencia de ficheiros e para o player
 
-                    //MyToolkit.Networking.StringToIPAddress(x.publicIPAddress).ToString()
-                    //Parece estúpido, mas é uma forma de garantir que 10.0.000000.1 é o mesmo que 10.0.0.1
-                }
+                //using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
+                //{
+                //    foreach (var pl in db.Players.Where(x => x.isActive && x. == privatePort && x.privateIPAddress != privateIP && x.publicIPAddress == publicIP))
+                //    {
+                //        if (MyToolkit.Networking.StringToIPAddress(pl.publicIPAddress).ToString() == MyToolkit.Networking.PublicIPAddress.ToString()) throw new ApplicationException("Já existe um player com esta porta");
+                //    }
 
+                //    //MyToolkit.Networking.StringToIPAddress(x.publicIPAddress).ToString()
+                //    //Parece estúpido, mas é uma forma de garantir que 10.0.000000.1 é o mesmo que 10.0.0.1
+                //}
+                #region Endpoint do player
                 ////endereço do player
-                Uri baseAddress = new Uri(String.Format("net.tcp://{0}:{1}/PlayerService", textBoxPrivateIP.Text, privatePort));
+                Uri baseAddress = new Uri(String.Format("net.tcp://{0}:{1}/PlayerService", textBoxPrivateIP.Text, privatePortPlayer));
 
                 //criar o host do serviço
                 serviceHost = new ServiceHost(typeof(PlayerService), baseAddress);
-                NetTcpBinding tcpBindingAnnouncement = new NetTcpBinding();
-                tcpBindingAnnouncement.Security.Mode = SecurityMode.None; //Alterar a autenticação para um modelo melhor
+                //NetTcpBinding tcpBindingAnnouncement = new NetTcpBinding();
+                //tcpBindingAnnouncement.Security.Mode = SecurityMode.None; //Alterar a autenticação para um modelo melhor
+                #endregion
+
+                #region Endpoint dos ficheiros
+
+                fileTransferHost = FileStreamingService.CreateHost(textBoxPrivateIP.Text, privatePortFileTransfer);
+
+                #endregion
 
                 ////http://nerdwords.blogspot.pt/2008/01/wcf-error-socket-connection-was-aborted.html
 #if EXPOSE_METADATA
@@ -676,13 +771,14 @@ namespace Server.View
 #endif
 
                 serviceHost.Open();
+                fileTransferHost.Open();
 
                 try
                 {
                     using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
                     {
                         List<Player> conflictingPlayers = new List<Player>();
-                        var conflictingPlayersTemp = db.Players.Where(x => x.isActive && x.privatePort == privatePort);
+                        var conflictingPlayersTemp = db.Players.Where(x => x.isActive && x.Endpoints.Where(y=>y.PrivatePort == privatePortPlayer || y.PrivatePort == privatePortFileTransfer).Count() > 0);
 
                         foreach (var pl in conflictingPlayersTemp)
                         {
@@ -703,12 +799,13 @@ namespace Server.View
                                                             x.idClinica == idClinicaMulti &&
                                                             x.privateIPAddress == privateIP &&
                                                             x.publicIPAddress == publicIP &&
-                                                            x.privatePort == privatePort &&
-                                                            x.publicPort == publicPort &&
                                                             x.privateHostname == privateHostname &&
                                                             x.publicHostname == publicHostname &&
-                                                            x.wcfEndpoint == serviceHost.Description.Endpoints[0].Address.ToString()
-                                                            );
+                                                            x.Endpoints.Where(y => 
+                                                                y.PrivatePort == privatePortPlayer &&
+                                                                y.PublicPort == publicPortPlayer
+                                                                ).Count() > 0
+                                                            ); //Ver bem esta condição
 
                         //Apagar todos excepto o mais recente
                         if (tempOverlappingPlayersInactive.Count() > 1)
@@ -726,19 +823,34 @@ namespace Server.View
                         if (tempOverlappingPlayersInactive.Count() == 1) tempOverlappingPlayersInactive.Single().isActive = true;
                         else
                         {
-                            db.Players.InsertOnSubmit(new Player()
+                            var pl = new Player()
                             {
                                 isActive = true,
                                 idClinica = idClinicaMulti,
                                 privateIPAddress = privateIP,
                                 publicIPAddress = publicIP,
-                                privatePort = privatePort,
-                                publicPort = publicPort,
                                 privateHostname = privateHostname,
-                                publicHostname = publicHostname,
-                                wcfEndpoint = serviceHost.Description.Endpoints[0].Address.ToString()
-                            }
-                            );
+                                publicHostname = publicHostname
+                            };
+
+                            pl.Endpoints.Add(new Endpoint()
+                            {
+                                Type = (int)EndpointTypeEnum.Player,
+                                Address = serviceHost.Description.Endpoints[0].Address.ToString(), //Procurar o endereço de uma maneira melhor
+                                PrivatePort = privatePortPlayer,
+                                PublicPort = publicPortPlayer,
+                            });
+
+                            pl.Endpoints.Add(new Endpoint()
+                            {
+                                Type = (int)EndpointTypeEnum.FileTransfer,
+                                Address = fileTransferHost.Description.Endpoints[0].Address.ToString(), //Procurar o endereço de uma maneira melhor
+                                PrivatePort = privatePortFileTransfer,
+                                PublicPort = publicPortFileTransfer,
+                            });
+
+
+                            db.Players.InsertOnSubmit(pl);
                         }
 
                         db.SubmitChanges();
@@ -781,19 +893,43 @@ namespace Server.View
         {
             try
             {
-                if (serviceHost == null) return;
+                if (serviceHost == null && fileTransferHost == null) return;
 
-                this.Log("A fechar o serviço");
-                serviceHost.Close();
-                this.Log("Serviço fechado com sucesso");
+                try
+                {
+                    this.Log("A fechar o player");
+                    serviceHost.Close();
+                    this.Log("Player fechado com sucesso");
+                }
+                catch(Exception ex)
+                {
+                    this.Log(ex);
+                    this.Log("A abortar o player");
+                    serviceHost.Abort();
+                    this.Log("Player abortado");
+                }
+                try
+                {
+                    this.Log("A fechar a transferência de ficheiros");
+                    fileTransferHost.Close();
+                    this.Log("Transferência de ficheiros fechada com sucesso");
+                }
+                catch (Exception ex)
+                {
+                    this.Log(ex);
+                    this.Log("A abortar a transferência de ficheiros");
+                    fileTransferHost.Abort();
+                    this.Log("Transferência de ficheiros abortada");
+                }
 
                 using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
                 {
                     string publicIPAddress = MyToolkit.Networking.PublicIPAddress.ToString();
 
-                    string endpoint = serviceHost.Description.Endpoints[0].Address.ToString();
+                    string playerEndpoint = serviceHost.Description.Endpoints[0].Address.ToString(),
+                           fileTransferEndpoint = fileTransferHost.Description.Endpoints[0].Address.ToString();
 
-                    foreach (var pl in db.Players.Where(x => x.isActive && x.publicIPAddress == publicIPAddress && x.wcfEndpoint == endpoint))
+                    foreach (var pl in db.Players.Where(x => x.isActive && (x.Endpoints.Single(y => y.Type == (int)EndpointTypeEnum.Player).Address == playerEndpoint) && x.Endpoints.Single(y => y.Type == (int)EndpointTypeEnum.FileTransfer).Address == fileTransferEndpoint))
                         pl.isActive = false;
 
                     db.SubmitChanges();
@@ -802,27 +938,6 @@ namespace Server.View
             catch (Exception ex)
             {
                 this.Log(ex);
-                this.Log("A abortar o serviço");
-                serviceHost.Abort();
-                this.Log("Serviço abortado");
-
-                try
-                {
-                    using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
-                    {
-                        string publicIPAddress = MyToolkit.Networking.PublicIPAddress.ToString();
-
-                        string endpoint = serviceHost.Description.Endpoints.ToString();
-
-                        foreach (var pl in db.Players.Where(x => x.isActive && x.publicIPAddress == publicIPAddress && x.wcfEndpoint == endpoint))
-                            pl.isActive = false;
-
-                        db.SubmitChanges();
-                    }
-                }
-                catch
-                {
-                }
             }
         }
 

@@ -32,6 +32,7 @@ using Assemblies.Toolkit;
 using Assemblies.XMLSerialization.Components;
 using Assemblies.XMLSerialization;
 using System.Xml.Serialization;
+using Assemblies.PlayerServiceImplementation;
 
 using Assemblies.Linq;
 using System.ServiceModel;
@@ -163,7 +164,8 @@ namespace Client
                 int counter = 0;
                 foreach (IComponentCreator creator in items)
                 {
-                    AddComponentToPanel(creator).Location = panel.PointToClient(new Point(e.X + (counter * 10), e.Y + (counter++ * 10)));
+                    var comp = AddComponentToPanel(creator);
+                    if(comp != null) comp.Location = panel.PointToClient(new Point(e.X + (counter * 10), e.Y + (counter++ * 10)));
                 }
 
                 panel.Cursor = Cursors.Default;
@@ -282,6 +284,8 @@ namespace Client
         {
             try
             {
+                if (creator is TVCreator && panelBuilder.Controls.OfType<TVComposer>().Count() > 0) throw new ApplicationException("Já existe um componente de televisão neste monitor");
+
                 ComposerComponent component = creator.Instance;
 
                 component.Configuration.Resolution = panelBuilder.Size;
@@ -291,7 +295,15 @@ namespace Client
                 component.ContextMenuStrip = contextMenuStripComponents;
 
                 if (component is TVComposer)
-                    (component as TVComposer).SetOptionsWindowConnection(Connection);
+                    (component as TVComposer).SetOptionsWindowConnection(Connection); //vai ser preciso fazer o mesmo no video
+                else if (component is VideoComposer)
+                { 
+                    int videoCount = panelBuilder.Controls.OfType<VideoComposer>().Count();
+
+                    ((component as VideoComposer).Configuration as VideoConfiguration).ID = videoCount + 1;
+
+                    ((component as VideoComposer).Configuration as VideoConfiguration).Playlist.Add("C:\\Users\\Cláudio\\Videos\\Wildlife.wmv");
+                }
 
                 component.DoubleClick += component_DoubleClick;
 
@@ -419,8 +431,8 @@ namespace Client
 
                 statusLines.Clear();
 
-                SetStatusLine("Geral", "Nome do dispositivo", MyToolkit.Networking.ResolveIP(connection.ServerIP));
-                SetStatusLine("Geral", "Endereço IP", connection.ServerIP);
+                SetStatusLine("Geral", "Nome do dispositivo", MyToolkit.Networking.ResolveIP(connection.PlayerIP));
+                SetStatusLine("Geral", "Endereço IP", connection.PlayerIP);
                 SetStatusLine("Geral", "Monitores", connection.GetDisplayInformation().Length + "");
 
                 foreach (var item in connection.GetDisplayInformation().OrderBy(x => !x.Primary).ThenBy(x => x.Bounds.Left))
@@ -610,6 +622,9 @@ namespace Client
             progressBarScan.Visible = true;
 
             this.GetPlayersFromDatabase();
+
+            buttonScan.Enabled = true;
+            progressBarScan.Visible = false;
         }
         private void buttonScan_Click(object sender, EventArgs e)
         {
@@ -620,110 +635,112 @@ namespace Client
             this.ScanAndUpdateUI();
 
         }
-        /// <summary>
-        /// Procura no discovery server por players
-        /// </summary>
-        [Obsolete("ScanPlayers é sucatada, usar o ScanPlayersAsync")]
-        private void ScanPlayers()
-        {
-            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { ScanPlayers(); }));
-            try
-            {
-                using (Assemblies.ClientModel.Connection discoveryServerConnection = new WCFConnection()
-                {
-                    ServerIP = "10.0.0.165",
-                    ServerPort = "8001"
-                })
-                {
-                    treeViewRede.Nodes.Clear();
-                    discoveryServerConnection.Open();
+        #region A usar discovery server
+        ///// <summary>
+        ///// Procura no discovery server por players
+        ///// </summary>
+        //[Obsolete("ScanPlayers é sucatada, usar o ScanPlayersAsync")]
+        //private void ScanPlayers()
+        //{
+        //    if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { ScanPlayers(); }));
+        //    try
+        //    {
+        //        using (Assemblies.ClientModel.Connection discoveryServerConnection = new WCFConnection()
+        //        {
+        //            PlayerIP = "10.0.0.165",
+        //            ServerPort = "8001"
+        //        })
+        //        {
+        //            treeViewRede.Nodes.Clear();
+        //            discoveryServerConnection.Open();
 
-                    foreach (var pc in discoveryServerConnection.GetPlayers())
-                    {
-                        TreeNode nodePC = new TreeNode
-                        {
-                            Text = pc.Name,
-                            ToolTipText = string.Format("IP: {0}", pc.IP),
-                            Tag = pc,
-                            ImageKey = "Computer",
-                            SelectedImageKey = "Computer"
-                        };
+        //            foreach (var pc in discoveryServerConnection.GetPlayers())
+        //            {
+        //                TreeNode nodePC = new TreeNode
+        //                {
+        //                    Text = pc.Name,
+        //                    ToolTipText = string.Format("IP: {0}", pc.IP),
+        //                    Tag = pc,
+        //                    ImageKey = "Computer",
+        //                    SelectedImageKey = "Computer"
+        //                };
 
-                        foreach (var display in pc.Displays)
-                        {
-                            TreeNode t = new TreeNode()
-                            {
-                                Text = display.Name,
-                                ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
-                                Tag = display,
-                                ImageKey = "Monitor",
-                                SelectedImageKey = "Monitor"
-                            };
+        //                foreach (var display in pc.Displays)
+        //                {
+        //                    TreeNode t = new TreeNode()
+        //                    {
+        //                        Text = display.Name,
+        //                        ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
+        //                        Tag = display,
+        //                        ImageKey = "Monitor",
+        //                        SelectedImageKey = "Monitor"
+        //                    };
 
-                            nodePC.Nodes.Add(t);
-                        }
+        //                    nodePC.Nodes.Add(t);
+        //                }
 
-                        treeViewRede.Nodes.Add(nodePC);
-                    }
-                }
-            }
-            catch
-            {
-            }
-        }
-        private void ScanPlayersAsync()
-        {
-            try
-            {
-                using (Assemblies.ClientModel.Connection discoveryServerConnection = new WCFConnection()
-                {
-                    ServerIP = "10.0.0.165",
-                    ServerPort = "8001"
-                })
-                {
-                    treeViewRede.Nodes.Clear();
-                    discoveryServerConnection.Open();
+        //                treeViewRede.Nodes.Add(nodePC);
+        //            }
+        //        }
+        //    }
+        //    catch
+        //    {
+        //    }
+        //}
+        //private void ScanPlayersAsync()
+        //{
+        //    try
+        //    {
+        //        using (Assemblies.ClientModel.Connection discoveryServerConnection = new WCFConnection()
+        //        {
+        //            PlayerIP = "10.0.0.165",
+        //            ServerPort = "8001"
+        //        })
+        //        {
+        //            treeViewRede.Nodes.Clear();
+        //            discoveryServerConnection.Open();
 
-                    discoveryServerConnection.GetPlayersAsync(ScanPlayersCallback);
-                }
-            }
-            catch
-            {
-            }
-        }
-        private void ScanPlayersCallback(PlayerPC pc)
-        {
-            if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { this.ScanPlayersCallback(pc); }));
-            else
-            {
-                TreeNode nodePC = new TreeNode
-                {
-                    Text = pc.Name,
-                    ToolTipText = string.Format("IP: {0}", pc.IP),
-                    Tag = pc,
-                    ImageKey = "Computer",
-                    SelectedImageKey = "Computer"
-                };
+        //            discoveryServerConnection.GetPlayersAsync(ScanPlayersCallback);
+        //        }
+        //    }
+        //    catch
+        //    {
+        //    }
+        //}
+        //private void ScanPlayersCallback(PlayerPC pc)
+        //{
+        //    if (this.InvokeRequired) this.Invoke((MethodInvoker)(() => { this.ScanPlayersCallback(pc); }));
+        //    else
+        //    {
+        //        TreeNode nodePC = new TreeNode
+        //        {
+        //            Text = pc.Name,
+        //            ToolTipText = string.Format("IP: {0}", pc.IP),
+        //            Tag = pc,
+        //            ImageKey = "Computer",
+        //            SelectedImageKey = "Computer"
+        //        };
 
-                foreach (var display in pc.Displays)
-                {
-                    string tempDispName = string.Format("{0} (X: {1}, Y: {2})", display.Name, display.Bounds.X, display.Bounds.Y);
+        //        foreach (var display in pc.Displays)
+        //        {
+        //            string tempDispName = string.Format("{0} (X: {1}, Y: {2})", display.Name, display.Bounds.X, display.Bounds.Y);
 
-                    TreeNode t = new TreeNode()
-                    {
-                        Text = tempDispName,
-                        ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
-                        Tag = display,
-                        ImageKey = "Monitor",
-                        SelectedImageKey = "Monitor"
-                    };
+        //            TreeNode t = new TreeNode()
+        //            {
+        //                Text = tempDispName,
+        //                ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
+        //                Tag = display,
+        //                ImageKey = "Monitor",
+        //                SelectedImageKey = "Monitor"
+        //            };
 
-                    nodePC.Nodes.Add(t);
-                }
+        //            nodePC.Nodes.Add(t);
+        //        }
 
-                treeViewRede.Nodes.Add(nodePC);
-            }
-        }
+        //        treeViewRede.Nodes.Add(nodePC);
+        //    }
+        //}
+        #endregion
 
         int playersFound = 0,
             playersScanned = 0;
@@ -731,9 +748,25 @@ namespace Client
 
         private void GetPlayersFromDatabase()
         {
-            List<Player> players = new List<Player>();
+            //Alterar a classe WCFPlayerPC para aceitar mais de um tipo de endpoints, e copiar os dados para lá
 
-            using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados)) players = db.Players.Where(x => x.isActive).ToList();
+            List<Player> players = new List<Player>();
+            List<Endpoint> endpoints = new List<Endpoint>();
+
+            using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
+            {
+                foreach (var pl in db.Players.Where(x => x.isActive).ToList())
+                {
+                    foreach (var ep in pl.Endpoints)
+                    {
+                        endpoints.Add(ep);
+                    }
+
+                    players.Add(pl);
+                }
+            }
+
+            //using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados)) players = db.Players.Where(x => x.isActive).ToList();
 
             playersFound = players.Count;
             playersScanned = 0;
@@ -761,7 +794,7 @@ namespace Client
                 else
                     treeViewRede.Nodes.Clear();
 
-                worker.RunWorkerAsync(new object[] { player, clinicScreenName });
+                worker.RunWorkerAsync(new object[] { player, endpoints.Where(x=>x.IDPlayer == player.ID).ToList(), clinicScreenName });
             }
             //using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) thisClinic = db.ClinicaDados.FirstOrDefault();
         }
@@ -784,21 +817,28 @@ namespace Client
             try
             {
                 Player player = (e.Argument as object[])[0] as Player;
-                string clinicScreenName = (e.Argument as object[])[1] as string;
+                List<Endpoint> endpoints = (e.Argument as object[])[1] as List<Endpoint>;
+                string clinicScreenName = (e.Argument as object[])[2] as string;
 
-                string endpointString = player.wcfEndpoint;
+                string playerEndpointString = endpoints.Single(x => x.Type == (int)EndpointTypeEnum.Player).Address,
+                       fileTransferEndpointString = endpoints.Single(x => x.Type == (int)EndpointTypeEnum.FileTransfer).Address;
 
                 if (!(player.publicIPAddress == MyToolkit.Networking.PublicIPAddress.ToString() && MyToolkit.Networking.IsLocal(player.privateIPAddress)))
-                    endpointString = this.PrivateToPublicEndpoint(player);
+                {
+                    playerEndpointString = this.PrivateToPublicEndpoint(player, EndpointTypeEnum.Player);
+                    fileTransferEndpointString = this.PrivateToPublicEndpoint(player, EndpointTypeEnum.FileTransfer);
+                }
 
-                EndpointAddress endpoint = new EndpointAddress(endpointString);
+                EndpointAddress playerEndpoint = new EndpointAddress(playerEndpointString),
+                                fileTransferEndpoint = new EndpointAddress(fileTransferEndpointString);
+                
 
                 NetTcpBinding bindingPC = new NetTcpBinding();
                 bindingPC.Security.Mode = SecurityMode.None;
                 bindingPC.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
-                bindingPC.CloseTimeout = new TimeSpan(0, 0, 2);
+                bindingPC.CloseTimeout = new TimeSpan(0, 0, 3);
 
-                PlayerProxy client = new PlayerProxy(bindingPC, endpoint);
+                PlayerProxy client = new PlayerProxy(bindingPC, playerEndpoint);
 
                 client.Open();
 
@@ -811,7 +851,8 @@ namespace Client
                 {
                     this.Invoke((MethodInvoker)(() =>
                     {
-                        WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays, Endpoint = new EndpointAddress(endpointString) };
+                        //WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays, PlayerEndpoint = new EndpointAddress(playerEndpointString) };
+                        WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays, PlayerEndpoint = playerEndpoint, FileTransferEndpoint = fileTransferEndpoint };
 
                         TreeNode nodeClinic;
                         bool newClinicNode = true;
@@ -867,12 +908,12 @@ namespace Client
             }
         }
 
-        private string PrivateToPublicEndpoint(Player player)
+        private string PrivateToPublicEndpoint(Player player, EndpointTypeEnum type)
         {
-            string result = player.wcfEndpoint;
+            string result = player.Endpoints.Single(x=>x.Type == (int)type).Address;
 
             result = result.Replace(player.privateIPAddress, player.publicIPAddress);
-            result = result.Replace(player.privatePort, player.publicPort);
+            result = result.Replace(player.Endpoints.Single(x => x.Type == (int)type).PrivatePort, player.Endpoints.Single(x => x.Type == (int)type).PublicPort);
 
             return result;
 
@@ -1305,6 +1346,34 @@ namespace Client
         {
             e.Cancel = this.cancelTreeViewContextMenu || !(treeViewRede.SelectedNode.Tag is WCFScreenInformation);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //OpenFileDialog ofd = new OpenFileDialog();
+
+            //if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    using (FileStream fileStream = File.OpenRead(ofd.FileName))
+            //    {
+            //        var file = fileStream.ToStreamedFile(ofd.SafeFileName);
+
+            //        //MemoryStream memStream = new MemoryStream();
+            //        //memStream.SetLength(fileStream.Length);
+            //        //fileStream.Read(memStream.GetBuffer(), 0, (int)fileStream.Length);
+
+            //        //StreamedFile file = new StreamedFile();
+
+            //        //file.Bytes = StreamingService.ToByteArray<MemoryStream>(memStream);
+            //        //file.FileName = ofd.SafeFileName;
+
+            //        connection.SendVideoFile(file);
+            //    }
+            //}
+
+            var l = connection.GetRemoteVideoFileNames();
+
+            ;
+        }
     }
 
     #region Fechar os grupos na listview
@@ -1335,3 +1404,6 @@ namespace Client
 
     #endregion
 }
+
+
+//Falta a lógica toda desde que se adiciona o componente de video do builder, assim como a janela de opçoes

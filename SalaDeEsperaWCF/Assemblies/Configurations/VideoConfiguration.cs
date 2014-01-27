@@ -8,6 +8,14 @@ namespace Assemblies.Configurations
 {
     public class VideoConfiguration : ItemConfiguration
     {
-        
+        public int ID { get; set; }
+
+        public List<string> Playlist { get; set; }
+
+        public VideoConfiguration()
+        {
+            this.Playlist = new List<string>();
+        }
+
     }
 }

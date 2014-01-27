@@ -88,6 +88,7 @@
     <Compile Include="ClientModel\WCFPlayerPC.cs" />
     <Compile Include="Components\ComponentTargetSite.cs" />
     <Compile Include="Configurations\VideoConfiguration.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Linq\Clinica.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -98,6 +99,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Clinicas.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Linq\EndpointType.cs" />
     <Compile Include="Linq\LinqConnectionStrings.cs" />
     <Compile Include="Linq\PlayersLigados.designer.cs">
       <AutoGen>True</AutoGen>
@@ -132,6 +134,12 @@
     <Compile Include="Options\OptionsGeneral\Views\FooterOptionsView.Designer.cs">
       <DependentUpon>FooterOptionsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Options\VideoOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options\VideoOptions.Designer.cs">
+      <DependentUpon>VideoOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlayerComponents\DateTime.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -153,7 +161,7 @@
     </Compile>
     <Compile Include="Testes\IPlayerComponent.cs" />
     <Compile Include="Toolkit\EnumUtilities.cs" />
-    <Compile Include="WCF\ClientProxies\PlayerProxy.cs" />
+    <Compile Include="WCF\Main\ClientProxies\PlayerProxy.cs" />
     <Compile Include="Components\ComposerComponent.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -192,15 +200,16 @@
     <Compile Include="Configurations\PlayerWindowInformation.cs" />
     <Compile Include="Configurations\ScreenInformation.cs" />
     <Compile Include="Configurations\TVConfiguration.cs" />
-    <Compile Include="WCF\DataContracts\Components\Markee\WCFMarkeeConfiguration.cs" />
-    <Compile Include="WCF\DataContracts\Components\TV\TunerDevice.cs" />
-    <Compile Include="WCF\DataContracts\Components\TV\WCFChannel.cs" />
-    <Compile Include="WCF\DataContracts\Components\TV\WCFTVConfiguration.cs" />
-    <Compile Include="WCF\DataContracts\Components\WCFItemConfiguration.cs" />
-    <Compile Include="WCF\DataContracts\Drawing\WCFDrawing.cs" />
-    <Compile Include="WCF\DataContracts\Main Window\WCFPlayerWindowInformation.cs" />
-    <Compile Include="WCF\DataContracts\Main Window\WCFScreenInformation.cs" />
-    <Compile Include="WCF\DataContracts\NetToWCFConverter.cs" />
+    <Compile Include="WCF\Main\DataContracts\Components\Markee\WCFMarkeeConfiguration.cs" />
+    <Compile Include="WCF\Main\DataContracts\Components\TV\TunerDevice.cs" />
+    <Compile Include="WCF\Main\DataContracts\Components\TV\WCFChannel.cs" />
+    <Compile Include="WCF\Main\DataContracts\Components\TV\WCFTVConfiguration.cs" />
+    <Compile Include="WCF\Main\DataContracts\Components\Video\WCFVideoConfiguration.cs" />
+    <Compile Include="WCF\Main\DataContracts\Components\WCFItemConfiguration.cs" />
+    <Compile Include="WCF\Main\DataContracts\Drawing\WCFDrawing.cs" />
+    <Compile Include="WCF\Main\DataContracts\Main Window\WCFPlayerWindowInformation.cs" />
+    <Compile Include="WCF\Main\DataContracts\Main Window\WCFScreenInformation.cs" />
+    <Compile Include="WCF\Main\DataContracts\NetToWCFConverter.cs" />
     <Compile Include="Factories\ComponentCreators.cs" />
     <Compile Include="Factories\IComponentCreator.cs" />
     <Compile Include="Options\MarkeeOptions.cs">
@@ -222,8 +231,12 @@
     <Compile Include="Toolkit\Direction.cs" />
     <Compile Include="Toolkit\Networking.cs" />
     <Compile Include="Toolkit\UnsafeNativeMethods.cs" />
-    <Compile Include="WCF\PlayerServiceContracts\IPlayer.cs" />
-    <Compile Include="WCF\PlayerServiceImplementation\PlayerService.cs" />
+    <Compile Include="WCF\Main\PlayerServiceContracts\IPlayer.cs" />
+    <Compile Include="WCF\Main\PlayerServiceImplementation\PlayerService.cs" />
+    <Compile Include="WCF\Streaming\PlayerServiceContracts\IFileStreamingService.cs" />
+    <Compile Include="WCF\Streaming\DataContracts\StreamedFile.cs" />
+    <Compile Include="WCF\Streaming\PlayerServiceImplementation\FileStreamingService.cs" />
+    <Compile Include="WCF\Streaming\ClientProxies\FileStreamingServiceProxy.cs" />
     <Compile Include="XMLSerialization\Components\Markee\XMLMarkeeConfiguration.cs" />
     <Compile Include="XMLSerialization\Components\TV\XMLChannel.cs" />
     <Compile Include="XMLSerialization\Components\TV\XMLTVConfiguration.cs" />
@@ -320,6 +333,7 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

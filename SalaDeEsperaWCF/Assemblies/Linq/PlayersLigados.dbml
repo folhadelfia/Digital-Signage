@@ -6,12 +6,29 @@
       <Column Name="idClinica" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="privateIPAddress" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="publicIPAddress" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="privatePort" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
-      <Column Name="publicPort" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
       <Column Name="privateHostname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="publicHostname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="wcfEndpoint" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="isActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Player_Endpoint" Member="Endpoints" ThisKey="ID" OtherKey="IDPlayer" Type="Endpoint" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Endpoint" Member="Endpoints">
+    <Type Name="Endpoint">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDPlayer" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PublicPort" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PrivatePort" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Player_Endpoint" Member="Player" ThisKey="IDPlayer" OtherKey="ID" Type="Player" IsForeignKey="true" />
+      <Association Name="EndpointType_Endpoint" Member="EndpointType" ThisKey="Type" OtherKey="ID" Type="EndpointType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EndpointType" Member="EndpointTypes">
+    <Type Name="EndpointType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Association Name="EndpointType_Endpoint" Member="Endpoints" ThisKey="ID" OtherKey="Type" Type="Endpoint" />
     </Type>
   </Table>
 </Database>

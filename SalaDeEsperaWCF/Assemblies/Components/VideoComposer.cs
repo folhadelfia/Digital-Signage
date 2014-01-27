@@ -5,11 +5,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Assemblies.Configurations;
 
 namespace Assemblies.Components
 {
     public class VideoComposer : ComposerComponent
     {
+
         public VideoComposer()
         {
             base.BackColor = Color.MediumSlateBlue;
@@ -18,26 +20,14 @@ namespace Assemblies.Components
 
             tt.SetToolTip(this, this.ToString());
 
-            this.Configuration = new Configurations.VideoConfiguration();
-
             this.Designation = "Video";
+
+            this.Configuration = new Configurations.VideoConfiguration();
         }
-
-        #region
-
-        private string source;
-
-        public string Source
-        {
-            get { return source; }
-            set { source = value; }
-        }
-
-        #endregion
 
         public override string ToString()
         {
-            return "Video";
+            return this.Designation;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,21 +13,16 @@ namespace Assemblies.ClientModel
 {
     public abstract class Connection : IDisposable
     {
-        private string serverIP, serverPort;
+        private string playerIP;
         protected PlayerPC pc;
 
-        public string ServerIP
+        public string PlayerIP
         {
-            get { return serverIP; }
-            set { serverIP = value; }
+            get { return playerIP; }
+            set { playerIP = value; }
         }
-        public string ServerPort
-        {
-            get { return serverPort; }
-            set { serverPort = value; }
-        }
-        public abstract string CompleteServerAddress
-        { get; }
+        //public abstract string CompleteServerAddress
+        //{ get; }
         public abstract ConnectionState State { get; }
 
         protected Connection() { }
@@ -34,8 +30,8 @@ namespace Assemblies.ClientModel
 
         public abstract void Open();
         public abstract void Close();
-        public abstract IEnumerable<PlayerPC> GetPlayers();
-        public abstract void GetPlayersAsync(NewPlayerFoundDelegate callback);
+        //public abstract IEnumerable<PlayerPC> GetPlayers();
+        //public abstract void GetPlayersAsync(NewPlayerFoundDelegate callback);
         public abstract event GetPlayersEventHandler GetPlayersProgressChanged;
 
         #region Janela do Player
@@ -177,6 +173,19 @@ namespace Assemblies.ClientModel
 
         public abstract int GetMarkeeSpeed();
         public abstract void SetMarkeeSpeed(int speed);
+        #endregion
+
+        #region Video
+
+        public abstract bool SendVideoFile(StreamedFile file);
+        public abstract IEnumerable<string> GetRemoteVideoFileNames();
+
+        public abstract void StartVideo(string displayName, int videoPlayerID);
+        public abstract void StopVideo(string displayName, int videoPlayerID);
+        public abstract void PreviousVideo(string displayName, int videoPlayerID);
+        public abstract void NextVideo(string displayName, int videoPlayerID);
+
+
         #endregion
 
         public abstract void Dispose();
