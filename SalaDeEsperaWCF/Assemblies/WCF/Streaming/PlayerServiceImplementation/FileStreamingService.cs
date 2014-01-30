@@ -14,9 +14,16 @@ namespace Assemblies.PlayerServiceImplementation
 {
     public class FileStreamingService : IFileStreamingService
     {
-        public static event FileStreamReceivedEventHandler FileStreamReceived;
-        public static event FileBytesReceivedEventHandler FileBytesReceived;
-        public static event FileReceivedEventHandler FileReceived;
+        #region Events
+
+        public static event EventHandler<FileStreamReceivedEventArgs> FileStreamReceived;
+        public static event EventHandler<FileBytesReceivedEventArgs> FileBytesReceived;
+        public static event EventHandler<FileReceivedEventArgs> FileReceived;
+        public static event EventHandler<FileStreamProgressReceivedEventArgs> FileStreamProgressReceived;
+
+        #endregion
+
+        #region IFileStreamingService
 
         public bool UploadStream(Stream stream)
         {
@@ -38,6 +45,15 @@ namespace Assemblies.PlayerServiceImplementation
 
             return FileReceived != null;
         }
+
+        public void UploadStreamWithProgress(RemoteFileInfo request)
+        {
+            if (FileStreamProgressReceived != null) FileStreamProgressReceived(this, new FileStreamProgressReceivedEventArgs(request));
+        }
+
+        #endregion
+
+        #region Create host/client
 
         public static ServiceHost CreateHost(string ip, string port)
         {
@@ -93,6 +109,10 @@ namespace Assemblies.PlayerServiceImplementation
             return proxy;
         }
 
+        #endregion
+
+        #region Helpers
+
         public static byte[] ToByteArray<T>(T obj)
         {
             if (obj == null) return null;
@@ -116,6 +136,8 @@ namespace Assemblies.PlayerServiceImplementation
 
             return obj;
         }
+
+        #endregion
     }
 
     public class FileStreamReceivedEventArgs : EventArgs
@@ -145,25 +167,13 @@ namespace Assemblies.PlayerServiceImplementation
 
         public StreamedFile File { get; private set; }
     }
-
-    public delegate void FileStreamReceivedEventHandler(object sender, FileStreamReceivedEventArgs e);
-    public delegate void FileBytesReceivedEventHandler(object sender, FileBytesReceivedEventArgs e);
-    public delegate void FileReceivedEventHandler(object sender, FileReceivedEventArgs e);
-
-    public static class ExtensionMethods
+    public class FileStreamProgressReceivedEventArgs : EventArgs
     {
-        public static StreamedFile ToStreamedFile(this FileStream f, string fileName)
+        public FileStreamProgressReceivedEventArgs(RemoteFileInfo request)
         {
-            MemoryStream memStream = new MemoryStream();
-            memStream.SetLength(f.Length);
-            f.Read(memStream.GetBuffer(), 0, (int)f.Length);
-
-            StreamedFile file = new StreamedFile();
-
-            file.Bytes = FileStreamingService.ToByteArray<MemoryStream>(memStream);
-            file.FileName = fileName;
-
-            return file;
+            this.Request = request;
         }
+
+        public RemoteFileInfo Request { get; private set; }
     }
 }

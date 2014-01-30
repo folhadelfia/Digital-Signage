@@ -31,5 +31,11 @@ namespace Assemblies.ClientProxies
         {
             return Channel.UploadFile(file);
         }
+
+
+        public void UploadStreamWithProgress(RemoteFileInfo request)
+        {
+            Channel.UploadStreamWithProgress(request);
+        }
     }
 }

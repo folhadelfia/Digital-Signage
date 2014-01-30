@@ -8,3 +8,5 @@ c:\users\cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming
 c:\users\cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Server\obj\Debug\Server.csproj.GenerateResource.Cache
 c:\users\cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Server\obj\Debug\Server.exe
 c:\users\cláudio\documents\visual studio 2012\Projects\WcfFileTransferStreaming\Server\obj\Debug\Server.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\WcfFileTransferStreaming\Server\obj\Debug\Server.exe
+C:\Users\Cláudio\Desktop\Digital-Signage.git\WcfFileTransferStreaming\Server\obj\Debug\Server.pdb

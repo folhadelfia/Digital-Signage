@@ -582,9 +582,49 @@ namespace Assemblies.ClientModel
 
         #region Video files
 
-        public override bool SendVideoFile(StreamedFile file)
+        #region File transfer
+
+        public override void SendVideoFile(string filePath)
         {
-            return fileTransfer.UploadFile(file);
+            try
+            {
+                FileInfo fileInfo = new FileInfo(filePath);
+
+                using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    using (StreamWithProgress progressStream = new StreamWithProgress(stream))
+                    {
+                        progressStream.ProgressChanged += progressStream_ProgressChanged;
+
+                        RemoteFileInfo request = new RemoteFileInfo()
+                        {
+                            FileName = fileInfo.Name,
+                            Length = fileInfo.Length,
+                            FileByteStream = progressStream
+                        };
+
+                        fileTransfer.UploadStreamWithProgress(request);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public event EventHandler<FileTransferProgressEventArgs> ProgressChanged;
+        void progressStream_ProgressChanged(object sender, StreamWithProgress.ProgressEventArgs e)
+        {
+            if (this.ProgressChanged != null) ProgressChanged(this, new FileTransferProgressEventArgs() { Progress = e.Progress });
+        }
+
+        #endregion
+
+        public class FileTransferProgressEventArgs : EventArgs
+        {
+            public decimal Progress { get; internal set; }
         }
 
         public override IEnumerable<string> GetRemoteVideoFileNames()

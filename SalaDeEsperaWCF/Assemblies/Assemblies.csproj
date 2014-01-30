@@ -80,6 +80,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\Transitions.dll</HintPath>
     </Reference>
+    <Reference Include="VideoPlayer">
+      <HintPath>..\..\VideoPlayerControl\VideoPlayer\bin\Debug\VideoPlayer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientModel\Connection.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="ClientModel\WCFConnection.cs" />
     <Compile Include="ClientModel\WCFPlayerPC.cs" />
     <Compile Include="Components\ComponentTargetSite.cs" />
+    <Compile Include="Components\IUsesConnection.cs" />
     <Compile Include="Configurations\VideoConfiguration.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Linq\Clinica.designer.cs">
@@ -116,6 +120,12 @@
     </Compile>
     <Compile Include="Options\BackgroundOptions.Designer.cs">
       <DependentUpon>BackgroundOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options\FileTransferForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options\FileTransferForm.Designer.cs">
+      <DependentUpon>FileTransferForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Options\IOptionsWindow.cs" />
     <Compile Include="Options\OptionsGeneral\FormOptionsBuilder.cs">
@@ -229,12 +239,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Toolkit\Direction.cs" />
-    <Compile Include="Toolkit\Networking.cs" />
+    <Compile Include="Toolkit\MyToolkit.cs" />
     <Compile Include="Toolkit\UnsafeNativeMethods.cs" />
     <Compile Include="WCF\Main\PlayerServiceContracts\IPlayer.cs" />
     <Compile Include="WCF\Main\PlayerServiceImplementation\PlayerService.cs" />
     <Compile Include="WCF\Streaming\PlayerServiceContracts\IFileStreamingService.cs" />
-    <Compile Include="WCF\Streaming\DataContracts\StreamedFile.cs" />
+    <Compile Include="WCF\Streaming\DataContracts\StreamedFileContracts.cs" />
     <Compile Include="WCF\Streaming\PlayerServiceImplementation\FileStreamingService.cs" />
     <Compile Include="WCF\Streaming\ClientProxies\FileStreamingServiceProxy.cs" />
     <Compile Include="XMLSerialization\Components\Markee\XMLMarkeeConfiguration.cs" />
@@ -264,6 +274,9 @@
     <EmbeddedResource Include="Options\BackgroundOptions.resx">
       <DependentUpon>BackgroundOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Options\FileTransferForm.resx">
+      <DependentUpon>FileTransferForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Options\MarkeeOptions.resx">
       <DependentUpon>MarkeeOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Options\TVOptions.resx">
       <DependentUpon>TVOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options\VideoOptions.resx">
+      <DependentUpon>VideoOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

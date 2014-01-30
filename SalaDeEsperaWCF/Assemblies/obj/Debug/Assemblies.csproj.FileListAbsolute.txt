@@ -44,3 +44,7 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Deb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TV2Lib.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.RegistarPosto.AskForPasswordForm.resources
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Assemblies.dll.config
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.VideoOptions.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\VideoPlayer.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\VideoPlayer.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.FileTransferForm.resources

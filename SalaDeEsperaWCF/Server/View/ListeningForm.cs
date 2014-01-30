@@ -19,10 +19,6 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Discovery;
 using System.Windows.Forms;
-using Assemblies.Configurations;
-using Assemblies.Toolkit;
-using Assemblies.DataContracts;
-using Assemblies.PlayerServiceImplementation;
 using Transitions;
 using System.Threading;
 using TV2Lib;
@@ -33,7 +29,13 @@ using System.IO;
 using System.ComponentModel;
 
 using Assemblies.Linq;
+using Assemblies.Configurations;
+using Assemblies.Toolkit;
+using Assemblies.DataContracts;
+using Assemblies.PlayerServiceImplementation;
 using Assemblies.PlayerServiceContracts;
+
+using Assemblies.ExtensionMethods;
 
 namespace Server.View
 {
@@ -41,6 +43,8 @@ namespace Server.View
     {
         private const string OBTAININGADDRESSES_TEXTBOX_TEXT = "A obter...",
                              UNAVAILABE_TEXTBOX_TEXT = "Indisponível. Verifique a ligação à Internet e clique em Actualizar.";
+
+        private string VideoFolderPath { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "DigitalSignage"); } }
 
         private ServiceHost serviceHost, fileTransferHost;
 
@@ -94,6 +98,7 @@ namespace Server.View
             #region Enviar ficheiros
 
             FileStreamingService.FileReceived += FileStreamingService_FileReceived;
+            FileStreamingService.FileStreamProgressReceived += FileStreamingService_FileStreamProgressReceived;
 
             #endregion
 
@@ -105,14 +110,50 @@ namespace Server.View
             PlayerService.NextVideo += PlayerService_NextVideo;
             #endregion
         }
+
+        void FileStreamingService_FileStreamProgressReceived(object sender, FileStreamProgressReceivedEventArgs e)
+        {
+            this.ReceiveFileStreamProgress(e.Request);
+
+            e.Request.Dispose();
+        }
+
+        private void ReceiveFileStreamProgress(RemoteFileInfo request)
+        {
+
+            if (!Directory.Exists(VideoFolderPath)) Directory.CreateDirectory(VideoFolderPath);
+
+            string filePath = Path.Combine(VideoFolderPath, request.FileName);
+            if (File.Exists(filePath)) File.Delete(filePath);
+
+            int chunkSize = 2 * 1024;
+            byte[] buffer = new byte[chunkSize];
+
+            using (FileStream writeStream = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write))
+            {
+                request.FileByteStream.CopyStream(writeStream);
+
+                writeStream.Close();
+            }
+        }
+
         private void ListeningForm_Load(object sender, EventArgs e)
         {
             buttonConnect.Enabled = false;
-            this.RefreshIPAndHostnameTextboxes();
 
-            this.textBoxPrivatePortPL.Text = MyToolkit.Networking.RandomPort().ToString();
+            this.RefreshIPAndHostnameTextboxes();
+            this.GeneratePortValues();
 
             using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) idClinicaMulti = db.ClinicaDados.Single().idClinicaMulti ?? -1;
+        }
+
+        private void GeneratePortValues()
+        {
+            this.textBoxPrivatePortPL.Text = MyToolkit.Networking.RandomPort().ToString();
+            this.textBoxPrivatePortFT.Text = MyToolkit.Networking.RandomPort(new string[] { textBoxPrivatePortPL.Text });
+
+            this.textBoxPublicPortPL.Text = this.textBoxPrivatePortPL.Text;
+            this.textBoxPublicPortFT.Text = this.textBoxPrivatePortFT.Text;
         }
 
         #region Preenchimento dos ips e hostnames, actualização dos estados dos botões
@@ -286,33 +327,33 @@ namespace Server.View
 
         private void UpdateButtonStatus()
         {
-            bool scanningPrivate = privateIP == OBTAININGADDRESSES_TEXTBOX_TEXT ||
-                                   privateHostname == OBTAININGADDRESSES_TEXTBOX_TEXT,
 
-                 scanningPublic = publicIP == OBTAININGADDRESSES_TEXTBOX_TEXT ||
-                                  publicHostname == OBTAININGADDRESSES_TEXTBOX_TEXT;
+            bool privateReady = textBoxPrivateIP.Text != OBTAININGADDRESSES_TEXTBOX_TEXT &&
+                                textBoxPrivateHostname.Text != OBTAININGADDRESSES_TEXTBOX_TEXT &&
 
-            bool privateReady = !scanningPrivate &&
+                                textBoxPrivateIP.Text != UNAVAILABE_TEXTBOX_TEXT &&
+                                textBoxPrivateHostname.Text != UNAVAILABE_TEXTBOX_TEXT;
 
-                                privateIP != UNAVAILABE_TEXTBOX_TEXT &&
-                                privateHostname != UNAVAILABE_TEXTBOX_TEXT;
+            bool publicReady = textBoxPublicIP.Text != OBTAININGADDRESSES_TEXTBOX_TEXT &&
+                               textBoxPublicHostname.Text != OBTAININGADDRESSES_TEXTBOX_TEXT &&
 
-            bool publicReady = !scanningPublic &&
+                               textBoxPublicIP.Text != UNAVAILABE_TEXTBOX_TEXT &&
+                               textBoxPublicHostname.Text != UNAVAILABE_TEXTBOX_TEXT;
 
-                               publicIP != UNAVAILABE_TEXTBOX_TEXT &&
-                               publicHostname != UNAVAILABE_TEXTBOX_TEXT;
+            buttonRefreshPrivate.Enabled = !(textBoxPrivateIP.Text == OBTAININGADDRESSES_TEXTBOX_TEXT ||
+                                           textBoxPrivateHostname.Text == OBTAININGADDRESSES_TEXTBOX_TEXT);
 
-            buttonRefreshPrivate.Enabled = !scanningPrivate;
-            buttonRefreshPublic.Enabled = !scanningPublic;
+            buttonRefreshPublic.Enabled = !(textBoxPublicIP.Text == OBTAININGADDRESSES_TEXTBOX_TEXT ||
+                                           textBoxPublicHostname.Text == OBTAININGADDRESSES_TEXTBOX_TEXT);
 
             buttonConnect.Enabled = privateReady && publicReady;
         }
         private void RemoveSelectionFromTextboxes()
         {
-            textBoxPrivateIP.Select(textBoxPrivateIP.Text.Length - 1, 0);
-            textBoxPrivateHostname.Select(textBoxPrivateHostname.Text.Length - 1, 0);
-            textBoxPublicIP.Select(textBoxPublicIP.Text.Length - 1, 0);
-            textBoxPublicHostname.Select(textBoxPublicHostname.Text.Length - 1, 0);
+            textBoxPrivateIP.Select(textBoxPrivateIP.Text.Length, 0);
+            textBoxPrivateHostname.Select(textBoxPrivateHostname.Text.Length, 0);
+            textBoxPublicIP.Select(textBoxPublicIP.Text.Length, 0);
+            textBoxPublicHostname.Select(textBoxPublicHostname.Text.Length, 0);
         }
 
         #endregion

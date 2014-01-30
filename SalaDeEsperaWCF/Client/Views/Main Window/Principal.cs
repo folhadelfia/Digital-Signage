@@ -263,8 +263,8 @@ namespace Client
 
                 component.ContextMenuStrip = contextMenuStripComponents;
 
-                if (component is TVComposer)
-                    (component as TVComposer).SetOptionsWindowConnection(Connection);
+                if (component is IUsesConnection)
+                    (component as IUsesConnection).SetConnection(Connection);
 
                 component.DoubleClick += component_DoubleClick;
 
@@ -294,8 +294,8 @@ namespace Client
 
                 component.ContextMenuStrip = contextMenuStripComponents;
 
-                if (component is TVComposer)
-                    (component as TVComposer).SetOptionsWindowConnection(Connection); //vai ser preciso fazer o mesmo no video
+                if (component is IUsesConnection)
+                    (component as IUsesConnection).SetConnection(Connection); //vai ser preciso fazer o mesmo no video
                 else if (component is VideoComposer)
                 { 
                     int videoCount = panelBuilder.Controls.OfType<VideoComposer>().Count();
@@ -353,8 +353,8 @@ namespace Client
 
         void Principal_ConnectionChanged(object sender, EventArgs e)
         {
-            foreach (var component in panelBuilder.Controls.Cast<ComposerComponent>().Where(x => x is TVComposer).ToList())
-                (component as TVComposer).SetOptionsWindowConnection(Connection);
+            foreach (var component in panelBuilder.Controls.Cast<ComposerComponent>().Where(x => x is IUsesConnection).ToList())
+                (component as IUsesConnection).SetConnection(Connection);
         }
 
         #endregion

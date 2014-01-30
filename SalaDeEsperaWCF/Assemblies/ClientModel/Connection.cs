@@ -177,7 +177,7 @@ namespace Assemblies.ClientModel
 
         #region Video
 
-        public abstract bool SendVideoFile(StreamedFile file);
+        public abstract void SendVideoFile(string filePath);
         public abstract IEnumerable<string> GetRemoteVideoFileNames();
 
         public abstract void StartVideo(string displayName, int videoPlayerID);

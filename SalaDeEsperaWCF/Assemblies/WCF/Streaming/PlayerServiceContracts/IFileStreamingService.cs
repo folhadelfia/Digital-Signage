@@ -17,5 +17,7 @@ namespace Assemblies.PlayerServiceContracts
         bool UploadBytes(byte[] bytes);
         [OperationContract]
         bool UploadFile(StreamedFile file);
+        [OperationContract]
+        void UploadStreamWithProgress(RemoteFileInfo request);
     }
 }

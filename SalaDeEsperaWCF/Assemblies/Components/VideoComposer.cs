@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Assemblies.Configurations;
+using Assemblies.Options;
 
 namespace Assemblies.Components
 {
-    public class VideoComposer : ComposerComponent
+    public class VideoComposer : ComposerComponent, IUsesConnection
     {
 
         public VideoComposer()
@@ -23,11 +24,36 @@ namespace Assemblies.Components
             this.Designation = "Video";
 
             this.Configuration = new Configurations.VideoConfiguration();
+
+            base.optionsForm = new VideoOptions();
         }
 
         public override string ToString()
         {
             return this.Designation;
+        }
+
+        public void SetConnection(ClientModel.Connection con)
+        {
+            (this.optionsForm as VideoOptions).AssignConnection(con);
+        }
+
+        public override void OpenOptionsWindow()
+        {
+            try
+            {
+                VideoOptions options = base.optionsForm as VideoOptions;
+
+                if (options.ShowDialog() == DialogResult.OK)
+                {
+                }
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                MessageBox.Show("OpenOptionsWindow Video" + Environment.NewLine + ex.Message);
+#endif
+            }
         }
     }
 }

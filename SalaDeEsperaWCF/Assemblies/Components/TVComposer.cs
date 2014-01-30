@@ -11,7 +11,7 @@ using Assemblies.Options;
 
 namespace Assemblies.Components
 {
-    public class TVComposer : ComposerComponent
+    public class TVComposer : ComposerComponent, IUsesConnection
     {
         public TVComposer()
             : this(new TVConfiguration())
@@ -67,7 +67,7 @@ namespace Assemblies.Components
         //}
         #endregion
 
-        public void SetOptionsWindowConnection(Connection con)
+        public void SetConnection(Connection con)
         {
             (optionsForm as TVOptions).AssignConnection(con);
         }

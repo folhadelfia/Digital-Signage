@@ -41,3 +41,5 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForm
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\obj\Debug\RemoteControlWForms.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\obj\Debug\RemoteControlWForms.Comando.resources
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\bin\Debug\RemoteControlWForms.exe.config
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\bin\Debug\VideoPlayer.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\RemoteControlWForms\bin\Debug\VideoPlayer.pdb

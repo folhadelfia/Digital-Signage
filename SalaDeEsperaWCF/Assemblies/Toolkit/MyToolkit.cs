@@ -193,6 +193,54 @@ namespace Assemblies.Toolkit
                 throw new ApplicationException("No physical address found", null);
             }
 
+            /// <summary>
+            /// Returns a valid unused port number, different from the ports provided
+            /// </summary>
+            /// <param name="excludedPorts"></param>
+            /// <returns></returns>
+            /// <exception cref="ApplicationException"></exception>
+            public static int RandomPort(int[] excludedPorts)
+            {
+                int failsafeCounter = 0;
+
+                while (failsafeCounter < 63000)
+                {
+                    int temp = RandomPort();
+
+                    if (!excludedPorts.Contains(temp)) return temp;
+                    failsafeCounter++;
+                }
+
+                throw new ApplicationException("Failed to find a usable port");
+            }
+
+            /// <summary>
+            /// Returns a valid unused port number, different from the ports provided
+            /// </summary>
+            /// <param name="excludedPorts"></param>
+            /// <returns></returns>
+            /// <exception cref="ApplicationException"></exception>
+            /// <exception cref="ArgumentException"></exception>
+            public static string RandomPort(string[] excludedPorts)
+            {
+                List<int> ports = new List<int>();
+
+                foreach (var port in excludedPorts)
+                {
+                    int temp = 0;
+
+                    if (!(int.TryParse(port, out temp))) throw new ArgumentException(string.Format("{0} is not a valid port number.", port));
+
+                    ports.Add(temp);
+                }
+
+                return RandomPort(ports.ToArray()).ToString();
+            }
+
+            /// <summary>
+            /// Returns a valid unused port number
+            /// </summary>
+            /// <returns></returns>
             public static int RandomPort()
             {
                 IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 0);
@@ -275,6 +323,132 @@ namespace Assemblies.Toolkit
             public static IEnumerable<T> GetValues<T>()
             {
                 return Enum.GetValues(typeof(T)).Cast<T>();
+            }
+        }
+
+        public static class Sizes
+        {
+            public enum Base
+            {
+                Base2,
+                Base10
+            }
+
+            /// <summary>
+            /// Converts the number of bytes to the best fit unit, using the specified base
+            /// </summary>
+            /// <param name="bytes"></param>
+            /// <param name="theBase"></param>
+            /// <param name="result"></param>
+            /// <param name="unit"></param>
+            public static void ByteToBestFitUnit(double bytes, MyToolkit.Sizes.Base theBase, out float result, out string unit)
+            {
+                int b = 0;
+
+                if(theBase == Base.Base2) b = 1024;
+                else if (theBase == Base.Base10) b = 1000;
+                else
+                {
+                    result = -1;
+                    unit = "";
+                    return;
+                }
+
+                if(bytes < b)                     // B
+                {
+                    result = Convert.ToSingle(bytes);
+                    unit = "B";
+                    return;
+                }
+                else if (bytes < Math.Pow(b,2))   // KB Base2 / kB base10
+                {
+                    result = Convert.ToSingle(Math.Round(bytes / b, 2));
+                    switch (theBase)
+                    {
+                        case Base.Base2: unit = "KB";
+                            break;
+                        case Base.Base10: unit = "kB";
+                            break;
+                        default: unit = "KB";
+                            break;
+                    }
+
+                    return;
+                }
+                else if (bytes < Math.Pow(b,3))   // MB
+                {
+                    result = Convert.ToSingle(Math.Round(bytes / Math.Pow(b, 2), 2));
+                    unit = "MB";
+                }
+                else if (bytes < Math.Pow(b,4))   // GB
+                {
+                    result = Convert.ToSingle(Math.Round(bytes / Math.Pow(b, 3), 2));
+                    unit = "GB";
+                }
+                else if (bytes < Math.Pow(b,5))   // TB
+                {
+                    result = Convert.ToSingle(Math.Round(bytes / Math.Pow(b, 4), 2));
+                    unit = "TB";
+                }
+                else if (bytes < Math.Pow(b,6))   // PB
+                {
+                    result = Convert.ToSingle(Math.Round(bytes / Math.Pow(b, 5), 2));
+                    unit = "PB";
+                }
+                else if (bytes < Math.Pow(b,7))   // EB
+                {
+                    result = Convert.ToSingle(Math.Round(bytes / Math.Pow(b, 6), 2));
+                    unit = "EB";
+                }
+                else if (bytes < Math.Pow(b,8))   // ZB
+                {
+                    result = Convert.ToSingle(Math.Round(bytes / Math.Pow(b, 7), 2));
+                    unit = "ZB";
+                }
+                else if (bytes < Math.Pow(b, 9))  // YB
+                {
+                    result = Convert.ToSingle(Math.Round(bytes / Math.Pow(b, 8), 2));
+                    unit = "MB";
+                }
+                else
+                {
+                    result = 0;
+                    unit = "Wtf? Something went wrong";
+                }
+            }
+            /// <summary>
+            /// Converts the number of bytes to the best fit unit
+            /// </summary>
+            /// <param name="bytes"></param>
+            /// <param name="result"></param>
+            /// <param name="unit"></param>
+            public static void ByteToBestFitUnit(double bytes, out float result, out string unit)
+            {
+                Sizes.ByteToBestFitUnit(bytes, Base.Base2, out result, out unit);
+            }
+            /// <summary>
+            /// Converts the number of bytes to the best fit unit, using the specified base
+            /// </summary>
+            /// <param name="bytes"></param>
+            /// <param name="theBase"></param>
+            /// <returns></returns>
+            public static string ByteToBestFitUnit(double bytes, MyToolkit.Sizes.Base theBase)
+            {
+                string unit = "";
+                float val = 0;
+
+                Sizes.ByteToBestFitUnit(bytes, theBase, out val, out unit);
+
+                return string.Format("{0} {1}", val, unit);
+            }
+            /// <summary>
+            /// Converts the number of bytes to the best fit unit
+            /// </summary>
+            /// <param name="bytes"></param>
+            /// <returns></returns>
+            public static string ByteToBestFitUnit(double bytes)
+            {
+                return ByteToBestFitUnit(bytes, Base.Base2);
             }
         }
     }
