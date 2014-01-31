@@ -69,14 +69,14 @@ namespace Assemblies.PlayerServiceImplementation
             NetTcpBinding binding = new NetTcpBinding(SecurityMode.None);
             binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
 
-            binding.MaxReceivedMessageSize = 1 * 1024 * 1024 * 1024; // 1GB
+            binding.MaxReceivedMessageSize = 2147483647; // Valor máximo
             binding.MaxBufferSize = 8 * 1024 * 1024; // 8MB
 
-            binding.ReaderQuotas.MaxArrayLength = 1 * 1024 * 1024 * 1024;
+            binding.ReaderQuotas.MaxArrayLength = 2147483647; //Valor máximo
 
             binding.TransferMode = TransferMode.StreamedRequest;
-            binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-            binding.SendTimeout = new TimeSpan(0, 10, 0);
+            binding.ReceiveTimeout = new TimeSpan(12, 0, 0);
+            binding.SendTimeout = new TimeSpan(12, 0, 0);
 
             serviceHostTemp.AddServiceEndpoint(typeof(IFileStreamingService), binding, baseAddress);
 
@@ -95,11 +95,11 @@ namespace Assemblies.PlayerServiceImplementation
         {
             NetTcpBinding binding = new NetTcpBinding(SecurityMode.None)
             {
-                ReceiveTimeout = new TimeSpan(0, 10, 0),
-                SendTimeout = new TimeSpan(0, 10, 0),
+                ReceiveTimeout = new TimeSpan(12, 0, 0),
+                SendTimeout = new TimeSpan(12, 0, 0),
                 TransferMode = TransferMode.StreamedRequest,
                 MaxBufferSize = 8 * 1024 * 1024,
-                MaxReceivedMessageSize = 1 * 1024 * 1024 * 1024
+                MaxReceivedMessageSize = 2147483647 // Valor máximo
             };
 
             binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;

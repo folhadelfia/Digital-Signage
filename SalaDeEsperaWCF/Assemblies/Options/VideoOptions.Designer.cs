@@ -44,6 +44,7 @@
             this.buttonMoveItemsUp = new System.Windows.Forms.Button();
             this.groupBoxRemoteFiles = new System.Windows.Forms.GroupBox();
             this.listBoxRemoteFiles = new System.Windows.Forms.ListBox();
+            this.buttonRefreshRemoteFiles = new System.Windows.Forms.Button();
             this.groupBoxLocal.SuspendLayout();
             this.groupBoxRemote.SuspendLayout();
             this.groupBoxPlaylist.SuspendLayout();
@@ -87,7 +88,7 @@
             this.listViewLocalFiles.SmallImageList = this.imageListVideo;
             this.listViewLocalFiles.TabIndex = 2;
             this.listViewLocalFiles.UseCompatibleStateImageBehavior = false;
-            this.listViewLocalFiles.View = System.Windows.Forms.View.SmallIcon;
+            this.listViewLocalFiles.View = System.Windows.Forms.View.List;
             // 
             // imageListVideo
             // 
@@ -192,6 +193,7 @@
             this.groupBoxRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxRemoteFiles.Controls.Add(this.buttonRefreshRemoteFiles);
             this.groupBoxRemoteFiles.Controls.Add(this.listBoxRemoteFiles);
             this.groupBoxRemoteFiles.Location = new System.Drawing.Point(8, 278);
             this.groupBoxRemoteFiles.Name = "groupBoxRemoteFiles";
@@ -202,12 +204,24 @@
             // 
             // listBoxRemoteFiles
             // 
-            this.listBoxRemoteFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxRemoteFiles.FormattingEnabled = true;
             this.listBoxRemoteFiles.Location = new System.Drawing.Point(3, 16);
             this.listBoxRemoteFiles.Name = "listBoxRemoteFiles";
-            this.listBoxRemoteFiles.Size = new System.Drawing.Size(304, 284);
+            this.listBoxRemoteFiles.Size = new System.Drawing.Size(304, 251);
             this.listBoxRemoteFiles.TabIndex = 0;
+            // 
+            // buttonRefreshRemoteFiles
+            // 
+            this.buttonRefreshRemoteFiles.Location = new System.Drawing.Point(230, 274);
+            this.buttonRefreshRemoteFiles.Name = "buttonRefreshRemoteFiles";
+            this.buttonRefreshRemoteFiles.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefreshRemoteFiles.TabIndex = 1;
+            this.buttonRefreshRemoteFiles.Text = "Actualizar";
+            this.buttonRefreshRemoteFiles.UseVisualStyleBackColor = true;
+            this.buttonRefreshRemoteFiles.Click += new System.EventHandler(this.buttonRefreshRemoteFiles_Click);
             // 
             // VideoOptions
             // 
@@ -244,5 +258,6 @@
         private System.Windows.Forms.ListBox listBoxPlaylist;
         private System.Windows.Forms.ListBox listBoxRemoteFiles;
         private System.Windows.Forms.ImageList imageListVideo;
+        private System.Windows.Forms.Button buttonRefreshRemoteFiles;
     }
 }

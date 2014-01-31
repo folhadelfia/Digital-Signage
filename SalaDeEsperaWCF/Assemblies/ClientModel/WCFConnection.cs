@@ -78,7 +78,7 @@ namespace Assemblies.ClientModel
             {
                 #region Player
 
-                NetTcpBinding playerBinding = new NetTcpBinding(SecurityMode.None) { ReceiveTimeout = new TimeSpan(0, 5, 0), SendTimeout = new TimeSpan(0, 5, 0) };
+                NetTcpBinding playerBinding = new NetTcpBinding(SecurityMode.None) { ReceiveTimeout = new TimeSpan(12, 0, 0), SendTimeout = new TimeSpan(12, 0, 0) };
                 WCFPlayerPC wcfComputer = pc as WCFPlayerPC;
                 player = new PlayerProxy(playerBinding, wcfComputer.PlayerEndpoint);
                 player.Open();
@@ -584,7 +584,8 @@ namespace Assemblies.ClientModel
 
         #region File transfer
 
-        public override void SendVideoFile(string filePath)
+        Stream fileStream;
+        public override void UploadVideoFile(string filePath)
         {
             try
             {
@@ -594,6 +595,8 @@ namespace Assemblies.ClientModel
                 {
                     using (StreamWithProgress progressStream = new StreamWithProgress(stream))
                     {
+                        fileStream = progressStream; //Usada para ter acesso ao close de fora do método
+
                         progressStream.ProgressChanged += progressStream_ProgressChanged;
 
                         RemoteFileInfo request = new RemoteFileInfo()
@@ -610,14 +613,26 @@ namespace Assemblies.ClientModel
             catch (Exception)
             {
 
-                throw;
             }
+        }
+        public override void CancelFileUpload()
+        {
+            if (fileStream == null)
+                return;
+
+            fileStream.Dispose();
+            fileStream = null;
         }
 
         public event EventHandler<FileTransferProgressEventArgs> ProgressChanged;
         void progressStream_ProgressChanged(object sender, StreamWithProgress.ProgressEventArgs e)
         {
-            if (this.ProgressChanged != null) ProgressChanged(this, new FileTransferProgressEventArgs() { Progress = e.Progress });
+            if (this.ProgressChanged != null) ProgressChanged(this, new FileTransferProgressEventArgs()
+            { 
+                Progress = e.Progress,
+                TotalBytes = e.TotalBytes,
+                BytesTransferred = e.BytesTransferred
+            });
         }
 
         #endregion
@@ -625,6 +640,8 @@ namespace Assemblies.ClientModel
         public class FileTransferProgressEventArgs : EventArgs
         {
             public decimal Progress { get; internal set; }
+            public decimal BytesTransferred { get; internal set; }
+            public decimal TotalBytes { get; internal set; }
         }
 
         public override IEnumerable<string> GetRemoteVideoFileNames()

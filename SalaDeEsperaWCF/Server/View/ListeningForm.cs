@@ -120,20 +120,34 @@ namespace Server.View
 
         private void ReceiveFileStreamProgress(RemoteFileInfo request)
         {
-
-            if (!Directory.Exists(VideoFolderPath)) Directory.CreateDirectory(VideoFolderPath);
-
-            string filePath = Path.Combine(VideoFolderPath, request.FileName);
-            if (File.Exists(filePath)) File.Delete(filePath);
-
-            int chunkSize = 2 * 1024;
-            byte[] buffer = new byte[chunkSize];
-
-            using (FileStream writeStream = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write))
+            try
             {
-                request.FileByteStream.CopyStream(writeStream);
+                if (!Directory.Exists(VideoFolderPath)) Directory.CreateDirectory(VideoFolderPath);
 
-                writeStream.Close();
+                string filePath = Path.Combine(VideoFolderPath, request.FileName);
+                if (File.Exists(filePath)) File.Delete(filePath);
+
+                int chunkSize = 2 * 1024;
+                byte[] buffer = new byte[chunkSize];
+
+                using (FileStream writeStream = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write))
+                {
+                    try
+                    {
+                        request.FileByteStream.CopyStream(writeStream);
+
+                        writeStream.Close();
+                    }
+                    catch (IOException ex)
+                    {
+                        MessageBox.Show(ex.Message, "IOException", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        writeStream.Close();
+                    }
+                }
+            }
+            catch
+            {
             }
         }
 
@@ -142,11 +156,38 @@ namespace Server.View
             buttonConnect.Enabled = false;
 
             this.RefreshIPAndHostnameTextboxes();
-            this.GeneratePortValues();
 
+            try
+            {
+                this.GetPortValues();
+            }
+            catch
+            {
+                this.GeneratePortValues();
+            }
+            
             using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) idClinicaMulti = db.ClinicaDados.Single().idClinicaMulti ?? -1;
         }
 
+        private void GetPortValues()
+        {
+            using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
+            {
+                string m_publicIP = "";
+                if (!string.IsNullOrWhiteSpace(textBoxPublicIP.Text) && textBoxPublicIP.Text != OBTAININGADDRESSES_TEXTBOX_TEXT && textBoxPublicIP.Text != UNAVAILABE_TEXTBOX_TEXT)
+                    m_publicIP = textBoxPublicIP.Text;
+                else m_publicIP = MyToolkit.Networking.PublicIPAddress.ToString();
+
+                var mostRecentPlayer = db.Players.Where(x => x.privateIPAddress == MyToolkit.Networking.PrivateIPAddress.ToString() &&
+                                                           x.publicIPAddress == m_publicIP).OrderByDescending(x => x.ID).First();
+                
+                textBoxPrivatePortFT.Text = mostRecentPlayer.Endpoints.Single(x => x.Type == (int)EndpointTypeEnum.FileTransfer).PrivatePort;
+                textBoxPrivatePortPL.Text = mostRecentPlayer.Endpoints.Single(x => x.Type == (int)EndpointTypeEnum.Player).PrivatePort;
+
+                textBoxPublicPortFT.Text = mostRecentPlayer.Endpoints.Single(x => x.Type == (int)EndpointTypeEnum.FileTransfer).PublicPort;
+                textBoxPublicPortPL.Text = mostRecentPlayer.Endpoints.Single(x => x.Type == (int)EndpointTypeEnum.Player).PublicPort;
+            }
+        }
         private void GeneratePortValues()
         {
             this.textBoxPrivatePortPL.Text = MyToolkit.Networking.RandomPort().ToString();
@@ -515,7 +556,7 @@ namespace Server.View
 
         void PlayerService_SendVideoFilePaths(out string[] paths)
         {
-            DirectoryInfo videoFolder = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos));
+            DirectoryInfo videoFolder = new DirectoryInfo(this.VideoFolderPath);
 
             List<string> files = new List<string>();
 
@@ -766,18 +807,6 @@ namespace Server.View
         {
             try
             {
-                //Usar um check diferente para a porta da transferencia de ficheiros e para o player
-
-                //using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
-                //{
-                //    foreach (var pl in db.Players.Where(x => x.isActive && x. == privatePort && x.privateIPAddress != privateIP && x.publicIPAddress == publicIP))
-                //    {
-                //        if (MyToolkit.Networking.StringToIPAddress(pl.publicIPAddress).ToString() == MyToolkit.Networking.PublicIPAddress.ToString()) throw new ApplicationException("Já existe um player com esta porta");
-                //    }
-
-                //    //MyToolkit.Networking.StringToIPAddress(x.publicIPAddress).ToString()
-                //    //Parece estúpido, mas é uma forma de garantir que 10.0.000000.1 é o mesmo que 10.0.0.1
-                //}
                 #region Endpoint do player
                 ////endereço do player
                 Uri baseAddress = new Uri(String.Format("net.tcp://{0}:{1}/PlayerService", textBoxPrivateIP.Text, privatePortPlayer));
@@ -814,92 +843,155 @@ namespace Server.View
                 serviceHost.Open();
                 fileTransferHost.Open();
 
-                try
+                using (var db = new PlayersLigadosDataContext(Program.LigacaoPlayersLigados))
                 {
-                    using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
+                    var players = db.Players.Where(x => x.publicIPAddress == this.publicIP && x.privateIPAddress == this.privateIP);
+                    
+                    if (players.Count() > 0)
                     {
-                        List<Player> conflictingPlayers = new List<Player>();
-                        var conflictingPlayersTemp = db.Players.Where(x => x.isActive && x.Endpoints.Where(y=>y.PrivatePort == privatePortPlayer || y.PrivatePort == privatePortFileTransfer).Count() > 0);
+                        var pl = players.OrderByDescending(x => x.ID).First();
 
-                        foreach (var pl in conflictingPlayersTemp)
-                        {
-                            if (pl.privateIPAddress == privateIP && pl.publicIPAddress == publicIP)
-                                conflictingPlayers.Add(pl);
-                        }
+                        pl.privateHostname = this.privateHostname;
+                        pl.publicHostname = this.publicHostname;
 
-                        foreach (var pl in conflictingPlayers)
-                        {
-                            pl.isActive = false;
-                        }
+                        pl.Endpoints.Single(x => x.Type == (int)EndpointTypeEnum.Player).PublicPort = publicPortPlayer;
+                        pl.Endpoints.Single(x => x.Type == (int)EndpointTypeEnum.Player).PrivatePort = privatePortPlayer;
+                        pl.Endpoints.Single(x => x.Type == (int)EndpointTypeEnum.FileTransfer).PublicPort = publicPortFileTransfer;
+                        pl.Endpoints.Single(x => x.Type == (int)EndpointTypeEnum.FileTransfer).PrivatePort = privatePortFileTransfer;
 
-                        db.SubmitChanges();
-
-                        //Encontrar os players com os mesmos dados deste mas que estão inactivos
-                        var tempOverlappingPlayersInactive = db.Players.Where(x =>
-                                                            !x.isActive &&
-                                                            x.idClinica == idClinicaMulti &&
-                                                            x.privateIPAddress == privateIP &&
-                                                            x.publicIPAddress == publicIP &&
-                                                            x.privateHostname == privateHostname &&
-                                                            x.publicHostname == publicHostname &&
-                                                            x.Endpoints.Where(y => 
-                                                                y.PrivatePort == privatePortPlayer &&
-                                                                y.PublicPort == publicPortPlayer
-                                                                ).Count() > 0
-                                                            ); //Ver bem esta condição
-
-                        //Apagar todos excepto o mais recente
-                        if (tempOverlappingPlayersInactive.Count() > 1)
-                        {
-                            foreach (var pl in tempOverlappingPlayersInactive)
-                            {
-                                if(pl.ID != tempOverlappingPlayersInactive.Max(x=>x.ID))
-                                    db.Players.DeleteOnSubmit(pl);
-                            }
-
-                            db.SubmitChanges();
-                        }
-
-                        //Se já existia um, activa-lo, senão adicionar
-                        if (tempOverlappingPlayersInactive.Count() == 1) tempOverlappingPlayersInactive.Single().isActive = true;
-                        else
-                        {
-                            var pl = new Player()
-                            {
-                                isActive = true,
-                                idClinica = idClinicaMulti,
-                                privateIPAddress = privateIP,
-                                publicIPAddress = publicIP,
-                                privateHostname = privateHostname,
-                                publicHostname = publicHostname
-                            };
-
-                            pl.Endpoints.Add(new Endpoint()
-                            {
-                                Type = (int)EndpointTypeEnum.Player,
-                                Address = serviceHost.Description.Endpoints[0].Address.ToString(), //Procurar o endereço de uma maneira melhor
-                                PrivatePort = privatePortPlayer,
-                                PublicPort = publicPortPlayer,
-                            });
-
-                            pl.Endpoints.Add(new Endpoint()
-                            {
-                                Type = (int)EndpointTypeEnum.FileTransfer,
-                                Address = fileTransferHost.Description.Endpoints[0].Address.ToString(), //Procurar o endereço de uma maneira melhor
-                                PrivatePort = privatePortFileTransfer,
-                                PublicPort = publicPortFileTransfer,
-                            });
-
-
-                            db.Players.InsertOnSubmit(pl);
-                        }
-
-                        db.SubmitChanges();
+                        pl.isActive = true;
                     }
+                    else
+                    {
+                        var pl = new Player()
+                        {
+                            isActive = true,
+                            idClinica = idClinicaMulti,
+                            privateIPAddress = privateIP,
+                            publicIPAddress = publicIP,
+                            privateHostname = privateHostname,
+                            publicHostname = publicHostname
+                        };
+
+                        pl.Endpoints.Add(new Endpoint()
+                        {
+                            Type = (int)EndpointTypeEnum.Player,
+                            Address = serviceHost.Description.Endpoints[0].Address.ToString(), //Procurar o endereço de uma maneira melhor
+                            PrivatePort = privatePortPlayer,
+                            PublicPort = publicPortPlayer,
+                        });
+
+                        pl.Endpoints.Add(new Endpoint()
+                        {
+                            Type = (int)EndpointTypeEnum.FileTransfer,
+                            Address = fileTransferHost.Description.Endpoints[0].Address.ToString(), //Procurar o endereço de uma maneira melhor
+                            PrivatePort = privatePortFileTransfer,
+                            PublicPort = publicPortFileTransfer,
+                        });
+
+
+                        db.Players.InsertOnSubmit(pl);
+                    }
+
+                    db.SubmitChanges();
                 }
-                catch
-                {
-                }
+#region
+
+                //try
+                //{
+                //    using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
+                //    {
+                //        var conflictingPlayers = db.Players.Where(x => x.publicIPAddress == this.publicIP && 
+                //                                                           x.privateIPAddress == this.privateIP);
+
+                //        if (conflictingPlayers.Count() > 1) //se existem muitos, limpar todos excepto o mais recente
+                //        {
+                //            foreach (var pl in conflictingPlayers.Where(x=>x.ID < conflictingPlayers.Max(y=>y.ID)))
+                //            {
+                //                foreach (var ep in pl.Endpoints)
+                //                {
+                //                    db.Endpoints.DeleteOnSubmit(ep);
+                //                }
+
+                //                db.Players.DeleteOnSubmit(pl);
+                //            }
+
+                //            db.SubmitChanges();
+                //        }
+
+                //        var player = db.Players.Single(x => x.ID == db.Players.Max(y => y.ID));
+
+
+
+                //        //Encontrar os players com os mesmos dados deste mas que estão inactivos
+                //        var tempOverlappingPlayersInactive = db.Players.Where(x =>
+                //                                            !x.isActive &&
+                //                                            x.idClinica == idClinicaMulti &&
+                //                                            x.privateIPAddress == privateIP &&
+                //                                            x.publicIPAddress == publicIP &&
+                //                                            x.privateHostname == privateHostname &&
+                //                                            x.publicHostname == publicHostname &&
+                //                                            x.Endpoints.Where(y => 
+                //                                                y.PrivatePort == privatePortPlayer &&
+                //                                                y.PublicPort == publicPortPlayer
+                //                                                ).Count() > 0
+                //                                            ); //Ver bem esta condição
+
+                //        //Apagar todos excepto o mais recente
+                //        if (tempOverlappingPlayersInactive.Count() > 1)
+                //        {
+                //            foreach (var pl in tempOverlappingPlayersInactive)
+                //            {
+                //                if(pl.ID != tempOverlappingPlayersInactive.Max(x=>x.ID))
+                //                    db.Players.DeleteOnSubmit(pl);
+                //            }
+
+                //            db.SubmitChanges();
+                //        }
+
+                //        //Se já existia um, activa-lo, senão adicionar
+                //        if (tempOverlappingPlayersInactive.Count() == 1) tempOverlappingPlayersInactive.Single().isActive = true;
+                //        else
+                //        {
+                //            var pl = new Player()
+                //            {
+                //                isActive = true,
+                //                idClinica = idClinicaMulti,
+                //                privateIPAddress = privateIP,
+                //                publicIPAddress = publicIP,
+                //                privateHostname = privateHostname,
+                //                publicHostname = publicHostname
+                //            };
+
+                //            pl.Endpoints.Add(new Endpoint()
+                //            {
+                //                Type = (int)EndpointTypeEnum.Player,
+                //                Address = serviceHost.Description.Endpoints[0].Address.ToString(), //Procurar o endereço de uma maneira melhor
+                //                PrivatePort = privatePortPlayer,
+                //                PublicPort = publicPortPlayer,
+                //            });
+
+                //            pl.Endpoints.Add(new Endpoint()
+                //            {
+                //                Type = (int)EndpointTypeEnum.FileTransfer,
+                //                Address = fileTransferHost.Description.Endpoints[0].Address.ToString(), //Procurar o endereço de uma maneira melhor
+                //                PrivatePort = privatePortFileTransfer,
+                //                PublicPort = publicPortFileTransfer,
+                //            });
+
+
+                //            db.Players.InsertOnSubmit(pl);
+                //        }
+
+                //        db.SubmitChanges();
+                //    }
+                //}
+                //catch
+                //{
+                //}
+
+#endregion
+
             }
             catch (CommunicationException e)
             {

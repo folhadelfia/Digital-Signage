@@ -773,7 +773,7 @@ namespace Client
 
             List<Clinica> clinicas = new List<Clinica>();
 
-            using (var db = new ClinicasDataContext(LinqConnectionStrings.LigacaoClinicas)) clinicas = db.Clinicas.Where(x => x.isActive ?? false && players.Select(y => y.idClinica).Contains(x.idClinica)).ToList();
+            using (var db = new ClinicasDataContext(LinqConnectionStrings.LigacaoClinicas)) clinicas = db.Clinicas.Where(x => (x.isActive ?? false) && players.Select(y => y.idClinica).Contains(x.idClinica)).ToList();
 
             foreach (var player in players)
             {
@@ -803,10 +803,10 @@ namespace Client
         {
             playersScanned++;
 
-            if (playersFound != 0) //para não dividir por zero, just in case. se o programa chegou aqui é porque à partida é != 0, mas mesmo assim...
-            {
-                progressBarScan.Value = Convert.ToInt32(Math.Round((playersScanned / playersFound) * 100f));
-            }
+            //if (playersFound != 0) //para não dividir por zero, just in case. se o programa chegou aqui é porque à partida é != 0, mas mesmo assim...
+            //{
+            //    progressBarScan.Value = Convert.ToInt32(Math.Round((playersScanned / playersFound) * 100f));
+            //}
 
             buttonScan.Enabled = playersScanned >= playersFound;
             progressBarScan.Visible = !buttonScan.Enabled;

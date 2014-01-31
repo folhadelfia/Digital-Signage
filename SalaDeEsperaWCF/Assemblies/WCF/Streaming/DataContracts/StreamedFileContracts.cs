@@ -61,7 +61,12 @@ namespace Assemblies.DataContracts
             int result = file.Read(buffer, offset, count);
             bytesRead += result;
 
-            if (ProgressChanged != null) ProgressChanged(this, new ProgressEventArgs() { Progress = 100 * bytesRead / length });
+            if (ProgressChanged != null) ProgressChanged(this, new ProgressEventArgs() 
+            { 
+                Progress = 100 * bytesRead / length,
+                BytesTransferred = bytesRead,
+                TotalBytes = length
+            });
 
             return result;
         }
@@ -69,6 +74,8 @@ namespace Assemblies.DataContracts
         public class ProgressEventArgs : EventArgs
         {
             public decimal Progress { get; internal set; }
+            public decimal BytesTransferred { get; internal set; }
+            public decimal TotalBytes { get; internal set; }
         }
 
         #region Overrides de Stream. Todos lançam NotImplementedException

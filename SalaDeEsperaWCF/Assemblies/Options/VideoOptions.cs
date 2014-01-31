@@ -223,7 +223,6 @@ namespace Assemblies.Options
 
         private void buttonEnviar_Click(object sender, EventArgs e)
         {
-            FileTransferForm ftf = new FileTransferForm(this.connection);
 
             List<string> files = new List<string>();
 
@@ -232,7 +231,64 @@ namespace Assemblies.Options
                 files.Add(file);
             }
 
-            ftf.UploadFiles(files);
+            this.TransferFiles(files);
+        }
+
+        private void TransferFiles(IEnumerable<string> files)
+        {
+            List<string> largeFiles = new List<string>();
+            List<string> okFiles = new List<string>();
+
+            foreach (var file in files)
+            {
+                FileInfo f = new FileInfo(file);
+
+                if (f.Length > 2147483647) largeFiles.Add(file);
+                else okFiles.Add(file);
+            }
+
+            if (largeFiles.Count > 0)
+            {
+                string messageBegin = string.Format("O{0} seguinte{0} ficheiro{0} {1} demasiado grande{0}, pelo que não poder{2} ser transferido{0}.", largeFiles.Count == 1 ? "" : "s", largeFiles.Count == 1 ? "é" : "são", largeFiles.Count == 1 ? "á" : "ão");
+
+                string messageFiles = Environment.NewLine + Environment.NewLine;
+                foreach (var f in largeFiles)
+                {
+                    messageFiles += f.Substring(f.LastIndexOf("\\") + 1) + Environment.NewLine;
+                }
+
+                string messageEnd = Environment.NewLine + "Deseja continuar o upload?";
+
+                string message = string.Concat(messageBegin, messageFiles, messageEnd);
+
+                if (okFiles.Count == 0)
+                {
+                    MessageBox.Show(message, "Ficheiros enormes!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (MessageBox.Show(message, "Ficheiros enormes!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No) return;
+            }
+
+
+
+            var ftf = new FileTransferForm(this.connection);
+            ftf.FormClosed += (s, e) => ftf.Dispose();
+            ftf.FileTransferred += ftf_FileTransferred;
+
+            ftf.UploadFiles(okFiles);
+
+
+        }
+
+        void ftf_FileTransferred(object sender, EventArgs e)
+        {
+            LoadFiles();
+        }
+
+        private void buttonRefreshRemoteFiles_Click(object sender, EventArgs e)
+        {
+            LoadFiles();
         }
     }
 }

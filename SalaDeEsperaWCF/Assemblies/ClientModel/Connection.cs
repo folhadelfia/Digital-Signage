@@ -177,7 +177,8 @@ namespace Assemblies.ClientModel
 
         #region Video
 
-        public abstract void SendVideoFile(string filePath);
+        public abstract void UploadVideoFile(string filePath);
+        public abstract void CancelFileUpload();
         public abstract IEnumerable<string> GetRemoteVideoFileNames();
 
         public abstract void StartVideo(string displayName, int videoPlayerID);
