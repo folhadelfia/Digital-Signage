@@ -903,9 +903,16 @@ namespace Client
                     }));
                 }
             }
-            catch
+            catch(EndpointNotFoundException)
             {
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+
+                // normalmente cai aqui quando a ligação não e bem sucedida. atenção às firewalls
+            }
+            //Tratar EndpointNotFoundException
         }
 
         private string PrivateToPublicEndpoint(Player player, EndpointTypeEnum type)
@@ -1180,8 +1187,6 @@ namespace Client
 
             if (Connection != null && Connection.State == Assemblies.ClientModel.ConnectionState.Open) Connection.ClosePlayerWindow(display);
             UpdatePlayerStatus();
-
-            Connection.Close();
         }
 
         private void propriedadesBackgroundToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1339,40 +1344,12 @@ namespace Client
                 UpdatePlayerStatus();
             }
 
-            if (connection.State != Assemblies.ClientModel.ConnectionState.Closed) connection.Close();
+            //if (connection.State != Assemblies.ClientModel.ConnectionState.Closed) connection.Close();
         }
 
         private void contextMenuStripTreeViewRede_Opening(object sender, CancelEventArgs e)
         {
             e.Cancel = this.cancelTreeViewContextMenu || !(treeViewRede.SelectedNode.Tag is WCFScreenInformation);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //OpenFileDialog ofd = new OpenFileDialog();
-
-            //if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            //{
-            //    using (FileStream fileStream = File.OpenRead(ofd.FileName))
-            //    {
-            //        var file = fileStream.ToStreamedFile(ofd.SafeFileName);
-
-            //        //MemoryStream memStream = new MemoryStream();
-            //        //memStream.SetLength(fileStream.Length);
-            //        //fileStream.Read(memStream.GetBuffer(), 0, (int)fileStream.Length);
-
-            //        //StreamedFile file = new StreamedFile();
-
-            //        //file.Bytes = StreamingService.ToByteArray<MemoryStream>(memStream);
-            //        //file.FileName = ofd.SafeFileName;
-
-            //        connection.SendVideoFile(file);
-            //    }
-            //}
-
-            var l = connection.GetRemoteVideoFileNames();
-
-            ;
         }
     }
 

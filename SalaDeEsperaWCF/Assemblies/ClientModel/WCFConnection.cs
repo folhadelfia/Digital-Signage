@@ -617,11 +617,18 @@ namespace Assemblies.ClientModel
         }
         public override void CancelFileUpload()
         {
-            if (fileStream == null)
-                return;
+            //if (fileStream == null)
+            //    return;
 
-            fileStream.Dispose();
-            fileStream = null;
+            //fileStream.Dispose();
+            //fileStream = null;
+
+            if (fileStream is StreamWithProgress)
+            {
+                StreamWithProgress swp = fileStream as StreamWithProgress;
+
+                swp.Cancel();
+            }
         }
 
         public event EventHandler<FileTransferProgressEventArgs> ProgressChanged;

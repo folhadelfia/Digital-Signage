@@ -41,12 +41,12 @@ namespace Assemblies.Options
 
         private void buttonMoveItemsUp_Click(object sender, EventArgs e)
         {
-            MoveListBoxItemsUp(listBoxPlaylist);
+            MoveListBoxItemsUp(listViewVideoPlaylist);
         }
 
         private void buttonMoveItemsDown_Click(object sender, EventArgs e)
         {
-            MoveListBoxItemsDown(listBoxPlaylist);
+            MoveListBoxItemsDown(listViewVideoPlaylist);
         }
 
 
@@ -121,19 +121,18 @@ namespace Assemblies.Options
         {
             try
             {
-                int selectedIndex = listBoxPlaylist.SelectedIndices.Cast<int>().Min();
-                List<object> selectedItems = listBoxPlaylist.SelectedItems.Cast<object>().ToList();
+                int selectedIndex = listViewVideoPlaylist.SelectedIndices.Cast<int>().Min();
+                var selectedItems = listViewVideoPlaylist.SelectedItems.OfType<ListViewItem>().ToList();
 
-                foreach (object item in selectedItems)
+                foreach (var item in selectedItems)
                 {
-                    listBoxPlaylist.Items.Remove(item);
+                    listViewVideoPlaylist.Items.Remove(item);
                 }
 
                 //UpdateFooterTextList();
 
-                if (listBoxPlaylist.Items.Count > 0)
+                if (listViewVideoPlaylist.Items.Count > 0)
                 {
-                    listBoxPlaylist.SelectedIndex = selectedIndex;
                 }
             }
             catch (Exception ex)
@@ -147,6 +146,8 @@ namespace Assemblies.Options
         private void VideoOptions_Load(object sender, EventArgs e)
         {
             LoadFiles();
+
+            textBoxPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         }
 
         private void LoadFiles()
@@ -155,13 +156,13 @@ namespace Assemblies.Options
             {
                 var remoteFiles = connection.GetRemoteVideoFileNames();
 
-                listBoxRemoteFiles.Items.Clear();
+                listViewRemoteFiles.Items.Clear();
 
                 foreach (var file in remoteFiles)
                 {
                     string fileName = file.Substring(file.LastIndexOf("\\") + 1);
 
-                    listBoxRemoteFiles.Items.Add(fileName);
+                    listViewRemoteFiles.Items.Add(new ListViewItem() { Text = fileName, Tag = file });
                 }
             }
         }
@@ -274,7 +275,7 @@ namespace Assemblies.Options
 
             var ftf = new FileTransferForm(this.connection);
             ftf.FormClosed += (s, e) => ftf.Dispose();
-            ftf.FileTransferred += ftf_FileTransferred;
+            ftf.Uploaded += ftf_FileTransferred;
 
             ftf.UploadFiles(okFiles);
 
@@ -289,6 +290,30 @@ namespace Assemblies.Options
         private void buttonRefreshRemoteFiles_Click(object sender, EventArgs e)
         {
             LoadFiles();
+        }
+
+        private void listViewRemoteFiles_DoubleClick(object sender, EventArgs e)
+        {
+            foreach (ListViewItem video in (sender as ListView).SelectedItems)
+            {
+                AddVideoToPlaylist(video.Text, video.Tag as string);
+            }
+        }
+
+        private void AddVideoToPlaylist(string name, string path)
+        {
+            if (listViewVideoPlaylist.Items.OfType<ListViewItem>().Where(x => x.Tag == path).Count() > 0) return;
+
+            listViewVideoPlaylist.Items.Add(new ListViewItem() { Text = name, Tag = path });
+        }
+
+        private void listViewRemoteFiles_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                foreach (ListViewItem video in (sender as ListView).SelectedItems)
+                {
+                    AddVideoToPlaylist(video.Text, video.Tag as string);
+                }
         }
     }
 }

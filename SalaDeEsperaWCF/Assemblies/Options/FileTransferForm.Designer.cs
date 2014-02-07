@@ -35,6 +35,7 @@
             this.labelCurrentFilename = new System.Windows.Forms.Label();
             this.labelFileSizeProgress = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // progressBarCurrentFile
@@ -106,19 +107,30 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(330, 148);
+            this.buttonClose.Location = new System.Drawing.Point(249, 148);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 6;
             this.buttonClose.Text = "Fechar";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(330, 148);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 7;
+            this.buttonCancel.Text = "Cancelar";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // FileTransferForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 178);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.labelFileSizeProgress);
             this.Controls.Add(this.labelCurrentFilename);
@@ -146,5 +158,6 @@
         private System.Windows.Forms.Label labelCurrentFilename;
         private System.Windows.Forms.Label labelFileSizeProgress;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }

@@ -20,9 +20,23 @@ C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Assembli
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Assemblies\bin\Debug\Options\Images\MarkeeBackground.png
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Assemblies\bin\Debug\MediaFoundation.dll
 C:\Users\Cláudio\documents\visual studio 2012\Projects\SalaDeEsperaWCF\Assemblies\bin\Debug\TV2Lib.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Components.ComposerComponent.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.BackgroundOptions.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.FileTransferForm.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.MarkeeOptions.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.OptionsGeneral.FormOptionsBuilder.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.OptionsGeneral.FooterOptionsView.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.TVOptions.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.VideoOptions.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Properties.Resources.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.RegistarPosto.AskForPasswordForm.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Libraries\DirectShowLib-2005.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Libraries\Transitions.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Options\Images\MarkeeBackground.png
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Assemblies.dll.config
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Assemblies.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Assemblies.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\DirectShowLib-2005.dll
@@ -30,21 +44,7 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Deb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TrackBar.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Transitions.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TV2Lib.dll
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.csprojResolveAssemblyReference.cache
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Components.ComposerComponent.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.BackgroundOptions.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.MarkeeOptions.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.OptionsGeneral.FormOptionsBuilder.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.OptionsGeneral.FooterOptionsView.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.TVOptions.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Properties.Resources.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.csproj.GenerateResource.Cache
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.dll
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.pdb
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TV2Lib.pdb
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.RegistarPosto.AskForPasswordForm.resources
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\Assemblies.dll.config
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.VideoOptions.resources
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\VideoPlayer.dll
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\TV2Lib.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\bin\Debug\VideoPlayer.pdb
-C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.Options.FileTransferForm.resources
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Assemblies\obj\Debug\Assemblies.dll

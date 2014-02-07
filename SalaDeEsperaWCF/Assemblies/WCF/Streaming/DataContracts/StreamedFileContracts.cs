@@ -46,7 +46,10 @@ namespace Assemblies.DataContracts
         private readonly long length;
         private long bytesRead;
 
+        bool cancelFlag = false;
+
         public event EventHandler<ProgressEventArgs> ProgressChanged;
+        public event EventHandler<EventArgs> Cancelled;
 
         public StreamWithProgress(System.IO.FileStream file)
         {
@@ -58,6 +61,13 @@ namespace Assemblies.DataContracts
 
         public override int Read(byte[] buffer, int offset, int count)
         {
+            if (cancelFlag)
+            {
+                if (Cancelled != null) Cancelled(this, new EventArgs());
+                cancelFlag = false;
+                return 0;
+            }
+
             int result = file.Read(buffer, offset, count);
             bytesRead += result;
 
@@ -69,6 +79,11 @@ namespace Assemblies.DataContracts
             });
 
             return result;
+        }
+
+        public void Cancel()
+        {
+            cancelFlag = true;
         }
 
         public class ProgressEventArgs : EventArgs

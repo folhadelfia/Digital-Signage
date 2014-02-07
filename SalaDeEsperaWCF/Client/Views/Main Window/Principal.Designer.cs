@@ -56,7 +56,6 @@
             this.contextMenuStripTreeViewRede = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ligarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxRede = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.progressBarScan = new System.Windows.Forms.ProgressBar();
             this.buttonScan = new System.Windows.Forms.Button();
             this.groupBoxBuilder = new System.Windows.Forms.GroupBox();
@@ -321,7 +320,6 @@
             // 
             // groupBoxRede
             // 
-            this.groupBoxRede.Controls.Add(this.button1);
             this.groupBoxRede.Controls.Add(this.progressBarScan);
             this.groupBoxRede.Controls.Add(this.buttonClose);
             this.groupBoxRede.Controls.Add(this.buttonScan);
@@ -335,16 +333,6 @@
             this.groupBoxRede.TabIndex = 9;
             this.groupBoxRede.TabStop = false;
             this.groupBoxRede.Text = "Rede";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(179, 199);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // progressBarScan
             // 
@@ -535,7 +523,6 @@
         private System.Windows.Forms.SplitContainer splitContainerGeral;
         private System.Windows.Forms.SplitContainer splitContainerRedeStatus;
         private System.Windows.Forms.ProgressBar progressBarScan;
-        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -38,13 +38,13 @@
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.groupBoxRemote = new System.Windows.Forms.GroupBox();
             this.groupBoxPlaylist = new System.Windows.Forms.GroupBox();
-            this.listBoxPlaylist = new System.Windows.Forms.ListBox();
             this.buttonRemoveItems = new System.Windows.Forms.Button();
             this.buttonMoveItemsDown = new System.Windows.Forms.Button();
             this.buttonMoveItemsUp = new System.Windows.Forms.Button();
             this.groupBoxRemoteFiles = new System.Windows.Forms.GroupBox();
-            this.listBoxRemoteFiles = new System.Windows.Forms.ListBox();
             this.buttonRefreshRemoteFiles = new System.Windows.Forms.Button();
+            this.listViewRemoteFiles = new System.Windows.Forms.ListView();
+            this.listViewVideoPlaylist = new System.Windows.Forms.ListView();
             this.groupBoxLocal.SuspendLayout();
             this.groupBoxRemote.SuspendLayout();
             this.groupBoxPlaylist.SuspendLayout();
@@ -73,7 +73,7 @@
             this.buttonEnviar.Name = "buttonEnviar";
             this.buttonEnviar.Size = new System.Drawing.Size(75, 23);
             this.buttonEnviar.TabIndex = 3;
-            this.buttonEnviar.Text = "Enviar";
+            this.buttonEnviar.Text = "Upload";
             this.buttonEnviar.UseVisualStyleBackColor = true;
             this.buttonEnviar.Click += new System.EventHandler(this.buttonEnviar_Click);
             // 
@@ -136,7 +136,7 @@
             // 
             // groupBoxPlaylist
             // 
-            this.groupBoxPlaylist.Controls.Add(this.listBoxPlaylist);
+            this.groupBoxPlaylist.Controls.Add(this.listViewVideoPlaylist);
             this.groupBoxPlaylist.Controls.Add(this.buttonRemoveItems);
             this.groupBoxPlaylist.Controls.Add(this.buttonMoveItemsDown);
             this.groupBoxPlaylist.Controls.Add(this.buttonMoveItemsUp);
@@ -146,15 +146,6 @@
             this.groupBoxPlaylist.TabIndex = 14;
             this.groupBoxPlaylist.TabStop = false;
             this.groupBoxPlaylist.Text = "Playlist";
-            // 
-            // listBoxPlaylist
-            // 
-            this.listBoxPlaylist.Dock = System.Windows.Forms.DockStyle.Left;
-            this.listBoxPlaylist.FormattingEnabled = true;
-            this.listBoxPlaylist.Location = new System.Drawing.Point(3, 16);
-            this.listBoxPlaylist.Name = "listBoxPlaylist";
-            this.listBoxPlaylist.Size = new System.Drawing.Size(272, 229);
-            this.listBoxPlaylist.TabIndex = 17;
             // 
             // buttonRemoveItems
             // 
@@ -193,25 +184,14 @@
             this.groupBoxRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxRemoteFiles.Controls.Add(this.listViewRemoteFiles);
             this.groupBoxRemoteFiles.Controls.Add(this.buttonRefreshRemoteFiles);
-            this.groupBoxRemoteFiles.Controls.Add(this.listBoxRemoteFiles);
             this.groupBoxRemoteFiles.Location = new System.Drawing.Point(8, 278);
             this.groupBoxRemoteFiles.Name = "groupBoxRemoteFiles";
             this.groupBoxRemoteFiles.Size = new System.Drawing.Size(310, 303);
             this.groupBoxRemoteFiles.TabIndex = 13;
             this.groupBoxRemoteFiles.TabStop = false;
             this.groupBoxRemoteFiles.Text = "Vídeos remotos";
-            // 
-            // listBoxRemoteFiles
-            // 
-            this.listBoxRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBoxRemoteFiles.FormattingEnabled = true;
-            this.listBoxRemoteFiles.Location = new System.Drawing.Point(3, 16);
-            this.listBoxRemoteFiles.Name = "listBoxRemoteFiles";
-            this.listBoxRemoteFiles.Size = new System.Drawing.Size(304, 251);
-            this.listBoxRemoteFiles.TabIndex = 0;
             // 
             // buttonRefreshRemoteFiles
             // 
@@ -222,6 +202,24 @@
             this.buttonRefreshRemoteFiles.Text = "Actualizar";
             this.buttonRefreshRemoteFiles.UseVisualStyleBackColor = true;
             this.buttonRefreshRemoteFiles.Click += new System.EventHandler(this.buttonRefreshRemoteFiles_Click);
+            // 
+            // listViewRemoteFiles
+            // 
+            this.listViewRemoteFiles.Location = new System.Drawing.Point(6, 19);
+            this.listViewRemoteFiles.Name = "listViewRemoteFiles";
+            this.listViewRemoteFiles.Size = new System.Drawing.Size(298, 249);
+            this.listViewRemoteFiles.TabIndex = 2;
+            this.listViewRemoteFiles.UseCompatibleStateImageBehavior = false;
+            this.listViewRemoteFiles.DoubleClick += new System.EventHandler(this.listViewRemoteFiles_DoubleClick);
+            this.listViewRemoteFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listViewRemoteFiles_KeyDown);
+            // 
+            // listViewVideoPlaylist
+            // 
+            this.listViewVideoPlaylist.Location = new System.Drawing.Point(5, 0);
+            this.listViewVideoPlaylist.Name = "listViewVideoPlaylist";
+            this.listViewVideoPlaylist.Size = new System.Drawing.Size(270, 242);
+            this.listViewVideoPlaylist.TabIndex = 17;
+            this.listViewVideoPlaylist.UseCompatibleStateImageBehavior = false;
             // 
             // VideoOptions
             // 
@@ -255,9 +253,9 @@
         private System.Windows.Forms.Button buttonMoveItemsDown;
         private System.Windows.Forms.Button buttonMoveItemsUp;
         private System.Windows.Forms.GroupBox groupBoxRemoteFiles;
-        private System.Windows.Forms.ListBox listBoxPlaylist;
-        private System.Windows.Forms.ListBox listBoxRemoteFiles;
         private System.Windows.Forms.ImageList imageListVideo;
         private System.Windows.Forms.Button buttonRefreshRemoteFiles;
+        private System.Windows.Forms.ListView listViewVideoPlaylist;
+        private System.Windows.Forms.ListView listViewRemoteFiles;
     }
 }
