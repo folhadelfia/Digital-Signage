@@ -9,34 +9,44 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Assemblies.ClientModel;
+using Assemblies.Components;
 using Assemblies.Configurations;
 using Assemblies.ExtensionMethods;
 using VideoPlayer;
 
 namespace Assemblies.Options
 {
-    public partial class VideoOptions : Form
+    public partial class VideoOptions : Form, IOptionsWindow
     {
         Connection connection;
+        VideoConfiguration configuration;
 
         public List<string> Playlist { get; private set; }
 
         public VideoOptions()
         {
             InitializeComponent();
+
+            configuration = new VideoConfiguration();
         }
 
         public VideoOptions(VideoConfiguration config) : this()
         {
             config.Playlist.DeepCopyTo(this.Playlist);
+
+            config.Playlist.DeepCopyTo(configuration.Playlist);
         }
 
-        public void AssignConnection(Connection con)
+        private void VideoOptions_Load(object sender, EventArgs e)
         {
-            connection = con;
-        }
-        #region Mover items na LB http://stackoverflow.com/questions/4796109/how-to-move-item-in-listbox-up-and-down alterado para multi item
+            LoadFiles();
 
+            textBoxPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+        }
+
+
+        #region Mover items na ListBox
+        //http://stackoverflow.com/questions/4796109/how-to-move-item-in-listbox-up-and-down alterado para multi item
 
 
         private void buttonMoveItemsUp_Click(object sender, EventArgs e)
@@ -114,60 +124,12 @@ namespace Assemblies.Options
 #endif
             }
 
-
+            UpdateConfig();
         }
         #endregion
-        private void RemoveListBoxItems()
-        {
-            try
-            {
-                int selectedIndex = listViewVideoPlaylist.SelectedIndices.Cast<int>().Min();
-                var selectedItems = listViewVideoPlaylist.SelectedItems.OfType<ListViewItem>().ToList();
 
-                foreach (var item in selectedItems)
-                {
-                    listViewVideoPlaylist.Items.Remove(item);
-                }
 
-                //UpdateFooterTextList();
-
-                if (listViewVideoPlaylist.Items.Count > 0)
-                {
-                }
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                MessageBox.Show("RemoveListBoxItems" + Environment.NewLine + ex.Message);
-#endif
-            }
-        }
-
-        private void VideoOptions_Load(object sender, EventArgs e)
-        {
-            LoadFiles();
-
-            textBoxPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
-        }
-
-        private void LoadFiles()
-        {
-            if (connection != null && connection.State == ClientModel.ConnectionState.Open)
-            {
-                var remoteFiles = connection.GetRemoteVideoFileNames();
-
-                listViewRemoteFiles.Items.Clear();
-
-                foreach (var file in remoteFiles)
-                {
-                    string fileName = file.Substring(file.LastIndexOf("\\") + 1);
-
-                    listViewRemoteFiles.Items.Add(new ListViewItem() { Text = fileName, Tag = file });
-                }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonSearch_Click(object sender, EventArgs e)
         {
             string path = GetVideoFolderPathWithDialog();
 
@@ -176,7 +138,6 @@ namespace Assemblies.Options
                 textBoxPath.Text = path;
             }
         }
-
         private string GetVideoFolderPathWithDialog()
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -190,25 +151,6 @@ namespace Assemblies.Options
 
             return path;
         }
-        private void PopulateLocalVideoList(string path)
-        {
-            DirectoryInfo dir = new DirectoryInfo(path);
-
-            listViewLocalFiles.Clear();
-
-
-            foreach (var file in dir.EnumerateFiles().Where(x=>FileVideoPlayer.SupportedVideoExtensions().Contains(x.Extension)))
-            {
-                listViewLocalFiles.Items.Add(new ListViewItem() 
-                { 
-                    Text = file.Name, 
-                    Tag = file.FullName,
-                    ImageKey = "Movie"
-                });
-            }
-
-            //listViewLocalFiles
-        }
 
         private void textBoxPath_TextChanged(object sender, EventArgs e)
         {
@@ -221,6 +163,7 @@ namespace Assemblies.Options
                 PopulateLocalVideoList(path);
             }
         }
+
 
         private void buttonEnviar_Click(object sender, EventArgs e)
         {
@@ -281,11 +224,11 @@ namespace Assemblies.Options
 
 
         }
-
         void ftf_FileTransferred(object sender, EventArgs e)
         {
             LoadFiles();
         }
+
 
         private void buttonRefreshRemoteFiles_Click(object sender, EventArgs e)
         {
@@ -300,13 +243,6 @@ namespace Assemblies.Options
             }
         }
 
-        private void AddVideoToPlaylist(string name, string path)
-        {
-            if (listViewVideoPlaylist.Items.OfType<ListViewItem>().Where(x => x.Tag == path).Count() > 0) return;
-
-            listViewVideoPlaylist.Items.Add(new ListViewItem() { Text = name, Tag = path });
-        }
-
         private void listViewRemoteFiles_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -314,6 +250,106 @@ namespace Assemblies.Options
                 {
                     AddVideoToPlaylist(video.Text, video.Tag as string);
                 }
+        }
+
+
+        public void AssignConnection(Connection con)
+        {
+            connection = con;
+        }
+
+        private void AddVideoToPlaylist(string name, string path)
+        {
+            if (listViewVideoPlaylist.Items.OfType<ListViewItem>().Where(x => x.Tag == path).Count() > 0) return;
+
+            listViewVideoPlaylist.Items.Add(new ListViewItem() { Text = name, Tag = path });
+
+            UpdateConfig();
+        }
+
+        private void LoadFiles()
+        {
+            if (connection != null && connection.State == ClientModel.ConnectionState.Open)
+            {
+                var remoteFiles = connection.GetRemoteVideoFileNames();
+
+                listViewRemoteFiles.Items.Clear();
+
+                foreach (var file in remoteFiles)
+                {
+                    string fileName = file.Substring(file.LastIndexOf("\\") + 1);
+
+                    listViewRemoteFiles.Items.Add(new ListViewItem() { Text = fileName, Tag = file, ImageKey = "Movie" });
+                }
+            }
+        }
+
+        private void PopulateLocalVideoList(string path)
+        {
+            DirectoryInfo dir = new DirectoryInfo(path);
+
+            listViewLocalFiles.Clear();
+
+
+            foreach (var file in dir.EnumerateFiles().Where(x=>FileVideoPlayer.SupportedVideoExtensions().Contains(x.Extension)))
+            {
+                listViewLocalFiles.Items.Add(new ListViewItem() 
+                { 
+                    Text = file.Name, 
+                    Tag = file.FullName,
+                    ImageKey = "Movie"
+                });
+            }
+
+            //listViewLocalFiles
+        }
+
+        private void RemoveListBoxPlaylistItems()
+        {
+            try
+            {
+                int selectedIndex = listViewVideoPlaylist.SelectedIndices.Cast<int>().Min();
+                var selectedItems = listViewVideoPlaylist.SelectedItems.OfType<ListViewItem>().ToList();
+
+                foreach (var item in selectedItems)
+                {
+                    listViewVideoPlaylist.Items.Remove(item);
+                }
+
+                //UpdateFooterTextList();
+
+                if (listViewVideoPlaylist.Items.Count > 0)
+                {
+                }
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                MessageBox.Show("RemoveListBoxItems" + Environment.NewLine + ex.Message);
+#endif
+            }
+
+            UpdateConfig();
+        }
+
+
+        public void ApplyChangesToComponent(Components.ComposerComponent component)
+        {
+            if (!(component is VideoComposer)) return;
+
+            VideoComposer temp = component as VideoComposer;
+
+            configuration.Playlist.DeepCopyTo((temp.Configuration as VideoConfiguration).Playlist);
+        }
+
+        private void UpdateConfig()
+        {
+            configuration.Playlist.Clear();
+
+            foreach (var video in listViewVideoPlaylist.Items.OfType<ListViewItem>().Select(x=>x.Tag.ToString()))
+            {
+                configuration.Playlist.Add(video);
+            }
         }
     }
 }

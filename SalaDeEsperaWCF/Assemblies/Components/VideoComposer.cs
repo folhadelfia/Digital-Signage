@@ -46,6 +46,7 @@ namespace Assemblies.Components
 
                 if (options.ShowDialog() == DialogResult.OK)
                 {
+                    options.ApplyChangesToComponent(this);
                 }
             }
             catch (Exception ex)

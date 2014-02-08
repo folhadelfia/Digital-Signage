@@ -698,6 +698,7 @@ namespace Server.View
                     player.Playlist.Add(temp.Playlist);
 
                     this.Controls.Add(player);
+                    player.Playlist.Replay = true;
 
                     player.Run();
                 }
