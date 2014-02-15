@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this._fileVideoPlayer = new VideoPlayer.FileVideoPlayer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonPlay = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPause = new System.Windows.Forms.ToolStripButton();
@@ -39,7 +40,8 @@
             this.buttonTestMove = new System.Windows.Forms.Button();
             this.buttonTestClear = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this._fileVideoPlayer = new VideoPlayer.FileVideoPlayer();
+            this.labelVideoInfo = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +59,19 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "OMG Video!";
+            // 
+            // _fileVideoPlayer
+            // 
+            this._fileVideoPlayer.Aspect = VideoPlayer.FileVideoPlayer.AspectMode.Fit;
+            this._fileVideoPlayer.BackColor = System.Drawing.Color.Black;
+            this._fileVideoPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._fileVideoPlayer.ID = 0;
+            this._fileVideoPlayer.Location = new System.Drawing.Point(3, 41);
+            this._fileVideoPlayer.Name = "_fileVideoPlayer";
+            this._fileVideoPlayer.Size = new System.Drawing.Size(598, 435);
+            this._fileVideoPlayer.TabIndex = 2;
+            this._fileVideoPlayer.UseBlackBands = false;
+            this._fileVideoPlayer.Resize += new System.EventHandler(this._fileVideoPlayer_Resize);
             // 
             // toolStrip1
             // 
@@ -163,24 +178,44 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(622, 28);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(238, 459);
+            this.listBox1.Size = new System.Drawing.Size(238, 277);
             this.listBox1.TabIndex = 6;
             // 
-            // _fileVideoPlayer
+            // labelVideoInfo
             // 
-            this._fileVideoPlayer.BackColor = System.Drawing.Color.Black;
-            this._fileVideoPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._fileVideoPlayer.Location = new System.Drawing.Point(3, 41);
-            this._fileVideoPlayer.Name = "_fileVideoPlayer";
-            this._fileVideoPlayer.Size = new System.Drawing.Size(598, 435);
-            this._fileVideoPlayer.TabIndex = 2;
-            this._fileVideoPlayer.UseBlackBands = false;
+            this.labelVideoInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelVideoInfo.AutoSize = true;
+            this.labelVideoInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVideoInfo.Location = new System.Drawing.Point(622, 354);
+            this.labelVideoInfo.Name = "labelVideoInfo";
+            this.labelVideoInfo.Size = new System.Drawing.Size(60, 24);
+            this.labelVideoInfo.TabIndex = 7;
+            this.labelVideoInfo.Text = "label1";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Fill",
+            "Fit",
+            "Stretch",
+            "Center"});
+            this.comboBox1.Location = new System.Drawing.Point(626, 311);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(176, 32);
+            this.comboBox1.TabIndex = 8;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(872, 532);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.labelVideoInfo);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.buttonTestClear);
             this.Controls.Add(this.groupBox1);
@@ -189,11 +224,13 @@
             this.Controls.Add(this.buttonTestRemove);
             this.Name = "Form1";
             this.Text = "Rendering files with DirectShowLib for .NET";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -211,6 +248,8 @@
         private System.Windows.Forms.Button buttonTestClear;
         private VideoPlayer.FileVideoPlayer _fileVideoPlayer;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label labelVideoInfo;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

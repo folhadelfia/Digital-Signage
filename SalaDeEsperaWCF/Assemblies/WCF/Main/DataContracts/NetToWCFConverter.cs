@@ -173,7 +173,8 @@ namespace Assemblies.DataContracts
                     FinalResolution = ToWCF(videoConfig.FinalResolution),
                     Location = ToWCF(videoConfig.Location),
                     Resolution = ToWCF(videoConfig.Resolution),
-                    Size = ToWCF(videoConfig.Size)
+                    Size = ToWCF(videoConfig.Size),
+                    Aspect = ToWCF(videoConfig.Aspect)
                 };
             }
             else return null;
@@ -236,7 +237,8 @@ namespace Assemblies.DataContracts
                     Location = ToNET(videoConfig.Location),
                     Resolution = ToNET(videoConfig.Resolution),
                     Size = ToNET(videoConfig.Size),
-                    FinalResolution = ToNET(videoConfig.FinalResolution)
+                    FinalResolution = ToNET(videoConfig.FinalResolution), 
+                    Aspect = ToNET(videoConfig.Aspect)
 
                 };
             }
@@ -515,6 +517,20 @@ namespace Assemblies.DataContracts
                 res.Add(ToNET(ch));
 
             return res.ToArray();
+        }
+
+        #endregion
+
+        #region Video
+
+        public static WCFAspect ToWCF(VideoPlayer.FileVideoPlayer.AspectMode aspect)
+        {
+            return (WCFAspect)Convert.ToInt32(aspect);
+        }
+
+        public static VideoPlayer.FileVideoPlayer.AspectMode ToNET(WCFAspect aspect)
+        {
+            return (VideoPlayer.FileVideoPlayer.AspectMode)Convert.ToInt32(aspect);
         }
 
         #endregion

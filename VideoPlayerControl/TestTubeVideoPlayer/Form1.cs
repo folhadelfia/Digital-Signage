@@ -15,7 +15,21 @@ namespace TestTubeVideoPlayer
         {
             InitializeComponent();
 
-            _fileVideoPlayer.Playlist.Autoplay = true;
+            switch (_fileVideoPlayer.Aspect)
+            {
+                case VideoPlayer.FileVideoPlayer.AspectMode.Center: comboBox1.SelectedItem = "Center";
+                    break;
+                case VideoPlayer.FileVideoPlayer.AspectMode.Fill: comboBox1.SelectedItem = "Fill";
+                    break;
+                case VideoPlayer.FileVideoPlayer.AspectMode.Fit: comboBox1.SelectedItem = "Fit";
+                    break;
+                case VideoPlayer.FileVideoPlayer.AspectMode.Stretch: comboBox1.SelectedItem = "Stretch";
+                    break;
+                default: comboBox1.SelectedItem = "Stretch";
+                    break;
+            }
+
+            _fileVideoPlayer.Playlist.Autoplay = false;
             _fileVideoPlayer.Playlist.Replay = true;
 
             _fileVideoPlayer.Playlist.VideoAdded += Playlist_VideoAdded;
@@ -74,6 +88,8 @@ namespace TestTubeVideoPlayer
         private void toolStripButtonPlay_Click(object sender, EventArgs e)
         {
             _fileVideoPlayer.Run();
+
+            labelVideoInfo.Text = string.Format("Position: ({1}, {2}){0}Size: ({3}, {4})", Environment.NewLine, _fileVideoPlayer.VideoLocation.X, _fileVideoPlayer.VideoLocation.Y, _fileVideoPlayer.VideoSize.Width, _fileVideoPlayer.VideoSize.Height);
         }
 
         private void toolStripButtonOpen_Click(object sender, EventArgs e)
@@ -124,6 +140,39 @@ namespace TestTubeVideoPlayer
         private void buttonTestClear_Click(object sender, EventArgs e)
         {
             _fileVideoPlayer.Playlist.Clear();
+        }
+
+        private void _fileVideoPlayer_Resize(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxKeepAspectRatio_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cBox = sender as ComboBox;
+
+            switch (cBox.SelectedItem.ToString())
+            {
+                case "Fill": _fileVideoPlayer.Aspect = VideoPlayer.FileVideoPlayer.AspectMode.Fill;
+                    break;
+                case "Fit": _fileVideoPlayer.Aspect = VideoPlayer.FileVideoPlayer.AspectMode.Fit;
+                    break;
+                case "Stretch": _fileVideoPlayer.Aspect = VideoPlayer.FileVideoPlayer.AspectMode.Stretch;
+                    break;
+                case "Center": _fileVideoPlayer.Aspect = VideoPlayer.FileVideoPlayer.AspectMode.Center;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

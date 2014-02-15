@@ -12,6 +12,7 @@ namespace Assemblies.DataContracts
     {
         private int id;
         private string[] playlist;
+        WCFAspect aspect;
 
         [DataMember]
         public int ID
@@ -25,6 +26,13 @@ namespace Assemblies.DataContracts
         {
             get { return playlist; }
             set { playlist = value; }
+        }
+
+        [DataMember]
+        public WCFAspect Aspect
+        {
+            get { return aspect; }
+            set { aspect = value; }
         }
     }
 }

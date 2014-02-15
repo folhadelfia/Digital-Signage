@@ -509,19 +509,4 @@ namespace Assemblies.DataContracts
         }
     }
     #endregion
-
-    [DataContract]
-    public enum WCFDirection
-    {
-        [EnumMemberAttribute]
-        None = 0,
-        [EnumMemberAttribute]
-        Up = 1,
-        [EnumMemberAttribute]
-        Down = 2,
-        [EnumMemberAttribute]
-        Left = 3,
-        [EnumMemberAttribute]
-        Right = 4
-    }
 }

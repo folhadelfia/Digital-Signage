@@ -11,6 +11,7 @@ namespace Assemblies.Configurations
         public int ID { get; set; }
 
         public List<string> Playlist { get; set; }
+        public VideoPlayer.FileVideoPlayer.AspectMode Aspect { get; set; }
 
         public VideoConfiguration()
         {

@@ -210,12 +210,14 @@
     <Compile Include="Configurations\PlayerWindowInformation.cs" />
     <Compile Include="Configurations\ScreenInformation.cs" />
     <Compile Include="Configurations\TVConfiguration.cs" />
+    <Compile Include="WCF\Main\DataContracts\Components\Markee\Enums.cs" />
     <Compile Include="WCF\Main\DataContracts\Components\Markee\WCFMarkeeConfiguration.cs" />
     <Compile Include="WCF\Main\DataContracts\Components\TV\TunerDevice.cs" />
     <Compile Include="WCF\Main\DataContracts\Components\TV\WCFChannel.cs" />
     <Compile Include="WCF\Main\DataContracts\Components\TV\WCFTVConfiguration.cs" />
     <Compile Include="WCF\Main\DataContracts\Components\Video\WCFVideoConfiguration.cs" />
     <Compile Include="WCF\Main\DataContracts\Components\WCFItemConfiguration.cs" />
+    <Compile Include="WCF\Main\DataContracts\Components\Video\Enums.cs" />
     <Compile Include="WCF\Main\DataContracts\Drawing\WCFDrawing.cs" />
     <Compile Include="WCF\Main\DataContracts\Main Window\WCFPlayerWindowInformation.cs" />
     <Compile Include="WCF\Main\DataContracts\Main Window\WCFScreenInformation.cs" />

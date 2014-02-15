@@ -20,6 +20,11 @@ namespace VideoPlayer
 
         public int ID { get; set; }
 
+        public Size VideoSize { get { return new Size((filterGraph as IVideoWindow).Width, (filterGraph as IVideoWindow).Height); } }
+        public Point VideoLocation { get {return new Point((filterGraph as IVideoWindow).Left, (filterGraph as IVideoWindow).Top); } }
+
+
+
         public FileVideoPlayer()
         {
             Initialize();
@@ -372,9 +377,286 @@ namespace VideoPlayer
         }
 
         private int globalFileErrorCount = 0;
+
+
+
+
+        #region All things Aspect!
+
+        int originalVideoWidth, originalVideoHeight;
+
+        public enum AspectMode { Center, Fill, Fit, Stretch }
+        private AspectMode aspect = AspectMode.Fit;
+        public event EventHandler AspectChanged;
+        public AspectMode Aspect
+        {
+            get { return aspect; }
+            set
+            {
+                var oldAspect = aspect;
+
+                if (value != oldAspect)
+                {
+                    aspect = value;
+                    if (AspectChanged != null) this.AspectChanged(this, new EventArgs());
+
+                    AdjustVideo(value);
+                }
+            }
+        }
+
+
+        //private void AdjustVideo()
+        //{
+        //    if (filterGraph != null && filterGraph is IVideoWindow)
+        //    {
+        //        var videoWindow = filterGraph as IVideoWindow;
+
+        //        if (this.KeepAspectRatio)
+        //        {
+        //            this.PanelResize(videoWindow);
+        //        }
+        //        else
+        //        {
+        //            videoWindow.SetWindowPosition(this.Left, this.Top, this.Width, this.Height);
+        //        }
+        //    }
+        //}
+        private void AdjustVideo(AspectMode mode)
+        {
+            if (filterGraph != null && filterGraph is IVideoWindow)
+            {
+                var videoWindow = filterGraph as IVideoWindow;
+
+                int w, h, x, y;
+
+                switch (mode)
+                {
+                    case AspectMode.Center:
+                        this.PanelResize(originalVideoWidth, originalVideoHeight, this.Width, this.Height, out x, out y, out w, out h);
+                        break;
+                    case AspectMode.Fill:
+                        double ratioFill = Convert.ToDouble(originalVideoWidth) / Convert.ToDouble(originalVideoHeight);
+
+                        if (ratioFill * this.Width < originalVideoWidth)
+                        {
+                            this.PanelResize(true, Convert.ToInt32(this.Height * ratioFill), this.Height, this.Width, this.Height, out x, out y, out w, out h);
+                        }
+                        else
+                        {
+                            this.PanelResize(true, this.Width, Convert.ToInt32(this.Width / ratioFill), this.Width, this.Height, out x, out y, out w, out h);
+                        }
+                        break;
+                    case AspectMode.Fit:
+                        double ratioFit = Convert.ToDouble(originalVideoWidth) / Convert.ToDouble(originalVideoHeight);
+
+                        if (ratioFit * this.Width < originalVideoWidth) //Se o vídeo sai pelos lados
+                        {
+                            this.PanelResize(this.Width, Convert.ToInt32(this.Width / ratioFit), this.Width, this.Height, out x, out y, out w, out h);
+                        }
+                        else //Se o video é muito alto
+                        {
+                            this.PanelResize(Convert.ToInt32(this.Height * ratioFit), this.Height, this.Width, this.Height, out x, out y, out w, out h);
+                        }
+                        break;
+                    case AspectMode.Stretch:
+                        x = 0;
+                        y = 0;
+                        w = this.Width;
+                        h = this.Height;
+                        break;
+                    default:
+                        x = 0;
+                        y = 0;
+                        w = this.Width;
+                        h = this.Height;
+                        break;
+                }
+
+                videoWindow.SetWindowPosition(x, y, w, h);
+            }
+        }
+        
+        /// <summary>
+        /// Redimensiona o painel do video para manter o rácio original e caber no parent (panelBlack)
+        /// </summary>
+        /// <param name="_width"></param>
+        /// <param name="_height"></param>
+        private void PanelResize(IVideoWindow videoWindow)
+        {
+            float racioPanel = Convert.ToSingle(this.Size.Width) / Convert.ToSingle(this.Size.Height);
+            float racioImagem = Convert.ToSingle(videoWindow.Width) / Convert.ToSingle(videoWindow.Height);
+
+            int posX, posY, l, h;
+
+            if (racioImagem > racioPanel) //Modo cinema
+            {
+                if (videoWindow.Width>= this.Size.Width) //Se a largura for maior, calcular a altura e a posição
+                {
+                    posX = 0;
+
+                    l = this.Size.Width;
+                    h = (videoWindow.Height * l) / videoWindow.Width;
+
+                    posY = (this.Size.Height - h) / 2;
+                }
+                else //Calcular a posição, a largura e a altura serão as originais (1)
+                {
+                    posX = (this.Size.Width - videoWindow.Width) / 2;
+                    posY = (this.Size.Height - videoWindow.Height) / 2;
+
+                    l = videoWindow.Width;
+                    h = videoWindow.Height;
+                }
+            }
+            else if (racioImagem < racioPanel) // Modo gravar com o telemóvel de lado
+            {
+                if (videoWindow.Height >= this.Size.Width) //Se a altura for maior, calcular a largura e a posição
+                {
+                    posY = 0;
+
+                    h = this.Size.Height;
+                    l = (videoWindow.Width * h) / videoWindow.Height;
+
+                    posX = (this.Size.Width - l) / 2;
+                }
+                else //Calcular a posição, a largura e a altura serão as originais (1)
+                {
+                    posX = (this.Size.Width - videoWindow.Width) / 2;
+                    posY = (this.Size.Height - videoWindow.Height) / 2;
+
+                    l = videoWindow.Width;
+                    h = videoWindow.Height;
+                }
+            }
+            else // Mesmo rácio do painel (improvavel)
+            {
+                if (videoWindow.Width >= this.Size.Width) //Se a largura for maior, a largura e a altura da imagem vão ser as do painel, e a pos será (0,0)
+                {
+                    posX = 0;
+                    posY = 0;
+
+                    l = this.Size.Width;
+                    h = this.Size.Height;
+                }
+                else //Calcular a posição, a largura e a altura serão as originais (1)
+                {
+                    posX = (this.Size.Width - videoWindow.Width) / 2;
+                    posY = (this.Size.Height - videoWindow.Height) / 2;
+
+                    l = videoWindow.Width;
+                    h = videoWindow.Height;
+                }
+            }
+
+            videoWindow.SetWindowPosition(posX, posY, l, h);
+        }
+
+        private void PanelResize(bool allowOverflow, int videoWidth, int videoHeight, int containerWidth, int containerHeight, out int x, out int y, out int w, out int h)
+        {
+            float racioPanel = Convert.ToSingle(containerWidth) / Convert.ToSingle(containerHeight);
+            float racioImagem = Convert.ToSingle(videoWidth) / Convert.ToSingle(videoHeight);
+
+            int posX, posY, largura, altura;
+
+            if (racioImagem > racioPanel) //Modo cinema
+            {
+                if (videoWidth >= containerWidth && allowOverflow)
+                {
+                    posY = 0;
+
+                    altura = containerHeight;
+                    largura = (videoWidth * altura) / videoHeight;
+
+                    posX = (containerWidth - largura) / 2;
+                }
+                else if (videoWidth >= containerWidth && !allowOverflow) //Se a largura for maior, calcular a altura e a posição
+                {
+                    posX = 0;
+
+                    largura = containerWidth;
+                    altura = (videoHeight * largura) / videoWidth;
+
+                    posY = (containerHeight - altura) / 2;
+                }
+                else //Calcular a posição, a largura e a altura serão as originais (1)
+                {
+                    posX = (containerWidth - videoWidth) / 2;
+                    posY = (containerHeight - videoHeight) / 2;
+
+                    largura = videoWidth;
+                    altura = videoHeight;
+                }
+            }
+            else if (racioImagem < racioPanel) // Modo gravar com o telemóvel de lado
+            {
+                if (videoHeight >= containerHeight && allowOverflow)
+                {
+                    posX = 0;
+
+                    largura = containerWidth;
+                    altura = (videoHeight * largura) / videoWidth;
+
+                    posY = (containerHeight - altura) / 2;
+                }
+                else if (videoHeight >= containerHeight && !allowOverflow) //Se a altura for maior, calcular a largura e a posição
+                {
+                    posY = 0;
+
+                    altura = containerHeight;
+                    largura = (videoWidth * altura) / videoHeight;
+
+                    posX = (containerWidth - largura) / 2;
+                }
+                else //Calcular a posição, a largura e a altura serão as originais (1)
+                {
+                    posX = (containerWidth - videoWidth) / 2;
+                    posY = (containerHeight - videoHeight) / 2;
+
+                    largura = videoWidth;
+                    altura = videoHeight;
+                }
+            }
+            else // Mesmo rácio do painel (improvavel)
+            {
+                if (videoWidth >= containerWidth) //Se a largura for maior, a largura e a altura da imagem vão ser as do painel, e a pos será (0,0)
+                {
+                    posX = 0;
+                    posY = 0;
+
+                    largura = containerWidth;
+                    altura = containerHeight;
+                }
+                else //Calcular a posição, a largura e a altura serão as originais (1)
+                {
+                    posX = (containerWidth - videoWidth) / 2;
+                    posY = (containerHeight - videoHeight) / 2;
+
+                    largura = videoWidth;
+                    altura = videoHeight;
+                }
+            }
+
+            //videoWindow.SetWindowPosition(posX, posY, largura, altura);
+            x = posX;
+            y = posY;
+            w = largura;
+            h = altura;
+        }
+        private void PanelResize(int videoWidth, int videoHeight, int containerWidth, int containerHeight, out int x, out int y, out int w, out int h)
+        {
+            this.PanelResize(false, videoWidth, videoHeight, containerWidth, containerHeight, out x, out y, out w, out h);
+        }
+
+        #endregion
+
+
+
+
+
         public void Run()
         {
-            if(!string.IsNullOrWhiteSpace(this.Source))
+            if(!string.IsNullOrWhiteSpace(this.Playlist.Files[this.Playlist.TrackNumber]))
             {
                 if (this.State == MediaStatus.Stopped)
                 {
@@ -384,7 +666,7 @@ namespace VideoPlayer
 
                         filterGraph = new FilgraphManager();
 
-                        this.filterGraph.RenderFile(this.Source);
+                        this.filterGraph.RenderFile(this.Playlist.Files[this.Playlist.TrackNumber]);
                         basicAudio = filterGraph as IBasicAudio;
 
                         try
@@ -392,7 +674,10 @@ namespace VideoPlayer
                             videoWindow = filterGraph as IVideoWindow;
                             videoWindow.Owner = (int)this.Handle;
                             videoWindow.WindowStyle = WS_CHILD | WS_CLIPCHILDREN;
-                            videoWindow.SetWindowPosition(this.ClientRectangle.Left, this.ClientRectangle.Top, this.ClientRectangle.Width, this.ClientRectangle.Height);
+
+                            originalVideoWidth = videoWindow.Width;
+                            originalVideoHeight = videoWindow.Height;
+
                         }
                         catch (Exception)
                         {
@@ -437,6 +722,8 @@ namespace VideoPlayer
                     this.mediaControl.Run();
                     this.State = MediaStatus.Running;
                 }
+
+                this.AdjustVideo(this.Aspect);
             }
         }
         public void Pause()
@@ -545,7 +832,7 @@ namespace VideoPlayer
         {
             try
             {
-                videoWindow.SetWindowPosition(base.ClientRectangle.Left, base.ClientRectangle.Top, base.Width, base.Height);
+                //videoWindow.SetWindowPosition(base.ClientRectangle.Left, base.ClientRectangle.Top, base.Width, base.Height);
             }
             catch
             {
@@ -617,6 +904,24 @@ namespace VideoPlayer
             }
 
             base.WndProc(ref m);
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FileVideoPlayer
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.Name = "FileVideoPlayer";
+            this.ResumeLayout(false);
+
+        }
+        protected override void OnResize(EventArgs e)
+        {
+            //base.OnResize(e);
+
+            AdjustVideo(this.Aspect);
         }
     }
 }

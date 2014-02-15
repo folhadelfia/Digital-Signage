@@ -72,6 +72,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FileVideoPlayer.resx">
+      <DependentUpon>FileVideoPlayer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VideoControl.resx">
       <DependentUpon>VideoControl.cs</DependentUpon>
     </EmbeddedResource>
