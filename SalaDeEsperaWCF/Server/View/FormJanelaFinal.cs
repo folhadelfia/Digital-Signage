@@ -696,7 +696,7 @@ namespace Server.View
 
                     player.ID = temp.ID;
                     player.Playlist.Add(temp.Playlist);
-                    player.KeepAspectRatio = true;
+                    player.Aspect = temp.Aspect;
 
                     this.Controls.Add(player);
                     player.Playlist.Replay = true;

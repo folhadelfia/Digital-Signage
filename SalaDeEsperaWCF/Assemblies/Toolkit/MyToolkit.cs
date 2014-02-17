@@ -451,5 +451,22 @@ namespace Assemblies.Toolkit
                 return ByteToBestFitUnit(bytes, Base.Base2);
             }
         }
+
+        public static class Files
+        {
+            public static string FileNameFromPath(string path)
+            {
+                try
+                {
+                    var lio = path.LastIndexOf("\\");
+
+                    return path.Substring(lio, path.Length - lio);
+                }
+                catch (Exception)
+                {
+                    return "";
+                }
+            }
+        }
     }
 }

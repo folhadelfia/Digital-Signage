@@ -181,7 +181,8 @@ namespace Assemblies.Factories
 
         public ComposerComponent FromConfiguration(Configurations.ItemConfiguration config)
         {
-            throw new NotImplementedException();
+            if (!(config is Assemblies.Configurations.VideoConfiguration)) return null;
+            return new VideoComposer(config as Assemblies.Configurations.VideoConfiguration);
         }
     }
 }

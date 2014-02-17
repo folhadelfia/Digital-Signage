@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Assemblies.DataContracts
 {
-    #region Markee
     [DataContract]
     public enum WCFDirection
     {
@@ -22,5 +21,4 @@ namespace Assemblies.DataContracts
         [EnumMemberAttribute]
         Right = 4
     }
-    #endregion
 }

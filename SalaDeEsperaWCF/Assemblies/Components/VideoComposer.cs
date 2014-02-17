@@ -12,7 +12,6 @@ namespace Assemblies.Components
 {
     public class VideoComposer : ComposerComponent, IUsesConnection
     {
-
         public VideoComposer()
         {
             base.BackColor = Color.MediumSlateBlue;
@@ -26,6 +25,11 @@ namespace Assemblies.Components
             this.Configuration = new Configurations.VideoConfiguration();
 
             base.optionsForm = new VideoOptions();
+        }
+
+        public VideoComposer(VideoConfiguration videoConfiguration) : this()
+        {
+            this.Configuration = videoConfiguration;
         }
 
         public override string ToString()

@@ -12,6 +12,7 @@ using Assemblies.ClientModel;
 using Assemblies.Components;
 using Assemblies.Configurations;
 using Assemblies.ExtensionMethods;
+using Assemblies.Toolkit;
 using VideoPlayer;
 
 namespace Assemblies.Options
@@ -45,7 +46,7 @@ namespace Assemblies.Options
         }
 
 
-        #region Mover items na ListBox
+        #region Mover items na ListView
         //http://stackoverflow.com/questions/4796109/how-to-move-item-in-listbox-up-and-down alterado para multi item
 
 
@@ -64,18 +65,40 @@ namespace Assemblies.Options
 
         private void MoveListBoxItemsUp(object target)
         {
-            MoveItem(target as ListBox, -1);
-            //UpdateFooterTextList();
+            MoveItem(target as ListView, -1);
+            //UpdateVideoList(listViewVideoPlaylist);
+        }
+
+        private void UpdateVideoList(ListView list)
+        {
+            try
+            {
+                list.Items.Clear();
+                foreach (var video in this.Playlist)
+                {
+                    string name = MyToolkit.Files.FileNameFromPath(video);
+
+                    if(!string.IsNullOrWhiteSpace(name))
+                        AddVideoToPlaylist(name, video);
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void MoveListBoxItemsDown(object sender)
         {
-            MoveItem(sender as ListBox, 1);
+            MoveItem(sender as ListView, 1);
             //UpdateFooterTextList();
         }
 
-        private void MoveItem(ListBox sender, int direction)
+        private void MoveItem(ListView sender, int direction)
         {
+
+            if (sender == null) return;
             try
             {
                 List<int> selectedIndices;
@@ -103,7 +126,7 @@ namespace Assemblies.Options
                     //if (newIndex < 0 || newIndex >= sender.Items.Count)
                     //    return; // Index out of range - nothing to do
 
-                    object selected = sender.Items[index];
+                    var selected = sender.Items[index];
 
                     //Só mover os items se a nova posição não estiver seleccionada
                     if (!(sender.SelectedIndices.Contains(newIndex)))
@@ -113,7 +136,7 @@ namespace Assemblies.Options
                         // Insert it in new position
                         sender.Items.Insert(newIndex, selected);
                         // Restore selection
-                        sender.SetSelected(newIndex, true);
+                        sender.Items[newIndex].Selected = true;
                     }
                 }
             }
@@ -260,9 +283,9 @@ namespace Assemblies.Options
 
         private void AddVideoToPlaylist(string name, string path)
         {
-            if (listViewVideoPlaylist.Items.OfType<ListViewItem>().Where(x => x.Tag == path).Count() > 0) return;
+            //if (listViewVideoPlaylist.Items.OfType<ListViewItem>().Where(x => x.Tag.ToString() == path).Count() > 0) return;
 
-            listViewVideoPlaylist.Items.Add(new ListViewItem() { Text = name, Tag = path });
+            listViewVideoPlaylist.Items.Add(new ListViewItem() { Text = name, Tag = path, ImageKey = "Movie" });
 
             UpdateConfig();
         }
@@ -308,6 +331,8 @@ namespace Assemblies.Options
         {
             try
             {
+                if (listViewVideoPlaylist.Items.Count < 1) return;
+
                 int selectedIndex = listViewVideoPlaylist.SelectedIndices.Cast<int>().Min();
                 var selectedItems = listViewVideoPlaylist.SelectedItems.OfType<ListViewItem>().ToList();
 
@@ -350,6 +375,11 @@ namespace Assemblies.Options
             {
                 configuration.Playlist.Add(video);
             }
+        }
+
+        private void buttonRemoveItems_Click(object sender, EventArgs e)
+        {
+            RemoveListBoxPlaylistItems();
         }
     }
 }

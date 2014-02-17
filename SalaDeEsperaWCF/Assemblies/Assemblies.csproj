@@ -249,12 +249,15 @@
     <Compile Include="WCF\Streaming\DataContracts\StreamedFileContracts.cs" />
     <Compile Include="WCF\Streaming\PlayerServiceImplementation\FileStreamingService.cs" />
     <Compile Include="WCF\Streaming\ClientProxies\FileStreamingServiceProxy.cs" />
+    <Compile Include="XMLSerialization\Components\Markee\Enums.cs" />
     <Compile Include="XMLSerialization\Components\Markee\XMLMarkeeConfiguration.cs" />
     <Compile Include="XMLSerialization\Components\TV\XMLChannel.cs" />
     <Compile Include="XMLSerialization\Components\TV\XMLTVConfiguration.cs" />
+    <Compile Include="XMLSerialization\Components\Video\Enums.cs" />
+    <Compile Include="XMLSerialization\Components\Video\XMLVideoConfiguration.cs" />
     <Compile Include="XMLSerialization\Components\XMLItemConfiguration.cs" />
     <Compile Include="XMLSerialization\Drawing\XMLDrawing.cs" />
-    <Compile Include="XMLSerialization\NetToXMLConverter.cs" />
+    <Compile Include="XMLSerialization\NetXMLConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Components\ComposerComponent.resx">

@@ -10,6 +10,7 @@ namespace Assemblies.XMLSerialization.Components
 {
     [XmlInclude(typeof(XMLTVConfiguration))]
     [XmlInclude(typeof(XMLMarkeeConfiguration))]
+    [XmlInclude(typeof(XMLVideoConfiguration))]
     public class XMLItemConfiguration
     {
         protected XMLItemConfiguration() { }

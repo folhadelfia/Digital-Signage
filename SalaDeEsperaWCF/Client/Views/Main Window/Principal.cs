@@ -1024,7 +1024,7 @@ namespace Client
                     List<XMLItemConfiguration> temp = new List<XMLItemConfiguration>();
 
                     foreach (var item in panelBuilder.Controls.OfType<ComposerComponent>().Select(x => x.Configuration).OrderBy(x => x.GetType().ToString()).ToList())
-                        temp.Add(NetToXMLConverter.ToXML(item));
+                        temp.Add(NetXMLConverter.ToXML(item));
 
                     serializer.Serialize(writer, temp);
                     writer.Close();
@@ -1055,7 +1055,7 @@ namespace Client
 
                     foreach (var item in temp)
                     {
-                        res.Add(NetToXMLConverter.ToNET(item));
+                        res.Add(NetXMLConverter.ToNET(item));
                     }
 
                     this.CurrentProjectSavePath = path;
@@ -1126,6 +1126,7 @@ namespace Client
                 {
                     if (item is MarkeeConfiguration) creator = new MarkeeCreator();
                     else if (item is TVConfiguration) creator = new TVCreator();
+                    else if (item is VideoConfiguration) creator = new VideoCreator();
                     //else if (item is DateTimeConfiguration...
                     else return;
 
