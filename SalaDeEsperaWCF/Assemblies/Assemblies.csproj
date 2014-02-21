@@ -341,6 +341,10 @@
     </Content>
     <Content Include="Libraries\TV2Lib.dll" />
     <Content Include="Options\Images\alpha.png" />
+    <None Include="Options\Images\Stretch.png" />
+    <None Include="Options\Images\Center.png" />
+    <None Include="Options\Images\Fill.png" />
+    <None Include="Options\Images\Fit.png" />
     <Content Include="Options\Images\MarkeeBackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -43,6 +43,8 @@ namespace Assemblies.Options
             LoadFiles();
 
             textBoxPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+
+            this.UpdateAspectMode();
         }
 
 
@@ -365,6 +367,7 @@ namespace Assemblies.Options
             VideoComposer temp = component as VideoComposer;
 
             configuration.Playlist.DeepCopyTo((temp.Configuration as VideoConfiguration).Playlist);
+            (temp.Configuration as VideoConfiguration).Aspect = this.configuration.Aspect;
         }
 
         private void UpdateConfig()
@@ -381,5 +384,82 @@ namespace Assemblies.Options
         {
             RemoveListBoxPlaylistItems();
         }
+
+        #region Aspect
+
+        private void radioButtonFill_CheckedChanged(object sender, EventArgs e)
+        {
+            if((sender as RadioButton).Checked) SetAspectMode(FileVideoPlayer.AspectMode.Fill);
+        }
+
+        private void radioButtonFit_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as RadioButton).Checked) SetAspectMode(FileVideoPlayer.AspectMode.Fit);
+        }
+
+        private void radioButtonStretch_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as RadioButton).Checked) SetAspectMode(FileVideoPlayer.AspectMode.Stretch);
+        }
+
+        private void radioButtonCenter_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as RadioButton).Checked) SetAspectMode(FileVideoPlayer.AspectMode.Center);
+        }
+
+        private void pictureBoxFill_Click(object sender, EventArgs e)
+        {
+            radioButtonFill.PerformClick();
+        }
+
+        private void pictureBoxFit_Click(object sender, EventArgs e)
+        {
+            radioButtonFit.PerformClick();
+        }
+
+        private void pictureBoxStretch_Click(object sender, EventArgs e)
+        {
+            radioButtonStretch.PerformClick();
+        }
+
+        private void pictureBoxCenter_Click(object sender, EventArgs e)
+        {
+            radioButtonCenter.PerformClick();
+        }
+
+
+        /// <summary>
+        /// Sets the aspect mode in the configuration
+        /// </summary>
+        /// <param name="mode"></param>
+        private void SetAspectMode(FileVideoPlayer.AspectMode mode)
+        {
+            this.configuration.Aspect = mode;
+        }
+        /// <summary>
+        /// Updates the aspect mode in the GUI from the configuration
+        /// </summary>
+        private void UpdateAspectMode()
+        {
+            switch (this.configuration.Aspect)
+            {
+                case FileVideoPlayer.AspectMode.Center:
+                    radioButtonCenter.Checked = true;
+                    break;
+                case FileVideoPlayer.AspectMode.Fill:
+                    radioButtonFill.Checked = true;
+                    break;
+                case FileVideoPlayer.AspectMode.Fit:
+                    radioButtonFit.Checked = true;
+                    break;
+                case FileVideoPlayer.AspectMode.Stretch:
+                    radioButtonStretch.Checked = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion
     }
 }

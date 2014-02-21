@@ -39,22 +39,37 @@
             this.buttonEnviar = new System.Windows.Forms.Button();
             this.groupBoxLocal = new System.Windows.Forms.GroupBox();
             this.groupBoxRemoteFiles = new System.Windows.Forms.GroupBox();
-            this.buttonRefreshRemoteFiles = new System.Windows.Forms.Button();
             this.listViewRemoteFiles = new System.Windows.Forms.ListView();
+            this.buttonRefreshRemoteFiles = new System.Windows.Forms.Button();
             this.groupBoxPlaylist = new System.Windows.Forms.GroupBox();
-            this.buttonMoveItemsUp = new System.Windows.Forms.Button();
-            this.buttonMoveItemsDown = new System.Windows.Forms.Button();
-            this.buttonRemoveItems = new System.Windows.Forms.Button();
             this.listViewVideoPlaylist = new System.Windows.Forms.ListView();
+            this.buttonRemoveItems = new System.Windows.Forms.Button();
+            this.buttonMoveItemsDown = new System.Windows.Forms.Button();
+            this.buttonMoveItemsUp = new System.Windows.Forms.Button();
             this.groupBoxRemote = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageFiles = new System.Windows.Forms.TabPage();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.groupBoxAspect = new System.Windows.Forms.GroupBox();
+            this.radioButtonCenter = new System.Windows.Forms.RadioButton();
+            this.radioButtonStretch = new System.Windows.Forms.RadioButton();
+            this.radioButtonFit = new System.Windows.Forms.RadioButton();
+            this.radioButtonFill = new System.Windows.Forms.RadioButton();
+            this.pictureBoxFit = new System.Windows.Forms.PictureBox();
+            this.pictureBoxCenter = new System.Windows.Forms.PictureBox();
+            this.pictureBoxStretch = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFill = new System.Windows.Forms.PictureBox();
+            this.tabPageFiles = new System.Windows.Forms.TabPage();
             this.groupBoxLocal.SuspendLayout();
             this.groupBoxRemoteFiles.SuspendLayout();
             this.groupBoxPlaylist.SuspendLayout();
             this.groupBoxRemote.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPageGeneral.SuspendLayout();
+            this.groupBoxAspect.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCenter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStretch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFill)).BeginInit();
             this.tabPageFiles.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -165,17 +180,6 @@
             this.groupBoxRemoteFiles.TabStop = false;
             this.groupBoxRemoteFiles.Text = "Vídeos remotos";
             // 
-            // buttonRefreshRemoteFiles
-            // 
-            this.buttonRefreshRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRefreshRemoteFiles.Location = new System.Drawing.Point(188, 196);
-            this.buttonRefreshRemoteFiles.Name = "buttonRefreshRemoteFiles";
-            this.buttonRefreshRemoteFiles.Size = new System.Drawing.Size(75, 23);
-            this.buttonRefreshRemoteFiles.TabIndex = 1;
-            this.buttonRefreshRemoteFiles.Text = "Actualizar";
-            this.buttonRefreshRemoteFiles.UseVisualStyleBackColor = true;
-            this.buttonRefreshRemoteFiles.Click += new System.EventHandler(this.buttonRefreshRemoteFiles_Click);
-            // 
             // listViewRemoteFiles
             // 
             this.listViewRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -193,6 +197,17 @@
             this.listViewRemoteFiles.DoubleClick += new System.EventHandler(this.listViewRemoteFiles_DoubleClick);
             this.listViewRemoteFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listViewRemoteFiles_KeyDown);
             // 
+            // buttonRefreshRemoteFiles
+            // 
+            this.buttonRefreshRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRefreshRemoteFiles.Location = new System.Drawing.Point(188, 196);
+            this.buttonRefreshRemoteFiles.Name = "buttonRefreshRemoteFiles";
+            this.buttonRefreshRemoteFiles.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefreshRemoteFiles.TabIndex = 1;
+            this.buttonRefreshRemoteFiles.Text = "Actualizar";
+            this.buttonRefreshRemoteFiles.UseVisualStyleBackColor = true;
+            this.buttonRefreshRemoteFiles.Click += new System.EventHandler(this.buttonRefreshRemoteFiles_Click);
+            // 
             // groupBoxPlaylist
             // 
             this.groupBoxPlaylist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -208,39 +223,6 @@
             this.groupBoxPlaylist.TabStop = false;
             this.groupBoxPlaylist.Text = "Playlist";
             // 
-            // buttonMoveItemsUp
-            // 
-            this.buttonMoveItemsUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMoveItemsUp.Location = new System.Drawing.Point(247, 32);
-            this.buttonMoveItemsUp.Name = "buttonMoveItemsUp";
-            this.buttonMoveItemsUp.Size = new System.Drawing.Size(21, 36);
-            this.buttonMoveItemsUp.TabIndex = 14;
-            this.buttonMoveItemsUp.Text = "↑";
-            this.buttonMoveItemsUp.UseVisualStyleBackColor = true;
-            this.buttonMoveItemsUp.Click += new System.EventHandler(this.buttonMoveItemsUp_Click);
-            // 
-            // buttonMoveItemsDown
-            // 
-            this.buttonMoveItemsDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMoveItemsDown.Location = new System.Drawing.Point(247, 103);
-            this.buttonMoveItemsDown.Name = "buttonMoveItemsDown";
-            this.buttonMoveItemsDown.Size = new System.Drawing.Size(21, 36);
-            this.buttonMoveItemsDown.TabIndex = 15;
-            this.buttonMoveItemsDown.Text = "↓";
-            this.buttonMoveItemsDown.UseVisualStyleBackColor = true;
-            this.buttonMoveItemsDown.Click += new System.EventHandler(this.buttonMoveItemsDown_Click);
-            // 
-            // buttonRemoveItems
-            // 
-            this.buttonRemoveItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRemoveItems.Location = new System.Drawing.Point(247, 74);
-            this.buttonRemoveItems.Name = "buttonRemoveItems";
-            this.buttonRemoveItems.Size = new System.Drawing.Size(21, 23);
-            this.buttonRemoveItems.TabIndex = 16;
-            this.buttonRemoveItems.Text = "-";
-            this.buttonRemoveItems.UseVisualStyleBackColor = true;
-            this.buttonRemoveItems.Click += new System.EventHandler(this.buttonRemoveItems_Click);
-            // 
             // listViewVideoPlaylist
             // 
             this.listViewVideoPlaylist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -254,6 +236,39 @@
             this.listViewVideoPlaylist.TabIndex = 17;
             this.listViewVideoPlaylist.UseCompatibleStateImageBehavior = false;
             this.listViewVideoPlaylist.View = System.Windows.Forms.View.List;
+            // 
+            // buttonRemoveItems
+            // 
+            this.buttonRemoveItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRemoveItems.Location = new System.Drawing.Point(247, 74);
+            this.buttonRemoveItems.Name = "buttonRemoveItems";
+            this.buttonRemoveItems.Size = new System.Drawing.Size(21, 23);
+            this.buttonRemoveItems.TabIndex = 16;
+            this.buttonRemoveItems.Text = "-";
+            this.buttonRemoveItems.UseVisualStyleBackColor = true;
+            this.buttonRemoveItems.Click += new System.EventHandler(this.buttonRemoveItems_Click);
+            // 
+            // buttonMoveItemsDown
+            // 
+            this.buttonMoveItemsDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMoveItemsDown.Location = new System.Drawing.Point(247, 103);
+            this.buttonMoveItemsDown.Name = "buttonMoveItemsDown";
+            this.buttonMoveItemsDown.Size = new System.Drawing.Size(21, 36);
+            this.buttonMoveItemsDown.TabIndex = 15;
+            this.buttonMoveItemsDown.Text = "↓";
+            this.buttonMoveItemsDown.UseVisualStyleBackColor = true;
+            this.buttonMoveItemsDown.Click += new System.EventHandler(this.buttonMoveItemsDown_Click);
+            // 
+            // buttonMoveItemsUp
+            // 
+            this.buttonMoveItemsUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMoveItemsUp.Location = new System.Drawing.Point(247, 32);
+            this.buttonMoveItemsUp.Name = "buttonMoveItemsUp";
+            this.buttonMoveItemsUp.Size = new System.Drawing.Size(21, 36);
+            this.buttonMoveItemsUp.TabIndex = 14;
+            this.buttonMoveItemsUp.Text = "↑";
+            this.buttonMoveItemsUp.UseVisualStyleBackColor = true;
+            this.buttonMoveItemsUp.Click += new System.EventHandler(this.buttonMoveItemsUp_Click);
             // 
             // groupBoxRemote
             // 
@@ -281,6 +296,124 @@
             this.tabControl1.Size = new System.Drawing.Size(599, 500);
             this.tabControl1.TabIndex = 4;
             // 
+            // tabPageGeneral
+            // 
+            this.tabPageGeneral.Controls.Add(this.groupBoxAspect);
+            this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGeneral.Name = "tabPageGeneral";
+            this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGeneral.Size = new System.Drawing.Size(591, 474);
+            this.tabPageGeneral.TabIndex = 1;
+            this.tabPageGeneral.Text = "Geral";
+            this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxAspect
+            // 
+            this.groupBoxAspect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxAspect.Controls.Add(this.radioButtonCenter);
+            this.groupBoxAspect.Controls.Add(this.radioButtonStretch);
+            this.groupBoxAspect.Controls.Add(this.radioButtonFit);
+            this.groupBoxAspect.Controls.Add(this.radioButtonFill);
+            this.groupBoxAspect.Controls.Add(this.pictureBoxFit);
+            this.groupBoxAspect.Controls.Add(this.pictureBoxCenter);
+            this.groupBoxAspect.Controls.Add(this.pictureBoxStretch);
+            this.groupBoxAspect.Controls.Add(this.pictureBoxFill);
+            this.groupBoxAspect.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxAspect.Name = "groupBoxAspect";
+            this.groupBoxAspect.Size = new System.Drawing.Size(579, 209);
+            this.groupBoxAspect.TabIndex = 0;
+            this.groupBoxAspect.TabStop = false;
+            this.groupBoxAspect.Text = "Aspecto";
+            // 
+            // radioButtonCenter
+            // 
+            this.radioButtonCenter.AutoSize = true;
+            this.radioButtonCenter.Location = new System.Drawing.Point(74, 169);
+            this.radioButtonCenter.Name = "radioButtonCenter";
+            this.radioButtonCenter.Size = new System.Drawing.Size(59, 17);
+            this.radioButtonCenter.TabIndex = 7;
+            this.radioButtonCenter.TabStop = true;
+            this.radioButtonCenter.Text = "Centrar";
+            this.radioButtonCenter.UseVisualStyleBackColor = true;
+            this.radioButtonCenter.CheckedChanged += new System.EventHandler(this.radioButtonCenter_CheckedChanged);
+            // 
+            // radioButtonStretch
+            // 
+            this.radioButtonStretch.AutoSize = true;
+            this.radioButtonStretch.Location = new System.Drawing.Point(74, 122);
+            this.radioButtonStretch.Name = "radioButtonStretch";
+            this.radioButtonStretch.Size = new System.Drawing.Size(57, 17);
+            this.radioButtonStretch.TabIndex = 6;
+            this.radioButtonStretch.TabStop = true;
+            this.radioButtonStretch.Text = "Esticar";
+            this.radioButtonStretch.UseVisualStyleBackColor = true;
+            this.radioButtonStretch.CheckedChanged += new System.EventHandler(this.radioButtonStretch_CheckedChanged);
+            // 
+            // radioButtonFit
+            // 
+            this.radioButtonFit.AutoSize = true;
+            this.radioButtonFit.Location = new System.Drawing.Point(74, 75);
+            this.radioButtonFit.Name = "radioButtonFit";
+            this.radioButtonFit.Size = new System.Drawing.Size(57, 17);
+            this.radioButtonFit.TabIndex = 5;
+            this.radioButtonFit.TabStop = true;
+            this.radioButtonFit.Text = "Ajustar";
+            this.radioButtonFit.UseVisualStyleBackColor = true;
+            this.radioButtonFit.CheckedChanged += new System.EventHandler(this.radioButtonFit_CheckedChanged);
+            // 
+            // radioButtonFill
+            // 
+            this.radioButtonFill.AutoSize = true;
+            this.radioButtonFill.Location = new System.Drawing.Point(74, 28);
+            this.radioButtonFill.Name = "radioButtonFill";
+            this.radioButtonFill.Size = new System.Drawing.Size(74, 17);
+            this.radioButtonFill.TabIndex = 4;
+            this.radioButtonFill.TabStop = true;
+            this.radioButtonFill.Text = "Preencher";
+            this.radioButtonFill.UseVisualStyleBackColor = true;
+            this.radioButtonFill.CheckedChanged += new System.EventHandler(this.radioButtonFill_CheckedChanged);
+            // 
+            // pictureBoxFit
+            // 
+            this.pictureBoxFit.Image = global::Assemblies.Properties.Resources.Fit;
+            this.pictureBoxFit.Location = new System.Drawing.Point(10, 63);
+            this.pictureBoxFit.Name = "pictureBoxFit";
+            this.pictureBoxFit.Size = new System.Drawing.Size(54, 41);
+            this.pictureBoxFit.TabIndex = 3;
+            this.pictureBoxFit.TabStop = false;
+            this.pictureBoxFit.Click += new System.EventHandler(this.pictureBoxFit_Click);
+            // 
+            // pictureBoxCenter
+            // 
+            this.pictureBoxCenter.Image = global::Assemblies.Properties.Resources.Center;
+            this.pictureBoxCenter.Location = new System.Drawing.Point(10, 157);
+            this.pictureBoxCenter.Name = "pictureBoxCenter";
+            this.pictureBoxCenter.Size = new System.Drawing.Size(54, 41);
+            this.pictureBoxCenter.TabIndex = 2;
+            this.pictureBoxCenter.TabStop = false;
+            this.pictureBoxCenter.Click += new System.EventHandler(this.pictureBoxCenter_Click);
+            // 
+            // pictureBoxStretch
+            // 
+            this.pictureBoxStretch.Image = global::Assemblies.Properties.Resources.Stretch;
+            this.pictureBoxStretch.Location = new System.Drawing.Point(10, 110);
+            this.pictureBoxStretch.Name = "pictureBoxStretch";
+            this.pictureBoxStretch.Size = new System.Drawing.Size(54, 41);
+            this.pictureBoxStretch.TabIndex = 1;
+            this.pictureBoxStretch.TabStop = false;
+            this.pictureBoxStretch.Click += new System.EventHandler(this.pictureBoxStretch_Click);
+            // 
+            // pictureBoxFill
+            // 
+            this.pictureBoxFill.Image = global::Assemblies.Properties.Resources.Fill;
+            this.pictureBoxFill.Location = new System.Drawing.Point(6, 16);
+            this.pictureBoxFill.Name = "pictureBoxFill";
+            this.pictureBoxFill.Size = new System.Drawing.Size(62, 41);
+            this.pictureBoxFill.TabIndex = 0;
+            this.pictureBoxFill.TabStop = false;
+            this.pictureBoxFill.Click += new System.EventHandler(this.pictureBoxFill_Click);
+            // 
             // tabPageFiles
             // 
             this.tabPageFiles.Controls.Add(this.groupBoxLocal);
@@ -292,16 +425,6 @@
             this.tabPageFiles.TabIndex = 0;
             this.tabPageFiles.Text = "Ficheiros";
             this.tabPageFiles.UseVisualStyleBackColor = true;
-            // 
-            // tabPageGeneral
-            // 
-            this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
-            this.tabPageGeneral.Name = "tabPageGeneral";
-            this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(591, 474);
-            this.tabPageGeneral.TabIndex = 1;
-            this.tabPageGeneral.Text = "Geral";
-            this.tabPageGeneral.UseVisualStyleBackColor = true;
             // 
             // VideoOptions
             // 
@@ -321,6 +444,13 @@
             this.groupBoxPlaylist.ResumeLayout(false);
             this.groupBoxRemote.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.tabPageGeneral.ResumeLayout(false);
+            this.groupBoxAspect.ResumeLayout(false);
+            this.groupBoxAspect.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCenter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStretch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFill)).EndInit();
             this.tabPageFiles.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -348,5 +478,14 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageGeneral;
         private System.Windows.Forms.TabPage tabPageFiles;
+        private System.Windows.Forms.GroupBox groupBoxAspect;
+        private System.Windows.Forms.RadioButton radioButtonCenter;
+        private System.Windows.Forms.RadioButton radioButtonStretch;
+        private System.Windows.Forms.RadioButton radioButtonFit;
+        private System.Windows.Forms.RadioButton radioButtonFill;
+        private System.Windows.Forms.PictureBox pictureBoxFit;
+        private System.Windows.Forms.PictureBox pictureBoxCenter;
+        private System.Windows.Forms.PictureBox pictureBoxStretch;
+        private System.Windows.Forms.PictureBox pictureBoxFill;
     }
 }

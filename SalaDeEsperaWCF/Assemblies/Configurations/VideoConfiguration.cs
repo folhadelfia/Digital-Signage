@@ -16,6 +16,7 @@ namespace Assemblies.Configurations
         public VideoConfiguration()
         {
             this.Playlist = new List<string>();
+            this.Aspect = VideoPlayer.FileVideoPlayer.AspectMode.Fit;
         }
 
     }

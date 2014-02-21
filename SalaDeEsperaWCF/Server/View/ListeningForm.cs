@@ -42,7 +42,8 @@ namespace Server.View
     public partial class ListeningForm : Form
     {
         private const string OBTAININGADDRESSES_TEXTBOX_TEXT = "A obter...",
-                             UNAVAILABE_TEXTBOX_TEXT = "Indisponível. Verifique a ligação à Internet e clique em Actualizar.";
+                             UNAVAILABE_TEXTBOX_TEXT = "Indisponível. Verifique a ligação à Internet e clique em Actualizar.",
+                             HOSTNAME_RESOLVE_FAILURE = "<none>";
 
         private string VideoFolderPath { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "DigitalSignage"); } }
 
@@ -318,8 +319,10 @@ namespace Server.View
 
                 if (string.IsNullOrWhiteSpace(tempHostname))
                 {
-                    using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica))
-                        tempHostname = db.ClinicaDados.Single().DNS;
+                    //using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica))
+                    //    tempHostname = db.ClinicaDados.Single().DNS;
+
+                    tempHostname = HOSTNAME_RESOLVE_FAILURE;
                 }
 
                 publicHostname = tempHostname;
