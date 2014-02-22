@@ -49,6 +49,7 @@
             this.groupBoxRemote = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxReplay = new System.Windows.Forms.CheckBox();
             this.groupBoxAspect = new System.Windows.Forms.GroupBox();
             this.radioButtonCenter = new System.Windows.Forms.RadioButton();
             this.radioButtonStretch = new System.Windows.Forms.RadioButton();
@@ -59,7 +60,9 @@
             this.pictureBoxStretch = new System.Windows.Forms.PictureBox();
             this.pictureBoxFill = new System.Windows.Forms.PictureBox();
             this.tabPageFiles = new System.Windows.Forms.TabPage();
-            this.checkBoxReplay = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listViewRemoteFilesTab2 = new System.Windows.Forms.ListView();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBoxLocal.SuspendLayout();
             this.groupBoxRemoteFiles.SuspendLayout();
             this.groupBoxPlaylist.SuspendLayout();
@@ -72,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStretch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFill)).BeginInit();
             this.tabPageFiles.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageListVideo
@@ -169,14 +173,13 @@
             // 
             // groupBoxRemoteFiles
             // 
-            this.groupBoxRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBoxRemoteFiles.Controls.Add(this.listViewRemoteFiles);
             this.groupBoxRemoteFiles.Controls.Add(this.buttonRefreshRemoteFiles);
-            this.groupBoxRemoteFiles.Location = new System.Drawing.Point(6, 225);
+            this.groupBoxRemoteFiles.Location = new System.Drawing.Point(10, 19);
             this.groupBoxRemoteFiles.Name = "groupBoxRemoteFiles";
-            this.groupBoxRemoteFiles.Size = new System.Drawing.Size(274, 225);
+            this.groupBoxRemoteFiles.Size = new System.Drawing.Size(261, 222);
             this.groupBoxRemoteFiles.TabIndex = 13;
             this.groupBoxRemoteFiles.TabStop = false;
             this.groupBoxRemoteFiles.Text = "Vídeos remotos";
@@ -189,7 +192,7 @@
             this.listViewRemoteFiles.LargeImageList = this.imageListVideo;
             this.listViewRemoteFiles.Location = new System.Drawing.Point(6, 19);
             this.listViewRemoteFiles.Name = "listViewRemoteFiles";
-            this.listViewRemoteFiles.Size = new System.Drawing.Size(257, 171);
+            this.listViewRemoteFiles.Size = new System.Drawing.Size(244, 168);
             this.listViewRemoteFiles.SmallImageList = this.imageListVideo;
             this.listViewRemoteFiles.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewRemoteFiles.TabIndex = 2;
@@ -201,7 +204,7 @@
             // buttonRefreshRemoteFiles
             // 
             this.buttonRefreshRemoteFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRefreshRemoteFiles.Location = new System.Drawing.Point(188, 196);
+            this.buttonRefreshRemoteFiles.Location = new System.Drawing.Point(175, 193);
             this.buttonRefreshRemoteFiles.Name = "buttonRefreshRemoteFiles";
             this.buttonRefreshRemoteFiles.Size = new System.Drawing.Size(75, 23);
             this.buttonRefreshRemoteFiles.TabIndex = 1;
@@ -211,15 +214,17 @@
             // 
             // groupBoxPlaylist
             // 
-            this.groupBoxPlaylist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBoxPlaylist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxPlaylist.Controls.Add(this.checkBoxReplay);
             this.groupBoxPlaylist.Controls.Add(this.listViewVideoPlaylist);
             this.groupBoxPlaylist.Controls.Add(this.buttonRemoveItems);
             this.groupBoxPlaylist.Controls.Add(this.buttonMoveItemsDown);
             this.groupBoxPlaylist.Controls.Add(this.buttonMoveItemsUp);
-            this.groupBoxPlaylist.Location = new System.Drawing.Point(6, 24);
+            this.groupBoxPlaylist.Location = new System.Drawing.Point(277, 19);
             this.groupBoxPlaylist.Name = "groupBoxPlaylist";
-            this.groupBoxPlaylist.Size = new System.Drawing.Size(274, 173);
+            this.groupBoxPlaylist.Size = new System.Drawing.Size(299, 222);
             this.groupBoxPlaylist.TabIndex = 14;
             this.groupBoxPlaylist.TabStop = false;
             this.groupBoxPlaylist.Text = "Playlist";
@@ -232,7 +237,7 @@
             this.listViewVideoPlaylist.LargeImageList = this.imageListVideo;
             this.listViewVideoPlaylist.Location = new System.Drawing.Point(9, 19);
             this.listViewVideoPlaylist.Name = "listViewVideoPlaylist";
-            this.listViewVideoPlaylist.Size = new System.Drawing.Size(232, 148);
+            this.listViewVideoPlaylist.Size = new System.Drawing.Size(257, 168);
             this.listViewVideoPlaylist.SmallImageList = this.imageListVideo;
             this.listViewVideoPlaylist.TabIndex = 17;
             this.listViewVideoPlaylist.UseCompatibleStateImageBehavior = false;
@@ -241,7 +246,7 @@
             // buttonRemoveItems
             // 
             this.buttonRemoveItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRemoveItems.Location = new System.Drawing.Point(247, 74);
+            this.buttonRemoveItems.Location = new System.Drawing.Point(272, 61);
             this.buttonRemoveItems.Name = "buttonRemoveItems";
             this.buttonRemoveItems.Size = new System.Drawing.Size(21, 23);
             this.buttonRemoveItems.TabIndex = 16;
@@ -252,7 +257,7 @@
             // buttonMoveItemsDown
             // 
             this.buttonMoveItemsDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMoveItemsDown.Location = new System.Drawing.Point(247, 103);
+            this.buttonMoveItemsDown.Location = new System.Drawing.Point(272, 90);
             this.buttonMoveItemsDown.Name = "buttonMoveItemsDown";
             this.buttonMoveItemsDown.Size = new System.Drawing.Size(21, 36);
             this.buttonMoveItemsDown.TabIndex = 15;
@@ -263,7 +268,7 @@
             // buttonMoveItemsUp
             // 
             this.buttonMoveItemsUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMoveItemsUp.Location = new System.Drawing.Point(247, 32);
+            this.buttonMoveItemsUp.Location = new System.Drawing.Point(272, 19);
             this.buttonMoveItemsUp.Name = "buttonMoveItemsUp";
             this.buttonMoveItemsUp.Size = new System.Drawing.Size(21, 36);
             this.buttonMoveItemsUp.TabIndex = 14;
@@ -277,9 +282,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxRemote.Controls.Add(this.groupBoxPlaylist);
             this.groupBoxRemote.Controls.Add(this.groupBoxRemoteFiles);
-            this.groupBoxRemote.Location = new System.Drawing.Point(299, 6);
+            this.groupBoxRemote.Location = new System.Drawing.Point(6, 221);
             this.groupBoxRemote.Name = "groupBoxRemote";
-            this.groupBoxRemote.Size = new System.Drawing.Size(286, 456);
+            this.groupBoxRemote.Size = new System.Drawing.Size(582, 247);
             this.groupBoxRemote.TabIndex = 1;
             this.groupBoxRemote.TabStop = false;
             this.groupBoxRemote.Text = "Remoto";
@@ -299,7 +304,7 @@
             // 
             // tabPageGeneral
             // 
-            this.tabPageGeneral.Controls.Add(this.checkBoxReplay);
+            this.tabPageGeneral.Controls.Add(this.groupBoxRemote);
             this.tabPageGeneral.Controls.Add(this.groupBoxAspect);
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
@@ -308,6 +313,18 @@
             this.tabPageGeneral.TabIndex = 1;
             this.tabPageGeneral.Text = "Geral";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxReplay
+            // 
+            this.checkBoxReplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxReplay.AutoSize = true;
+            this.checkBoxReplay.Location = new System.Drawing.Point(9, 193);
+            this.checkBoxReplay.Name = "checkBoxReplay";
+            this.checkBoxReplay.Size = new System.Drawing.Size(94, 17);
+            this.checkBoxReplay.TabIndex = 1;
+            this.checkBoxReplay.Text = "Repetir playlist";
+            this.checkBoxReplay.UseVisualStyleBackColor = true;
+            this.checkBoxReplay.CheckedChanged += new System.EventHandler(this.checkBoxReplay_CheckedChanged);
             // 
             // groupBoxAspect
             // 
@@ -418,8 +435,8 @@
             // 
             // tabPageFiles
             // 
+            this.tabPageFiles.Controls.Add(this.groupBox1);
             this.tabPageFiles.Controls.Add(this.groupBoxLocal);
-            this.tabPageFiles.Controls.Add(this.groupBoxRemote);
             this.tabPageFiles.Location = new System.Drawing.Point(4, 22);
             this.tabPageFiles.Name = "tabPageFiles";
             this.tabPageFiles.Padding = new System.Windows.Forms.Padding(3);
@@ -428,16 +445,44 @@
             this.tabPageFiles.Text = "Ficheiros";
             this.tabPageFiles.UseVisualStyleBackColor = true;
             // 
-            // checkBoxReplay
+            // groupBox1
             // 
-            this.checkBoxReplay.AutoSize = true;
-            this.checkBoxReplay.Location = new System.Drawing.Point(60, 221);
-            this.checkBoxReplay.Name = "checkBoxReplay";
-            this.checkBoxReplay.Size = new System.Drawing.Size(94, 17);
-            this.checkBoxReplay.TabIndex = 1;
-            this.checkBoxReplay.Text = "Repetir playlist";
-            this.checkBoxReplay.UseVisualStyleBackColor = true;
-            this.checkBoxReplay.CheckedChanged += new System.EventHandler(this.checkBoxReplay_CheckedChanged);
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.listViewRemoteFilesTab2);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Location = new System.Drawing.Point(299, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(286, 462);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Vídeos remotos";
+            // 
+            // listViewRemoteFilesTab2
+            // 
+            this.listViewRemoteFilesTab2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewRemoteFilesTab2.LargeImageList = this.imageListVideo;
+            this.listViewRemoteFilesTab2.Location = new System.Drawing.Point(6, 19);
+            this.listViewRemoteFilesTab2.Name = "listViewRemoteFilesTab2";
+            this.listViewRemoteFilesTab2.Size = new System.Drawing.Size(269, 408);
+            this.listViewRemoteFilesTab2.SmallImageList = this.imageListVideo;
+            this.listViewRemoteFilesTab2.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.listViewRemoteFilesTab2.TabIndex = 2;
+            this.listViewRemoteFilesTab2.UseCompatibleStateImageBehavior = false;
+            this.listViewRemoteFilesTab2.View = System.Windows.Forms.View.List;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(200, 433);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Actualizar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // VideoOptions
             // 
@@ -455,10 +500,10 @@
             this.groupBoxLocal.PerformLayout();
             this.groupBoxRemoteFiles.ResumeLayout(false);
             this.groupBoxPlaylist.ResumeLayout(false);
+            this.groupBoxPlaylist.PerformLayout();
             this.groupBoxRemote.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneral.ResumeLayout(false);
-            this.tabPageGeneral.PerformLayout();
             this.groupBoxAspect.ResumeLayout(false);
             this.groupBoxAspect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFit)).EndInit();
@@ -466,6 +511,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStretch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFill)).EndInit();
             this.tabPageFiles.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -502,5 +548,8 @@
         private System.Windows.Forms.PictureBox pictureBoxStretch;
         private System.Windows.Forms.PictureBox pictureBoxFill;
         private System.Windows.Forms.CheckBox checkBoxReplay;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListView listViewRemoteFilesTab2;
+        private System.Windows.Forms.Button button1;
     }
 }

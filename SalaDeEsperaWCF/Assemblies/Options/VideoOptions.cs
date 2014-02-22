@@ -299,12 +299,14 @@ namespace Assemblies.Options
                 var remoteFiles = connection.GetRemoteVideoFileNames();
 
                 listViewRemoteFiles.Items.Clear();
+                listViewRemoteFilesTab2.Items.Clear();
 
                 foreach (var file in remoteFiles)
                 {
-                    string fileName = file.Substring(file.LastIndexOf("\\") + 1);
+                    string fileName = MyToolkit.Files.FileNameFromPath(file);
 
                     listViewRemoteFiles.Items.Add(new ListViewItem() { Text = fileName, Tag = file, ImageKey = "Movie" });
+                    listViewRemoteFilesTab2.Items.Add(new ListViewItem() { Text = fileName, Tag = file, ImageKey = "Movie" });
                 }
             }
         }
@@ -468,6 +470,11 @@ namespace Assemblies.Options
         private void checkBoxReplay_CheckedChanged(object sender, EventArgs e)
         {
             this.configuration.Replay = (sender as CheckBox).Checked;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadFiles();
         }
     }
 }

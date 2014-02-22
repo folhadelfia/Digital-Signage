@@ -20,6 +20,7 @@ namespace Assemblies.PlayerServiceImplementation
         public static event EventHandler<FileBytesReceivedEventArgs> FileBytesReceived;
         public static event EventHandler<FileReceivedEventArgs> FileReceived;
         public static event EventHandler<FileStreamProgressReceivedEventArgs> FileStreamProgressReceived;
+        public static event EventHandler<string> FileStreamProgressCancelled;
 
         #endregion
 
@@ -50,6 +51,8 @@ namespace Assemblies.PlayerServiceImplementation
         {
             if (FileStreamProgressReceived != null) FileStreamProgressReceived(this, new FileStreamProgressReceivedEventArgs(request));
         }
+
+        //Adicionar um método para receber uma informaçao de cancelamento da transferencia, com o caminho do ficheiro para ser apagado
 
         #endregion
 

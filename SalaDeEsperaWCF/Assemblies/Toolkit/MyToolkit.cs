@@ -460,7 +460,7 @@ namespace Assemblies.Toolkit
                 {
                     var lio = path.LastIndexOf("\\");
 
-                    return path.Substring(lio, path.Length - lio);
+                    return path.Substring(lio + 1, path.Length - lio);
                 }
                 catch (Exception)
                 {
