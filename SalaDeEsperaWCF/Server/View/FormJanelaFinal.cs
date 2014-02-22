@@ -91,7 +91,6 @@ namespace Server.View
         /// </summary>
         Control menuSource = null;
 
-        private Timer mouseHideTimer = new Timer();
 
         /// <summary>
         /// Contém o tamanho e a localização que foi dada quando a janela foi aberta. É preciso para poder reposicionar a janela correctamente no monitor dado pelo PlayerWindowInformation
@@ -119,45 +118,52 @@ namespace Server.View
         }
 
         private void FormJanelaFinal_Load(object sender, EventArgs e)
-        {
-            mouseHideTimer.Interval = 5000;
+        { 
+            #region Mouse hide
+            //mouseHideTimer.Interval = 5000;
 
-            mouseHideTimer.Tick += mouseHideTimer_Tick;
-            this.MouseMove += General_MouseMove;
+            //mouseHideTimer.Tick += mouseHideTimer_Tick;
+            //this.MouseMove += General_MouseMove;
 
-            mouseHideTimer.Start();
+            //mouseHideTimer.Start();
+            #endregion
         }
 
-        void General_MouseMove(object sender, MouseEventArgs e)
-        {
-            Point lkmp = lastMousePos,
-                  cp = Cursor.Position;
+        #region Mouse hide
 
-            lkmp.Offset(0,0);
-            cp.Offset(0,0);
+        //private Timer mouseHideTimer = new Timer();
 
-            if (mouseHidden && lkmp != cp)
-            {
-                Cursor.Show();
-                mouseHidden = false;
-            }
+        //void General_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    Point lkmp = lastMousePos,
+        //          cp = Cursor.Position;
 
-            mouseHideTimer.Stop();
-            mouseHideTimer.Start();
-        }
+        //    lkmp.Offset(0,0);
+        //    cp.Offset(0,0);
+
+        //    if (mouseHidden && lkmp != cp)
+        //    {
+        //        Cursor.Show();
+        //        mouseHidden = false;
+        //    }
+
+        //    mouseHideTimer.Stop();
+        //    mouseHideTimer.Start();
+        //}
 
 
-        bool mouseHidden = false;
-        Point lastMousePos = new Point();
-        void mouseHideTimer_Tick(object sender, EventArgs e)
-        {
-            //if (!mouseHidden)
-            {
-                Cursor.Hide();
-                lastMousePos = Cursor.Position;
-                mouseHidden = true;
-            }
-        }
+        //bool mouseHidden = false;
+        //Point lastMousePos = new Point();
+        //void mouseHideTimer_Tick(object sender, EventArgs e)
+        //{
+        //    //if (!mouseHidden)
+        //    {
+        //        Cursor.Hide();
+        //        lastMousePos = Cursor.Position;
+        //        mouseHidden = true;
+        //    }
+        //}
+        #endregion
 
         private void reposicionarJanelaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -573,7 +579,7 @@ namespace Server.View
 
                 this.ResumeLayout(true);
 
-                this.TopMost = false;
+                this.TopMost = true;
                 this.PreventSleep();
 
                 this.Show();
@@ -614,7 +620,7 @@ namespace Server.View
 
                     this.Controls.Add(markee);
 
-                    markee.MouseMove += General_MouseMove;
+                    //markee.MouseMove += General_MouseMove;
 
                     markee.Run();
 
@@ -660,7 +666,7 @@ namespace Server.View
 
                     tvScreen.ContextMenuStrip = contextMSTV;
 
-                    tvScreen.MouseMove += General_MouseMove;
+                    //tvScreen.MouseMove += General_MouseMove;
 
                     this.Controls.Add(tvScreen);
 
