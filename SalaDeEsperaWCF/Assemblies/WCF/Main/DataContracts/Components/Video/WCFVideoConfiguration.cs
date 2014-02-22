@@ -13,6 +13,7 @@ namespace Assemblies.DataContracts
         private int id;
         private string[] playlist;
         WCFAspect aspect;
+        bool repeat;
 
         [DataMember]
         public int ID
@@ -33,6 +34,13 @@ namespace Assemblies.DataContracts
         {
             get { return aspect; }
             set { aspect = value; }
+        }
+
+        [DataMember]
+        public bool Replay
+        {
+            get { return repeat; }
+            set { repeat = value; }
         }
     }
 }

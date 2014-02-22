@@ -496,7 +496,7 @@
             this.Controls.Add(this.buttonOk);
             this.Name = "TVOptions";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "TVOptions";
+            this.Text = "Opções de TV";
             this.Load += new System.EventHandler(this.TVOptions_Load);
             this.groupBoxScan.ResumeLayout(false);
             this.groupBoxScan.PerformLayout();

@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackgroundOptions));
             this.groupBoxPreview = new System.Windows.Forms.GroupBox();
+            this.toolStripPreview = new System.Windows.Forms.ToolStrip();
+            this.toolStripComboBoxImageStyle = new System.Windows.Forms.ToolStripComboBox();
             this.panelBackground = new System.Windows.Forms.Panel();
             this.openFileDialogBackground = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxFiles = new System.Windows.Forms.GroupBox();
@@ -51,13 +53,12 @@
             this.folderBrowserDialogBackground = new System.Windows.Forms.FolderBrowserDialog();
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
-            this.toolStripPreview = new System.Windows.Forms.ToolStrip();
-            this.toolStripComboBoxImageStyle = new System.Windows.Forms.ToolStripComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBoxPreview.SuspendLayout();
+            this.toolStripPreview.SuspendLayout();
             this.groupBoxFiles.SuspendLayout();
             this.toolStripBackgrounds.SuspendLayout();
             this.contextMenuStripListViewBackgrounds.SuspendLayout();
-            this.toolStripPreview.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxPreview
@@ -73,6 +74,24 @@
             this.groupBoxPreview.TabIndex = 0;
             this.groupBoxPreview.TabStop = false;
             this.groupBoxPreview.Text = "Preview";
+            // 
+            // toolStripPreview
+            // 
+            this.toolStripPreview.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripPreview.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBoxImageStyle});
+            this.toolStripPreview.Location = new System.Drawing.Point(3, 16);
+            this.toolStripPreview.Name = "toolStripPreview";
+            this.toolStripPreview.Size = new System.Drawing.Size(470, 25);
+            this.toolStripPreview.TabIndex = 1;
+            this.toolStripPreview.Text = "toolStrip1";
+            // 
+            // toolStripComboBoxImageStyle
+            // 
+            this.toolStripComboBoxImageStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxImageStyle.Name = "toolStripComboBoxImageStyle";
+            this.toolStripComboBoxImageStyle.Size = new System.Drawing.Size(121, 25);
+            this.toolStripComboBoxImageStyle.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxImageStyle_SelectedIndexChanged);
             // 
             // panelBackground
             // 
@@ -266,23 +285,16 @@
             this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
             // 
-            // toolStripPreview
+            // label1
             // 
-            this.toolStripPreview.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStripPreview.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBoxImageStyle});
-            this.toolStripPreview.Location = new System.Drawing.Point(3, 16);
-            this.toolStripPreview.Name = "toolStripPreview";
-            this.toolStripPreview.Size = new System.Drawing.Size(470, 25);
-            this.toolStripPreview.TabIndex = 1;
-            this.toolStripPreview.Text = "toolStrip1";
-            // 
-            // toolStripComboBoxImageStyle
-            // 
-            this.toolStripComboBoxImageStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBoxImageStyle.Name = "toolStripComboBoxImageStyle";
-            this.toolStripComboBoxImageStyle.Size = new System.Drawing.Size(121, 25);
-            this.toolStripComboBoxImageStyle.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxImageStyle_SelectedIndexChanged);
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label1.Location = new System.Drawing.Point(270, 331);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(353, 26);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "ESCOLHER O ASPECTO DO FUNDO COMO NAS OPÇOES DE VIDEO.\r\nTIRAR MAIS UM SS PARA O MO" +
+    "SAICO";
             // 
             // BackgroundOptions
             // 
@@ -290,22 +302,24 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancelar;
             this.ClientSize = new System.Drawing.Size(800, 366);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.groupBoxFiles);
             this.Controls.Add(this.groupBoxPreview);
             this.Name = "BackgroundOptions";
-            this.Text = "BackgroundOptions";
+            this.Text = "Opções da imagem de fundo";
             this.groupBoxPreview.ResumeLayout(false);
             this.groupBoxPreview.PerformLayout();
+            this.toolStripPreview.ResumeLayout(false);
+            this.toolStripPreview.PerformLayout();
             this.groupBoxFiles.ResumeLayout(false);
             this.groupBoxFiles.PerformLayout();
             this.toolStripBackgrounds.ResumeLayout(false);
             this.toolStripBackgrounds.PerformLayout();
             this.contextMenuStripListViewBackgrounds.ResumeLayout(false);
-            this.toolStripPreview.ResumeLayout(false);
-            this.toolStripPreview.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -334,5 +348,6 @@
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.ToolStrip toolStripPreview;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxImageStyle;
+        private System.Windows.Forms.Label label1;
     }
 }

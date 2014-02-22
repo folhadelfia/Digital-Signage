@@ -11,5 +11,6 @@ namespace Assemblies.XMLSerialization.Components
         public int ID { get; set; }
         public string[] Playlist { get; set; }
         public XMLAspect Aspect { get; set; }
+        public bool Replay { get; set; }
     }
 }

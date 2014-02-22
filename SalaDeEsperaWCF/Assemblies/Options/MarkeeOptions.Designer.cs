@@ -37,6 +37,7 @@
             this.buttonMoveItemsUp = new System.Windows.Forms.Button();
             this.trackBarSpeed = new System.Windows.Forms.TrackBar();
             this.groupBoxProperties = new System.Windows.Forms.GroupBox();
+            this.checkBoxBorder = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarBackgroundTransparency = new Dotnetrix.Controls.TrackBar();
             this.buttonBackColor = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonPause = new System.Windows.Forms.Button();
-            this.checkBoxBorder = new System.Windows.Forms.CheckBox();
             this.groupBoxTextList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             this.groupBoxProperties.SuspendLayout();
@@ -174,6 +174,18 @@
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Propriedades de apresentação";
             // 
+            // checkBoxBorder
+            // 
+            this.checkBoxBorder.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.checkBoxBorder.AutoSize = true;
+            this.checkBoxBorder.Location = new System.Drawing.Point(160, 50);
+            this.checkBoxBorder.Name = "checkBoxBorder";
+            this.checkBoxBorder.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxBorder.TabIndex = 19;
+            this.checkBoxBorder.Text = "Limite";
+            this.checkBoxBorder.UseVisualStyleBackColor = true;
+            this.checkBoxBorder.CheckedChanged += new System.EventHandler(this.checkBoxBorder_CheckedChanged);
+            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -282,18 +294,6 @@
             this.buttonPause.UseVisualStyleBackColor = true;
             this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
             // 
-            // checkBoxBorder
-            // 
-            this.checkBoxBorder.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.checkBoxBorder.AutoSize = true;
-            this.checkBoxBorder.Location = new System.Drawing.Point(160, 50);
-            this.checkBoxBorder.Name = "checkBoxBorder";
-            this.checkBoxBorder.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxBorder.TabIndex = 19;
-            this.checkBoxBorder.Text = "Limite";
-            this.checkBoxBorder.UseVisualStyleBackColor = true;
-            this.checkBoxBorder.CheckedChanged += new System.EventHandler(this.checkBoxBorder_CheckedChanged);
-            // 
             // MarkeeOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,7 +312,7 @@
             this.MinimumSize = new System.Drawing.Size(394, 442);
             this.Name = "MarkeeOptions";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "FooterOptions";
+            this.Text = "Opções de rodapé";
             this.Load += new System.EventHandler(this.FooterOptions_Load);
             this.groupBoxTextList.ResumeLayout(false);
             this.groupBoxTextList.PerformLayout();

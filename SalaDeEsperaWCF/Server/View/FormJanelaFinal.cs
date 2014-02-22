@@ -699,7 +699,7 @@ namespace Server.View
                     player.Aspect = temp.Aspect;
 
                     this.Controls.Add(player);
-                    player.Playlist.Replay = true;
+                    player.Playlist.Replay = temp.Replay;
 
                     player.Run();
                 }

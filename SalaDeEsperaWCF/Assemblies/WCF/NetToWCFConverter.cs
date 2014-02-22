@@ -174,7 +174,8 @@ namespace Assemblies.DataContracts
                     Location = ToWCF(videoConfig.Location),
                     Resolution = ToWCF(videoConfig.Resolution),
                     Size = ToWCF(videoConfig.Size),
-                    Aspect = ToWCF(videoConfig.Aspect)
+                    Aspect = ToWCF(videoConfig.Aspect),
+                    Replay = videoConfig.Replay
                 };
             }
             else return null;
@@ -238,7 +239,8 @@ namespace Assemblies.DataContracts
                     Resolution = ToNET(videoConfig.Resolution),
                     Size = ToNET(videoConfig.Size),
                     FinalResolution = ToNET(videoConfig.FinalResolution), 
-                    Aspect = ToNET(videoConfig.Aspect)
+                    Aspect = ToNET(videoConfig.Aspect),
+                    Replay = videoConfig.Replay
 
                 };
             }

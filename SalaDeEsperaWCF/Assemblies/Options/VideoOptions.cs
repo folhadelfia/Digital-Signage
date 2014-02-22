@@ -368,6 +368,7 @@ namespace Assemblies.Options
 
             configuration.Playlist.DeepCopyTo((temp.Configuration as VideoConfiguration).Playlist);
             (temp.Configuration as VideoConfiguration).Aspect = this.configuration.Aspect;
+            (temp.Configuration as VideoConfiguration).Replay = this.configuration.Replay;
         }
 
         private void UpdateConfig()
@@ -378,6 +379,13 @@ namespace Assemblies.Options
             {
                 configuration.Playlist.Add(video);
             }
+
+            if (radioButtonCenter.Checked) this.configuration.Aspect = FileVideoPlayer.AspectMode.Center;
+            else if (radioButtonFill.Checked) this.configuration.Aspect = FileVideoPlayer.AspectMode.Fill;
+            else if (radioButtonFit.Checked) this.configuration.Aspect = FileVideoPlayer.AspectMode.Fit;
+            else if (radioButtonStretch.Checked) this.configuration.Aspect = FileVideoPlayer.AspectMode.Center;
+
+            this.configuration.Replay = checkBoxReplay.Checked;
         }
 
         private void buttonRemoveItems_Click(object sender, EventArgs e)
@@ -391,17 +399,14 @@ namespace Assemblies.Options
         {
             if((sender as RadioButton).Checked) SetAspectMode(FileVideoPlayer.AspectMode.Fill);
         }
-
         private void radioButtonFit_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as RadioButton).Checked) SetAspectMode(FileVideoPlayer.AspectMode.Fit);
         }
-
         private void radioButtonStretch_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as RadioButton).Checked) SetAspectMode(FileVideoPlayer.AspectMode.Stretch);
         }
-
         private void radioButtonCenter_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as RadioButton).Checked) SetAspectMode(FileVideoPlayer.AspectMode.Center);
@@ -411,17 +416,14 @@ namespace Assemblies.Options
         {
             radioButtonFill.PerformClick();
         }
-
         private void pictureBoxFit_Click(object sender, EventArgs e)
         {
             radioButtonFit.PerformClick();
         }
-
         private void pictureBoxStretch_Click(object sender, EventArgs e)
         {
             radioButtonStretch.PerformClick();
         }
-
         private void pictureBoxCenter_Click(object sender, EventArgs e)
         {
             radioButtonCenter.PerformClick();
@@ -461,5 +463,11 @@ namespace Assemblies.Options
         }
 
         #endregion
+
+
+        private void checkBoxReplay_CheckedChanged(object sender, EventArgs e)
+        {
+            this.configuration.Replay = (sender as CheckBox).Checked;
+        }
     }
 }

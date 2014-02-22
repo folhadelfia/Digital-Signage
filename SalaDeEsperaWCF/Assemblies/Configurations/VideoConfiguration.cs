@@ -10,6 +10,7 @@ namespace Assemblies.Configurations
     {
         public int ID { get; set; }
 
+        public bool Replay { get; set; }
         public List<string> Playlist { get; set; }
         public VideoPlayer.FileVideoPlayer.AspectMode Aspect { get; set; }
 
@@ -17,6 +18,7 @@ namespace Assemblies.Configurations
         {
             this.Playlist = new List<string>();
             this.Aspect = VideoPlayer.FileVideoPlayer.AspectMode.Fit;
+            this.Replay = true;
         }
 
     }

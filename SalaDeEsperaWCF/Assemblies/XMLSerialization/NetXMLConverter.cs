@@ -169,7 +169,8 @@ namespace Assemblies.XMLSerialization
                     Size = ToXML(videoConfig.Size),
                     ID = videoConfig.ID,
                     Aspect = ToXML(videoConfig.Aspect),
-                    Playlist = videoConfig.Playlist.ToArray()
+                    Playlist = videoConfig.Playlist.ToArray(),
+                    Replay = videoConfig.Replay
                 };
             }
             else return null;
@@ -225,7 +226,8 @@ namespace Assemblies.XMLSerialization
                     Size = ToNET(videoConfig.Size),
                     ID = videoConfig.ID,
                     Playlist = videoConfig.Playlist.ToList(),
-                    Aspect = ToNET(videoConfig.Aspect)
+                    Aspect = ToNET(videoConfig.Aspect),
+                    Replay = videoConfig.Replay
                 };
             }
             else return null;

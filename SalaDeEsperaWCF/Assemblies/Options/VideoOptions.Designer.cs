@@ -59,6 +59,7 @@
             this.pictureBoxStretch = new System.Windows.Forms.PictureBox();
             this.pictureBoxFill = new System.Windows.Forms.PictureBox();
             this.tabPageFiles = new System.Windows.Forms.TabPage();
+            this.checkBoxReplay = new System.Windows.Forms.CheckBox();
             this.groupBoxLocal.SuspendLayout();
             this.groupBoxRemoteFiles.SuspendLayout();
             this.groupBoxPlaylist.SuspendLayout();
@@ -298,6 +299,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.checkBoxReplay);
             this.tabPageGeneral.Controls.Add(this.groupBoxAspect);
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
@@ -426,6 +428,17 @@
             this.tabPageFiles.Text = "Ficheiros";
             this.tabPageFiles.UseVisualStyleBackColor = true;
             // 
+            // checkBoxReplay
+            // 
+            this.checkBoxReplay.AutoSize = true;
+            this.checkBoxReplay.Location = new System.Drawing.Point(60, 221);
+            this.checkBoxReplay.Name = "checkBoxReplay";
+            this.checkBoxReplay.Size = new System.Drawing.Size(94, 17);
+            this.checkBoxReplay.TabIndex = 1;
+            this.checkBoxReplay.Text = "Repetir playlist";
+            this.checkBoxReplay.UseVisualStyleBackColor = true;
+            this.checkBoxReplay.CheckedChanged += new System.EventHandler(this.checkBoxReplay_CheckedChanged);
+            // 
             // VideoOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,7 +449,7 @@
             this.Controls.Add(this.buttonCancel);
             this.MinimumSize = new System.Drawing.Size(639, 591);
             this.Name = "VideoOptions";
-            this.Text = "VideoOptions";
+            this.Text = "Opções de vídeo";
             this.Load += new System.EventHandler(this.VideoOptions_Load);
             this.groupBoxLocal.ResumeLayout(false);
             this.groupBoxLocal.PerformLayout();
@@ -445,6 +458,7 @@
             this.groupBoxRemote.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneral.ResumeLayout(false);
+            this.tabPageGeneral.PerformLayout();
             this.groupBoxAspect.ResumeLayout(false);
             this.groupBoxAspect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFit)).EndInit();
@@ -487,5 +501,6 @@
         private System.Windows.Forms.PictureBox pictureBoxCenter;
         private System.Windows.Forms.PictureBox pictureBoxStretch;
         private System.Windows.Forms.PictureBox pictureBoxFill;
+        private System.Windows.Forms.CheckBox checkBoxReplay;
     }
 }

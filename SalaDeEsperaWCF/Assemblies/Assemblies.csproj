@@ -221,7 +221,7 @@
     <Compile Include="WCF\Main\DataContracts\Drawing\WCFDrawing.cs" />
     <Compile Include="WCF\Main\DataContracts\Main Window\WCFPlayerWindowInformation.cs" />
     <Compile Include="WCF\Main\DataContracts\Main Window\WCFScreenInformation.cs" />
-    <Compile Include="WCF\Main\DataContracts\NetToWCFConverter.cs" />
+    <Compile Include="WCF\NetToWCFConverter.cs" />
     <Compile Include="Factories\ComponentCreators.cs" />
     <Compile Include="Factories\IComponentCreator.cs" />
     <Compile Include="Options\MarkeeOptions.cs">
