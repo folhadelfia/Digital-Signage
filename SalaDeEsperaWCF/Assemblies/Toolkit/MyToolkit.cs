@@ -183,7 +183,7 @@ namespace Assemblies.Toolkit
             {
                 foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
                 {
-                    if (nic.NetworkInterfaceType != NetworkInterfaceType.Ethernet) continue;
+                    if (nic.NetworkInterfaceType != NetworkInterfaceType.Ethernet && nic.NetworkInterfaceType != NetworkInterfaceType.Wireless80211) continue;
                     if (nic.OperationalStatus == OperationalStatus.Up)
                     {
                         return nic.GetPhysicalAddress();
@@ -460,7 +460,7 @@ namespace Assemblies.Toolkit
                 {
                     var lio = path.LastIndexOf("\\");
 
-                    return path.Substring(lio + 1, path.Length - lio);
+                    return path.Substring(lio + 1, path.Length - lio - 1);
                 }
                 catch (Exception)
                 {
