@@ -53,3 +53,6 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Debug\V
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\bin\Debug\VideoPlayerDShowLib.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug\Server.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Server\obj\Debug\Server.pdb
+C:\Users\Cláudio\Documents\Git\SalaDeEsperaWCF\Server\bin\Debug\Server.exe.config
+C:\Users\Cláudio\Documents\Git\SalaDeEsperaWCF\Server\obj\Debug\Server.exe
+C:\Users\Cláudio\Documents\Git\SalaDeEsperaWCF\Server\obj\Debug\Server.pdb

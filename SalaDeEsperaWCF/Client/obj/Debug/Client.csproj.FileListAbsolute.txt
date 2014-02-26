@@ -51,3 +51,6 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\T
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\bin\Debug\VideoPlayer.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.pdb
+C:\Users\Cláudio\Documents\Git\SalaDeEsperaWCF\Client\bin\Debug\Client.exe.config
+C:\Users\Cláudio\Documents\Git\SalaDeEsperaWCF\Client\obj\Debug\Client.exe
+C:\Users\Cláudio\Documents\Git\SalaDeEsperaWCF\Client\obj\Debug\Client.pdb
