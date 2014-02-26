@@ -6,3 +6,5 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Deb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.pdb
+C:\Users\Cláudio\Documents\Git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.exe
+C:\Users\Cláudio\Documents\Git\Testes\CopiasPorReferencia\obj\Debug\CopiasPorReferencia.pdb

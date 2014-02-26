@@ -1,9 +1,0 @@
-C:\Users\Cláudio\Working Directory\TV2Lib.dll
-C:\Users\Cláudio\Working Directory\TV2Lib.pdb
-C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Deploy to working dir\TV2Lib.csprojResolveAssemblyReference.cache
-C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Deploy to working dir\TV2Lib.DigitalTVScreen.resources
-C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Deploy to working dir\TV2Lib.VideoControl.resources
-C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Deploy to working dir\TV2Lib.Properties.Resources.resources
-C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Deploy to working dir\TV2Lib.csproj.GenerateResource.Cache
-C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Deploy to working dir\TV2Lib.dll
-C:\Users\Cláudio\Documents\Visual Studio 2012\Projects\Testes\TV2Lib\obj\Deploy to working dir\TV2Lib.pdb
