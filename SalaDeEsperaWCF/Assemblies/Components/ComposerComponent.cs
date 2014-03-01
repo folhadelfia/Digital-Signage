@@ -19,7 +19,7 @@ namespace Assemblies.Components
         public string Designation
         {
             get { return DesignationLabel.Text; }
-            protected set { DesignationLabel.Text = value; }
+            set { DesignationLabel.Text = value; }
         }
 
         protected ComposerComponent():this(ComponentTargetSite.Builder)

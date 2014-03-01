@@ -180,6 +180,7 @@ namespace Assemblies.ClientModel
         public abstract void UploadVideoFile(string filePath);
         public abstract void CancelFileUpload();
         public abstract IEnumerable<string> GetRemoteVideoFileNames();
+        public abstract IEnumerable<string> GetVideoPlayerNames(string displayName);
 
         public abstract void StartVideo(string displayName, int videoPlayerID);
         public abstract void StopVideo(string displayName, int videoPlayerID);

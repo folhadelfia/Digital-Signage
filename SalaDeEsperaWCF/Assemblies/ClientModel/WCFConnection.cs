@@ -679,5 +679,14 @@ namespace Assemblies.ClientModel
         #endregion
 
         #endregion
+
+        public override IEnumerable<string> GetVideoPlayerNames(string displayName)
+        {
+            List<string> res = new List<string>();
+
+            res = player.GetVideoPlayerNames(displayName).ToList();
+
+            return res;
+        }
     }
 }

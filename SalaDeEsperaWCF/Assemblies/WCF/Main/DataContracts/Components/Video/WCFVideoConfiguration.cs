@@ -11,6 +11,7 @@ namespace Assemblies.DataContracts
     public class WCFVideoConfiguration : WCFItemConfiguration
     {
         private int id;
+        private string name;
         private string[] playlist;
         WCFAspect aspect;
         bool repeat;
@@ -20,6 +21,13 @@ namespace Assemblies.DataContracts
         {
             get { return id; }
             set { id = value; }
+        }
+
+        [DataMember]
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
         }
 
         [DataMember]

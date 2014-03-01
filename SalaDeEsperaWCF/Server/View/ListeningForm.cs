@@ -104,12 +104,23 @@ namespace Server.View
             #endregion
 
             PlayerService.SendVideoFilePaths += PlayerService_SendVideoFilePaths;
+            PlayerService.SendVideoNamesBack += PlayerService_SendVideoNamesBack;
 
             PlayerService.StartVideo += PlayerService_StartVideo;
             PlayerService.StopVideo += PlayerService_StopVideo;
             PlayerService.PreviousVideo += PlayerService_PreviousVideo;
             PlayerService.NextVideo += PlayerService_NextVideo;
             #endregion
+        }
+
+        void PlayerService_SendVideoNamesBack(string displayName, out string[] names)
+        {
+            if (playerWindows.Keys.Contains(displayName))
+            {
+                names = playerWindows[displayName].GetPlayerNames();
+            }
+
+            names = null;
         }
 
         void FileStreamingService_FileStreamProgressReceived(object sender, FileStreamProgressReceivedEventArgs e)

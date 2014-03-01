@@ -9,6 +9,7 @@ namespace Assemblies.XMLSerialization.Components
     public class XMLVideoConfiguration : XMLItemConfiguration
     {
         public int ID { get; set; }
+        public string Name { get; set; }
         public string[] Playlist { get; set; }
         public XMLAspect Aspect { get; set; }
         public bool Replay { get; set; }

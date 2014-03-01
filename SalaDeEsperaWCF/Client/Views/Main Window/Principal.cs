@@ -285,6 +285,7 @@ namespace Client
             try
             {
                 if (creator is TVCreator && panelBuilder.Controls.OfType<TVComposer>().Count() > 0) throw new ApplicationException("Já existe um componente de televisão neste monitor");
+                if (creator is VideoCreator && panelBuilder.Controls.OfType<VideoComposer>().Count() > 0) throw new ApplicationException("Já existe um componente de vídeo neste monitor"); //mais tarde, dar a hipotese de ter mais do que um video
 
                 ComposerComponent component = creator.Instance;
 
@@ -383,6 +384,36 @@ namespace Client
             try
             {
                 (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as ComposerComponent).OpenOptionsWindow();
+
+                #region Nome do videoplayer, fazer depois
+                //if ((((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as ComposerComponent).Configuration is VideoConfiguration)
+                //{
+                //    VideoConfiguration cfg = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as ComposerComponent).Configuration as VideoConfiguration;
+
+
+
+                //    if (panelBuilder.Controls.OfType<VideoComposer>().Where(x => (x.Configuration as VideoConfiguration).Name == cfg.Name && (x.Configuration as VideoConfiguration).ID != cfg.ID).Count() > 0) //se o nome já está repetido
+                //    {
+                //        string tempName = string.Format("{0} (1)", cfg.Name);
+
+                //        if (panelBuilder.Controls.OfType<VideoComposer>().Select(x => (x.Configuration as VideoConfiguration).Name).Contains(tempName))
+                //        {
+                //            int repeatNumber = 0;
+
+                //            string lastName = panelBuilder.Controls.OfType<VideoComposer>().Select(x => (x.Configuration as VideoConfiguration).Name).Last();
+
+                //            int.TryParse(lastName.Substring(lastName.LastIndexOf('(') + 1, lastName.Length - lastName.LastIndexOf('(') + 1), out repeatNumber);
+
+                //            tempName = string.Format("{0} ({1})", cfg.Name, repeatNumber);
+                //        }
+
+                //        cfg.Name = tempName;
+                //    }
+
+                //    (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as ComposerComponent).Designation = cfg.Name;
+                //}
+
+                #endregion
             }
             catch (Exception ex)
             {

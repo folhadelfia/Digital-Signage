@@ -108,6 +108,8 @@ namespace Assemblies.Toolkit
             /// </summary>
             public static bool IsLocal(IPAddress remote)
             {
+                if (remote.ToString() == "127.0.0.1" || remote.ToString() == "localhost" || remote.ToString() == ".") return true;
+
                 IPAddress mask = SubnetMask;
                 IPAddress local = PrivateIPAddress;
 

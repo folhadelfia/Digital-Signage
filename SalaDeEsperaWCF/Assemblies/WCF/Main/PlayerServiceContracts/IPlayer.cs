@@ -282,6 +282,9 @@ namespace Assemblies.PlayerServiceContracts
         string[] GetVideoFilePaths();
 
         [OperationContract]
+        string[] GetVideoPlayerNames(string displayName);
+
+        [OperationContract]
         void SetStartVideo(string displayName, int videoPlayerID);
 
         [OperationContract]

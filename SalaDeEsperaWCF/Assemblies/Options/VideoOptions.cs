@@ -45,6 +45,8 @@ namespace Assemblies.Options
             textBoxPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
 
             this.UpdateAspectMode();
+
+            textBoxName.Text = configuration.Name;
         }
 
 
@@ -371,6 +373,7 @@ namespace Assemblies.Options
             configuration.Playlist.DeepCopyTo((temp.Configuration as VideoConfiguration).Playlist);
             (temp.Configuration as VideoConfiguration).Aspect = this.configuration.Aspect;
             (temp.Configuration as VideoConfiguration).Replay = this.configuration.Replay;
+            (temp.Configuration as VideoConfiguration).Name = string.IsNullOrWhiteSpace(this.configuration.Name) ? string.Format("Video {0}", (temp.Configuration as VideoConfiguration).ID) : this.configuration.Name;
         }
 
         private void UpdateConfig()
@@ -388,6 +391,8 @@ namespace Assemblies.Options
             else if (radioButtonStretch.Checked) this.configuration.Aspect = FileVideoPlayer.AspectMode.Center;
 
             this.configuration.Replay = checkBoxReplay.Checked;
+
+            this.configuration.Name = textBoxName.Text;
         }
 
         private void buttonRemoveItems_Click(object sender, EventArgs e)
@@ -475,6 +480,11 @@ namespace Assemblies.Options
         private void button1_Click(object sender, EventArgs e)
         {
             LoadFiles();
+        }
+
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+            this.configuration.Name = (sender as TextBox).Text;
         }
     }
 }

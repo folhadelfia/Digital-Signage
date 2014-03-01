@@ -168,6 +168,7 @@ namespace Assemblies.XMLSerialization
                     Resolution = ToXML(videoConfig.Resolution),
                     Size = ToXML(videoConfig.Size),
                     ID = videoConfig.ID,
+                    Name = videoConfig.Name,
                     Aspect = ToXML(videoConfig.Aspect),
                     Playlist = videoConfig.Playlist.ToArray(),
                     Replay = videoConfig.Replay
@@ -225,6 +226,7 @@ namespace Assemblies.XMLSerialization
                     Resolution = ToNET(videoConfig.Resolution),
                     Size = ToNET(videoConfig.Size),
                     ID = videoConfig.ID,
+                    Name = videoConfig.Name,
                     Playlist = videoConfig.Playlist.ToList(),
                     Aspect = ToNET(videoConfig.Aspect),
                     Replay = videoConfig.Replay

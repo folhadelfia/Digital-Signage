@@ -228,6 +228,12 @@ namespace Assemblies.ClientProxies
             Channel.SetNextVideo(displayName, videoPlayerID);
         }
 
+        public string[] GetVideoPlayerNames(string displayName)
+        {
+            return Channel.GetVideoPlayerNames(displayName);
+        }
+
         #endregion
+
     }
 }

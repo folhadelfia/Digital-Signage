@@ -169,6 +169,7 @@ namespace Assemblies.DataContracts
                 return new WCFVideoConfiguration
                 {
                     ID = videoConfig.ID,
+                    Name = videoConfig.Name,
                     Playlist = videoConfig.Playlist.ToArray(),
                     FinalResolution = ToWCF(videoConfig.FinalResolution),
                     Location = ToWCF(videoConfig.Location),
@@ -233,6 +234,7 @@ namespace Assemblies.DataContracts
                 return new VideoConfiguration
                 {
                     ID = videoConfig.ID,
+                    Name = videoConfig.Name,
                     Playlist = videoConfig.Playlist.ToList(),
 
                     Location = ToNET(videoConfig.Location),

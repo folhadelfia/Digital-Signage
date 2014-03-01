@@ -52,6 +52,7 @@ namespace Assemblies.PlayerServiceImplementation
         #region Video (ficheiro)
 
         static public event SendVideoFilePathsBackEventHandler SendVideoFilePaths;
+        static public event SendVideoNamesBackEventHandler SendVideoNamesBack;
 
         static public event PlayerWindowVideoControlEventHandler StartVideo;
         static public event PlayerWindowVideoControlEventHandler StopVideo;
@@ -582,6 +583,20 @@ namespace Assemblies.PlayerServiceImplementation
         }
 
         #endregion
+
+
+        public string[] GetVideoPlayerNames(string displayName)
+        {
+            if (SendVideoNamesBack != null) 
+            {
+                string[] res = null;
+                SendVideoNamesBack(displayName, out res);
+
+                return res;
+            }
+
+            return null;
+        }
     }
 
     #region Monitores
@@ -639,5 +654,5 @@ namespace Assemblies.PlayerServiceImplementation
 
     public delegate void PlayerWindowVideoControlEventHandler(string displayName, int videoPlayerID);
     public delegate void SendVideoFilePathsBackEventHandler(out string[] paths);
-
+    public delegate void SendVideoNamesBackEventHandler(string displayName, out string[] names);
 }

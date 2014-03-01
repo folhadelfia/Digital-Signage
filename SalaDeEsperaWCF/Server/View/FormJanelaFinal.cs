@@ -513,25 +513,78 @@ namespace Server.View
 
         #region Video
 
+        public void StartVideo(string name)
+        {
+            try
+            {
+                if (this.Controls.OfType<FileVideoPlayer>().Count() > 0) StartVideo(this.Controls.OfType<FileVideoPlayer>().Single(x => x.Name == name).ID);
+            }
+            catch
+            {
+            }
+        }
         public void StartVideo(int videoPlayerID)
         {
             if (this.Controls.OfType<FileVideoPlayer>().Where(x => x.ID == videoPlayerID).Count() != 1) return;
             else this.Controls.OfType<FileVideoPlayer>().Single(x => x.ID == videoPlayerID).Run();
+        }
+        public void StopVideo(string name)
+        {
+            try
+            {
+                if (this.Controls.OfType<FileVideoPlayer>().Count() > 0) StopVideo(this.Controls.OfType<FileVideoPlayer>().Single(x => x.Name == name).ID);
+            }
+            catch
+            {
+            }
         }
         public void StopVideo(int videoPlayerID)
         {
             if (this.Controls.OfType<FileVideoPlayer>().Where(x => x.ID == videoPlayerID).Count() != 1) return;
             else this.Controls.OfType<FileVideoPlayer>().Single(x => x.ID == videoPlayerID).Stop();
         }
+        public void PreviousVideo(string name)
+        {
+            try
+            {
+                if (this.Controls.OfType<FileVideoPlayer>().Count() > 0) PreviousVideo(this.Controls.OfType<FileVideoPlayer>().Single(x => x.Name == name).ID);
+            }
+            catch
+            {
+            }
+        }
         public void PreviousVideo(int videoPlayerID)
         {
             if (this.Controls.OfType<FileVideoPlayer>().Where(x => x.ID == videoPlayerID).Count() != 1) return;
             else this.Controls.OfType<FileVideoPlayer>().Single(x => x.ID == videoPlayerID).Previous();
         }
+        public void NextVideo(string name)
+        {
+            try
+            {
+                if (this.Controls.OfType<FileVideoPlayer>().Count() > 0) NextVideo(this.Controls.OfType<FileVideoPlayer>().Single(x => x.Name == name).ID);
+            }
+            catch
+            {
+            }
+        }
         public void NextVideo(int videoPlayerID)
         {
             if (this.Controls.OfType<FileVideoPlayer>().Where(x => x.ID == videoPlayerID).Count() != 1) return;
             else this.Controls.OfType<FileVideoPlayer>().Single(x => x.ID == videoPlayerID).Next();
+        }
+
+
+        public string[] GetPlayerNames()
+        {
+            List<string> res = new List<string>();
+
+            foreach (var video in this.Controls.OfType<FileVideoPlayer>())
+            {
+                res.Add(video.Name);
+            }
+
+            return res.ToArray();
         }
 
         #endregion
@@ -701,6 +754,13 @@ namespace Server.View
                     };
 
                     player.ID = temp.ID;
+                    try
+                    {
+                        player.Name = temp.Name;
+                    }
+                    catch
+                    {
+                    }
                     player.Playlist.Add(temp.Playlist);
                     player.Aspect = temp.Aspect;
 
