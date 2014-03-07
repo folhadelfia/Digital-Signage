@@ -207,18 +207,181 @@ namespace Client
         int playersFound = 0;
         int playersScanned = 0;
 
+
+        #region Players from database old
+        //private void GetPlayersFromDatabase()
+        //{
+        //    List<Player> players = new List<Player>();
+
+        //    using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados)) players = db.Players.Where(x => x.isActive).ToList();
+
+        //    playersFound = players.Count;
+        //    playersScanned = 0;
+
+        //    List<Clinica> clinicas = new List<Clinica>();
+
+        //    using (var db = new ClinicasDataContext(LinqConnectionStrings.LigacaoClinicas)) clinicas = db.Clinicas.Where(x => x.isActive ?? false && players.Select(y => y.idClinica).Contains(x.idClinica)).ToList();
+
+        //    foreach (var player in players)
+        //    {
+        //        string clinicLocation = clinicas.Single(x => x.idClinica == player.idClinica).Localidade;
+        //        string clinicName = clinicas.Single(x => x.idClinica == player.idClinica).Nome;
+
+        //        string clinicScreenName = string.Format("{0} ({1})", clinicName, clinicLocation);
+
+        //        BackgroundWorker worker = new BackgroundWorker();
+
+        //        worker.DoWork += worker_DoWorkAddPlayerToTreeView;
+        //        worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+
+        //        treeViewRede.Nodes.Clear();
+        //        worker.RunWorkerAsync(new object[] { player, clinicScreenName });
+        //    }
+        //    //using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) thisClinic = db.ClinicaDados.FirstOrDefault();
+        //}
+
+        //void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        //{
+        //    playersScanned++;
+
+        //    if (playersFound != 0) //para não dividir por zero, just in case. se o programa chegou aqui é porque à partida é != 0, mas mesmo assim...
+        //    {
+        //        progressBarScan.Value = Convert.ToInt32(Math.Round((playersScanned / playersFound) * 100f));
+        //    }
+
+        //    buttonScan.Enabled = playersScanned >= playersFound;
+        //    progressBarScan.Visible = !buttonScan.Enabled;
+        //}
+
+        //void worker_DoWorkAddPlayerToTreeView(object sender, DoWorkEventArgs e)
+        //{
+        //    try
+        //    {
+        //        Player player = (e.Argument as object[])[0] as Player;
+        //        string clinicScreenName = (e.Argument as object[])[1] as string;
+
+        //        string endpointString = player.Endpoints.Single(x=>x.Type == (int)EndpointTypeEnum.Player).Address;
+
+        //        if (!(player.publicIPAddress == MyToolkit.Networking.PublicIPAddress.ToString() && MyToolkit.Networking.IsLocal(player.privateIPAddress)))
+        //            endpointString = this.PrivateToPublicEndpoint(player, EndpointTypeEnum.Player);
+
+        //        EndpointAddress endpoint = new EndpointAddress(endpointString);
+
+        //        NetTcpBinding bindingPC = new NetTcpBinding();
+        //        bindingPC.Security.Mode = SecurityMode.None;
+        //        bindingPC.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
+        //        bindingPC.CloseTimeout = new TimeSpan(0, 0, 2);
+
+        //        PlayerProxy client = new PlayerProxy(bindingPC, endpoint);
+
+        //        client.Open();
+
+        //        Dictionary<WCFScreenInformation, bool> displays = new Dictionary<WCFScreenInformation, bool>();
+
+        //        var tempDisplays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
+
+        //        foreach (var display in tempDisplays)
+        //        {
+
+        //            displays.Add(display, client.PlayerWindowIsOpen(display.DeviceID));
+        //        }
+
+        //        client.Close();
+
+        //        if (displays.Count < 1) return;
+        //        lock (oLock)
+        //        {
+        //            this.Invoke((MethodInvoker)(() =>
+        //            {
+        //                WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays.Keys, PlayerEndpoint = new EndpointAddress(endpointString) };
+
+        //                TreeNode nodeClinic;
+        //                bool newClinicNode = true;
+
+        //                if (treeViewRede.Nodes.OfType<TreeNode>().Where(x => x.Text == clinicScreenName).Count() > 0)
+        //                {
+        //                    newClinicNode = false;
+        //                    nodeClinic = treeViewRede.Nodes.OfType<TreeNode>().Single(x => x.Text == clinicScreenName);
+        //                }
+        //                else
+        //                {
+        //                    nodeClinic = new TreeNode
+        //                    {
+        //                        Text = clinicScreenName,
+        //                        ImageKey = "Clinic",
+        //                        SelectedImageKey = "Clinic"
+        //                    };
+        //                }
+
+        //                TreeNode nodePC = new TreeNode
+        //                {
+        //                    Text = player.privateHostname,
+        //                    //ToolTipText = string.Format("IP: {0}", pc.IP),
+        //                    Tag = pc,
+        //                    ImageKey = "Computer",
+        //                    SelectedImageKey = "Computer"
+        //                };
+
+        //                nodeClinic.Nodes.Add(nodePC);
+
+        //                foreach (var display in pc.Displays)
+        //                {
+        //                    string tempDispName = string.Format("{0} (X: {1}, Y: {2})", display.Name, display.Bounds.X, display.Bounds.Y);
+        //                    bool isOpen = displays[display];
+                            
+
+        //                    TreeNode t = new TreeNode()
+        //                    {
+        //                        Text = tempDispName,
+        //                        ToolTipText = string.Format("Resolução: {0}{1}Primário: {2}", display.Bounds.Size.ToString(), Environment.NewLine, (display.Primary ? "Sim" : "Não")),
+        //                        Tag = display,
+        //                        ImageKey = "Monitor",
+        //                        SelectedImageKey = "Monitor",
+        //                        ForeColor = isOpen ? SELECTED_COLOR : SystemColors.ControlText
+        //                    };
+
+        //                    nodePC.Nodes.Add(t);
+        //                }
+        //                if (newClinicNode)
+        //                    treeViewRede.Nodes.Add(nodeClinic);
+        //            }));
+        //        }
+        //    }
+        //    catch
+        //    {
+        //    }
+        //}
+        #endregion
+
+        #region Players from database
         private void GetPlayersFromDatabase()
         {
-            List<Player> players = new List<Player>();
+            //Alterar a classe WCFPlayerPC para aceitar mais de um tipo de endpoints, e copiar os dados para lá
 
-            using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados)) players = db.Players.Where(x => x.isActive).ToList();
+            List<Player> players = new List<Player>();
+            List<Endpoint> endpoints = new List<Endpoint>();
+
+            using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados))
+            {
+                foreach (var pl in db.Players.Where(x => x.isActive).ToList())
+                {
+                    foreach (var ep in pl.Endpoints)
+                    {
+                        endpoints.Add(ep);
+                    }
+
+                    players.Add(pl);
+                }
+            }
+
+            //using (var db = new PlayersLigadosDataContext(LinqConnectionStrings.LigacaoPlayersLigados)) players = db.Players.Where(x => x.isActive).ToList();
 
             playersFound = players.Count;
             playersScanned = 0;
 
             List<Clinica> clinicas = new List<Clinica>();
 
-            using (var db = new ClinicasDataContext(LinqConnectionStrings.LigacaoClinicas)) clinicas = db.Clinicas.Where(x => x.isActive ?? false && players.Select(y => y.idClinica).Contains(x.idClinica)).ToList();
+            using (var db = new ClinicasDataContext(LinqConnectionStrings.LigacaoClinicas)) clinicas = db.Clinicas.Where(x => (x.isActive ?? false) && players.Select(y => y.idClinica).Contains(x.idClinica)).ToList();
 
             foreach (var player in players)
             {
@@ -232,8 +395,14 @@ namespace Client
                 worker.DoWork += worker_DoWorkAddPlayerToTreeView;
                 worker.RunWorkerCompleted += worker_RunWorkerCompleted;
 
-                treeViewRede.Nodes.Clear();
-                worker.RunWorkerAsync(new object[] { player, clinicScreenName });
+                if (this.InvokeRequired) treeViewRede.Invoke((MethodInvoker)(() =>
+                {
+                    treeViewRede.Nodes.Clear();
+                }));
+                else
+                    treeViewRede.Nodes.Clear();
+
+                worker.RunWorkerAsync(new object[] { player, endpoints.Where(x => x.IDPlayer == player.ID).ToList(), clinicScreenName });
             }
             //using (var db = new ClinicaDataContext(LinqConnectionStrings.LigacaoClinica)) thisClinic = db.ClinicaDados.FirstOrDefault();
         }
@@ -242,10 +411,10 @@ namespace Client
         {
             playersScanned++;
 
-            if (playersFound != 0) //para não dividir por zero, just in case. se o programa chegou aqui é porque à partida é != 0, mas mesmo assim...
-            {
-                progressBarScan.Value = Convert.ToInt32(Math.Round((playersScanned / playersFound) * 100f));
-            }
+            //if (playersFound != 0) //para não dividir por zero, just in case. se o programa chegou aqui é porque à partida é != 0, mas mesmo assim...
+            //{
+            //    progressBarScan.Value = Convert.ToInt32(Math.Round((playersScanned / playersFound) * 100f));
+            //}
 
             buttonScan.Enabled = playersScanned >= playersFound;
             progressBarScan.Visible = !buttonScan.Enabled;
@@ -256,21 +425,28 @@ namespace Client
             try
             {
                 Player player = (e.Argument as object[])[0] as Player;
-                string clinicScreenName = (e.Argument as object[])[1] as string;
+                List<Endpoint> endpoints = (e.Argument as object[])[1] as List<Endpoint>;
+                string clinicScreenName = (e.Argument as object[])[2] as string;
 
-                string endpointString = player.Endpoints.Single(x=>x.Type == (int)EndpointTypeEnum.Player).Address;
+                string playerEndpointString = endpoints.Single(x => x.Type == (int)EndpointTypeEnum.Player).Address,
+                       fileTransferEndpointString = endpoints.Single(x => x.Type == (int)EndpointTypeEnum.FileTransfer).Address;
 
                 if (!(player.publicIPAddress == MyToolkit.Networking.PublicIPAddress.ToString() && MyToolkit.Networking.IsLocal(player.privateIPAddress)))
-                    endpointString = this.PrivateToPublicEndpoint(player, EndpointTypeEnum.Player);
+                {
+                    playerEndpointString = this.PrivateToPublicEndpoint(player, EndpointTypeEnum.Player);
+                    fileTransferEndpointString = this.PrivateToPublicEndpoint(player, EndpointTypeEnum.FileTransfer);
+                }
 
-                EndpointAddress endpoint = new EndpointAddress(endpointString);
+                EndpointAddress playerEndpoint = new EndpointAddress(playerEndpointString),
+                                fileTransferEndpoint = new EndpointAddress(fileTransferEndpointString);
+
 
                 NetTcpBinding bindingPC = new NetTcpBinding();
                 bindingPC.Security.Mode = SecurityMode.None;
                 bindingPC.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.None;
-                bindingPC.CloseTimeout = new TimeSpan(0, 0, 2);
+                bindingPC.CloseTimeout = new TimeSpan(0, 0, 3);
 
-                PlayerProxy client = new PlayerProxy(bindingPC, endpoint);
+                PlayerProxy client = new PlayerProxy(bindingPC, playerEndpoint);
 
                 client.Open();
 
@@ -291,7 +467,8 @@ namespace Client
                 {
                     this.Invoke((MethodInvoker)(() =>
                     {
-                        WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays.Keys, PlayerEndpoint = new EndpointAddress(endpointString) };
+                        //WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays, PlayerEndpoint = new EndpointAddress(playerEndpointString) };
+                        WCFPlayerPC pc = new WCFPlayerPC() { Displays = displays.Keys, PlayerEndpoint = playerEndpoint, FileTransferEndpoint = fileTransferEndpoint };
 
                         TreeNode nodeClinic;
                         bool newClinicNode = true;
@@ -325,8 +502,8 @@ namespace Client
                         foreach (var display in pc.Displays)
                         {
                             string tempDispName = string.Format("{0} (X: {1}, Y: {2})", display.Name, display.Bounds.X, display.Bounds.Y);
+
                             bool isOpen = displays[display];
-                            
 
                             TreeNode t = new TreeNode()
                             {
@@ -336,6 +513,7 @@ namespace Client
                                 ImageKey = "Monitor",
                                 SelectedImageKey = "Monitor",
                                 ForeColor = isOpen ? SELECTED_COLOR : SystemColors.ControlText
+
                             };
 
                             nodePC.Nodes.Add(t);
@@ -345,10 +523,18 @@ namespace Client
                     }));
                 }
             }
-            catch
+            catch (EndpointNotFoundException)
             {
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+
+                // normalmente cai aqui quando a ligação não e bem sucedida. atenção às firewalls
+            }
+            //Tratar EndpointNotFoundException
         }
+        #endregion
 
         private string PrivateToPublicEndpoint(Player player, EndpointTypeEnum type)
         {

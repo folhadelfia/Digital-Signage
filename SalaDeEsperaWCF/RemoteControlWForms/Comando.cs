@@ -108,6 +108,12 @@ namespace RemoteControlWForms
             pictureBoxVolDown.Click += Blink;
             pictureBoxVolUp.Click += Blink;
 
+            pictureBoxPlay.Click += Blink;
+            pictureBoxStop.Click += Blink;
+            pictureBoxFWD.Click += Blink;
+            pictureBoxRWD.Click += Blink;
+
+
             pictureBoxVolDown.Visible = false;
             pictureBoxVolUp.Visible = false;
         }
@@ -134,6 +140,8 @@ namespace RemoteControlWForms
 
                 channels.Clear();
 
+                displayName = serviceList.Screen;
+
                 var chList = connection.GetTVChannels();
 
                 if(chList == null) return;
@@ -142,8 +150,6 @@ namespace RemoteControlWForms
                 {
                     channels.Add(ch as ChannelDVBT);
                 }
-
-                displayName = serviceList.Screen;
             }
         }
 
@@ -160,7 +166,6 @@ namespace RemoteControlWForms
 
             t.Start();
         }
-
         private void pictureBoxRTP2_Click(object sender, EventArgs e)
         {
             Thread t = new Thread(new ThreadStart(() =>
@@ -171,7 +176,6 @@ namespace RemoteControlWForms
 
             t.Start();
         }
-
         private void pictureBoxSIC_Click(object sender, EventArgs e)
         {
             Thread t = new Thread(new ThreadStart(() =>
@@ -182,7 +186,6 @@ namespace RemoteControlWForms
 
             t.Start();
         }
-
         private void pictureBoxTVI_Click(object sender, EventArgs e)
         {
             Thread t = new Thread(new ThreadStart(() =>
@@ -193,5 +196,48 @@ namespace RemoteControlWForms
 
             t.Start();
         }
+
+        #region Video
+        private void pictureBoxPlay_Click(object sender, EventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open)
+                    connection.StartVideo(displayName, 0); //QUANDO DER PARA TER MAIS QUE UM VÍDEO, SUBSTITUIR 0 POR playerID
+            }));
+
+            t.Start();
+        }
+        private void pictureBoxStop_Click(object sender, EventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open)
+                    connection.StopVideo(displayName, 0); //QUANDO DER PARA TER MAIS QUE UM VÍDEO, SUBSTITUIR 0 POR playerID
+            }));
+
+            t.Start();
+        }
+        private void pictureBoxFWD_Click(object sender, EventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open)
+                    connection.NextVideo(displayName, 0); //QUANDO DER PARA TER MAIS QUE UM VÍDEO, SUBSTITUIR 0 POR playerID
+            }));
+
+            t.Start();
+        }
+        private void pictureBoxRWD_Click(object sender, EventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open)
+                    connection.PreviousVideo(displayName, 0); //QUANDO DER PARA TER MAIS QUE UM VÍDEO, SUBSTITUIR 0 POR playerID
+            }));
+
+            t.Start();
+        }
+        #endregion
     }
 }

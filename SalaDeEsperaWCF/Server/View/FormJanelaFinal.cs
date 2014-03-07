@@ -632,7 +632,7 @@ namespace Server.View
 
                 this.ResumeLayout(true);
 
-                this.TopMost = true;
+                this.TopMost = false;
                 this.PreventSleep();
 
                 this.Show();

@@ -663,17 +663,17 @@ namespace Assemblies.ClientModel
 
         public override void StopVideo(string displayName, int videoPlayerID)
         {
-            player.SetStartVideo(displayName, videoPlayerID);
+            player.SetStopVideo(displayName, videoPlayerID);
         }
 
         public override void PreviousVideo(string displayName, int videoPlayerID)
         {
-            player.SetStartVideo(displayName, videoPlayerID);
+            player.SetPreviousVideo(displayName, videoPlayerID);
         }
 
         public override void NextVideo(string displayName, int videoPlayerID)
         {
-            player.SetStartVideo(displayName, videoPlayerID);
+            player.SetNextVideo(displayName, videoPlayerID);
         }
 
         #endregion

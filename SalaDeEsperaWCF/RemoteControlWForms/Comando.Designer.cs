@@ -37,6 +37,10 @@
             this.pictureBoxSIC = new System.Windows.Forms.PictureBox();
             this.pictureBoxRTP2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxRTP1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPlay = new System.Windows.Forms.PictureBox();
+            this.pictureBoxStop = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFWD = new System.Windows.Forms.PictureBox();
+            this.pictureBoxRWD = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVolDown)).BeginInit();
@@ -46,6 +50,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSIC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRTP2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRTP1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFWD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRWD)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxMinimize
@@ -148,12 +156,56 @@
             this.pictureBoxRTP1.TabStop = false;
             this.pictureBoxRTP1.Click += new System.EventHandler(this.pictureBoxRTP1_Click);
             // 
+            // pictureBoxPlay
+            // 
+            this.pictureBoxPlay.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.pictureBoxPlay.Location = new System.Drawing.Point(12, 50);
+            this.pictureBoxPlay.Name = "pictureBoxPlay";
+            this.pictureBoxPlay.Size = new System.Drawing.Size(47, 47);
+            this.pictureBoxPlay.TabIndex = 10;
+            this.pictureBoxPlay.TabStop = false;
+            this.pictureBoxPlay.Click += new System.EventHandler(this.pictureBoxPlay_Click);
+            // 
+            // pictureBoxStop
+            // 
+            this.pictureBoxStop.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.pictureBoxStop.Location = new System.Drawing.Point(65, 50);
+            this.pictureBoxStop.Name = "pictureBoxStop";
+            this.pictureBoxStop.Size = new System.Drawing.Size(47, 47);
+            this.pictureBoxStop.TabIndex = 11;
+            this.pictureBoxStop.TabStop = false;
+            this.pictureBoxStop.Click += new System.EventHandler(this.pictureBoxStop_Click);
+            // 
+            // pictureBoxFWD
+            // 
+            this.pictureBoxFWD.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.pictureBoxFWD.Location = new System.Drawing.Point(65, 103);
+            this.pictureBoxFWD.Name = "pictureBoxFWD";
+            this.pictureBoxFWD.Size = new System.Drawing.Size(47, 47);
+            this.pictureBoxFWD.TabIndex = 12;
+            this.pictureBoxFWD.TabStop = false;
+            this.pictureBoxFWD.Click += new System.EventHandler(this.pictureBoxFWD_Click);
+            // 
+            // pictureBoxRWD
+            // 
+            this.pictureBoxRWD.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.pictureBoxRWD.Location = new System.Drawing.Point(12, 103);
+            this.pictureBoxRWD.Name = "pictureBoxRWD";
+            this.pictureBoxRWD.Size = new System.Drawing.Size(47, 47);
+            this.pictureBoxRWD.TabIndex = 13;
+            this.pictureBoxRWD.TabStop = false;
+            this.pictureBoxRWD.Click += new System.EventHandler(this.pictureBoxRWD_Click);
+            // 
             // Comando
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(232, 376);
+            this.Controls.Add(this.pictureBoxRWD);
+            this.Controls.Add(this.pictureBoxFWD);
+            this.Controls.Add(this.pictureBoxStop);
+            this.Controls.Add(this.pictureBoxPlay);
             this.Controls.Add(this.pictureBoxMinimize);
             this.Controls.Add(this.pictureBoxClose);
             this.Controls.Add(this.pictureBoxVolDown);
@@ -175,6 +227,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSIC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRTP2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRTP1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFWD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRWD)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -190,6 +246,10 @@
         private System.Windows.Forms.PictureBox pictureBoxVolDown;
         private System.Windows.Forms.PictureBox pictureBoxClose;
         private System.Windows.Forms.PictureBox pictureBoxMinimize;
+        private System.Windows.Forms.PictureBox pictureBoxPlay;
+        private System.Windows.Forms.PictureBox pictureBoxStop;
+        private System.Windows.Forms.PictureBox pictureBoxFWD;
+        private System.Windows.Forms.PictureBox pictureBoxRWD;
     }
 }
 

@@ -776,7 +776,7 @@ namespace Client
         int playersFound = 0,
             playersScanned = 0;
 
-
+        #region Players from database
         private void GetPlayersFromDatabase()
         {
             //Alterar a classe WCFPlayerPC para aceitar mais de um tipo de endpoints, e copiar os dados para lá
@@ -945,6 +945,7 @@ namespace Client
             }
             //Tratar EndpointNotFoundException
         }
+        #endregion
 
         private string PrivateToPublicEndpoint(Player player, EndpointTypeEnum type)
         {
