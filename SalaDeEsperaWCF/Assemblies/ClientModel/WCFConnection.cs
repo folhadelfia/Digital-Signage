@@ -688,5 +688,15 @@ namespace Assemblies.ClientModel
 
             return res;
         }
+
+        public override bool HasVideo(string displayDeviceID)
+        {
+            return player.HasVideo(displayDeviceID);
+        }
+
+        public override bool HasTV(string displayDeviceID)
+        {
+            return player.HasTV(displayDeviceID);
+        }
     }
 }

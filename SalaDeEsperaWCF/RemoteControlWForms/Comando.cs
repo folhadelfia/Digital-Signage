@@ -138,23 +138,41 @@ namespace RemoteControlWForms
 
                 connection.Open();
 
-                channels.Clear();
-
+                bool hasTV = connection.HasTV(serviceList.Screen),
+                     hasVideo = connection.HasVideo(serviceList.Screen);
+                
                 displayName = serviceList.Screen;
 
-                var chList = connection.GetTVChannels();
-
-                if(chList == null) return;
-
-                foreach (var ch in chList)
+                if (hasTV)
                 {
-                    channels.Add(ch as ChannelDVBT);
+                    channels.Clear();
+
+                    var chList = connection.GetTVChannels();
+
+                    if (chList == null) return;
+
+                    foreach (var ch in chList)
+                    {
+                        channels.Add(ch as ChannelDVBT);
+                    }
                 }
+
+                pictureBoxRTP1.Enabled = hasTV;
+                pictureBoxRTP2.Enabled = hasTV;
+                pictureBoxSIC.Enabled = hasTV;
+                pictureBoxTVI.Enabled = hasTV;
+
+                pictureBoxStop.Enabled = hasVideo;
+                pictureBoxPlay.Enabled = hasVideo;
+                pictureBoxRWD.Enabled = hasVideo;
+                pictureBoxFWD.Enabled = hasVideo;
             }
         }
 
         //Escolher o monitor que quer controlar antes de fazer a ligação, e guardar o id numa var. Sempre que quiser mudar d canal,
         //dá o valor dessa var
+
+        #region TV
 
         private void pictureBoxRTP1_Click(object sender, EventArgs e)
         {
@@ -196,6 +214,8 @@ namespace RemoteControlWForms
 
             t.Start();
         }
+
+        #endregion
 
         #region Video
         private void pictureBoxPlay_Click(object sender, EventArgs e)
@@ -239,5 +259,11 @@ namespace RemoteControlWForms
             t.Start();
         }
         #endregion
+
+        private void pictureBox_EnabledChanged(object sender, EventArgs e)
+        {
+            (sender as Control).BackColor = (sender as Control).Enabled ? Color.CornflowerBlue : Color.LightGray;
+        }
+
     }
 }

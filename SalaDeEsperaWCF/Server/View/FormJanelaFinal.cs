@@ -820,5 +820,29 @@ namespace Server.View
                     | EXECUTION_STATE.ES_SYSTEM_REQUIRED); //Windows < Vista, forget away mode
         }
         #endregion
+
+        public bool HasTV()
+        {
+            try
+            {
+                return this.Controls.OfType<DigitalTVScreen>().Count() > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool HasVideo()
+        {
+            try
+            {
+                return this.Controls.OfType<FileVideoPlayer>().Count() > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

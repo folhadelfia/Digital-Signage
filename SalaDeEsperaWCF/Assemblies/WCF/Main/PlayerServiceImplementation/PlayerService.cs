@@ -49,6 +49,9 @@ namespace Assemblies.PlayerServiceImplementation
         static public event PlayerWindowSetDeviceEventHandler SetH264Decoder;
         static public event PlayerWindowSetDeviceEventHandler SetMPEG2Decoder;
 
+        static public event SendPlayerHasComponentBack HasVideoComponent;
+        static public event SendPlayerHasComponentBack HasTVComponent;
+
         #region Video (ficheiro)
 
         static public event SendVideoFilePathsBackEventHandler SendVideoFilePaths;
@@ -566,17 +569,14 @@ namespace Assemblies.PlayerServiceImplementation
         {
             if (StartVideo != null) StartVideo(displayName, videoPlayerID);
         }
-
         public void SetStopVideo(string displayName, int videoPlayerID)
         {
             if (StopVideo != null) StopVideo(displayName, videoPlayerID);
         }
-
         public void SetPreviousVideo(string displayName, int videoPlayerID)
         {
             if (PreviousVideo != null) PreviousVideo(displayName, videoPlayerID);
         }
-
         public void SetNextVideo(string displayName, int videoPlayerID)
         {
             if (NextVideo != null) NextVideo(displayName, videoPlayerID);
@@ -596,6 +596,25 @@ namespace Assemblies.PlayerServiceImplementation
             }
 
             return null;
+        }
+
+
+        public bool HasVideo(string displayName)
+        {
+            bool res = false;
+
+            if (HasVideoComponent != null) HasVideoComponent(displayName, out res);
+
+            return res;
+        }
+
+        public bool HasTV(string displayName)
+        {
+            bool res = false;
+
+            if (HasTVComponent != null) HasTVComponent(displayName, out res);
+
+            return res;
         }
     }
 
@@ -655,4 +674,6 @@ namespace Assemblies.PlayerServiceImplementation
     public delegate void PlayerWindowVideoControlEventHandler(string displayName, int videoPlayerID);
     public delegate void SendVideoFilePathsBackEventHandler(out string[] paths);
     public delegate void SendVideoNamesBackEventHandler(string displayName, out string[] names);
+
+    public delegate void SendPlayerHasComponentBack(string displayName, out bool result);
 }

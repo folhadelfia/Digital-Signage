@@ -235,5 +235,19 @@ namespace Assemblies.ClientProxies
 
         #endregion
 
+
+        #region General
+
+        public bool HasVideo(string displayName)
+        {
+            return Channel.HasVideo(displayName);
+        }
+
+        public bool HasTV(string displayName)
+        {
+            return Channel.HasTV(displayName);
+        }
+
+        #endregion
     }
 }

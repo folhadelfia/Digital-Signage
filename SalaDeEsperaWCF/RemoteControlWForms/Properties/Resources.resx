@@ -136,31 +136,43 @@
   <data name="rtp2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rtp2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="buttonTVI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\buttonTVI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="buttonVolDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\buttonVolDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="buttonMinimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\buttonMinimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="buttonMinimize2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\buttonMinimize2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="buttonVolUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\buttonVolUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="buttonOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\buttonOff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="buttonSIC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\buttonSIC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="buttonMinimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\buttonMinimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="buttonClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\buttonClose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="buttonTVI" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\buttonTVI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="buttonSIC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\buttonSIC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="buttonMinimize2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\buttonMinimize2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="buttonOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\buttonOff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FWD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FWD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RWD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RWD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

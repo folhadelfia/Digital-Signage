@@ -297,5 +297,15 @@ namespace Assemblies.PlayerServiceContracts
         void SetNextVideo(string displayName, int videoPlayerID);
 
         #endregion
+
+        #region 8 mar 2014 - HasVideo e HasTV
+
+        [OperationContract]
+        bool HasVideo(string displayName);
+
+        [OperationContract]
+        bool HasTV(string displayName);
+
+        #endregion
     }
 }

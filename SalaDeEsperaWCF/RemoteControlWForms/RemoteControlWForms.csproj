@@ -98,6 +98,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Anonymous_On_Off_Input_Output_IO 2.png" />
+    <Content Include="Resources\FWD.png" />
+    <Content Include="Resources\play.png" />
+    <Content Include="Resources\RWD.png" />
+    <Content Include="Resources\stop.png" />
     <None Include="Resources\buttonMinimize2.png" />
     <None Include="Resources\buttonMinimize.png" />
     <None Include="Resources\buttonClose.png" />

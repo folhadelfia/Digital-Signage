@@ -39,6 +39,9 @@ namespace Assemblies.ClientModel
         public abstract void ClosePlayerWindow(string displayDeviceID);
         public abstract ScreenInformation[] GetDisplayInformation();
         public abstract bool PlayerWindowIsOpen(string displayDeviceID);
+
+        public abstract bool HasVideo(string displayDeviceID);
+        public abstract bool HasTV(string displayDeviceID);
         #endregion
 
         #region TV

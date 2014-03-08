@@ -110,6 +110,10 @@ namespace Server.View
             PlayerService.StopVideo += PlayerService_StopVideo;
             PlayerService.PreviousVideo += PlayerService_PreviousVideo;
             PlayerService.NextVideo += PlayerService_NextVideo;
+
+            PlayerService.HasTVComponent += PlayerService_HasTVComponent;
+            PlayerService.HasVideoComponent += PlayerService_HasVideoComponent;
+
             #endregion
         }
 
@@ -552,6 +556,37 @@ namespace Server.View
             devs = DigitalTVScreen.DeviceStuff.MPEG2DecoderDevices.Values.Select(x => new GeneralDevice() { DevicePath = x.DevicePath, Name = x.Name }).ToArray();
         }
 
+
+
+        #region General
+
+        void PlayerService_HasVideoComponent(string displayName, out bool result)
+        {
+            try
+            {
+                if (playerWindows.Keys.Contains(displayName)) result = playerWindows[displayName].HasVideo();
+                else result = false;
+            }
+            catch
+            {
+                result = false;
+            }
+        }
+
+        void PlayerService_HasTVComponent(string displayName, out bool result)
+        {
+            try
+            {
+                if (playerWindows.Keys.Contains(displayName)) result = playerWindows[displayName].HasTV();
+                else result = false;
+            }
+            catch
+            {
+                result = false;
+            }
+        }
+
+        #endregion
 
         #region Enviar ficheiros
 
