@@ -849,10 +849,14 @@ namespace Client
             {
                 Player player = (e.Argument as object[])[0] as Player;
                 List<Endpoint> endpoints = (e.Argument as object[])[1] as List<Endpoint>;
+                List<WCFScreenInformation> displays = new List<WCFScreenInformation>();
+
                 string clinicScreenName = (e.Argument as object[])[2] as string;
 
                 string playerEndpointString = endpoints.Single(x => x.Type == (int)EndpointTypeEnum.Player).Address,
                        fileTransferEndpointString = endpoints.Single(x => x.Type == (int)EndpointTypeEnum.FileTransfer).Address;
+
+                bool goodPlayer = true;
 
                 if (!(player.publicIPAddress == MyToolkit.Networking.PublicIPAddress.ToString() && MyToolkit.Networking.IsLocal(player.privateIPAddress)))
                 {
@@ -873,11 +877,17 @@ namespace Client
 
                 client.Open();
 
-                List<WCFScreenInformation> displays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
+                try
+                {
+                    displays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
+                }
+                catch (EndpointNotFoundException)
+                {
+                    goodPlayer = false;
+                }
 
                 client.Close();
 
-                if (displays.Count < 1) return;
                 lock (oLock)
                 {
                     this.Invoke((MethodInvoker)(() =>
@@ -909,8 +919,11 @@ namespace Client
                             //ToolTipText = string.Format("IP: {0}", pc.IP),
                             Tag = pc,
                             ImageKey = "Computer",
-                            SelectedImageKey = "Computer"
+                            SelectedImageKey = goodPlayer ? "Computer" : "ComputerError",
+                            ForeColor = goodPlayer ? SystemColors.ControlText : SystemColors.ControlLight
                         };
+
+                        //Aqui os computadores que estão inacessiveis sao mostrados, deve-se dar a opçao de os desactivar com o builder. Por também a opção de desactivar players inacessiveis sempre que forem encontrados (nao recomendado)
 
                         nodeClinic.Nodes.Add(nodePC);
 
@@ -934,8 +947,9 @@ namespace Client
                     }));
                 }
             }
-            catch(EndpointNotFoundException)
+            catch(EndpointNotFoundException ex)
             {
+                
             }
             catch(Exception ex)
             {
