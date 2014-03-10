@@ -261,7 +261,14 @@ namespace Client
                 component.Configuration.FinalResolution = finalResolution;
                 component.Configuration.Size = component.Size;
 
-                component.ContextMenuStrip = contextMenuStripComponents;
+                if (component is VideoComposer || component is TVComposer)
+                {
+                    component.ContextMenuStrip = contextMenuStripVideoComponents;
+                }
+                else
+                {
+                    component.ContextMenuStrip = contextMenuStripComponents;
+                }
 
                 if (component is IUsesConnection)
                     (component as IUsesConnection).SetConnection(Connection);
@@ -293,7 +300,14 @@ namespace Client
                 component.Configuration.FinalResolution = finalResolution;
                 component.Configuration.Size = component.Size;
 
-                component.ContextMenuStrip = contextMenuStripComponents;
+                if (component is VideoComposer || component is TVComposer)
+                {
+                    component.ContextMenuStrip = contextMenuStripVideoComponents;
+                }
+                else
+                {
+                    component.ContextMenuStrip = contextMenuStripComponents;
+                }
 
                 if (component is IUsesConnection)
                     (component as IUsesConnection).SetConnection(Connection); //vai ser preciso fazer o mesmo no video
@@ -378,13 +392,11 @@ namespace Client
             }
         }
 
-
         private void propriedadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as ComposerComponent).OpenOptionsWindow();
-
                 #region Nome do videoplayer, fazer depois
                 //if ((((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as ComposerComponent).Configuration is VideoConfiguration)
                 //{
@@ -420,6 +432,45 @@ namespace Client
 #if DEBUG
                 MessageBox.Show("propriedadesToolStripMenuItem_Click" + Environment.NewLine + ex.Message);
 #endif
+            }
+        }
+
+        private void toolStripMenuItemFullscreen_Click(object sender, EventArgs e)
+        {
+            var menuItem = sender as ToolStripMenuItem;
+
+            var target = ((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as ComposerComponent;
+
+            if (menuItem.Checked)
+            {
+                if (menuItem.Tag is Control)
+                {
+                    target.Size = ((menuItem.Tag as Control) ?? new Control() { Size = new Size(target.Size.Width - 100, target.Size.Height - 100), Location = new Point(10, 10) }).Size;
+                    target.Location = ((menuItem.Tag as Control) ?? new Control() { Size = new Size(target.Size.Width - 100, target.Size.Height - 100), Location = new Point(10, 10) }).Location;
+                }
+            }
+            else
+            {
+                var location = new Control() { Size = target.Size, Location = target.Location };
+
+                menuItem.Tag = location; //Guardar o size e location antigos
+
+                target.Size = panelBuilder.Size;
+                target.Location = new Point(0, 0);
+            }
+
+            menuItem.Checked = !menuItem.Checked;
+        }
+
+        private void contextMenuStripVideoComponents_Opening(object sender, CancelEventArgs e)
+        {
+            if (contextMenuStripVideoComponents.Items["toolStripMenuItemFullscreen"] != null && contextMenuStripVideoComponents.Items["toolStripMenuItemFullscreen"] is ToolStripMenuItem)
+            {
+                var item = contextMenuStripVideoComponents.Items["toolStripMenuItemFullscreen"] as ToolStripMenuItem;
+
+                var target = (sender as ContextMenuStrip).SourceControl as ComposerComponent;
+
+                item.Checked = target.Size == panelBuilder.Size && target.Location == new Point(0, 0);
             }
         }
 
@@ -875,18 +926,19 @@ namespace Client
 
                 PlayerProxy client = new PlayerProxy(bindingPC, playerEndpoint);
 
-                client.Open();
-
                 try
                 {
+
+                    client.Open();
+
                     displays = client.GetDisplayInformation().ToList<WCFScreenInformation>();
+
+                    client.Close();
                 }
                 catch (EndpointNotFoundException)
                 {
                     goodPlayer = false;
                 }
-
-                client.Close();
 
                 lock (oLock)
                 {

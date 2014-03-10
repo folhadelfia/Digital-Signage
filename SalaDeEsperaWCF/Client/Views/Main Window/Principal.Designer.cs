@@ -65,6 +65,10 @@
             this.listViewStatusColValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainerGeral = new System.Windows.Forms.SplitContainer();
             this.splitContainerRedeStatus = new System.Windows.Forms.SplitContainer();
+            this.contextMenuStripVideoComponents = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemFullscreen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRemover = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemPropriedades = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxComponents.SuspendLayout();
             this.contextMenuStripBackground.SuspendLayout();
             this.contextMenuStripComponents.SuspendLayout();
@@ -81,6 +85,7 @@
             this.splitContainerRedeStatus.Panel1.SuspendLayout();
             this.splitContainerRedeStatus.Panel2.SuspendLayout();
             this.splitContainerRedeStatus.SuspendLayout();
+            this.contextMenuStripVideoComponents.SuspendLayout();
             this.SuspendLayout();
             // 
             // listViewComponents
@@ -449,6 +454,37 @@
             this.splitContainerRedeStatus.SplitterWidth = 5;
             this.splitContainerRedeStatus.TabIndex = 0;
             // 
+            // contextMenuStripVideoComponents
+            // 
+            this.contextMenuStripVideoComponents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemFullscreen,
+            this.toolStripMenuItemRemover,
+            this.toolStripMenuItemPropriedades});
+            this.contextMenuStripVideoComponents.Name = "contextMenuStripComponents";
+            this.contextMenuStripVideoComponents.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStripVideoComponents.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripVideoComponents_Opening);
+            // 
+            // toolStripMenuItemFullscreen
+            // 
+            this.toolStripMenuItemFullscreen.Name = "toolStripMenuItemFullscreen";
+            this.toolStripMenuItemFullscreen.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemFullscreen.Text = "Fullscreen";
+            this.toolStripMenuItemFullscreen.Click += new System.EventHandler(this.toolStripMenuItemFullscreen_Click);
+            // 
+            // toolStripMenuItemRemover
+            // 
+            this.toolStripMenuItemRemover.Name = "toolStripMenuItemRemover";
+            this.toolStripMenuItemRemover.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemRemover.Text = "Remover";
+            this.toolStripMenuItemRemover.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItemPropriedades
+            // 
+            this.toolStripMenuItemPropriedades.Name = "toolStripMenuItemPropriedades";
+            this.toolStripMenuItemPropriedades.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemPropriedades.Text = "Propriedades";
+            this.toolStripMenuItemPropriedades.Click += new System.EventHandler(this.propriedadesToolStripMenuItem_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -482,6 +518,7 @@
             this.splitContainerRedeStatus.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerRedeStatus)).EndInit();
             this.splitContainerRedeStatus.ResumeLayout(false);
+            this.contextMenuStripVideoComponents.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -524,6 +561,10 @@
         private System.Windows.Forms.SplitContainer splitContainerGeral;
         private System.Windows.Forms.SplitContainer splitContainerRedeStatus;
         private System.Windows.Forms.ProgressBar progressBarScan;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripVideoComponents;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFullscreen;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemover;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPropriedades;
     }
 }
 
