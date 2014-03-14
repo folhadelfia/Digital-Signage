@@ -36,6 +36,7 @@ using Assemblies.PlayerServiceImplementation;
 
 using Assemblies.Linq;
 using System.ServiceModel;
+using Client.Views.Main_Window;
 
 namespace Client
 {
@@ -1064,6 +1065,8 @@ namespace Client
                 treeViewRede.SelectedNode.BackColor = Color.FromArgb(100, 137, 255, 161);
                 treeViewRede.SelectedNode = null;
 
+                this.finalResolution = selectedScreen.Bounds.Size;
+
             }
         }
 
@@ -1449,6 +1452,28 @@ namespace Client
         private void contextMenuStripTreeViewRede_Opening(object sender, CancelEventArgs e)
         {
             e.Cancel = this.cancelTreeViewContextMenu || !(treeViewRede.SelectedNode.Tag is WCFScreenInformation);
+        }
+
+        private void posicaoManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowManualComponentBounds(sender);
+        }
+        private void toolStripMenuItemPosicao_Click(object sender, EventArgs e)
+        {
+            ShowManualComponentBounds(sender);
+        }
+
+        private void ShowManualComponentBounds(object sender)
+        {
+            ManualComponentBounds janela;
+
+            if (connection != null && connection.State == Assemblies.ClientModel.ConnectionState.Open)
+                janela = new ManualComponentBounds((((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as ComposerComponent), panelBuilder.Size, finalResolution);
+            else janela = new ManualComponentBounds((((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as ComposerComponent), panelBuilder.Size);
+
+            janela.ShowDialog();
+
+            janela.Dispose();
         }
     }
 

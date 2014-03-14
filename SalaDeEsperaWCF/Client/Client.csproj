@@ -73,6 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationConfiguration.cs" />
+    <Compile Include="Views\Main Window\ManualComponentPosition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Main Window\ManualComponentPosition.Designer.cs">
+      <DependentUpon>ManualComponentPosition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Service List\Option Views\Configure.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     <Compile Include="Views\Service List\ServiceList.Designer.cs">
       <DependentUpon>ServiceList.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Main Window\ManualComponentPosition.resx">
+      <DependentUpon>ManualComponentPosition.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Main Window\Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
     </EmbeddedResource>

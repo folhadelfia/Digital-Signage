@@ -78,3 +78,4 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\C
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.Views.Main_Window.ManualComponentBounds.resources

@@ -69,6 +69,8 @@
             this.toolStripMenuItemFullscreen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemRemover = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemPropriedades = new System.Windows.Forms.ToolStripMenuItem();
+            this.posicaoManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemPosicao = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxComponents.SuspendLayout();
             this.contextMenuStripBackground.SuspendLayout();
             this.contextMenuStripComponents.SuspendLayout();
@@ -93,7 +95,7 @@
             this.listViewComponents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewComponents.Location = new System.Drawing.Point(3, 18);
             this.listViewComponents.Name = "listViewComponents";
-            this.listViewComponents.Size = new System.Drawing.Size(152, 471);
+            this.listViewComponents.Size = new System.Drawing.Size(152, 480);
             this.listViewComponents.SmallImageList = this.imageListComponents;
             this.listViewComponents.TabIndex = 0;
             this.listViewComponents.UseCompatibleStateImageBehavior = false;
@@ -127,7 +129,7 @@
             this.groupBoxComponents.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxComponents.Location = new System.Drawing.Point(0, 0);
             this.groupBoxComponents.Name = "groupBoxComponents";
-            this.groupBoxComponents.Size = new System.Drawing.Size(158, 492);
+            this.groupBoxComponents.Size = new System.Drawing.Size(158, 501);
             this.groupBoxComponents.TabIndex = 1;
             this.groupBoxComponents.TabStop = false;
             this.groupBoxComponents.Text = "Componentes";
@@ -142,7 +144,7 @@
             this.panelBuilder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBuilder.Location = new System.Drawing.Point(3, 18);
             this.panelBuilder.Name = "panelBuilder";
-            this.panelBuilder.Size = new System.Drawing.Size(629, 471);
+            this.panelBuilder.Size = new System.Drawing.Size(640, 480);
             this.panelBuilder.TabIndex = 2;
             this.panelBuilder.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelConfigurador_DragDrop);
             this.panelBuilder.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelConfigurador_DragEnter);
@@ -167,21 +169,22 @@
             // 
             this.contextMenuStripComponents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.removerToolStripMenuItem,
+            this.posicaoManualToolStripMenuItem,
             this.propriedadesToolStripMenuItem});
             this.contextMenuStripComponents.Name = "contextMenuStripComponents";
-            this.contextMenuStripComponents.Size = new System.Drawing.Size(144, 48);
+            this.contextMenuStripComponents.Size = new System.Drawing.Size(212, 70);
             // 
             // removerToolStripMenuItem
             // 
             this.removerToolStripMenuItem.Name = "removerToolStripMenuItem";
-            this.removerToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.removerToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.removerToolStripMenuItem.Text = "Remover";
             this.removerToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
             // propriedadesToolStripMenuItem
             // 
             this.propriedadesToolStripMenuItem.Name = "propriedadesToolStripMenuItem";
-            this.propriedadesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.propriedadesToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.propriedadesToolStripMenuItem.Text = "Propriedades";
             this.propriedadesToolStripMenuItem.Click += new System.EventHandler(this.propriedadesToolStripMenuItem_Click);
             // 
@@ -192,7 +195,7 @@
             this.ferramentasToolStripMenuItem});
             this.menuStripPrincipal.Location = new System.Drawing.Point(0, 0);
             this.menuStripPrincipal.Name = "menuStripPrincipal";
-            this.menuStripPrincipal.Size = new System.Drawing.Size(1150, 24);
+            this.menuStripPrincipal.Size = new System.Drawing.Size(1158, 24);
             this.menuStripPrincipal.TabIndex = 4;
             this.menuStripPrincipal.Text = "menuStrip1";
             // 
@@ -272,7 +275,7 @@
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonClose.Location = new System.Drawing.Point(87, 197);
+            this.buttonClose.Location = new System.Drawing.Point(87, 198);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 8;
@@ -283,7 +286,7 @@
             // buttonConnect
             // 
             this.buttonConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonConnect.Location = new System.Drawing.Point(6, 197);
+            this.buttonConnect.Location = new System.Drawing.Point(6, 198);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(75, 23);
             this.buttonConnect.TabIndex = 7;
@@ -305,7 +308,7 @@
             this.treeViewRede.Name = "treeViewRede";
             this.treeViewRede.SelectedImageIndex = 0;
             this.treeViewRede.ShowNodeToolTips = true;
-            this.treeViewRede.Size = new System.Drawing.Size(316, 174);
+            this.treeViewRede.Size = new System.Drawing.Size(316, 175);
             this.treeViewRede.TabIndex = 8;
             this.treeViewRede.DoubleClick += new System.EventHandler(this.treeViewRede_DoubleClick);
             // 
@@ -335,7 +338,7 @@
             this.groupBoxRede.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxRede.Location = new System.Drawing.Point(0, 0);
             this.groupBoxRede.Name = "groupBoxRede";
-            this.groupBoxRede.Size = new System.Drawing.Size(322, 226);
+            this.groupBoxRede.Size = new System.Drawing.Size(322, 225);
             this.groupBoxRede.TabIndex = 9;
             this.groupBoxRede.TabStop = false;
             this.groupBoxRede.Text = "Rede";
@@ -344,7 +347,7 @@
             // 
             this.progressBarScan.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBarScan.Location = new System.Drawing.Point(3, 182);
+            this.progressBarScan.Location = new System.Drawing.Point(3, 183);
             this.progressBarScan.Name = "progressBarScan";
             this.progressBarScan.Size = new System.Drawing.Size(316, 10);
             this.progressBarScan.TabIndex = 13;
@@ -353,7 +356,7 @@
             // buttonScan
             // 
             this.buttonScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonScan.Location = new System.Drawing.Point(241, 197);
+            this.buttonScan.Location = new System.Drawing.Point(241, 198);
             this.buttonScan.Name = "buttonScan";
             this.buttonScan.Size = new System.Drawing.Size(75, 23);
             this.buttonScan.TabIndex = 9;
@@ -368,7 +371,7 @@
             this.groupBoxBuilder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxBuilder.Location = new System.Drawing.Point(503, 27);
             this.groupBoxBuilder.Name = "groupBoxBuilder";
-            this.groupBoxBuilder.Size = new System.Drawing.Size(635, 492);
+            this.groupBoxBuilder.Size = new System.Drawing.Size(646, 501);
             this.groupBoxBuilder.TabIndex = 10;
             this.groupBoxBuilder.TabStop = false;
             this.groupBoxBuilder.Text = "Builder";
@@ -380,7 +383,7 @@
             this.groupBoxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxStatus.Location = new System.Drawing.Point(0, 0);
             this.groupBoxStatus.Name = "groupBoxStatus";
-            this.groupBoxStatus.Size = new System.Drawing.Size(322, 261);
+            this.groupBoxStatus.Size = new System.Drawing.Size(322, 271);
             this.groupBoxStatus.TabIndex = 11;
             this.groupBoxStatus.TabStop = false;
             this.groupBoxStatus.Text = "Status";
@@ -397,7 +400,7 @@
             this.listViewPlayerStatus.MultiSelect = false;
             this.listViewPlayerStatus.Name = "listViewPlayerStatus";
             this.listViewPlayerStatus.ShowItemToolTips = true;
-            this.listViewPlayerStatus.Size = new System.Drawing.Size(316, 240);
+            this.listViewPlayerStatus.Size = new System.Drawing.Size(316, 250);
             this.listViewPlayerStatus.TabIndex = 0;
             this.listViewPlayerStatus.UseCompatibleStateImageBehavior = false;
             this.listViewPlayerStatus.View = System.Windows.Forms.View.Details;
@@ -428,16 +431,14 @@
             // splitContainerGeral.Panel2
             // 
             this.splitContainerGeral.Panel2.Controls.Add(this.groupBoxComponents);
-            this.splitContainerGeral.Size = new System.Drawing.Size(485, 492);
+            this.splitContainerGeral.Size = new System.Drawing.Size(485, 501);
             this.splitContainerGeral.SplitterDistance = 322;
             this.splitContainerGeral.SplitterWidth = 5;
             this.splitContainerGeral.TabIndex = 12;
             // 
             // splitContainerRedeStatus
             // 
-            this.splitContainerRedeStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainerRedeStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerRedeStatus.Location = new System.Drawing.Point(0, 0);
             this.splitContainerRedeStatus.Name = "splitContainerRedeStatus";
             this.splitContainerRedeStatus.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -449,8 +450,8 @@
             // splitContainerRedeStatus.Panel2
             // 
             this.splitContainerRedeStatus.Panel2.Controls.Add(this.groupBoxStatus);
-            this.splitContainerRedeStatus.Size = new System.Drawing.Size(322, 492);
-            this.splitContainerRedeStatus.SplitterDistance = 226;
+            this.splitContainerRedeStatus.Size = new System.Drawing.Size(322, 501);
+            this.splitContainerRedeStatus.SplitterDistance = 225;
             this.splitContainerRedeStatus.SplitterWidth = 5;
             this.splitContainerRedeStatus.TabIndex = 0;
             // 
@@ -459,38 +460,53 @@
             this.contextMenuStripVideoComponents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemFullscreen,
             this.toolStripMenuItemRemover,
+            this.toolStripMenuItemPosicao,
             this.toolStripMenuItemPropriedades});
             this.contextMenuStripVideoComponents.Name = "contextMenuStripComponents";
-            this.contextMenuStripVideoComponents.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStripVideoComponents.Size = new System.Drawing.Size(212, 114);
             this.contextMenuStripVideoComponents.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripVideoComponents_Opening);
             // 
             // toolStripMenuItemFullscreen
             // 
             this.toolStripMenuItemFullscreen.Name = "toolStripMenuItemFullscreen";
-            this.toolStripMenuItemFullscreen.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemFullscreen.Size = new System.Drawing.Size(211, 22);
             this.toolStripMenuItemFullscreen.Text = "Fullscreen";
             this.toolStripMenuItemFullscreen.Click += new System.EventHandler(this.toolStripMenuItemFullscreen_Click);
             // 
             // toolStripMenuItemRemover
             // 
             this.toolStripMenuItemRemover.Name = "toolStripMenuItemRemover";
-            this.toolStripMenuItemRemover.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemRemover.Size = new System.Drawing.Size(211, 22);
             this.toolStripMenuItemRemover.Text = "Remover";
             this.toolStripMenuItemRemover.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
             // toolStripMenuItemPropriedades
             // 
             this.toolStripMenuItemPropriedades.Name = "toolStripMenuItemPropriedades";
-            this.toolStripMenuItemPropriedades.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemPropriedades.Size = new System.Drawing.Size(211, 22);
             this.toolStripMenuItemPropriedades.Text = "Propriedades";
             this.toolStripMenuItemPropriedades.Click += new System.EventHandler(this.propriedadesToolStripMenuItem_Click);
+            // 
+            // posicaoManualToolStripMenuItem
+            // 
+            this.posicaoManualToolStripMenuItem.Name = "posicaoManualToolStripMenuItem";
+            this.posicaoManualToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.posicaoManualToolStripMenuItem.Text = "Posição/tamanho manual";
+            this.posicaoManualToolStripMenuItem.Click += new System.EventHandler(this.posicaoManualToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItemPosicao
+            // 
+            this.toolStripMenuItemPosicao.Name = "toolStripMenuItemPosicao";
+            this.toolStripMenuItemPosicao.Size = new System.Drawing.Size(211, 22);
+            this.toolStripMenuItemPosicao.Text = "Posição/tamanho manual";
+            this.toolStripMenuItemPosicao.Click += new System.EventHandler(this.toolStripMenuItemPosicao_Click);
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1150, 534);
+            this.ClientSize = new System.Drawing.Size(1158, 534);
             this.Controls.Add(this.splitContainerGeral);
             this.Controls.Add(this.groupBoxBuilder);
             this.Controls.Add(this.menuStripPrincipal);
@@ -565,6 +581,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFullscreen;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemover;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPropriedades;
+        private System.Windows.Forms.ToolStripMenuItem posicaoManualToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPosicao;
     }
 }
 
