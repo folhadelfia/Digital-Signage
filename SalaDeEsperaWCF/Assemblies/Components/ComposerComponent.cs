@@ -100,25 +100,25 @@ namespace Assemblies.Components
 
                 this.BringToFront();
 
-                if (e.Y < 5)
+                if (e.Y < 6)
                 {
                     msg = 12; //Top
                     if (e.X < 6) msg = 13; //Top Left
                     if (e.X > Width - 6) msg = 14; //Top Right
                 }
-                else if (e.X < 5)
+                else if (e.X < 6)
                 {
                     msg = 10; //Left
                     if (e.Y < 6) msg = 13;
                     if (e.Y > Height - 6) msg = 16;
                 }
-                else if (e.Y > Height - 5)
+                else if (e.Y > Height - 6)
                 {
                     msg = 15; //Bottom
                     if (e.X < 6) msg = 16;
                     if (e.X > Width - 6) msg = 17;
                 }
-                else if (e.X > Width - 5)
+                else if (e.X > Width - 6)
                 {
                     msg = 11; //Right
                     if (e.Y < 6) msg = 14;
@@ -195,25 +195,25 @@ namespace Assemblies.Components
                 else
                     if (!triggeredByDesignationLabel)
                     {
-                        if (e.Y < 5)
+                        if (e.Y < 6)
                         {
                             if (e.X < 6) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
                             else if (e.X > Width - 6) base.Cursor = Cursors.SizeNESW; //Topo direita
                             else base.Cursor = Cursors.SizeNS; //Topo
                         }
-                        else if (e.X < 5)
+                        else if (e.X < 6)
                         {
                             if (e.Y < 6) base.Cursor = Cursors.SizeNWSE; //Topo esquerda
                             else if (e.Y > Height - 6) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
                             else base.Cursor = Cursors.SizeWE; //Esquerda
                         }
-                        else if (e.Y > Height - 5)
+                        else if (e.Y > Height - 6)
                         {
                             if (e.X < 6) base.Cursor = Cursors.SizeNESW; //Fundo esquerda
                             else if (e.X > Width - 6) base.Cursor = Cursors.SizeNWSE; //Fundo direita
                             else base.Cursor = Cursors.SizeNS; //Fundo
                         }
-                        else if (e.X > Width - 5)
+                        else if (e.X > Width - 6)
                         {
                             if (e.Y < 6) base.Cursor = Cursors.SizeNESW;
                             else if (e.Y > Height - 6) base.Cursor = Cursors.SizeNWSE;

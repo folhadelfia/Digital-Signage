@@ -38,6 +38,7 @@
             this.propriedadesBackgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripComponents = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.posicaoManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propriedadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripPrincipal = new System.Windows.Forms.MenuStrip();
             this.ficheiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,9 +69,8 @@
             this.contextMenuStripVideoComponents = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemFullscreen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemRemover = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemPropriedades = new System.Windows.Forms.ToolStripMenuItem();
-            this.posicaoManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemPosicao = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemPropriedades = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxComponents.SuspendLayout();
             this.contextMenuStripBackground.SuspendLayout();
             this.contextMenuStripComponents.SuspendLayout();
@@ -118,7 +118,7 @@
             this.imageListComponents.Images.SetKeyName(7, "Footer");
             this.imageListComponents.Images.SetKeyName(8, "Weather");
             this.imageListComponents.Images.SetKeyName(9, "Computer");
-            this.imageListComponents.Images.SetKeyName(10, "ComputerError.png");
+            this.imageListComponents.Images.SetKeyName(10, "ComputerError");
             this.imageListComponents.Images.SetKeyName(11, "Monitor");
             this.imageListComponents.Images.SetKeyName(12, "Clinic");
             // 
@@ -180,6 +180,13 @@
             this.removerToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.removerToolStripMenuItem.Text = "Remover";
             this.removerToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
+            // 
+            // posicaoManualToolStripMenuItem
+            // 
+            this.posicaoManualToolStripMenuItem.Name = "posicaoManualToolStripMenuItem";
+            this.posicaoManualToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.posicaoManualToolStripMenuItem.Text = "Posição/tamanho manual";
+            this.posicaoManualToolStripMenuItem.Click += new System.EventHandler(this.posicaoManualToolStripMenuItem_Click);
             // 
             // propriedadesToolStripMenuItem
             // 
@@ -463,7 +470,7 @@
             this.toolStripMenuItemPosicao,
             this.toolStripMenuItemPropriedades});
             this.contextMenuStripVideoComponents.Name = "contextMenuStripComponents";
-            this.contextMenuStripVideoComponents.Size = new System.Drawing.Size(212, 114);
+            this.contextMenuStripVideoComponents.Size = new System.Drawing.Size(212, 92);
             this.contextMenuStripVideoComponents.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripVideoComponents_Opening);
             // 
             // toolStripMenuItemFullscreen
@@ -480,26 +487,19 @@
             this.toolStripMenuItemRemover.Text = "Remover";
             this.toolStripMenuItemRemover.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
-            // toolStripMenuItemPropriedades
-            // 
-            this.toolStripMenuItemPropriedades.Name = "toolStripMenuItemPropriedades";
-            this.toolStripMenuItemPropriedades.Size = new System.Drawing.Size(211, 22);
-            this.toolStripMenuItemPropriedades.Text = "Propriedades";
-            this.toolStripMenuItemPropriedades.Click += new System.EventHandler(this.propriedadesToolStripMenuItem_Click);
-            // 
-            // posicaoManualToolStripMenuItem
-            // 
-            this.posicaoManualToolStripMenuItem.Name = "posicaoManualToolStripMenuItem";
-            this.posicaoManualToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.posicaoManualToolStripMenuItem.Text = "Posição/tamanho manual";
-            this.posicaoManualToolStripMenuItem.Click += new System.EventHandler(this.posicaoManualToolStripMenuItem_Click);
-            // 
             // toolStripMenuItemPosicao
             // 
             this.toolStripMenuItemPosicao.Name = "toolStripMenuItemPosicao";
             this.toolStripMenuItemPosicao.Size = new System.Drawing.Size(211, 22);
             this.toolStripMenuItemPosicao.Text = "Posição/tamanho manual";
             this.toolStripMenuItemPosicao.Click += new System.EventHandler(this.toolStripMenuItemPosicao_Click);
+            // 
+            // toolStripMenuItemPropriedades
+            // 
+            this.toolStripMenuItemPropriedades.Name = "toolStripMenuItemPropriedades";
+            this.toolStripMenuItemPropriedades.Size = new System.Drawing.Size(211, 22);
+            this.toolStripMenuItemPropriedades.Text = "Propriedades";
+            this.toolStripMenuItemPropriedades.Click += new System.EventHandler(this.propriedadesToolStripMenuItem_Click);
             // 
             // Principal
             // 

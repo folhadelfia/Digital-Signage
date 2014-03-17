@@ -123,7 +123,7 @@ namespace Client.Views.Main_Window
             ignoreTextChanged = false;
         }
 
-        #endregion
+        #region TextChanges
 
         private void textBoxBuilderX_TextChanged(object sender, EventArgs e)
         {
@@ -261,6 +261,10 @@ namespace Client.Views.Main_Window
         {
             Apply();
         }
+
+        #endregion
+
+        #endregion
 
         private void Apply()
         {

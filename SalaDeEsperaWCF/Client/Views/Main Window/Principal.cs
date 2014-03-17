@@ -85,18 +85,18 @@ namespace Client
             try
             {
                 #region Popular lista de componentes
-                listViewComponents.Items.Add(new ListViewItem() { Text = "Data e hora", Tag = new DateTimeCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("DateTime") });
-                listViewComponents.Items.Add(new ListViewItem() { Text = "Imagem", Tag = new ImageCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("Image") });
-                listViewComponents.Items.Add(new ListViewItem() { Text = "Lista de Espera", Tag = new WaitListCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("WaitList") });
-                listViewComponents.Items.Add(new ListViewItem() { Text = "Meteorologia", Tag = new WeatherCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("Weather") });
+                //listViewComponents.Items.Add(new ListViewItem() { Text = "Data e hora", Tag = new DateTimeCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("DateTime") });
+                //listViewComponents.Items.Add(new ListViewItem() { Text = "Imagem", Tag = new ImageCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("Image") });
+                //listViewComponents.Items.Add(new ListViewItem() { Text = "Lista de Espera", Tag = new WaitListCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("WaitList") });
+                //listViewComponents.Items.Add(new ListViewItem() { Text = "Meteorologia", Tag = new WeatherCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("Weather") });
                 listViewComponents.Items.Add(new ListViewItem() { Text = "Rodapé", Tag = new MarkeeCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("Footer") });
-                listViewComponents.Items.Add(new ListViewItem() { Text = "Slide Show", Tag = new SlideShowCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("SlideShow") });
-                listViewComponents.Items.Add(new ListViewItem() { Text = "Tabela de Preços", Tag = new PriceListCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("PriceList") });
+                //listViewComponents.Items.Add(new ListViewItem() { Text = "Slide Show", Tag = new SlideShowCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("SlideShow") });
+                //listViewComponents.Items.Add(new ListViewItem() { Text = "Tabela de Preços", Tag = new PriceListCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("PriceList") });
                 listViewComponents.Items.Add(new ListViewItem() { Text = "TV", Tag = new TVCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("TV") });
                 listViewComponents.Items.Add(new ListViewItem() { Text = "Video", Tag = new VideoCreator(), ImageIndex = listViewComponents.SmallImageList.Images.IndexOfKey("Video") });
                 #endregion
 
-                #region Pesquisar periodicamente por players
+                #region Pesquisar players
 
                 this.ScanAndUpdateUI();
 
@@ -317,8 +317,6 @@ namespace Client
                     int videoCount = panelBuilder.Controls.OfType<VideoComposer>().Count();
 
                     ((component as VideoComposer).Configuration as VideoConfiguration).ID = videoCount + 1;
-
-                    ((component as VideoComposer).Configuration as VideoConfiguration).Playlist.Add("C:\\Users\\Cláudio\\Videos\\Wildlife.wmv");
                 }
 
                 component.DoubleClick += component_DoubleClick;
@@ -825,8 +823,8 @@ namespace Client
         //}
         #endregion
 
-        int playersFound = 0,
-            playersScanned = 0;
+        double playersFound = 0,
+               playersScanned = 0;
 
         #region Players from database
         private void GetPlayersFromDatabase()
@@ -886,6 +884,8 @@ namespace Client
         {
             playersScanned++;
 
+            progressBarScan.Value += Convert.ToInt32(Math.Round((1d / playersFound) * 100d));
+
             //if (playersFound != 0) //para não dividir por zero, just in case. se o programa chegou aqui é porque à partida é != 0, mas mesmo assim...
             //{
             //    progressBarScan.Value = Convert.ToInt32(Math.Round((playersScanned / playersFound) * 100f));
@@ -910,7 +910,9 @@ namespace Client
 
                 bool goodPlayer = true;
 
-                if (!(player.publicIPAddress == MyToolkit.Networking.PublicIPAddress.ToString() && MyToolkit.Networking.IsLocal(player.privateIPAddress)))
+                string myIP = MyToolkit.Networking.PublicIPAddress.ToString();
+
+                if (!(player.publicIPAddress == myIP && MyToolkit.Networking.IsLocal(player.privateIPAddress)))
                 {
                     playerEndpointString = this.PrivateToPublicEndpoint(player, EndpointTypeEnum.Player);
                     fileTransferEndpointString = this.PrivateToPublicEndpoint(player, EndpointTypeEnum.FileTransfer);
@@ -971,11 +973,17 @@ namespace Client
                             Text = player.privateHostname,
                             //ToolTipText = string.Format("IP: {0}", pc.IP),
                             Tag = pc,
-                            ImageKey = "Computer",
+                            ImageKey = goodPlayer ? "Computer" : "ComputerError",
                             SelectedImageKey = goodPlayer ? "Computer" : "ComputerError",
                             ForeColor = goodPlayer ? SystemColors.ControlText : SystemColors.ControlLight
                         };
 
+                        ToolTip tt = new ToolTip();
+
+                        if (!goodPlayer)
+                        {
+                            nodePC.ToolTipText = "Ocorreu um erro ao tentar comunicar com este computador.";
+                        }
                         //Aqui os computadores que estão inacessiveis sao mostrados, deve-se dar a opçao de os desactivar com o builder. Por também a opção de desactivar players inacessiveis sempre que forem encontrados (nao recomendado)
 
                         nodeClinic.Nodes.Add(nodePC);
@@ -1006,7 +1014,7 @@ namespace Client
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
+                //MessageBox.Show(ex.Message, ex.GetType().ToString());
 
                 // normalmente cai aqui quando a ligação não e bem sucedida. atenção às firewalls
             }
