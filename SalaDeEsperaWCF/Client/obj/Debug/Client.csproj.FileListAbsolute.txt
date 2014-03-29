@@ -79,3 +79,6 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\C
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.exe
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.pdb
 C:\Users\Cláudio\Desktop\Digital-Signage.git\SalaDeEsperaWCF\Client\obj\Debug\Client.Views.Main_Window.ManualComponentBounds.resources
+C:\Users\Cláudio\Desktop\Digital-Signage\SalaDeEsperaWCF\Client\bin\Debug\Client.exe.config
+C:\Users\Cláudio\Desktop\Digital-Signage\SalaDeEsperaWCF\Client\obj\Debug\Client.exe
+C:\Users\Cláudio\Desktop\Digital-Signage\SalaDeEsperaWCF\Client\obj\Debug\Client.pdb
