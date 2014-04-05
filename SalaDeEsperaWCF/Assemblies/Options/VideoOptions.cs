@@ -194,6 +194,7 @@ namespace Assemblies.Options
 
         private void buttonEnviar_Click(object sender, EventArgs e)
         {
+            if (listViewLocalFiles.SelectedItems.Count <= 0) return;
 
             List<string> files = new List<string>();
 

@@ -5,6 +5,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupDSPlayer", "SetupDSPla
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupDSBuilder", "SetupDSBuilder\SetupDSBuilder.vdproj", "{7C5F275E-B263-449C-9A54-2A8E580C27DE}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupDSController", "SetupDSController\SetupDSController.vdproj", "{8A3891A6-DF6A-4F32-A473-47BD3EC23FE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -17,6 +19,8 @@ Global
 		{7CB63117-AEC1-41F8-AEFC-F45C67517FC3}.Release|Default.Build.0 = Release
 		{7C5F275E-B263-449C-9A54-2A8E580C27DE}.Debug|Default.ActiveCfg = Debug
 		{7C5F275E-B263-449C-9A54-2A8E580C27DE}.Release|Default.ActiveCfg = Release
+		{8A3891A6-DF6A-4F32-A473-47BD3EC23FE5}.Debug|Default.ActiveCfg = Debug
+		{8A3891A6-DF6A-4F32-A473-47BD3EC23FE5}.Release|Default.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

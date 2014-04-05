@@ -53,7 +53,6 @@
             this.folderBrowserDialogBackground = new System.Windows.Forms.FolderBrowserDialog();
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBoxPreview.SuspendLayout();
             this.toolStripPreview.SuspendLayout();
             this.groupBoxFiles.SuspendLayout();
@@ -285,24 +284,12 @@
             this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(270, 331);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(353, 26);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "ESCOLHER O ASPECTO DO FUNDO COMO NAS OPÇOES DE VIDEO.\r\nTIRAR MAIS UM SS PARA O MO" +
-    "SAICO";
-            // 
             // BackgroundOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancelar;
             this.ClientSize = new System.Drawing.Size(800, 366);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.groupBoxFiles);
@@ -319,7 +306,6 @@
             this.toolStripBackgrounds.PerformLayout();
             this.contextMenuStripListViewBackgrounds.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -348,6 +334,5 @@
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.ToolStrip toolStripPreview;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxImageStyle;
-        private System.Windows.Forms.Label label1;
     }
 }

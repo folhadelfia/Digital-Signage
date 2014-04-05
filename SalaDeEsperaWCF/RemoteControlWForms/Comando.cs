@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Assemblies.ClientModel;
+using Assemblies.Misc;
 using Transitions;
 using TV2Lib;
 
@@ -130,7 +131,7 @@ namespace RemoteControlWForms
 
         private void pictureBoxOnOff_Click(object sender, EventArgs e)
         {
-            Client.ServiceList serviceList = new Client.ServiceList();
+            ServiceList serviceList = new ServiceList();
 
             if (serviceList.ShowDialog() == System.Windows.Forms.DialogResult.OK && serviceList.PC != null && serviceList.Screen != null)
             {

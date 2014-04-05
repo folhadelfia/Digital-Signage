@@ -1,4 +1,4 @@
-﻿namespace Client
+﻿namespace Assemblies.Misc
 {
     partial class ServiceList
     {

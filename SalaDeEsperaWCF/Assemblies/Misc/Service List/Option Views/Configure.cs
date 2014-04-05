@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using Assemblies.Toolkit;
 using Transitions;
 
-namespace Client
+namespace Assemblies.Misc
 {
     public partial class ConfigureForm : Form
     {

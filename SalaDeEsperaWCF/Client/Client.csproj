@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>builder.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DigitalTV, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -79,12 +82,6 @@
     <Compile Include="Views\Main Window\ManualComponentPosition.Designer.cs">
       <DependentUpon>ManualComponentPosition.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service List\Option Views\Configure.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Service List\Option Views\Configure.Designer.cs">
-      <DependentUpon>Configure.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Main Window\Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,12 +90,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Service List\ServiceList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Service List\ServiceList.Designer.cs">
-      <DependentUpon>ServiceList.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Views\Main Window\ManualComponentPosition.resx">
       <DependentUpon>ManualComponentPosition.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,12 +106,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\Service List\Option Views\Configure.resx">
-      <DependentUpon>Configure.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Service List\ServiceList.resx">
-      <DependentUpon>ServiceList.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="output.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -136,6 +121,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="builder.ico" />
     <Content Include="Images\building.png" />
     <Content Include="Images\clock.png" />
     <Content Include="Images\euro.png" />

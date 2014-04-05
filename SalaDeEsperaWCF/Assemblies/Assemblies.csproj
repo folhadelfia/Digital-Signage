@@ -95,6 +95,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RegistarPosto.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\Service List\Option Views\Configure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Misc\Service List\Option Views\Configure.Designer.cs">
+      <DependentUpon>Configure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Misc\Service List\ServiceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Misc\Service List\ServiceList.Designer.cs">
+      <DependentUpon>ServiceList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Options\BackgroundOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +268,12 @@
     <None Include="Linq\RegistarPosto.dbml.layout">
       <DependentUpon>RegistarPosto.dbml</DependentUpon>
     </None>
+    <EmbeddedResource Include="Misc\Service List\Option Views\Configure.resx">
+      <DependentUpon>Configure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misc\Service List\ServiceList.resx">
+      <DependentUpon>ServiceList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Options\BackgroundOptions.resx">
       <DependentUpon>BackgroundOptions.cs</DependentUpon>
     </EmbeddedResource>

@@ -33,6 +33,7 @@ using Assemblies.XMLSerialization.Components;
 using Assemblies.XMLSerialization;
 using System.Xml.Serialization;
 using Assemblies.PlayerServiceImplementation;
+using Assemblies.Misc;
 
 using Assemblies.Linq;
 using System.ServiceModel;

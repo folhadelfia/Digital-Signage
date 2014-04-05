@@ -22,7 +22,7 @@ using Assemblies.Linq;
 
 using System.Threading;
 
-namespace Client
+namespace Assemblies.Misc
 {
     public partial class ServiceList : Form
     {

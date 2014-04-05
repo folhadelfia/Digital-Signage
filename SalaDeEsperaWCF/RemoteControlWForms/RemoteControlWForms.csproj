@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>4d28702194a858080012c5a8b7adf1dc.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -91,12 +94,9 @@
       <Project>{a9ea65e7-f4ea-43dd-87c5-101195e583db}</Project>
       <Name>Assemblies</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Client\Client.csproj">
-      <Project>{7df5e287-f1bf-4676-94d1-20e1d44de525}</Project>
-      <Name>Client</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="4d28702194a858080012c5a8b7adf1dc.ico" />
     <Content Include="Resources\Anonymous_On_Off_Input_Output_IO 2.png" />
     <Content Include="Resources\FWD.png" />
     <Content Include="Resources\play.png" />

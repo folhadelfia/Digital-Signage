@@ -20,3 +20,15 @@ C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Debug\TV2Lib.Pro
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Debug\TV2Lib.csproj.GenerateResource.Cache
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Debug\TV2Lib.dll
 C:\Users\Cláudio\Desktop\Digital-Signage.git\Testes\TV2Lib\obj\Debug\TV2Lib.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\bin\Debug\TV2Lib.dll
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\bin\Debug\TV2Lib.pdb
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\bin\Debug\TV2Lib.tlb
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\bin\Debug\DirectShowLib-2005.dll
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\bin\Debug\MediaFoundation.dll
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\obj\Debug\TV2Lib.csprojResolveAssemblyReference.cache
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\obj\Debug\TV2Lib.DigitalTVScreen.resources
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\obj\Debug\TV2Lib.VideoControl.resources
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\obj\Debug\TV2Lib.Properties.Resources.resources
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\obj\Debug\TV2Lib.csproj.GenerateResource.Cache
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\obj\Debug\TV2Lib.dll
+C:\Users\Cláudio\Desktop\Digital-Signage\Testes\TV2Lib\obj\Debug\TV2Lib.pdb
